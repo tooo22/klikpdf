@@ -13,9 +13,17 @@ export const ResultDownload = ({ downloadUrl, fileName, onGoHome, onReset }) => 
       <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">
         {t('success.title')}
       </h2>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
         {t('success.subtitle')}
       </p>
+
+      {fileName && (
+        <div className="mb-6">
+          <span className="inline-flex items-center gap-1.5 bg-gray-100 dark:bg-[#27272A] text-gray-700 dark:text-gray-200 px-4 py-1.5 rounded-full text-xs font-semibold max-w-sm sm:max-w-md truncate border border-gray-200 dark:border-gray-700">
+            📄 <span className="font-bold text-[#E5322D]">{fileName}</span>
+          </span>
+        </div>
+      )}
 
       <a
         href={downloadUrl}

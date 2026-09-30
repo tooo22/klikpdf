@@ -91,11 +91,36 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
   };
 
   if (resultUrl) {
-    const ext = tool.id === 'hd-image' ? 'png' : tool.id === 'pdf-to-word' ? 'docx' : tool.id === 'pdf-to-excel' ? 'xlsx' : tool.id === 'pdf-to-image' ? 'zip' : 'pdf';
+    const firstFileName = selectedFiles[0]?.name || '';
+    const lastDotIdx = firstFileName.lastIndexOf('.');
+    const baseName = lastDotIdx > 0 ? firstFileName.substring(0, lastDotIdx) : (firstFileName || 'dokumen');
+
+    let ext = 'pdf';
+    if (tool.id === 'hd-image') ext = 'png';
+    else if (tool.id === 'pdf-to-word') ext = 'docx';
+    else if (tool.id === 'pdf-to-excel') ext = 'xlsx';
+    else if (tool.id === 'pdf-to-image') ext = 'zip';
+    else ext = 'pdf';
+
+    let finalFileName = `${baseName}.${ext}`;
+    if (tool.id === 'merge') {
+      finalFileName = selectedFiles.length > 1 ? `${baseName}_merged.${ext}` : `${baseName}.${ext}`;
+    } else if (tool.id === 'split') {
+      finalFileName = `${baseName}_split.${ext}`;
+    } else if (tool.id === 'compress') {
+      finalFileName = `${baseName}_compressed.${ext}`;
+    } else if (tool.id === 'rotate') {
+      finalFileName = `${baseName}_rotated.${ext}`;
+    } else if (tool.id === 'watermark') {
+      finalFileName = `${baseName}_watermark.${ext}`;
+    } else if (tool.id === 'hd-image') {
+      finalFileName = `${baseName}_hd.${ext}`;
+    }
+
     return (
       <ResultDownload
         downloadUrl={resultUrl}
-        fileName={`klikpdf_${tool.id}.${ext}`}
+        fileName={finalFileName}
         onGoHome={onGoHome}
         onReset={() => {
           setSelectedFiles([]);
