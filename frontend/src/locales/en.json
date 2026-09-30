@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "merge": "Merge PDF",
+    "split": "Split PDF",
+    "compress": "Compress PDF",
+    "convert": "Convert PDF",
+    "all_tools": "All PDF Tools",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Every tool you need to use PDFs, in one place",
+    "subtitle": "All 100% FREE and easy to use! Merge, split, compress, convert, rotate, and watermark PDFs with just a few clicks."
+  },
+  "dropzone": {
+    "select_files": "Select PDF files",
+    "drop_here": "or drop PDFs here",
+    "select_images": "Select JPG/PNG images"
+  },
+  "buttons": {
+    "process_now": "Process Now",
+    "download": "Download File",
+    "back_home": "Back to Home",
+    "process_another": "Process Another Document"
+  },
+  "success": {
+    "title": "Files processed successfully!",
+    "subtitle": "Your document is ready to download."
+  }
+}

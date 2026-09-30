@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "merge": "Gabungkan PDF",
+    "split": "Pisahkan PDF",
+    "compress": "Kompres PDF",
+    "convert": "Konversi PDF",
+    "all_tools": "Semua Alat PDF",
+    "language": "Bahasa"
+  },
+  "hero": {
+    "title": "Setiap alat yang Anda butuhkan untuk menggunakan PDF, ada di satu tempat",
+    "subtitle": "Semua alat 100% GRATIS dan mudah digunakan! Gabung, pisahkan, kompres, konversi, putar, dan beri watermark pada PDF hanya dalam beberapa klik."
+  },
+  "dropzone": {
+    "select_files": "Pilih file PDF",
+    "drop_here": "atau jatuhkan PDF di sini",
+    "select_images": "Pilih gambar JPG/PNG"
+  },
+  "buttons": {
+    "process_now": "Proses Sekarang",
+    "download": "Unduh File",
+    "back_home": "Kembali ke Beranda",
+    "process_another": "Proses Dokumen Lain"
+  },
+  "success": {
+    "title": "File berhasil diproses!",
+    "subtitle": "Dokumen Anda siap untuk diunduh."
+  }
+}
