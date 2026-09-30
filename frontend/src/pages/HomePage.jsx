@@ -17,10 +17,13 @@ export const HomePage = ({ onSelectTool }) => {
   });
 
   useEffect(() => {
-    // 1. Real-Time Auto-Polling for Global Total Visits (every 5 seconds without refresh)
-    const fetchRealVisits = async () => {
+    // 1. Record visit ONCE per browser session (Strictly 1x, no auto-polling or interval)
+    const recordVisitOncePerSession = async () => {
+      if (sessionStorage.getItem('klikpdf_session_visited')) return;
+      sessionStorage.setItem('klikpdf_session_visited', 'true');
+
       try {
-        const res = await fetch(`https://api.visitorbadge.io/api/visitors?path=klikpdf.my.id&nocache=${Date.now()}`);
+        const res = await fetch(`https://api.visitorbadge.io/api/visitors?path=klikpdf.my.id`);
         if (res.ok) {
           const svgText = await res.text();
           const numbers = svgText.match(/>(\d[\d,.]*)</g);
@@ -34,12 +37,11 @@ export const HomePage = ({ onSelectTool }) => {
           }
         }
       } catch (err) {
-        // Silently retry on next interval
+        // Silently ignore if offline
       }
     };
 
-    fetchRealVisits();
-    const visitInterval = setInterval(fetchRealVisits, 5000);
+    recordVisitOncePerSession();
 
     // 2. Real-Time Active Users Heartbeat Presence (Instant sync across tabs & devices)
     const myTabId = 'tab_' + Math.random().toString(36).substring(2, 9);
@@ -101,7 +103,6 @@ export const HomePage = ({ onSelectTool }) => {
 
       return () => {
         window.removeEventListener('beforeunload', handleUnload);
-        clearInterval(visitInterval);
         if (heartbeatInterval) clearInterval(heartbeatInterval);
         if (cleanupInterval) clearInterval(cleanupInterval);
         if (channel) {
@@ -111,9 +112,7 @@ export const HomePage = ({ onSelectTool }) => {
       };
     } catch (e) {
       setActiveUsers(1);
-      return () => {
-        clearInterval(visitInterval);
-      };
+      return () => {};
     }
   }, []);
 
