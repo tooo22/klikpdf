@@ -188,8 +188,176 @@ export const HomePage = ({ onSelectTool }) => {
     }
   ];
 
+  const [droppedFiles, setDroppedFiles] = useState([]);
+  const [showActionModal, setShowActionModal] = useState(false);
+  const [isHeroDragging, setIsHeroDragging] = useState(false);
+  const heroFileInputRef = React.useRef(null);
+
+  const handleHeroFiles = (files) => {
+    if (!files || files.length === 0) return;
+    const fileList = Array.from(files);
+    setDroppedFiles(fileList);
+
+    const firstFile = fileList[0];
+    const isImage = firstFile.type.startsWith('image/') || /\.(jpg|jpeg|png|webp)$/i.test(firstFile.name);
+    
+    // Auto-select action or open quick picker
+    setShowActionModal(true);
+  };
+
+  const handleQuickAction = (toolId) => {
+    setShowActionModal(false);
+    onSelectTool(toolId, droppedFiles);
+  };
+
+  const formatBadges = [
+    { label: "JPEG", icon: "J", color: "bg-amber-500 text-white" },
+    { label: "DOCX", icon: "W", color: "bg-blue-600 text-white" },
+    { label: "XLSX", icon: "X", color: "bg-emerald-600 text-white" },
+    { label: "PPTX", icon: "P", color: "bg-orange-600 text-white" },
+    { label: "JPG", icon: "J", color: "bg-red-600 text-white" },
+    { label: "PNG Transparent", icon: "T", color: "bg-purple-600 text-white" },
+    { label: "PNG", icon: "P", color: "bg-purple-500 text-white" },
+    { label: "DOCX", icon: "W", color: "bg-blue-600 text-white" }
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      {/* 3D Modern Hero Banner with Quick Drag & Drop */}
+      <div 
+        onDragOver={(e) => { e.preventDefault(); setIsHeroDragging(true); }}
+        onDragLeave={() => setIsHeroDragging(false)}
+        onDrop={(e) => { e.preventDefault(); setIsHeroDragging(false); handleHeroFiles(e.dataTransfer.files); }}
+        className={`relative overflow-hidden rounded-3xl bg-[#0b1329] bg-[url('/images/hero-banner-3d.jpg')] bg-cover bg-center text-white p-6 sm:p-10 lg:p-14 mb-8 shadow-2xl border transition-all duration-300 ${
+          isHeroDragging ? 'border-[#2563eb] ring-4 ring-blue-500/40 scale-[1.01]' : 'border-slate-700/60'
+        }`}
+      >
+        {/* Dark gradient overlay to ensure perfect contrast while preserving side 3D artwork */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/75 to-slate-950/85 pointer-events-none" />
+        
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:28px_28px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-3 text-white drop-shadow-md">
+            Solusi PDF Terbaik untuk Anda
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 font-medium mb-7 max-w-xl mx-auto drop-shadow-sm">
+            Kelola dan konversi file PDF dengan mudah, cepat, dan aman.
+          </p>
+
+          {/* Centered White Drag & Drop Box */}
+          <div 
+            onClick={() => heroFileInputRef.current?.click()}
+            className="bg-white/95 dark:bg-[#18181B]/95 backdrop-blur-md text-gray-800 dark:text-gray-100 rounded-2xl p-6 sm:p-8 max-w-sm sm:max-w-md mx-auto shadow-2xl border-2 border-dashed border-blue-400 dark:border-blue-500/50 hover:border-blue-600 transition-all cursor-pointer group hover:scale-[1.02]"
+          >
+            <input 
+              type="file" 
+              ref={heroFileInputRef} 
+              onChange={(e) => handleHeroFiles(e.target.files)} 
+              multiple 
+              className="hidden" 
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.webp"
+            />
+            
+            <button 
+              type="button"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] active:scale-95 text-white font-bold text-sm sm:text-base px-8 py-3 rounded-xl shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-all inline-flex items-center gap-2 mb-2.5 cursor-pointer"
+            >
+              <span>Upload PDF</span>
+            </button>
+
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-semibold">
+              Drag & Drop file PDF di sini
+            </p>
+          </div>
+
+          {/* Micro text */}
+          <p className="text-[12px] text-slate-300 font-medium mt-4 tracking-wide drop-shadow-sm">
+            Tool terdeteksi: <span className="text-blue-300 font-semibold">Otomatis memproses PDF, Word, Excel, PowerPoint & Foto HD</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Format Badges Pill Bar */}
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+        {formatBadges.map((badge, bIdx) => (
+          <button 
+            key={bIdx}
+            type="button"
+            onClick={() => heroFileInputRef.current?.click()}
+            title={`Proses file ${badge.label}`}
+            className="inline-flex items-center gap-2 bg-white dark:bg-[#18181B] px-3.5 py-1.5 rounded-full border border-gray-200 dark:border-[#27272A] shadow-xs text-xs font-bold text-gray-700 dark:text-gray-200 hover:border-blue-500 hover:shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <span className={`w-5 h-5 rounded-md ${badge.color} text-[10px] font-black flex items-center justify-center shadow-xs`}>
+              {badge.icon}
+            </span>
+            <span>{badge.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Quick Action Selection Modal after Drop */}
+      {showActionModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-150">
+          <div className="bg-white dark:bg-[#1E1E22] rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl border border-gray-100 dark:border-[#2E2E33]">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-[#2E2E33]">
+              <div>
+                <h3 className="text-lg font-black text-gray-900 dark:text-white">Pilih Tindakan untuk File Anda</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  {droppedFiles.length} file dipilih: <span className="font-semibold text-[#E5322D]">{droppedFiles[0]?.name}</span>
+                </p>
+              </div>
+              <button 
+                onClick={() => setShowActionModal(false)}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-lg font-bold p-1 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2.5 my-4">
+              <button
+                onClick={() => handleQuickAction('merge')}
+                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-[#E5322D] hover:bg-red-50/50 dark:hover:bg-red-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+              >
+                📑 Gabungkan PDF
+              </button>
+              <button
+                onClick={() => handleQuickAction('compress')}
+                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-emerald-500 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+              >
+                🗜️ Kompres PDF
+              </button>
+              <button
+                onClick={() => handleQuickAction('pdf-to-word')}
+                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+              >
+                📝 PDF ke Word
+              </button>
+              <button
+                onClick={() => handleQuickAction('hd-image')}
+                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-purple-500 hover:bg-purple-50/50 dark:hover:bg-purple-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+              >
+                ✨ HD-kan Foto (Upscale)
+              </button>
+              <button
+                onClick={() => handleQuickAction('split')}
+                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-amber-500 hover:bg-amber-50/50 dark:hover:bg-amber-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+              >
+                ✂️ Pisahkan PDF
+              </button>
+              <button
+                onClick={() => handleQuickAction('image-to-pdf')}
+                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-orange-500 hover:bg-orange-50/50 dark:hover:bg-orange-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+              >
+                🖼️ Gambar ke PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Header */}
       <div className="text-center max-w-4xl mx-auto mb-12">
         {/* Top Badge */}

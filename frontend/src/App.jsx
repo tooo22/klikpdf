@@ -13,6 +13,7 @@ export default function App() {
   };
 
   const [activeToolId, setActiveToolId] = useState(getToolFromHash());
+  const [initialFiles, setInitialFiles] = useState([]);
 
   // Listen to browser Back / Forward buttons
   useEffect(() => {
@@ -29,13 +30,15 @@ export default function App() {
     };
   }, []);
 
-  const handleSelectTool = (toolId) => {
+  const handleSelectTool = (toolId, files = []) => {
     setActiveToolId(toolId);
+    setInitialFiles(files || []);
     window.location.hash = `#/${toolId}`;
   };
 
   const handleGoHome = () => {
     setActiveToolId(null);
+    setInitialFiles([]);
     if (window.location.hash) {
       window.history.pushState(null, '', window.location.pathname);
     }
@@ -54,6 +57,7 @@ export default function App() {
               {activeToolId ? (
                 <ToolWorkspace
                   toolId={activeToolId}
+                  initialFiles={initialFiles}
                   onGoHome={handleGoHome}
                 />
               ) : (

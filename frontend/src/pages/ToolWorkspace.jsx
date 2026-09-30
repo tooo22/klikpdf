@@ -9,10 +9,10 @@ import { processPdfTool } from '../services/api';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export const ToolWorkspace = ({ toolId, onGoHome }) => {
+export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
   const { lang } = useLanguage();
   const tool = TOOLS.find((t) => t.id === toolId) || TOOLS[0];
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState(initialFiles || []);
   const [options, setOptions] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
   const [resultUrl, setResultUrl] = useState(null);
