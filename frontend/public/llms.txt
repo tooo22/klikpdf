@@ -1,0 +1,23 @@
+# KlikPDF
+
+> Alat PDF Online Gratis & Lengkap Identik iLovePDF oleh @toooowys.
+
+KlikPDF adalah platform web modern untuk mengolah dokumen PDF secara instan, aman, dan 100% gratis.
+
+## Tools & Features
+
+- [Gabungkan PDF](https://klikpdf.my.id): Satukan beberapa file PDF menjadi satu dokumen berurutan.
+- [Pisahkan PDF](https://klikpdf.my.id): Ekstrak halaman atau pisahkan berkas PDF.
+- [Kompres PDF](https://klikpdf.my.id): Kecilkan ukuran file PDF tanpa mengurangi kualitas.
+- [PDF ke Word](https://klikpdf.my.id): Konversi dokumen PDF ke format DOCX Microsoft Word.
+- [PDF ke Excel](https://klikpdf.my.id): Ekstrak tabel dokumen PDF ke spreadsheet XLSX.
+- [PDF ke Gambar JPG/PNG](https://klikpdf.my.id): Ekstrak halaman PDF menjadi gambar beresolusi tinggi.
+- [Gambar ke PDF](https://klikpdf.my.id): Gabungkan gambar JPG/PNG menjadi file PDF.
+- [Watermark PDF](https://klikpdf.my.id): Tambahkan cap air teks khusus pada dokumen PDF.
+- [Nomor Halaman](https://klikpdf.my.id): Beri penomoran halaman pada PDF secara otomatis.
+- [Kunci PDF & Buka Proteksi](https://klikpdf.my.id): Tambahkan atau hapus kata sandi keamanan pada PDF.
+
+## Links
+
+- [Website Resmi](https://klikpdf.my.id)
+- [Creator Profile](https://instagram.com/toooowys)

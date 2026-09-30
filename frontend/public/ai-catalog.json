@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/ai-catalog.json",
+  "name": "KlikPDF",
+  "version": "1.0.0",
+  "description": "Alat PDF Online Gratis & Lengkap Identik iLovePDF oleh @toooowys",
+  "url": "https://klikpdf.my.id",
+  "author": {
+    "name": "toooowys",
+    "url": "https://instagram.com/toooowys"
+  },
+  "capabilities": [
+    "pdf-merge",
+    "pdf-split",
+    "pdf-compress",
+    "pdf-to-docx",
+    "pdf-to-xlsx",
+    "pdf-to-images",
+    "images-to-pdf",
+    "pdf-watermark",
+    "pdf-page-numbers",
+    "pdf-protect",
+    "pdf-unlock"
+  ],
+  "endpoints": {
+    "api": "https://klikpdf.my.id/api"
+  }
+}
