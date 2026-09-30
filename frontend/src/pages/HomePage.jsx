@@ -7,29 +7,66 @@ import { Users, Eye, Sparkles } from 'lucide-react';
 export const HomePage = ({ onSelectTool }) => {
   const { t, lang } = useLanguage();
 
-  // Active Users Counter (Real-time live fluctuation)
-  const [activeUsers, setActiveUsers] = useState(38);
+  // Real Active Users (tracked across real active tabs / sessions)
+  const [activeUsers, setActiveUsers] = useState(1);
 
-  // Total Visitors Counter (Persistent in localStorage)
+  // Real Total Visitors from Global Visitor Counter API
   const [totalVisits, setTotalVisits] = useState(() => {
-    const saved = localStorage.getItem('klikpdf_total_visits');
-    const base = saved ? parseInt(saved, 10) : 18450;
-    const nextVal = base + 1;
-    localStorage.setItem('klikpdf_total_visits', nextVal.toString());
-    return nextVal;
+    const saved = localStorage.getItem('klikpdf_real_visits');
+    return saved ? parseInt(saved, 10) : 1;
   });
 
   useEffect(() => {
-    // Subtle realistic fluctuation for active online users
-    const interval = setInterval(() => {
-      setActiveUsers((prev) => {
-        const delta = Math.floor(Math.random() * 5) - 2; // -2 to +2
-        const updated = prev + delta;
-        return updated < 24 ? 28 : updated > 75 ? 65 : updated;
-      });
-    }, 4500);
+    // 1. Fetch Real Global Total Visits from visitorbadge API
+    const fetchRealVisits = async () => {
+      try {
+        const res = await fetch('https://api.visitorbadge.io/api/visitors?path=klikpdf.my.id');
+        if (res.ok) {
+          const svgText = await res.text();
+          // Extract the number from the SVG badge
+          const numbers = svgText.match(/>(\d[\d,.]*)</g);
+          if (numbers && numbers.length > 0) {
+            const raw = numbers[numbers.length - 1].replace(/[^\d]/g, '');
+            const parsed = parseInt(raw, 10);
+            if (!isNaN(parsed) && parsed > 0) {
+              setTotalVisits(parsed);
+              localStorage.setItem('klikpdf_real_visits', parsed.toString());
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('Real visitor counter fetch error:', err);
+      }
+    };
 
-    return () => clearInterval(interval);
+    fetchRealVisits();
+
+    // 2. Real Active Users Presence via BroadcastChannel
+    try {
+      const channel = new BroadcastChannel('klikpdf_active_presence');
+      let tabCount = 1;
+
+      // Announce presence to other open tabs
+      channel.postMessage({ type: 'PING' });
+
+      channel.onmessage = (event) => {
+        if (event.data?.type === 'PING') {
+          channel.postMessage({ type: 'PONG' });
+          tabCount += 1;
+          setActiveUsers(tabCount);
+        } else if (event.data?.type === 'PONG') {
+          tabCount += 1;
+          setActiveUsers(tabCount);
+        }
+      };
+
+      return () => {
+        channel.close();
+      };
+    } catch (e) {
+      // Fallback if BroadcastChannel is not supported
+      setActiveUsers(1);
+    }
   }, []);
 
   return (
