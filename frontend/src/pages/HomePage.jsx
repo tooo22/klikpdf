@@ -242,9 +242,41 @@ export const HomePage = ({ onSelectTool }) => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-3 text-white drop-shadow-md">
             Solusi PDF Terbaik untuk Anda
           </h1>
-          <p className="text-sm sm:text-base text-slate-200 font-medium mb-7 max-w-xl mx-auto drop-shadow-sm">
+          <p className="text-sm sm:text-base text-slate-200 font-medium mb-5 max-w-xl mx-auto drop-shadow-sm">
             Kelola dan konversi file PDF dengan mudah, cepat, dan aman.
           </p>
+
+          {/* Live Visitor & Active User Stats Badges (Right above the box) */}
+          <div className="inline-flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 px-4 py-1.5 mb-5 rounded-full bg-slate-950/70 backdrop-blur-md border border-slate-700/70 shadow-lg text-xs font-semibold text-slate-200 transition-all">
+            {/* Active Online Users */}
+            <div className="flex items-center space-x-2">
+              <span className="relative flex h-3 w-3 items-center justify-center">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 animate-blink-green"></span>
+              </span>
+              <span className="font-bold text-white">
+                {activeUsers}
+              </span>
+              <span className="text-slate-300">
+                {lang === 'id' ? 'Pengguna Online' : 'Active Users Online'}
+              </span>
+            </div>
+
+            <span className="text-slate-600 hidden sm:inline">•</span>
+
+            {/* Total Visitors */}
+            <div className="flex items-center space-x-1.5 text-slate-300">
+              <div className="relative flex items-center justify-center">
+                <Eye size={15} className="text-[#E5322D] animate-blink-red" />
+              </div>
+              <span className="font-bold text-white">
+                {totalVisits.toLocaleString('id-ID')}
+              </span>
+              <span>
+                {lang === 'id' ? 'Total Kunjungan' : 'Total Visits'}
+              </span>
+            </div>
+          </div>
 
           {/* Centered White Drag & Drop Box */}
           <div 
@@ -358,50 +390,17 @@ export const HomePage = ({ onSelectTool }) => {
         </div>
       )}
 
-      {/* Hero Header */}
-      <div className="text-center max-w-4xl mx-auto mb-12">
-        {/* Top Badge */}
+      {/* Category Filter & Section Header */}
+      <div className="text-center max-w-4xl mx-auto mb-10">
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-red-100 dark:bg-red-950/60 text-[#E5322D] dark:text-[#ff6b66] font-bold text-xs uppercase tracking-wider mb-4 border border-red-200 dark:border-red-900/40 shadow-xs">
           <Sparkles size={14} />
           <span>{t('hero.badge')}</span>
         </div>
 
-        {/* Live Visitor & Active User Stats Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 px-4 py-2 mb-6 rounded-full bg-white/90 dark:bg-[#1E1E22]/90 backdrop-blur-md border border-gray-200/80 dark:border-[#2E2E33] shadow-sm text-xs font-semibold text-gray-700 dark:text-gray-300 transition-all max-w-fit mx-auto">
-          {/* Active Online Users */}
-          <div className="flex items-center space-x-2">
-            <span className="relative flex h-3 w-3 items-center justify-center">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 animate-blink-green"></span>
-            </span>
-            <span className="font-bold text-gray-900 dark:text-white">
-              {activeUsers}
-            </span>
-            <span className="text-gray-500 dark:text-gray-400">
-              {lang === 'id' ? 'Pengguna Online' : 'Active Users Online'}
-            </span>
-          </div>
-
-          <span className="text-gray-300 dark:text-gray-600 hidden sm:inline">•</span>
-
-          {/* Total Visitors */}
-          <div className="flex items-center space-x-1.5 text-gray-600 dark:text-gray-400">
-            <div className="relative flex items-center justify-center">
-              <Eye size={15} className="text-[#E5322D] animate-blink-red" />
-            </div>
-            <span className="font-bold text-gray-900 dark:text-white">
-              {totalVisits.toLocaleString('id-ID')}
-            </span>
-            <span>
-              {lang === 'id' ? 'Total Kunjungan' : 'Total Visits'}
-            </span>
-          </div>
-        </div>
-
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-4 transition-colors">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-3 transition-colors">
           {t('hero.title')}
-        </h1>
-        <p className="text-sm sm:text-base lg:text-lg text-gray-500 dark:text-gray-400 font-medium transition-colors max-w-3xl mx-auto leading-relaxed">
+        </h2>
+        <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-medium transition-colors max-w-2xl mx-auto leading-relaxed">
           {t('hero.subtitle')}
         </p>
 
