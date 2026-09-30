@@ -6,6 +6,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { LoginModal } from './components/LoginModal';
 import { RecentFilesModal } from './components/RecentFilesModal';
+import { ChatbotWidget } from './components/ChatbotWidget';
 import { HomePage } from './pages/HomePage';
 import { ToolWorkspace } from './pages/ToolWorkspace';
 
@@ -72,6 +73,7 @@ export default function App() {
             <Footer />
             <LoginModal />
             <RecentFilesModal />
+            <ChatbotWidget onSelectTool={handleSelectTool} />
           </div>
         </AuthProvider>
       </LanguageProvider>
