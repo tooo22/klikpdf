@@ -239,15 +239,8 @@ export const HomePage = ({ onSelectTool }) => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:28px_28px] pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-3 text-white drop-shadow-md">
-            Solusi PDF Terbaik untuk Anda
-          </h1>
-          <p className="text-sm sm:text-base text-slate-200 font-medium mb-5 max-w-xl mx-auto drop-shadow-sm">
-            Kelola dan konversi file PDF dengan mudah, cepat, dan aman.
-          </p>
-
-          {/* Live Visitor & Active User Stats Badges (Right above the box) */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 px-4 py-1.5 mb-5 rounded-full bg-slate-950/70 backdrop-blur-md border border-slate-700/70 shadow-lg text-xs font-semibold text-slate-200 transition-all">
+          {/* Live Visitor & Active User Stats Badges (At the top above title) */}
+          <div className="inline-flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 px-4 py-1.5 mb-4 rounded-full bg-slate-950/70 backdrop-blur-md border border-slate-700/70 shadow-lg text-xs font-semibold text-slate-200 transition-all">
             {/* Active Online Users */}
             <div className="flex items-center space-x-2">
               <span className="relative flex h-3 w-3 items-center justify-center">
@@ -277,6 +270,13 @@ export const HomePage = ({ onSelectTool }) => {
               </span>
             </div>
           </div>
+
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-3 text-white drop-shadow-md">
+            Solusi PDF Terbaik untuk Anda
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 font-medium mb-7 max-w-xl mx-auto drop-shadow-sm">
+            Kelola dan konversi file PDF dengan mudah, cepat, dan aman.
+          </p>
 
           {/* Centered White Drag & Drop Box */}
           <div 
