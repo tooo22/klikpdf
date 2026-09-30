@@ -9,7 +9,14 @@ export const Footer = () => {
           <span>© 2026 KlikPDF. Dibuat dengan</span>
           <Heart size={14} className="text-[#E5322D] fill-current" />
           <span>oleh</span>
-          <span className="text-[#E5322D] font-bold">@toooowys</span>
+          <a
+            href="https://instagram.com/toooowys"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#E5322D] hover:text-[#ff4742] font-bold underline decoration-dotted hover:decoration-solid hover:scale-105 transition-all duration-150 inline-block"
+          >
+            @toooowys
+          </a>
           <span>untuk kemudahan pengolahan PDF Anda.</span>
         </div>
         <div className="flex space-x-4">
