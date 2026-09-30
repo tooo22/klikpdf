@@ -6,6 +6,15 @@ import { ActionSidebar } from '../components/ActionSidebar';
 import { ResultDownload } from '../components/ResultDownload';
 import { Toast } from '../components/Toast';
 import { processPdfTool } from '../services/api';
+import { 
+  clientWordToPdf, 
+  clientMergePdfs, 
+  clientSplitPdf, 
+  clientRotatePdf, 
+  clientWatermarkPdf, 
+  clientImageToPdf, 
+  clientHdImage 
+} from '../services/clientPdfProcessor';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -31,25 +40,51 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
     setIsProcessing(true);
     setErrorMessage(null);
 
-    const formData = new FormData();
-    if (tool.multipleFiles) {
-      selectedFiles.forEach((file) => formData.append('files', file));
-    } else {
-      formData.append('file', selectedFiles[0]);
-    }
-
-    if (options.watermarkText) formData.append('text', options.watermarkText);
-    if (options.password) formData.append('password', options.password);
-    if (options.ranges) formData.append('ranges', options.ranges);
-    if (options.quality) formData.append('quality', options.quality);
-    if (options.scale) formData.append('scale', options.scale.toString());
-
     try {
-      const blob = await processPdfTool(tool.endpoint, formData);
-      const url = window.URL.createObjectURL(blob);
-      setResultUrl(url);
+      let blob = null;
+
+      // 1. Instant Client-Side Processing Engine (Zero server dependency)
+      if (tool.id === 'word-to-pdf') {
+        blob = await clientWordToPdf(selectedFiles[0]);
+      } else if (tool.id === 'merge') {
+        blob = await clientMergePdfs(selectedFiles);
+      } else if (tool.id === 'split') {
+        blob = await clientSplitPdf(selectedFiles[0], options.ranges);
+      } else if (tool.id === 'rotate') {
+        blob = await clientRotatePdf(selectedFiles[0], 90);
+      } else if (tool.id === 'watermark') {
+        blob = await clientWatermarkPdf(selectedFiles[0], options.watermarkText);
+      } else if (tool.id === 'image-to-pdf') {
+        blob = await clientImageToPdf(selectedFiles);
+      } else if (tool.id === 'hd-image') {
+        blob = await clientHdImage(selectedFiles[0], options.scale || 2);
+      } else {
+        // 2. Server API fallback
+        const formData = new FormData();
+        if (tool.multipleFiles) {
+          selectedFiles.forEach((file) => formData.append('files', file));
+        } else {
+          formData.append('file', selectedFiles[0]);
+        }
+
+        if (options.watermarkText) formData.append('text', options.watermarkText);
+        if (options.password) formData.append('password', options.password);
+        if (options.ranges) formData.append('ranges', options.ranges);
+        if (options.quality) formData.append('quality', options.quality);
+        if (options.scale) formData.append('scale', options.scale.toString());
+
+        blob = await processPdfTool(tool.endpoint, formData);
+      }
+
+      if (blob) {
+        const url = window.URL.createObjectURL(blob);
+        setResultUrl(url);
+      } else {
+        throw new Error("Gagal menghasilkan berkas PDF.");
+      }
     } catch (err) {
-      setErrorMessage(err.response?.data?.detail || "Gagal memproses dokumen. Periksa kembali file Anda.");
+      console.error("Processing error:", err);
+      setErrorMessage(err.response?.data?.detail || err.message || "Gagal memproses dokumen. Periksa kembali file Anda.");
     } finally {
       setIsProcessing(false);
     }
