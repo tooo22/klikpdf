@@ -222,7 +222,41 @@ export const HomePage = ({ onSelectTool }) => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+      {/* Top Center Live Stats Bar (Placed at the very top above Hero Banner) */}
+      <div className="flex justify-center mb-4 sm:mb-6">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 px-4 py-1.5 rounded-full bg-white dark:bg-[#1E1E22] backdrop-blur-md border border-gray-200 dark:border-[#2E2E33] shadow-sm text-xs font-semibold text-gray-700 dark:text-gray-300 transition-all hover:shadow-md">
+          {/* Active Online Users */}
+          <div className="flex items-center space-x-2">
+            <span className="relative flex h-3 w-3 items-center justify-center">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 animate-blink-green"></span>
+            </span>
+            <span className="font-bold text-gray-900 dark:text-white">
+              {activeUsers}
+            </span>
+            <span className="text-gray-500 dark:text-gray-400">
+              {lang === 'id' ? 'Pengguna Online' : 'Active Users Online'}
+            </span>
+          </div>
+
+          <span className="text-gray-300 dark:text-gray-600 hidden sm:inline">•</span>
+
+          {/* Total Visitors */}
+          <div className="flex items-center space-x-1.5 text-gray-600 dark:text-gray-400">
+            <div className="relative flex items-center justify-center">
+              <Eye size={15} className="text-[#E5322D] animate-blink-red" />
+            </div>
+            <span className="font-bold text-gray-900 dark:text-white">
+              {totalVisits.toLocaleString('id-ID')}
+            </span>
+            <span>
+              {lang === 'id' ? 'Total Kunjungan' : 'Total Visits'}
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* 3D Modern Hero Banner with Quick Drag & Drop */}
       <div 
         onDragOver={(e) => { e.preventDefault(); setIsHeroDragging(true); }}
@@ -239,38 +273,6 @@ export const HomePage = ({ onSelectTool }) => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:28px_28px] pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          {/* Live Visitor & Active User Stats Badges (At the top above title) */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 px-4 py-1.5 mb-4 rounded-full bg-slate-950/70 backdrop-blur-md border border-slate-700/70 shadow-lg text-xs font-semibold text-slate-200 transition-all">
-            {/* Active Online Users */}
-            <div className="flex items-center space-x-2">
-              <span className="relative flex h-3 w-3 items-center justify-center">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 animate-blink-green"></span>
-              </span>
-              <span className="font-bold text-white">
-                {activeUsers}
-              </span>
-              <span className="text-slate-300">
-                {lang === 'id' ? 'Pengguna Online' : 'Active Users Online'}
-              </span>
-            </div>
-
-            <span className="text-slate-600 hidden sm:inline">•</span>
-
-            {/* Total Visitors */}
-            <div className="flex items-center space-x-1.5 text-slate-300">
-              <div className="relative flex items-center justify-center">
-                <Eye size={15} className="text-[#E5322D] animate-blink-red" />
-              </div>
-              <span className="font-bold text-white">
-                {totalVisits.toLocaleString('id-ID')}
-              </span>
-              <span>
-                {lang === 'id' ? 'Total Kunjungan' : 'Total Visits'}
-              </span>
-            </div>
-          </div>
-
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-3 text-white drop-shadow-md">
             Solusi PDF Terbaik untuk Anda
           </h1>
