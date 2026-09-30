@@ -76,9 +76,9 @@ export const HomePage = ({ onSelectTool }) => {
         <div className="inline-flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 px-4 py-2 mb-6 rounded-full bg-white/90 dark:bg-[#1E1E22]/90 backdrop-blur-md border border-gray-200/80 dark:border-[#2E2E33] shadow-sm text-xs font-semibold text-gray-700 dark:text-gray-300 transition-all">
           {/* Active Online Users */}
           <div className="flex items-center space-x-2">
-            <span className="relative flex h-2.5 w-2.5">
+            <span className="relative flex h-3 w-3 items-center justify-center">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 animate-blink-green"></span>
             </span>
             <span className="font-bold text-gray-900 dark:text-white">
               {activeUsers}
@@ -92,7 +92,9 @@ export const HomePage = ({ onSelectTool }) => {
 
           {/* Total Visitors */}
           <div className="flex items-center space-x-1.5 text-gray-600 dark:text-gray-400">
-            <Eye size={14} className="text-[#E5322D]" />
+            <div className="relative flex items-center justify-center">
+              <Eye size={15} className="text-[#E5322D] animate-blink-red" />
+            </div>
             <span className="font-bold text-gray-900 dark:text-white">
               {totalVisits.toLocaleString('id-ID')}
             </span>
