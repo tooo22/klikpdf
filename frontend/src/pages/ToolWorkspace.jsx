@@ -41,6 +41,8 @@ export const ToolWorkspace = ({ toolId, onGoHome }) => {
     if (options.watermarkText) formData.append('text', options.watermarkText);
     if (options.password) formData.append('password', options.password);
     if (options.ranges) formData.append('ranges', options.ranges);
+    if (options.quality) formData.append('quality', options.quality);
+    if (options.scale) formData.append('scale', options.scale.toString());
 
     try {
       const blob = await processPdfTool(tool.endpoint, formData);
@@ -54,10 +56,11 @@ export const ToolWorkspace = ({ toolId, onGoHome }) => {
   };
 
   if (resultUrl) {
+    const ext = tool.id === 'hd-image' ? 'png' : tool.id === 'pdf-to-word' ? 'docx' : tool.id === 'pdf-to-excel' ? 'xlsx' : tool.id === 'pdf-to-image' ? 'zip' : 'pdf';
     return (
       <ResultDownload
         downloadUrl={resultUrl}
-        fileName={`klikpdf_${tool.id}.pdf`}
+        fileName={`klikpdf_${tool.id}.${ext}`}
         onGoHome={onGoHome}
         onReset={() => {
           setSelectedFiles([]);

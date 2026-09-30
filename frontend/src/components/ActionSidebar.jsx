@@ -51,6 +51,38 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
           </div>
         )}
 
+        {tool.id === 'hd-image' && (
+          <div className="space-y-4">
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">Tingkat Ketajaman & Resolusi</label>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => onOptionsChange({ ...options, quality: 'hd', scale: 2 })}
+                className={`p-3 rounded-xl border text-xs font-bold transition-all ${
+                  (options.quality || 'hd') === 'hd'
+                    ? 'border-[#8B5CF6] bg-[#8B5CF6]/10 text-[#8B5CF6] ring-2 ring-[#8B5CF6]/30'
+                    : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-300 hover:border-gray-400'
+                }`}
+              >
+                ✨ 2x HD
+                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">Jernih & Cepat</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onOptionsChange({ ...options, quality: 'ultra', scale: 4 })}
+                className={`p-3 rounded-xl border text-xs font-bold transition-all ${
+                  options.quality === 'ultra'
+                    ? 'border-[#8B5CF6] bg-[#8B5CF6]/10 text-[#8B5CF6] ring-2 ring-[#8B5CF6]/30'
+                    : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-300 hover:border-gray-400'
+                }`}
+              >
+                💎 4x Ultra HD
+                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">Maksimal Detail</span>
+              </button>
+            </div>
+          </div>
+        )}
+
         {tool.id === 'split' && (
           <div className="space-y-4">
             <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">Rentang Halaman (opsional, misal: 1-3, 5)</label>

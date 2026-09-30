@@ -154,5 +154,18 @@ export const TOOLS = [
     endpoint: "/api/ocr",
     multipleFiles: false,
     accept: ".pdf"
+  },
+  {
+    id: "hd-image",
+    name: "HD-kan Foto (Upscale)",
+    nameEn: "Enhance Photo HD",
+    desc: "Tingkatkan ketajaman, resolusi, dan kualitas gambar/foto Anda menjadi HD jernih secara instan.",
+    descEn: "Upscale resolution, sharpen details, and enhance photo quality to HD instantly.",
+    icon: "Sparkles",
+    color: "#8B5CF6",
+    category: "convert",
+    endpoint: "/api/enhance-image",
+    multipleFiles: false,
+    accept: ".jpg,.jpeg,.png,.webp"
   }
 ];

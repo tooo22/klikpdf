@@ -15,6 +15,7 @@ export const CONVERT_COLUMNS = [
     titleId: "KONVERSI DARI PDF",
     items: [
       { id: "pdf-to-image", name: "PDF to JPG", nameId: "PDF ke JPG", icon: "Image", color: "#F7A600" },
+      { id: "hd-image", name: "Enhance Photo HD", nameId: "HD-kan Foto", icon: "Sparkles", color: "#8B5CF6" },
       { id: "pdf-to-word", name: "PDF to WORD", nameId: "PDF ke WORD", icon: "FileText", color: "#2072B8" },
       { id: "pdf-to-word", name: "PDF to POWERPOINT", nameId: "PDF ke POWERPOINT", icon: "Presentation", color: "#E65100" },
       { id: "pdf-to-excel", name: "PDF to EXCEL", nameId: "PDF ke EXCEL", icon: "FileSpreadsheet", color: "#107C41" },
@@ -40,6 +41,7 @@ export const ALL_TOOLS_COLUMNS = [
     title: "OPTIMIZE PDF",
     titleId: "OPTIMALKAN PDF",
     items: [
+      { id: "hd-image", name: "Enhance Photo HD", nameId: "HD-kan Foto", icon: "Sparkles", color: "#8B5CF6" },
       { id: "compress", name: "Compress PDF", nameId: "Kompres PDF", icon: "Minimize2", color: "#38B44A" },
       { id: "compress", name: "Repair PDF", nameId: "Perbaiki PDF", icon: "Wrench", color: "#38B44A" },
       { id: "ocr", name: "OCR PDF", nameId: "OCR PDF", icon: "Eye", color: "#3F51B5" }

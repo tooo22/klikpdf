@@ -1,7 +1,7 @@
 import zipfile
 import fitz
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract
 
 class OCRService:
@@ -53,5 +53,34 @@ class OCRService:
         ocr_pdf.close()
         doc.close()
         return output_pdf_path
+
+    @staticmethod
+    def enhance_image(image_path: Path, output_path: Path, scale: int = 2, sharpness: float = 1.6, contrast: float = 1.1) -> Path:
+        img = Image.open(image_path)
+        if img.mode != "RGB":
+            img = img.convert("RGB")
+        
+        # 1. Super-Resolution Upscaling with High-Quality Lanczos Resampling
+        new_width = int(img.width * scale)
+        new_height = int(img.height * scale)
+        upscaled = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+        
+        # 2. Detail Restoration and Unsharp Mask
+        sharpened = upscaled.filter(ImageFilter.UnsharpMask(radius=2, percent=int(140 * sharpness), threshold=2))
+        
+        # 3. Fine-tuning sharpness
+        enhancer_sharp = ImageEnhance.Sharpness(sharpened)
+        enhanced = enhancer_sharp.enhance(sharpness)
+        
+        # 4. Dynamic Contrast & Clarity Boost
+        enhancer_contrast = ImageEnhance.Contrast(enhanced)
+        enhanced = enhancer_contrast.enhance(contrast)
+        
+        # 5. Color Vibrancy & Balance
+        enhancer_color = ImageEnhance.Color(enhanced)
+        enhanced = enhancer_color.enhance(1.08)
+        
+        enhanced.save(output_path, quality=95, optimize=True)
+        return output_path
 
 ocr_service = OCRService()
