@@ -52,6 +52,19 @@ export const TOOLS = [
     accept: ".pdf"
   },
   {
+    id: "word-to-pdf",
+    name: "Word ke PDF",
+    nameEn: "Word to PDF",
+    desc: "Konversi berkas DOC & DOCX Microsoft Word menjadi dokumen PDF berkualitas tinggi.",
+    descEn: "Make DOC and DOCX files easy to read by converting them to PDF.",
+    icon: "FileCheck",
+    color: "#1B5E20",
+    category: "convert",
+    endpoint: "/api/word-to-pdf",
+    multipleFiles: false,
+    accept: ".doc,.docx"
+  },
+  {
     id: "pdf-to-excel",
     name: "PDF ke Excel",
     nameEn: "PDF to Excel",

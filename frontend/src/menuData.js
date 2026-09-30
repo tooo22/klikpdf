@@ -4,7 +4,7 @@ export const CONVERT_COLUMNS = [
     titleId: "KONVERSI KE PDF",
     items: [
       { id: "image-to-pdf", name: "JPG to PDF", nameId: "JPG ke PDF", icon: "FileImage", color: "#F7A600" },
-      { id: "pdf-to-word", name: "WORD to PDF", nameId: "WORD ke PDF", icon: "FileText", color: "#2072B8" },
+      { id: "word-to-pdf", name: "WORD to PDF", nameId: "WORD ke PDF", icon: "FileCheck", color: "#2072B8" },
       { id: "pdf-to-word", name: "POWERPOINT to PDF", nameId: "POWERPOINT ke PDF", icon: "Presentation", color: "#E65100" },
       { id: "pdf-to-excel", name: "EXCEL to PDF", nameId: "EXCEL ke PDF", icon: "FileSpreadsheet", color: "#107C41" },
       { id: "pdf-to-word", name: "HTML to PDF", nameId: "HTML ke PDF", icon: "Code2", color: "#E5322D" }
@@ -52,7 +52,7 @@ export const ALL_TOOLS_COLUMNS = [
     titleId: "KONVERSI KE PDF",
     items: [
       { id: "image-to-pdf", name: "JPG to PDF", nameId: "JPG ke PDF", icon: "FileImage", color: "#F7A600" },
-      { id: "pdf-to-word", name: "WORD to PDF", nameId: "WORD ke PDF", icon: "FileText", color: "#2072B8" },
+      { id: "word-to-pdf", name: "WORD to PDF", nameId: "WORD ke PDF", icon: "FileCheck", color: "#2072B8" },
       { id: "pdf-to-word", name: "POWERPOINT to PDF", nameId: "POWERPOINT ke PDF", icon: "Presentation", color: "#E65100" },
       { id: "pdf-to-excel", name: "EXCEL to PDF", nameId: "EXCEL ke PDF", icon: "FileSpreadsheet", color: "#107C41" },
       { id: "pdf-to-word", name: "HTML to PDF", nameId: "HTML ke PDF", icon: "Code2", color: "#E5322D" }

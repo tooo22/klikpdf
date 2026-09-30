@@ -64,14 +64,18 @@ export const Dropzone = ({ tool, onFilesSelected, onGoHome }) => {
         <button className="bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white text-lg font-extrabold px-8 py-4 rounded-2xl shadow-xl transition-all inline-flex items-center space-x-3 cursor-pointer">
           <Plus size={24} />
           <span>
-            {tool.id === 'image-to-pdf' || tool.id === 'hd-image'
+            {tool.id === 'word-to-pdf'
+              ? (lang === 'id' ? 'Pilih Berkas Word' : 'Select Word Files')
+              : tool.id === 'image-to-pdf' || tool.id === 'hd-image'
               ? t('dropzone.select_images')
               : t('dropzone.select_files')}
           </span>
         </button>
         
         <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 font-medium">
-          {tool.id === 'image-to-pdf' || tool.id === 'hd-image'
+          {tool.id === 'word-to-pdf'
+            ? (lang === 'id' ? 'atau jatuhkan berkas Word (.docx, .doc) di sini' : 'or drop Word documents here')
+            : tool.id === 'image-to-pdf' || tool.id === 'hd-image'
             ? (lang === 'id' ? 'atau jatuhkan gambar di sini' : 'or drop images here')
             : t('dropzone.drop_here')}
         </p>

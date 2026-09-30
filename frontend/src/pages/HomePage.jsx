@@ -333,13 +333,13 @@ export const HomePage = ({ onSelectTool }) => {
 
       {/* Quick Action Selection Modal after Drop */}
       {showActionModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-150">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in duration-150">
           <div className="bg-white dark:bg-[#1E1E22] rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl border border-gray-100 dark:border-[#2E2E33]">
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-[#2E2E33]">
               <div>
                 <h3 className="text-lg font-black text-gray-900 dark:text-white">Pilih Tindakan untuk File Anda</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {droppedFiles.length} file dipilih: <span className="font-semibold text-[#E5322D]">{droppedFiles[0]?.name}</span>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                  {droppedFiles.length} file dipilih: <span className="font-bold text-[#E5322D]">{droppedFiles[0]?.name}</span>
                 </p>
               </div>
               <button 
@@ -350,44 +350,94 @@ export const HomePage = ({ onSelectTool }) => {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-2.5 my-4">
-              <button
-                onClick={() => handleQuickAction('merge')}
-                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-[#E5322D] hover:bg-red-50/50 dark:hover:bg-red-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
-              >
-                📑 Gabungkan PDF
-              </button>
-              <button
-                onClick={() => handleQuickAction('compress')}
-                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-emerald-500 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
-              >
-                🗜️ Kompres PDF
-              </button>
-              <button
-                onClick={() => handleQuickAction('pdf-to-word')}
-                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
-              >
-                📝 PDF ke Word
-              </button>
-              <button
-                onClick={() => handleQuickAction('hd-image')}
-                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-purple-500 hover:bg-purple-50/50 dark:hover:bg-purple-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
-              >
-                ✨ HD-kan Foto (Upscale)
-              </button>
-              <button
-                onClick={() => handleQuickAction('split')}
-                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-amber-500 hover:bg-amber-50/50 dark:hover:bg-amber-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
-              >
-                ✂️ Pisahkan PDF
-              </button>
-              <button
-                onClick={() => handleQuickAction('image-to-pdf')}
-                className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-orange-500 hover:bg-orange-50/50 dark:hover:bg-orange-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
-              >
-                🖼️ Gambar ke PDF
-              </button>
-            </div>
+            {/* Smart Contextual Options based on File Type */}
+            {(() => {
+              const fileName = droppedFiles[0]?.name?.toLowerCase() || '';
+              const isWord = /\.(docx?|doc)$/i.test(fileName);
+              const isImage = /\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(fileName) || droppedFiles[0]?.type?.startsWith('image/');
+              
+              if (isWord) {
+                return (
+                  <div className="space-y-3 my-4">
+                    <button
+                      onClick={() => handleQuickAction('word-to-pdf')}
+                      className="w-full p-4 text-left rounded-2xl bg-blue-50 dark:bg-blue-950/30 border-2 border-blue-500 hover:bg-blue-100 dark:hover:bg-blue-900/40 text-sm font-black text-blue-700 dark:text-blue-300 transition-all cursor-pointer flex items-center justify-between shadow-sm group"
+                    >
+                      <span className="flex items-center gap-3">
+                        <span className="text-xl">📄</span>
+                        <div>
+                          <div>Word ke PDF (Konversi Otomatis)</div>
+                          <div className="text-[11px] font-normal text-blue-600/80 dark:text-blue-400/80">Ubah dokumen Word (.doc, .docx) menjadi PDF siap pakai</div>
+                        </div>
+                      </span>
+                      <span className="text-xs bg-blue-600 text-white font-bold px-3 py-1 rounded-full group-hover:scale-105 transition-transform">
+                        PILIH →
+                      </span>
+                    </button>
+                  </div>
+                );
+              }
+
+              if (isImage) {
+                return (
+                  <div className="grid grid-cols-2 gap-2.5 my-4">
+                    <button
+                      onClick={() => handleQuickAction('hd-image')}
+                      className="p-3.5 text-left rounded-xl border-2 border-purple-500/60 bg-purple-50/50 dark:bg-purple-950/20 hover:bg-purple-100 dark:hover:bg-purple-900/40 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+                    >
+                      ✨ HD-kan Foto (Upscale)
+                    </button>
+                    <button
+                      onClick={() => handleQuickAction('image-to-pdf')}
+                      className="p-3.5 text-left rounded-xl border-2 border-orange-500/60 bg-orange-50/50 dark:bg-orange-950/20 hover:bg-orange-100 dark:hover:bg-orange-900/40 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+                    >
+                      🖼️ Gambar ke PDF
+                    </button>
+                  </div>
+                );
+              }
+
+              return (
+                <div className="grid grid-cols-2 gap-2.5 my-4">
+                  <button
+                    onClick={() => handleQuickAction('word-to-pdf')}
+                    className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+                  >
+                    📄 Word ke PDF
+                  </button>
+                  <button
+                    onClick={() => handleQuickAction('pdf-to-word')}
+                    className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+                  >
+                    📝 PDF ke Word
+                  </button>
+                  <button
+                    onClick={() => handleQuickAction('merge')}
+                    className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-[#E5322D] hover:bg-red-50/50 dark:hover:bg-red-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+                  >
+                    📑 Gabungkan PDF
+                  </button>
+                  <button
+                    onClick={() => handleQuickAction('compress')}
+                    className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-emerald-500 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+                  >
+                    🗜️ Kompres PDF
+                  </button>
+                  <button
+                    onClick={() => handleQuickAction('hd-image')}
+                    className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-purple-500 hover:bg-purple-50/50 dark:hover:bg-purple-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+                  >
+                    ✨ HD-kan Foto (Upscale)
+                  </button>
+                  <button
+                    onClick={() => handleQuickAction('split')}
+                    className="p-3.5 text-left rounded-xl border border-gray-200 dark:border-[#2E2E33] hover:border-amber-500 hover:bg-amber-50/50 dark:hover:bg-amber-950/20 text-xs font-bold text-gray-800 dark:text-gray-200 transition-all cursor-pointer"
+                  >
+                    ✂️ Pisahkan PDF
+                  </button>
+                </div>
+              );
+            })()}
           </div>
         </div>
       )}
