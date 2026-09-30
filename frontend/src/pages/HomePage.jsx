@@ -262,7 +262,7 @@ export const HomePage = ({ onSelectTool }) => {
         onDragOver={(e) => { e.preventDefault(); setIsHeroDragging(true); }}
         onDragLeave={() => setIsHeroDragging(false)}
         onDrop={(e) => { e.preventDefault(); setIsHeroDragging(false); handleHeroFiles(e.dataTransfer.files); }}
-        className={`relative overflow-hidden rounded-3xl bg-[#0b1329] bg-[url('/images/hero-banner-3d.jpg')] bg-cover bg-center text-white p-6 sm:p-10 lg:p-14 mb-8 shadow-2xl border transition-all duration-300 ${
+        className={`relative overflow-hidden rounded-3xl bg-[#0b1329] bg-[url('/images/hero-banner-3d.webp')] bg-cover bg-center text-white p-6 sm:p-10 lg:p-14 mb-8 shadow-2xl border transition-all duration-300 ${
           isHeroDragging ? 'border-[#2563eb] ring-4 ring-blue-500/40 scale-[1.01]' : 'border-slate-700/60'
         }`}
       >
