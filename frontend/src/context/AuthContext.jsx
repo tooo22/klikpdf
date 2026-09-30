@@ -4,8 +4,8 @@ import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext();
 
-// Google Client ID (optional - fallback to demo login if empty or not configured)
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
+// Google Client ID
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '882960778924-qnagvcduvc341a89bh7v8af2h3dbhhtg.apps.googleusercontent.com';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
