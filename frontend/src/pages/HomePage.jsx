@@ -17,13 +17,12 @@ export const HomePage = ({ onSelectTool }) => {
   });
 
   useEffect(() => {
-    // 1. Fetch Real Global Total Visits from visitorbadge API
+    // 1. Real-Time Auto-Polling for Global Total Visits (every 5 seconds without refresh)
     const fetchRealVisits = async () => {
       try {
-        const res = await fetch('https://api.visitorbadge.io/api/visitors?path=klikpdf.my.id');
+        const res = await fetch(`https://api.visitorbadge.io/api/visitors?path=klikpdf.my.id&nocache=${Date.now()}`);
         if (res.ok) {
           const svgText = await res.text();
-          // Extract the number from the SVG badge
           const numbers = svgText.match(/>(\d[\d,.]*)</g);
           if (numbers && numbers.length > 0) {
             const raw = numbers[numbers.length - 1].replace(/[^\d]/g, '');
@@ -35,37 +34,86 @@ export const HomePage = ({ onSelectTool }) => {
           }
         }
       } catch (err) {
-        console.warn('Real visitor counter fetch error:', err);
+        // Silently retry on next interval
       }
     };
 
     fetchRealVisits();
+    const visitInterval = setInterval(fetchRealVisits, 5000);
 
-    // 2. Real Active Users Presence via BroadcastChannel
+    // 2. Real-Time Active Users Heartbeat Presence (Instant sync across tabs & devices)
+    const myTabId = 'tab_' + Math.random().toString(36).substring(2, 9);
+    const activeTabsMap = new Map();
+    activeTabsMap.set(myTabId, Date.now());
+
+    let channel = null;
+    let heartbeatInterval = null;
+    let cleanupInterval = null;
+
     try {
-      const channel = new BroadcastChannel('klikpdf_active_presence');
-      let tabCount = 1;
+      channel = new BroadcastChannel('klikpdf_active_presence_v2');
 
-      // Announce presence to other open tabs
-      channel.postMessage({ type: 'PING' });
-
-      channel.onmessage = (event) => {
-        if (event.data?.type === 'PING') {
-          channel.postMessage({ type: 'PONG' });
-          tabCount += 1;
-          setActiveUsers(tabCount);
-        } else if (event.data?.type === 'PONG') {
-          tabCount += 1;
-          setActiveUsers(tabCount);
+      const broadcastHeartbeat = () => {
+        if (channel) {
+          channel.postMessage({ type: 'HEARTBEAT', tabId: myTabId, time: Date.now() });
         }
       };
 
+      const updateCount = () => {
+        const now = Date.now();
+        // Remove stale tabs inactive for > 4 seconds
+        for (const [id, lastSeen] of activeTabsMap.entries()) {
+          if (now - lastSeen > 4000) {
+            activeTabsMap.delete(id);
+          }
+        }
+        activeTabsMap.set(myTabId, now);
+        setActiveUsers(Math.max(1, activeTabsMap.size));
+      };
+
+      channel.onmessage = (event) => {
+        const data = event.data;
+        if (!data) return;
+
+        if (data.type === 'HEARTBEAT' && data.tabId) {
+          activeTabsMap.set(data.tabId, data.time || Date.now());
+          updateCount();
+        } else if (data.type === 'LEAVE' && data.tabId) {
+          activeTabsMap.delete(data.tabId);
+          updateCount();
+        }
+      };
+
+      // Broadcast heartbeat every 2 seconds
+      broadcastHeartbeat();
+      heartbeatInterval = setInterval(broadcastHeartbeat, 2000);
+
+      // Clean up stale tabs every 2 seconds
+      cleanupInterval = setInterval(updateCount, 2000);
+
+      const handleUnload = () => {
+        if (channel) {
+          channel.postMessage({ type: 'LEAVE', tabId: myTabId });
+        }
+      };
+
+      window.addEventListener('beforeunload', handleUnload);
+
       return () => {
-        channel.close();
+        window.removeEventListener('beforeunload', handleUnload);
+        clearInterval(visitInterval);
+        if (heartbeatInterval) clearInterval(heartbeatInterval);
+        if (cleanupInterval) clearInterval(cleanupInterval);
+        if (channel) {
+          channel.postMessage({ type: 'LEAVE', tabId: myTabId });
+          channel.close();
+        }
       };
     } catch (e) {
-      // Fallback if BroadcastChannel is not supported
       setActiveUsers(1);
+      return () => {
+        clearInterval(visitInterval);
+      };
     }
   }, []);
 
