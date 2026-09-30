@@ -1,14 +1,29 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import { CONVERT_COLUMNS, ALL_TOOLS_COLUMNS } from '../menuData';
 import * as Icons from 'lucide-react';
 
 export const Navbar = ({ onSelectTool, onGoHome }) => {
   const { lang, toggleLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
+  const { user, logout, setIsLoginModalOpen, setIsRecentModalOpen } = useAuth();
   const [activeMenu, setActiveMenu] = useState(null); // 'convert' | 'all' | null
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const timeoutRef = useRef(null);
+  const userMenuRef = useRef(null);
+
+  // Close user dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleMouseEnter = (menuName) => {
     if (timeoutRef.current) {
@@ -203,7 +218,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
           </div>
         </nav>
 
-        {/* Right Controls: Theme Toggle & Language Switcher */}
+        {/* Right Controls: Theme, Language, & Auth Profile */}
         <div className="flex items-center space-x-2.5">
           {/* Dark / Light Theme Toggle Button */}
           <button
@@ -227,6 +242,81 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             <Icons.Globe size={14} className="text-[#E5322D]" />
             <span>{lang.toUpperCase()}</span>
           </button>
+
+          {/* Google Auth / Profile Button */}
+          {user ? (
+            <div className="relative" ref={userMenuRef}>
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center space-x-2 p-1 pl-1.5 pr-2.5 rounded-full border border-gray-200 dark:border-[#3F3F46] hover:border-gray-400 dark:hover:border-gray-500 bg-white dark:bg-[#1E1E22] transition-all duration-150 cursor-pointer shadow-sm active:scale-95"
+              >
+                {user.picture ? (
+                  <img
+                    src={user.picture}
+                    alt={user.name}
+                    className="w-7 h-7 rounded-full object-cover ring-2 ring-[#E5322D]/30"
+                  />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-[#E5322D] text-white flex items-center justify-center font-bold text-xs">
+                    {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                  </div>
+                )}
+                <span className="text-xs font-bold text-gray-800 dark:text-gray-200 max-w-[100px] truncate hidden sm:inline">
+                  {user.name}
+                </span>
+                <Icons.ChevronDown size={13} className="text-gray-400" />
+              </button>
+
+              {/* User Dropdown Menu */}
+              {isUserMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-[#1E1E22] rounded-2xl shadow-xl border border-gray-100 dark:border-[#2E2E33] py-2 z-50 animate-fade-in">
+                  <div className="px-4 py-3 border-b border-gray-100 dark:border-[#2E2E33]">
+                    <p className="text-xs font-bold text-gray-900 dark:text-white truncate">
+                      {user.name}
+                    </p>
+                    <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate mt-0.5">
+                      {user.email}
+                    </p>
+                    <span className="inline-block mt-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-green-50 dark:bg-green-950/40 text-green-600 dark:text-green-400">
+                      {user.isDemo ? 'Akun Demo' : 'Akun Google Terverifikasi'}
+                    </span>
+                  </div>
+
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        setIsUserMenuOpen(false);
+                        setIsRecentModalOpen(true);
+                      }}
+                      className="w-full flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-[#27272A] hover:text-[#E5322D] transition-colors text-left cursor-pointer"
+                    >
+                      <Icons.History size={15} className="text-gray-400" />
+                      <span>{lang === 'id' ? 'Riwayat File Saya' : 'My Recent Files'}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setIsUserMenuOpen(false);
+                        logout();
+                      }}
+                      className="w-full flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors text-left cursor-pointer"
+                    >
+                      <Icons.LogOut size={15} />
+                      <span>{lang === 'id' ? 'Keluar' : 'Sign out'}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={() => setIsLoginModalOpen(true)}
+              className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-[#E5322D] hover:bg-[#CC2520] text-white text-xs font-bold transition-all duration-150 cursor-pointer shadow-sm active:scale-95 ml-1"
+            >
+              <Icons.LogIn size={14} />
+              <span>{lang === 'id' ? 'Masuk' : 'Sign in'}</span>
+            </button>
+          )}
         </div>
       </div>
     </header>

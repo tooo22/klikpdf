@@ -17,9 +17,11 @@ import {
 } from '../services/clientPdfProcessor';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useAuth } from '../context/AuthContext';
 
 export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
   const { lang } = useLanguage();
+  const { addRecentFile } = useAuth();
   const tool = TOOLS.find((t) => t.id === toolId) || TOOLS[0];
   const [selectedFiles, setSelectedFiles] = useState(initialFiles || []);
   const [options, setOptions] = useState({});
@@ -79,6 +81,17 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
       if (blob) {
         const url = window.URL.createObjectURL(blob);
         setResultUrl(url);
+
+        // Record to user's recent file history
+        try {
+          addRecentFile({
+            name: selectedFiles[0]?.name || 'Dokumen.pdf',
+            toolName: lang === 'id' ? (tool.nameId || tool.name) : tool.name,
+            size: selectedFiles[0]?.size ? (selectedFiles[0].size / 1024 / 1024).toFixed(2) + ' MB' : '-'
+          });
+        } catch (e) {
+          console.warn("Could not save to recent files:", e);
+        }
       } else {
         throw new Error("Gagal menghasilkan berkas PDF.");
       }
