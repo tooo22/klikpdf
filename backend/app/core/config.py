@@ -1,8 +1,9 @@
 import os
+import tempfile
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-TEMP_STORAGE_DIR = BASE_DIR / "temp_storage"
+TEMP_STORAGE_DIR = Path(tempfile.gettempdir()) / "klikpdf_temp_storage"
 
 class Settings:
     PROJECT_NAME: str = "KlikPDF API"
