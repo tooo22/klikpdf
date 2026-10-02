@@ -9,7 +9,7 @@ export const ToolCard = ({ tool, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="bg-white dark:bg-[#1E1E22] rounded-2xl p-6 border border-gray-100 dark:border-[#27272A] shadow-sm hover:shadow-xl dark:hover:shadow-[0_10px_25px_rgba(0,0,0,0.5)] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between group"
+      className="bg-white dark:bg-[#1E1E22] rounded-2xl p-5 sm:p-6 border border-gray-100 dark:border-[#27272A] shadow-sm hover:shadow-xl dark:hover:shadow-[0_10px_25px_rgba(0,0,0,0.5)] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between group"
     >
       <div>
         <div 

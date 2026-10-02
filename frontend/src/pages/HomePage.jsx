@@ -118,6 +118,15 @@ export const HomePage = ({ onSelectTool }) => {
   // Before / After Comparison Slider Value (0 to 100)
   const [comparisonValue, setComparisonValue] = useState(50);
 
+  const handleComparisonTouch = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const touch = e.touches[0];
+    if (!touch) return;
+    const x = touch.clientX - rect.left;
+    const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setComparisonValue(Math.round(percent));
+  };
+
   // Category and Tools Filter
   const [activeCategory, setActiveCategory] = useState('all');
   const [showAllTools, setShowAllTools] = useState(true);
@@ -182,8 +191,8 @@ export const HomePage = ({ onSelectTool }) => {
             {/* LEFT COLUMN: Headline & Copy & Social Proof */}
             <div className="lg:col-span-6 flex flex-col items-start text-left">
               {/* Trust Badge with Live Active Users */}
-              <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-[#18181B] border border-border-subtle/80 dark:border-slate-800 shadow-xs mb-6 text-xs">
-                <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary">
+              <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white dark:bg-[#18181B] border border-border-subtle/80 dark:border-slate-800 shadow-xs mb-5 sm:mb-6 text-[11px] sm:text-xs max-w-full">
+                <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary shrink-0">
                   <span className="material-symbols-outlined text-[14px]">bolt</span>
                 </span>
                 <span className="font-bold text-text-primary dark:text-white">
@@ -206,7 +215,7 @@ export const HomePage = ({ onSelectTool }) => {
               </div>
 
               {/* Main Title */}
-              <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-black text-text-primary dark:text-white tracking-tight leading-[1.12] mb-5">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[52px] font-black text-text-primary dark:text-white tracking-tight leading-[1.2] sm:leading-[1.12] mb-4 sm:mb-5">
                 {lang === 'id' ? (
                   <>
                     Olah Dokumen PDF <br className="hidden sm:inline" />
@@ -225,14 +234,14 @@ export const HomePage = ({ onSelectTool }) => {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-base sm:text-lg text-secondary dark:text-slate-300 leading-relaxed mb-8 max-w-xl">
+              <p className="text-sm sm:text-lg text-secondary dark:text-slate-300 leading-relaxed mb-6 sm:mb-8 max-w-xl">
                 {lang === 'id'
                   ? 'Gabungkan berkas, kompres hingga 85%, atau ubah format PDF ke Word dalam hitungan detik. Cukup seret file Anda langsung ke kotak di samping.'
                   : 'Merge files, compress up to 85%, or convert PDF to Word in seconds. Simply drag and drop your file into the box on the right.'}
               </p>
 
               {/* Quick CTA buttons */}
-              <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto mb-10">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-8 sm:mb-10">
                 <button
                   onClick={() => {
                     const el = document.getElementById('dropzone-box');
@@ -256,7 +265,7 @@ export const HomePage = ({ onSelectTool }) => {
               </div>
 
               {/* Social proof & rating */}
-              <div className="pt-6 border-t border-border-subtle/80 dark:border-slate-800 flex items-center gap-6 w-full">
+              <div className="pt-5 sm:pt-6 border-t border-border-subtle/80 dark:border-slate-800 flex flex-wrap items-center gap-4 sm:gap-6 w-full">
                 <div className="flex items-center -space-x-2">
                   <div className="w-9 h-9 rounded-full ring-2 ring-white dark:ring-[#18181B] bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-xs text-slate-700 dark:text-slate-200">
                     AK
@@ -301,7 +310,7 @@ export const HomePage = ({ onSelectTool }) => {
 
             {/* RIGHT COLUMN: Compact Interactive Tool Box & Action Selector */}
             <div className="lg:col-span-6 w-full" id="dropzone-box">
-              <div className="relative bg-white dark:bg-[#18181B] rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-black/40 border border-border-subtle/90 dark:border-slate-800 p-5 sm:p-7 transition-all duration-300">
+              <div className="relative bg-white dark:bg-[#18181B] rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-black/40 border border-border-subtle/90 dark:border-slate-800 p-4 sm:p-7 transition-all duration-300">
                 {/* Dropzone Header */}
                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-border-subtle/80 dark:border-slate-800">
                   <span className="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-slate-400 flex items-center gap-1.5">
@@ -337,15 +346,15 @@ export const HomePage = ({ onSelectTool }) => {
                     handleHeroFiles(e.dataTransfer.files);
                   }}
                   onClick={() => heroFileInputRef.current?.click()}
-                  className={`w-full rounded-2xl border-2 border-dashed p-7 sm:p-9 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 group ${
+                  className={`w-full rounded-2xl border-2 border-dashed p-5 sm:p-9 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 group ${
                     isHeroDragging
                       ? 'border-primary bg-rose-50/70 dark:bg-rose-950/40 ring-4 ring-rose-500/20 scale-[1.01]'
                       : 'border-rose-200 dark:border-rose-900/50 bg-rose-50/30 dark:bg-rose-950/15 hover:bg-rose-50/60 dark:hover:bg-rose-950/30 hover:border-primary'
                   }`}
                 >
                   {/* Central Icon Badge */}
-                  <div className="w-16 h-16 rounded-2xl bg-white dark:bg-[#232733] shadow-md text-primary flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                    <span className="material-symbols-outlined text-[32px]">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white dark:bg-[#232733] shadow-md text-primary flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                    <span className="material-symbols-outlined text-[28px] sm:text-[32px]">
                       cloud_upload
                     </span>
                   </div>
@@ -354,14 +363,14 @@ export const HomePage = ({ onSelectTool }) => {
                     {lang === 'id' ? 'Tarik & Lepaskan File Anda Di Sini' : 'Drag & Drop Your Files Here'}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-text-muted dark:text-slate-400 mb-5 max-w-sm">
+                  <p className="text-xs sm:text-sm text-text-muted dark:text-slate-400 mb-4 sm:mb-5 max-w-sm">
                     {lang === 'id'
                       ? 'Mendukung file PDF, Word (.docx), Excel, PowerPoint, atau Foto (JPG/PNG). Pilih file untuk opsi pengolahan instan.'
                       : 'Supports PDF, Word (.docx), Excel, PowerPoint, or Photos (JPG/PNG). Choose file for instant processing options.'}
                   </p>
 
                   <button
-                    className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2 shadow-sm shadow-primary/20 transition-transform active:scale-95 cursor-pointer"
+                    className="h-11 sm:h-12 w-full sm:w-auto px-6 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-sm shadow-primary/20 transition-transform active:scale-95 cursor-pointer"
                     type="button"
                   >
                     <span className="material-symbols-outlined text-[18px]">add_circle</span>
@@ -432,7 +441,7 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO HERO CARD 1: KOMPRES PDF (Span 7 col) */}
             <div 
               onClick={() => onSelectTool('compress')}
-              className="lg:col-span-7 bg-white dark:bg-[#18181B] rounded-3xl border border-border-subtle/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
+              className="lg:col-span-7 bg-white dark:bg-[#18181B] rounded-3xl border border-border-subtle/90 dark:border-slate-800 p-5 sm:p-8 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
             >
               <div className="absolute -right-16 -top-16 w-52 h-52 bg-rose-50 dark:bg-rose-950/30 rounded-full blur-2xl group-hover:bg-rose-100 dark:group-hover:bg-rose-900/40 transition-all"></div>
               <div className="relative z-10">
@@ -488,7 +497,7 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO HERO CARD 2: GABUNGKAN PDF (Span 5 col) */}
             <div 
               onClick={() => onSelectTool('merge')}
-              className="lg:col-span-5 bg-white dark:bg-[#18181B] rounded-3xl border border-border-subtle/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
+              className="lg:col-span-5 bg-white dark:bg-[#18181B] rounded-3xl border border-border-subtle/90 dark:border-slate-800 p-5 sm:p-8 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
             >
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
@@ -760,7 +769,11 @@ export const HomePage = ({ onSelectTool }) => {
             </div>
 
             {/* Document Visual Preview Canvas with Split Mockup */}
-            <div className="relative w-full h-[280px] sm:h-[340px] bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden border border-border-subtle dark:border-slate-800 select-none">
+            <div 
+              onTouchMove={handleComparisonTouch}
+              onTouchStart={handleComparisonTouch}
+              className="relative w-full h-[280px] sm:h-[340px] bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden border border-border-subtle dark:border-slate-800 select-none touch-none"
+            >
               {/* BEFORE BACKGROUND (Full view) */}
               <div className="absolute inset-0 bg-[#F8FAFC] dark:bg-[#131622] p-6 sm:p-8 flex flex-col justify-between">
                 <div>
@@ -1008,8 +1021,8 @@ export const HomePage = ({ onSelectTool }) => {
                 : 'Choose from 24+ free tools to process, convert, protect, and optimize your documents.'}
             </p>
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+            {/* Category Filter Pills (Swipeable on mobile, centered on desktop) */}
+            <div className="flex items-center sm:justify-center overflow-x-auto no-scrollbar gap-2 mt-6 sm:mt-8 pb-2 px-1 max-w-full select-none">
               {[
                 { id: 'all', label: lang === 'id' ? 'Semua Alat' : 'All Tools' },
                 { id: 'popular', label: lang === 'id' ? '🔥 Populer' : '🔥 Popular' },
@@ -1020,7 +1033,7 @@ export const HomePage = ({ onSelectTool }) => {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                     activeCategory === cat.id
                       ? 'bg-primary text-white shadow-md shadow-primary/20 scale-105'
                       : 'bg-white dark:bg-[#18181B] text-secondary dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-border-subtle dark:border-slate-800'
@@ -1033,7 +1046,7 @@ export const HomePage = ({ onSelectTool }) => {
           </div>
 
           {/* Tools Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-16 sm:mb-20">
             {filteredTools.map((tool) => (
               <ToolCard key={tool.id} tool={tool} onClick={() => onSelectTool(tool.id)} />
             ))}
