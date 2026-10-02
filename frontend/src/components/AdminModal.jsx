@@ -17,7 +17,9 @@ import {
   Sliders, 
   LogOut,
   Clock,
-  Sparkles
+  Sparkles,
+  Power,
+  AlertTriangle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -30,12 +32,45 @@ export const AdminModal = ({ isOpen, onClose }) => {
   });
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'reviews' | 'files' | 'settings'
 
+  // Master System Status: 'online' | 'offline'
+  const [systemStatus, setSystemStatus] = useState(() => {
+    return localStorage.getItem('klikpdf_system_status') || 'online';
+  });
+
   // Admin Data state
   const [reviews, setReviews] = useState([]);
   const [recentFiles, setRecentFiles] = useState([]);
   const [apiStatus, setApiStatus] = useState('online');
   const [isPinging, setIsPinging] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Sync systemStatus with storage
+  useEffect(() => {
+    const handleStatusSync = (e) => {
+      if (e?.detail?.status) {
+        setSystemStatus(e.detail.status);
+      }
+    };
+    window.addEventListener('klikpdf-system-status-changed', handleStatusSync);
+    return () => window.removeEventListener('klikpdf-system-status-changed', handleStatusSync);
+  }, []);
+
+  const toggleSystemStatus = () => {
+    const nextStatus = systemStatus === 'online' ? 'offline' : 'online';
+    const confirmMsg = nextStatus === 'offline'
+      ? (lang === 'id' 
+          ? 'PERHATIAN: Apakah Anda yakin ingin mematikan sistem (OFF / Mode Pemeliharaan)? Pengunjung umum akan melihat layar pemeliharaan sampai Anda menyalakannya kembali.' 
+          : 'WARNING: Are you sure you want to turn the system OFF (Maintenance Mode)? Public visitors will see the maintenance screen until you turn it back on.')
+      : (lang === 'id'
+          ? 'Aktifkan kembali sistem KlikPDF (ON / Siap Layanan)?'
+          : 'Turn KlikPDF system back ON?');
+
+    if (window.confirm(confirmMsg)) {
+      setSystemStatus(nextStatus);
+      localStorage.setItem('klikpdf_system_status', nextStatus);
+      window.dispatchEvent(new CustomEvent('klikpdf-system-status-changed', { detail: { status: nextStatus } }));
+    }
+  };
 
   // Load reviews & files whenever modal opens or tab changes
   useEffect(() => {
@@ -237,6 +272,20 @@ export const AdminModal = ({ isOpen, onClose }) => {
               </div>
 
               <div className="flex items-center gap-2">
+                {/* Master System On/Off Toggle Button */}
+                <button
+                  onClick={toggleSystemStatus}
+                  title={systemStatus === 'online' ? 'Matikan sistem (Set OFF)' : 'Nyalakan sistem (Set ON)'}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 border transition-all cursor-pointer shadow-xs active:scale-95 ${
+                    systemStatus === 'online'
+                      ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/25'
+                      : 'bg-rose-500/20 text-rose-300 border-rose-500/40 hover:bg-rose-500/30 animate-pulse'
+                  }`}
+                >
+                  <Power size={13} />
+                  <span>{systemStatus === 'online' ? 'SISTEM: ON' : 'SISTEM: OFF'}</span>
+                </button>
+
                 <button
                   onClick={handleLogout}
                   title={lang === 'id' ? 'Keluar Admin' : 'Admin Logout'}
@@ -281,6 +330,63 @@ export const AdminModal = ({ isOpen, onClose }) => {
               {/* TAB 1: OVERVIEW */}
               {activeTab === 'overview' && (
                 <div className="space-y-6">
+                  {/* Master System Control Banner Card */}
+                  <div className={`p-5 rounded-2xl border transition-all shadow-sm ${
+                    systemStatus === 'online'
+                      ? 'bg-gradient-to-r from-emerald-950/40 via-slate-900 to-slate-900 border-emerald-500/30'
+                      : 'bg-gradient-to-r from-rose-950/50 via-slate-900 to-slate-900 border-rose-500/50'
+                  }`}>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                      <div className="flex items-center gap-3.5">
+                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border shadow-inner ${
+                          systemStatus === 'online'
+                            ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                            : 'bg-rose-500/20 text-rose-400 border-rose-500/30 animate-pulse'
+                        }`}>
+                          <Power size={24} />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-base font-black text-white">
+                              {lang === 'id' ? 'Saklar Utama Sistem (ON / OFF)' : 'Master System Switch (ON / OFF)'}
+                            </h3>
+                            <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide border ${
+                              systemStatus === 'online'
+                                ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                                : 'bg-rose-500/20 text-rose-300 border-rose-500/40 animate-pulse'
+                            }`}>
+                              {systemStatus === 'online' ? '● ONLINE (AKTIF)' : '■ OFFLINE (MAINTENANCE)'}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-400 mt-1 max-w-xl">
+                            {systemStatus === 'online'
+                              ? (lang === 'id'
+                                  ? 'Sistem sedang ON dan aktif melayani publik. Semua 24 alat pengolahan dokumen siap digunakan.'
+                                  : 'System is ON and active. All 24 tools and document processing run normally.')
+                              : (lang === 'id'
+                                  ? 'Sistem sedang OFF (Mode Pemeliharaan). Pengunjung umum akan melihat layar pemeliharaan maintenance.'
+                                  : 'System is OFF (Maintenance Mode). Visitors will see the scheduled maintenance screen.')}
+                          </p>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={toggleSystemStatus}
+                        className={`px-5 py-2.5 rounded-2xl font-black text-xs flex items-center gap-2 shadow-md transition-all active:scale-95 cursor-pointer shrink-0 ${
+                          systemStatus === 'online'
+                            ? 'bg-rose-600 hover:bg-rose-700 text-white shadow-rose-600/30'
+                            : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/30'
+                        }`}
+                      >
+                        <Power size={15} />
+                        <span>
+                          {systemStatus === 'online'
+                            ? (lang === 'id' ? 'Matikan Sistem (Set OFF)' : 'Turn System OFF')
+                            : (lang === 'id' ? 'Nyalakan Sistem (Set ON)' : 'Turn System ON')}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
                   {/* Stat Cards */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                     <div className="p-4 rounded-2xl bg-white dark:bg-[#1c2030] border border-slate-200 dark:border-slate-800 shadow-xs">
@@ -563,6 +669,32 @@ export const AdminModal = ({ isOpen, onClose }) => {
                     </h3>
 
                     <div className="space-y-3 text-xs">
+                      {/* Master System On/Off Toggle Setting */}
+                      <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-[#151722] border border-slate-100 dark:border-slate-800">
+                        <div>
+                          <div className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                            <Power size={14} className={systemStatus === 'online' ? 'text-emerald-500' : 'text-rose-500'} />
+                            <span>{lang === 'id' ? 'Saklar Status Sistem (ON / OFF)' : 'Master System Toggle (ON / OFF)'}</span>
+                          </div>
+                          <div className="text-[11px] text-slate-500 mt-0.5">
+                            {systemStatus === 'online' 
+                              ? (lang === 'id' ? 'Status saat ini: AKTIF (Pengunjung dapat mengakses)' : 'Status: ACTIVE (Public accessible)')
+                              : (lang === 'id' ? 'Status saat ini: OFF / MAINTENANCE (Pengunjung dialihkan)' : 'Status: OFF / MAINTENANCE (Public redirected)')}
+                          </div>
+                        </div>
+                        <button
+                          onClick={toggleSystemStatus}
+                          className={`px-3.5 py-1.5 rounded-xl text-xs font-bold text-white transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-1.5 ${
+                            systemStatus === 'online' ? 'bg-rose-600 hover:bg-rose-700' : 'bg-emerald-500 hover:bg-emerald-600'
+                          }`}
+                        >
+                          <Power size={12} />
+                          <span>
+                            {systemStatus === 'online' ? (lang === 'id' ? 'Set OFF (Maintenance)' : 'Set OFF') : (lang === 'id' ? 'Set ON (Online)' : 'Set ON')}
+                          </span>
+                        </button>
+                      </div>
+
                       <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-[#151722] border border-slate-100 dark:border-slate-800">
                         <div>
                           <div className="font-bold text-slate-800 dark:text-slate-200">
