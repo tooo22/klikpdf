@@ -1,6 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="7" fill="#E5322D"/>
-  <path d="M10 7h8l5 5v13a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="#FFFFFF"/>
-  <path d="M18 7v5h5" fill="none" stroke="#E5322D" stroke-width="1.5" stroke-linecap="round"/>
-  <text x="16" y="22" fill="#E5322D" font-family="Arial, sans-serif" font-weight="900" font-size="7" text-anchor="middle">PDF</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <rect width="48" height="48" rx="11" fill="#E5322D"/>
+  <!-- Document body -->
+  <path d="M14 10h14l8 8v18a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2z" fill="#FFFFFF"/>
+  <!-- Folded corner -->
+  <path d="M28 10v8h8" fill="none" stroke="#E5322D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M28 10l8 8h-8z" fill="#C62828"/>
+  <!-- Document accent lines -->
+  <rect x="17" y="24" width="14" height="2.5" rx="1.25" fill="#E5322D"/>
+  <rect x="17" y="29.5" width="9" height="2.5" rx="1.25" fill="#E5322D"/>
 </svg>
