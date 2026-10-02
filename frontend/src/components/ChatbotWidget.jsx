@@ -110,12 +110,12 @@ export const ChatbotWidget = ({ onSelectTool }) => {
   const suggestions = getSuggestionChips(lang);
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 select-none">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 select-none">
       {/* Tooltip greeting when closed */}
       {!isOpen && showTooltip && (
         <div 
           onClick={() => { setIsOpen(true); setShowTooltip(false); }}
-          className="absolute bottom-16 right-0 mb-2 w-64 bg-white dark:bg-[#18181B] p-3.5 rounded-2xl shadow-2xl border border-border-subtle dark:border-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200 cursor-pointer animate-bounce hover:animate-none flex items-center space-x-3 transition-all"
+          className="absolute bottom-16 right-0 mb-2 w-60 sm:w-64 max-w-[calc(100vw-3rem)] bg-white dark:bg-[#18181B] p-3.5 rounded-2xl shadow-2xl border border-border-subtle dark:border-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200 cursor-pointer animate-bounce hover:animate-none flex items-center space-x-3 transition-all"
         >
           <div className="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-primary flex items-center justify-center shrink-0 shadow-xs">
             <Sparkles size={17} />
@@ -143,19 +143,19 @@ export const ChatbotWidget = ({ onSelectTool }) => {
         <button
           onClick={() => { setIsOpen(true); setShowTooltip(false); }}
           aria-label="Buka Asisten AI"
-          className="relative group w-14 h-14 rounded-2xl bg-gradient-to-tr from-primary via-rose-600 to-red-500 text-white shadow-[0_8px_25px_rgba(225,29,72,0.45)] hover:shadow-[0_12px_35px_rgba(225,29,72,0.65)] flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+          className="relative group w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-primary via-rose-600 to-red-500 text-white shadow-[0_8px_25px_rgba(225,29,72,0.45)] hover:shadow-[0_12px_35px_rgba(225,29,72,0.65)] flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
         >
-          <Bot size={28} className="group-hover:rotate-12 transition-transform duration-200" />
+          <Bot size={24} className="sm:w-7 sm:h-7 group-hover:rotate-12 transition-transform duration-200" />
           
           {/* Online green indicator */}
-          <span className="absolute -top-1 -right-1 flex h-4 w-4">
+          <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 sm:h-4 sm:w-4">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white dark:border-[#141724]"></span>
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 bg-emerald-500 border-2 border-white dark:border-[#141724]"></span>
           </span>
         </button>
       ) : (
         /* Chat Window Dialog */
-        <div className="w-[360px] sm:w-[410px] h-[560px] max-h-[85vh] bg-white dark:bg-[#141724] rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.3)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.65)] border border-border-subtle/80 dark:border-slate-800 flex flex-col overflow-hidden animate-fade-in transition-colors duration-200">
+        <div className="w-[calc(100vw-2rem)] sm:w-[410px] h-[530px] max-h-[calc(100dvh-5.5rem)] bg-white dark:bg-[#141724] rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.3)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.65)] border border-border-subtle/80 dark:border-slate-800 flex flex-col overflow-hidden animate-fade-in transition-colors duration-200">
           
           {/* Header */}
           <div className="bg-gradient-to-r from-primary via-rose-600 to-red-600 px-5 py-4 text-white flex items-center justify-between shadow-md">
