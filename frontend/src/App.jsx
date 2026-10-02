@@ -52,7 +52,7 @@ export default function App() {
     <ThemeProvider>
       <LanguageProvider>
         <AuthProvider>
-          <div className="min-h-screen flex flex-col justify-between bg-[#F4F5F7] dark:bg-[#121214] text-[#161616] dark:text-[#E4E4E7] transition-colors duration-200">
+          <div className="min-h-screen flex flex-col justify-between bg-surface dark:bg-[#0f1117] text-text-primary dark:text-[#E4E4E7] transition-colors duration-200">
             <div>
               <Navbar
                 onSelectTool={handleSelectTool}
