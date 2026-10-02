@@ -1,7 +1,9 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Footer = () => {
+  const { lang } = useLanguage();
   return (
     <footer className="w-full bg-slate-50 dark:bg-[#0c0e14] border-t border-border-subtle/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -91,6 +93,13 @@ export const Footer = () => {
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/sign">
               Tanda Tangan Digital
             </a>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-rating-modal'))}
+              className="text-left text-xs sm:text-sm text-primary dark:text-rose-400 hover:underline font-bold transition-colors flex items-center gap-1.5 cursor-pointer mt-1"
+            >
+              <span>⭐</span>
+              <span>{lang === 'id' ? 'Beri Rating & Masukan' : 'Rate & Feedback'}</span>
+            </button>
           </div>
         </div>
 

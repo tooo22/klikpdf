@@ -7,6 +7,7 @@ import { Footer } from './components/Footer';
 import { LoginModal } from './components/LoginModal';
 import { RecentFilesModal } from './components/RecentFilesModal';
 import { ChatbotWidget } from './components/ChatbotWidget';
+import { RatingModal } from './components/RatingModal';
 import { HomePage } from './pages/HomePage';
 import { ToolWorkspace } from './pages/ToolWorkspace';
 
@@ -18,6 +19,17 @@ export default function App() {
 
   const [activeToolId, setActiveToolId] = useState(getToolFromHash());
   const [initialFiles, setInitialFiles] = useState([]);
+  const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+  const [ratingToolName, setRatingToolName] = useState(null);
+
+  useEffect(() => {
+    const handleOpenRating = (e) => {
+      setRatingToolName(e?.detail?.toolName || null);
+      setIsRatingModalOpen(true);
+    };
+    window.addEventListener('open-rating-modal', handleOpenRating);
+    return () => window.removeEventListener('open-rating-modal', handleOpenRating);
+  }, []);
 
   // Listen to browser Back / Forward buttons
   useEffect(() => {
@@ -73,6 +85,11 @@ export default function App() {
             <Footer />
             <LoginModal />
             <RecentFilesModal />
+            <RatingModal
+              isOpen={isRatingModalOpen}
+              onClose={() => setIsRatingModalOpen(false)}
+              toolName={ratingToolName}
+            />
             <ChatbotWidget onSelectTool={handleSelectTool} />
           </div>
         </AuthProvider>

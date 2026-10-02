@@ -134,6 +134,7 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
       <ResultDownload
         downloadUrl={resultUrl}
         fileName={finalFileName}
+        toolName={tool.title}
         onGoHome={onGoHome}
         onReset={() => {
           setSelectedFiles([]);

@@ -258,7 +258,7 @@ export const HomePage = ({ onSelectTool }) => {
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <div className="flex text-amber-400">
                       {[...Array(5)].map((_, i) => (
                         <span key={i} className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -267,8 +267,16 @@ export const HomePage = ({ onSelectTool }) => {
                       ))}
                     </div>
                     <span className="text-sm font-bold text-text-primary dark:text-white">4.9 / 5.0</span>
+                    <button
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-rating-modal'))}
+                      className="ml-1 text-[11px] font-bold text-primary hover:text-primary-container dark:text-rose-400 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900/60 px-2.5 py-1 rounded-full border border-primary/20 transition-all cursor-pointer flex items-center gap-1 active:scale-95 shadow-xs"
+                      title={lang === 'id' ? 'Beri Penilaian & Ulasan untuk KlikPDF' : 'Rate KlikPDF'}
+                    >
+                      <span className="material-symbols-outlined text-[13px]">rate_review</span>
+                      <span>{lang === 'id' ? 'Beri Ulasan' : 'Review'}</span>
+                    </button>
                   </div>
-                  <span className="text-xs text-secondary dark:text-slate-400">
+                  <span className="text-xs text-secondary dark:text-slate-400 mt-0.5">
                     Dipercaya oleh {totalVisits.toLocaleString('id-ID')}+ kunjungan pengguna di Indonesia
                   </span>
                 </div>
