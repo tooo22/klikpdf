@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { CONVERT_COLUMNS, ALL_TOOLS_COLUMNS } from '../menuData';
 import * as Icons from 'lucide-react';
 
-export const Navbar = ({ onSelectTool, onGoHome }) => {
+export const Navbar = ({ onSelectTool, onGoHome, onOpenAdmin }) => {
   const { lang, toggleLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const { user, logout, setIsLoginModalOpen, setIsRecentModalOpen } = useAuth();
@@ -57,17 +57,30 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
   return (
     <header className="sticky top-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#0f1117]/90 backdrop-blur-xl border-b border-border-subtle/80 dark:border-slate-800 transition-colors duration-200 select-none">
       <div className="h-16 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-        {/* Brand Logo */}
-        <div 
-          onClick={onGoHome}
-          className="flex items-center gap-2 group cursor-pointer shrink-0"
-        >
-          <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform duration-200">
-            <span className="material-symbols-outlined text-[20px]">layers</span>
-          </div>
-          <div className="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl">
-            <span className="text-text-primary dark:text-white group-hover:text-primary transition-colors">Klik</span>
-            <span className="text-primary ml-0.5">PDF</span>
+        {/* Brand Logo & Left Admin Trigger */}
+        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          {/* Admin Menu Button on the Left */}
+          <button
+            onClick={onOpenAdmin}
+            title={lang === 'id' ? 'Menu Admin (Password: 2899)' : 'Admin Menu (Password: 2899)'}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 dark:bg-slate-800 dark:hover:bg-rose-950/40 text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-rose-400 text-xs font-bold border border-slate-200/80 dark:border-slate-700/80 transition-all cursor-pointer shadow-xs active:scale-95 group"
+          >
+            <Icons.ShieldCheck size={14} className="text-primary group-hover:scale-110 transition-transform" />
+            <span>Admin</span>
+          </button>
+
+          {/* Brand Logo */}
+          <div 
+            onClick={onGoHome}
+            className="flex items-center gap-2 group cursor-pointer"
+          >
+            <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform duration-200">
+              <span className="material-symbols-outlined text-[20px]">layers</span>
+            </div>
+            <div className="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl">
+              <span className="text-text-primary dark:text-white group-hover:text-primary transition-colors">Klik</span>
+              <span className="text-primary ml-0.5">PDF</span>
+            </div>
           </div>
         </div>
 

@@ -93,7 +93,7 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
         className="bg-primary hover:bg-primary-container active:scale-95 text-white text-lg sm:text-xl font-black px-10 py-4.5 rounded-2xl shadow-xl shadow-primary/25 hover:shadow-2xl transition-all inline-flex items-center space-x-3 mb-8 cursor-pointer"
       >
         <Download size={26} />
-        <span>{t('buttons.download') || 'Unduh Berkas Sekarang'}</span>
+        <span>{lang === 'id' ? 'Unduh Berkas Sekarang' : 'Download File Now'}</span>
       </a>
 
       {/* Interactive In-Page Rating Prompt */}
@@ -159,7 +159,7 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
                   type="submit"
                   className="px-3 py-1.5 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-container transition-all cursor-pointer"
                 >
-                  Kirim
+                  {lang === 'id' ? 'Kirim' : 'Submit'}
                 </button>
               </form>
             )}
@@ -174,14 +174,14 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
           className="flex items-center space-x-2 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer px-4 py-2 rounded-xl hover:bg-surface-subtle dark:hover:bg-slate-800"
         >
           <RefreshCw size={15} />
-          <span>{t('buttons.process_another') || 'Proses Berkas Lain'}</span>
+          <span>{lang === 'id' ? 'Proses Berkas Lain' : 'Process Another File'}</span>
         </button>
         <button
           onClick={onGoHome}
           className="flex items-center space-x-2 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer px-4 py-2 rounded-xl hover:bg-surface-subtle dark:hover:bg-slate-800"
         >
           <ArrowLeft size={15} />
-          <span>{t('buttons.back_home') || 'Kembali ke Beranda'}</span>
+          <span>{lang === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}</span>
         </button>
       </div>
     </div>

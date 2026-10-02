@@ -10,12 +10,14 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
       <div>
         <div className="flex items-center space-x-2 text-gray-900 dark:text-white font-extrabold text-lg border-b border-gray-200 dark:border-[#27272A] pb-4 mb-6">
           <Settings size={20} className="text-[#E5322D]" />
-          <span>Pengaturan {lang === 'id' ? tool.name : tool.nameEn}</span>
+          <span>{lang === 'id' ? `Pengaturan ${tool.name}` : `${tool.nameEn} Settings`}</span>
         </div>
 
         {tool.id === 'watermark' && (
           <div className="space-y-4">
-            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">Teks Cap Air</label>
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">
+              {lang === 'id' ? 'Teks Cap Air' : 'Watermark Text'}
+            </label>
             <input
               type="text"
               value={options.watermarkText || 'KlikPDF'}
@@ -27,33 +29,39 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
 
         {tool.id === 'protect' && (
           <div className="space-y-4">
-            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">Kata Sandi Baru</label>
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">
+              {lang === 'id' ? 'Kata Sandi Baru' : 'New Password'}
+            </label>
             <input
               type="password"
               value={options.password || ''}
               onChange={(e) => onOptionsChange({ ...options, password: e.target.value })}
               className="w-full bg-white dark:bg-[#161619] border border-gray-300 dark:border-[#3F3F46] text-gray-900 dark:text-white rounded-lg p-2.5 text-sm font-medium focus:ring-2 focus:ring-[#E5322D] outline-none"
-              placeholder="Masukkan password..."
+              placeholder={lang === 'id' ? 'Masukkan password...' : 'Enter password...'}
             />
           </div>
         )}
 
         {tool.id === 'unlock' && (
           <div className="space-y-4">
-            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">Kata Sandi Buka PDF</label>
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">
+              {lang === 'id' ? 'Kata Sandi Buka PDF' : 'Unlock Password'}
+            </label>
             <input
               type="password"
               value={options.password || ''}
               onChange={(e) => onOptionsChange({ ...options, password: e.target.value })}
               className="w-full bg-white dark:bg-[#161619] border border-gray-300 dark:border-[#3F3F46] text-gray-900 dark:text-white rounded-lg p-2.5 text-sm font-medium focus:ring-2 focus:ring-[#E5322D] outline-none"
-              placeholder="Masukkan password..."
+              placeholder={lang === 'id' ? 'Masukkan password...' : 'Enter password...'}
             />
           </div>
         )}
 
         {tool.id === 'hd-image' && (
           <div className="space-y-4">
-            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">Tingkat Ketajaman & Resolusi</label>
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">
+              {lang === 'id' ? 'Tingkat Ketajaman & Resolusi' : 'Sharpness & Resolution'}
+            </label>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
@@ -65,7 +73,9 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
                 }`}
               >
                 ✨ 2x HD
-                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">Jernih & Cepat</span>
+                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
+                  {lang === 'id' ? 'Jernih & Cepat' : 'Clear & Fast'}
+                </span>
               </button>
               <button
                 type="button"
@@ -77,7 +87,9 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
                 }`}
               >
                 💎 4x Ultra HD
-                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">Maksimal Detail</span>
+                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
+                  {lang === 'id' ? 'Maksimal Detail' : 'Maximum Detail'}
+                </span>
               </button>
             </div>
           </div>
@@ -85,7 +97,9 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
 
         {tool.id === 'split' && (
           <div className="space-y-4">
-            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">Rentang Halaman (opsional, misal: 1-3, 5)</label>
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">
+              {lang === 'id' ? 'Rentang Halaman (opsional, misal: 1-3, 5)' : 'Page Range (optional, e.g. 1-3, 5)'}
+            </label>
             <input
               type="text"
               value={options.ranges || ''}
@@ -102,7 +116,11 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
         disabled={isProcessing}
         className="w-full mt-6 bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white font-extrabold py-4 px-6 rounded-2xl shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
       >
-        <span>{isProcessing ? 'Memproses...' : t('buttons.process_now')}</span>
+        <span>
+          {isProcessing 
+            ? (lang === 'id' ? 'Memproses berkas...' : 'Processing file...') 
+            : (lang === 'id' ? 'Proses Sekarang' : 'Process Now')}
+        </span>
         <ArrowRight size={20} />
       </button>
     </div>

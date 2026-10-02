@@ -187,11 +187,12 @@ export const HomePage = ({ onSelectTool }) => {
                   <span className="material-symbols-outlined text-[14px]">bolt</span>
                 </span>
                 <span className="font-bold text-text-primary dark:text-white">
-                  100% Gratis & Tanpa Batas
+                  {lang === 'id' ? '100% Gratis & Tanpa Batas' : '100% Free & Unlimited'}
                 </span>
                 <span className="w-1 h-1 rounded-full bg-border-strong dark:bg-slate-700"></span>
                 <span className="font-semibold text-success flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[13px]">verified</span> Bebas Watermark
+                  <span className="material-symbols-outlined text-[13px]">verified</span> 
+                  <span>{lang === 'id' ? 'Bebas Watermark' : 'No Watermark'}</span>
                 </span>
                 <span className="w-1 h-1 rounded-full bg-border-strong dark:bg-slate-700 hidden sm:inline"></span>
                 {/* Live Online Indicator */}
@@ -206,15 +207,28 @@ export const HomePage = ({ onSelectTool }) => {
 
               {/* Main Title */}
               <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-black text-text-primary dark:text-white tracking-tight leading-[1.12] mb-5">
-                Olah Dokumen PDF <br className="hidden sm:inline" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-500 to-red-600">
-                  Lebih Cepat & Praktis
-                </span>
+                {lang === 'id' ? (
+                  <>
+                    Olah Dokumen PDF <br className="hidden sm:inline" />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-500 to-red-600">
+                      Lebih Cepat & Praktis
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Process PDF Documents <br className="hidden sm:inline" />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-500 to-red-600">
+                      Faster & Effortless
+                    </span>
+                  </>
+                )}
               </h1>
 
               {/* Subtitle */}
               <p className="text-base sm:text-lg text-secondary dark:text-slate-300 leading-relaxed mb-8 max-w-xl">
-                Gabungkan berkas, kompres hingga 85%, atau ubah format PDF ke Word dalam hitungan detik. Cukup seret file Anda langsung ke kotak di samping.
+                {lang === 'id'
+                  ? 'Gabungkan berkas, kompres hingga 85%, atau ubah format PDF ke Word dalam hitungan detik. Cukup seret file Anda langsung ke kotak di samping.'
+                  : 'Merge files, compress up to 85%, or convert PDF to Word in seconds. Simply drag and drop your file into the box on the right.'}
               </p>
 
               {/* Quick CTA buttons */}
@@ -227,7 +241,7 @@ export const HomePage = ({ onSelectTool }) => {
                   className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5 cursor-pointer active:scale-95"
                 >
                   <span className="material-symbols-outlined text-[20px]">upload_file</span>
-                  <span>Unggah Dokumen Sekarang</span>
+                  <span>{lang === 'id' ? 'Unggah Dokumen Sekarang' : 'Upload Document Now'}</span>
                 </button>
                 <button
                   onClick={() => {
@@ -236,7 +250,7 @@ export const HomePage = ({ onSelectTool }) => {
                   }}
                   className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white dark:bg-[#18181B] hover:bg-surface-subtle dark:hover:bg-slate-800 text-text-primary dark:text-white border border-border-subtle dark:border-slate-800 font-bold text-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                 >
-                  <span>Jelajahi 24+ Alat</span>
+                  <span>{lang === 'id' ? 'Jelajahi 24+ Alat' : 'Explore 24+ Tools'}</span>
                   <span className="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
                 </button>
               </div>
@@ -277,7 +291,9 @@ export const HomePage = ({ onSelectTool }) => {
                     </button>
                   </div>
                   <span className="text-xs text-secondary dark:text-slate-400 mt-0.5">
-                    Dipercaya oleh {totalVisits.toLocaleString('id-ID')}+ kunjungan pengguna di Indonesia
+                    {lang === 'id' 
+                      ? `Dipercaya oleh ${totalVisits.toLocaleString('id-ID')}+ kunjungan pengguna di Indonesia` 
+                      : `Trusted by ${totalVisits.toLocaleString('en-US')}+ user visits worldwide`}
                   </span>
                 </div>
               </div>
@@ -290,11 +306,11 @@ export const HomePage = ({ onSelectTool }) => {
                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-border-subtle/80 dark:border-slate-800">
                   <span className="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-slate-400 flex items-center gap-1.5">
                     <span className="material-symbols-outlined text-[16px] text-primary">upload_file</span>
-                    <span>Upload & Pengolahan Dokumen</span>
+                    <span>{lang === 'id' ? 'Upload & Pengolahan Dokumen' : 'Upload & Document Processing'}</span>
                   </span>
                   <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-0.5 rounded-full">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Server Ready</span>
+                    <span>{lang === 'id' ? 'Server Siap' : 'Server Ready'}</span>
                   </span>
                 </div>
 
@@ -335,11 +351,13 @@ export const HomePage = ({ onSelectTool }) => {
                   </div>
 
                   <h3 className="text-base sm:text-lg font-bold text-text-primary dark:text-white mb-1">
-                    Tarik & Lepaskan File Anda Di Sini
+                    {lang === 'id' ? 'Tarik & Lepaskan File Anda Di Sini' : 'Drag & Drop Your Files Here'}
                   </h3>
 
                   <p className="text-xs sm:text-sm text-text-muted dark:text-slate-400 mb-5 max-w-sm">
-                    Mendukung file PDF, Word (.docx), Excel, PowerPoint, atau Foto (JPG/PNG). Pilih file untuk opsi pengolahan instan.
+                    {lang === 'id'
+                      ? 'Mendukung file PDF, Word (.docx), Excel, PowerPoint, atau Foto (JPG/PNG). Pilih file untuk opsi pengolahan instan.'
+                      : 'Supports PDF, Word (.docx), Excel, PowerPoint, or Photos (JPG/PNG). Choose file for instant processing options.'}
                   </p>
 
                   <button
@@ -347,14 +365,14 @@ export const HomePage = ({ onSelectTool }) => {
                     type="button"
                   >
                     <span className="material-symbols-outlined text-[18px]">add_circle</span>
-                    <span>Pilih Berkas Dokumen</span>
+                    <span>{lang === 'id' ? 'Pilih Berkas Dokumen' : 'Choose Document File'}</span>
                   </button>
                 </div>
 
                 {/* Cloud Import and Security Badges */}
                 <div className="mt-4 pt-3 flex flex-wrap items-center justify-between gap-3 text-xs text-text-muted dark:text-slate-400">
                   <div className="flex items-center gap-2">
-                    <span>Impor:</span>
+                    <span>{lang === 'id' ? 'Impor:' : 'Import:'}</span>
                     <button
                       onClick={() => heroFileInputRef.current?.click()}
                       className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-subtle dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-text-primary dark:text-slate-200 transition-colors cursor-pointer"
@@ -374,7 +392,7 @@ export const HomePage = ({ onSelectTool }) => {
                   </div>
                   <div className="inline-flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">
                     <span className="material-symbols-outlined text-[14px]">lock</span>
-                    <span>Enkripsi SSL 256-bit</span>
+                    <span>{lang === 'id' ? 'Enkripsi SSL 256-bit' : '256-bit SSL Encryption'}</span>
                   </div>
                 </div>
               </div>
@@ -393,16 +411,18 @@ export const HomePage = ({ onSelectTool }) => {
                 Bento Productivity Suite
               </span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-text-primary dark:text-white tracking-tight mt-1">
-                Alat PDF Paling Sering Digunakan
+                {lang === 'id' ? 'Alat PDF Paling Sering Digunakan' : 'Most Popular PDF Tools'}
               </h2>
               <p className="text-sm sm:text-base text-secondary dark:text-slate-300 mt-2">
-                Didesain dengan antarmuka presisi tinggi untuk mempermudah alur kerja dokumen harian Anda.
+                {lang === 'id'
+                  ? 'Didesain dengan antarmuka presisi tinggi untuk mempermudah alur kerja dokumen harian Anda.'
+                  : 'Designed with a high-precision interface to streamline your daily document workflow.'}
               </p>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-semibold text-text-muted dark:text-slate-400">Status:</span>
               <span className="text-xs font-bold text-text-primary dark:text-white bg-white dark:bg-[#18181B] px-3 py-1 rounded-full border border-border-subtle dark:border-slate-800 shadow-xs">
-                24 Alat Berjalan Normal
+                {lang === 'id' ? '24 Alat Berjalan Normal' : '24 Tools Running Normally'}
               </span>
             </div>
           </div>
@@ -421,41 +441,45 @@ export const HomePage = ({ onSelectTool }) => {
                     <span className="material-symbols-outlined text-[28px]">compress</span>
                   </div>
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-primary text-white shadow-xs shadow-primary/20">
-                    Paling Populer
+                    {lang === 'id' ? 'Paling Populer' : 'Most Popular'}
                   </span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  Kompres PDF Pintar
+                  {lang === 'id' ? 'Kompres PDF Pintar' : 'Smart PDF Compression'}
                 </h3>
                 <p className="text-sm text-secondary dark:text-slate-300 mt-1.5 max-w-md">
-                  Kecilkan volume file dokumen hingga 85% tanpa mengorbankan ketajaman teks atau diagram.
+                  {lang === 'id'
+                    ? 'Kecilkan volume file dokumen hingga 85% tanpa mengorbankan ketajaman teks atau diagram.'
+                    : 'Shrink document file size up to 85% without sacrificing text or diagram sharpness.'}
                 </p>
 
                 {/* Interactive mini graphic visualization */}
                 <div className="mt-6 p-4 rounded-2xl bg-surface-canvas dark:bg-[#12151f] border border-border-subtle/80 dark:border-slate-800">
                   <div className="flex items-center justify-between text-xs font-semibold text-text-primary dark:text-white mb-2">
                     <span className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Optimalisasi Ukuran
+                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span> 
+                      <span>{lang === 'id' ? 'Optimalisasi Ukuran' : 'Size Optimization'}</span>
                     </span>
-                    <span className="text-primary font-bold">Hemat 82%</span>
+                    <span className="text-primary font-bold">{lang === 'id' ? 'Hemat 82%' : 'Saved 82%'}</span>
                   </div>
                   {/* Progress bar comparison */}
                   <div className="w-full bg-slate-200 dark:bg-slate-700 h-3 rounded-full overflow-hidden flex">
                     <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '18%' }}></div>
                   </div>
                   <div className="flex justify-between items-center text-[11px] text-text-muted dark:text-slate-400 mt-2">
-                    <span>Ukuran Awal: <strong className="text-slate-700 dark:text-slate-200">15.0 MB</strong></span>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">Hasil Akhir: 1.8 MB</span>
+                    <span>{lang === 'id' ? 'Ukuran Awal:' : 'Original Size:'} <strong className="text-slate-700 dark:text-slate-200">15.0 MB</strong></span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">{lang === 'id' ? 'Hasil Akhir: 1.8 MB' : 'Final: 1.8 MB'}</span>
                   </div>
                 </div>
               </div>
 
               <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                 <span className="text-xs text-text-muted dark:text-slate-400 flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[16px] text-emerald-500">speed</span> Proses &lt; 3 detik
+                  <span className="material-symbols-outlined text-[16px] text-emerald-500">speed</span> 
+                  <span>{lang === 'id' ? 'Proses < 3 detik' : 'Processed in < 3s'}</span>
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary group-hover:translate-x-1 transition-transform">
-                  <span>Coba Kompres Sekarang</span>
+                  <span>{lang === 'id' ? 'Coba Kompres Sekarang' : 'Try Compress Now'}</span>
                   <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </span>
               </div>
@@ -472,37 +496,41 @@ export const HomePage = ({ onSelectTool }) => {
                     <span className="material-symbols-outlined text-[28px]">call_merge</span>
                   </div>
                   <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800">
-                    Praktis
+                    {lang === 'id' ? 'Praktis' : 'Practical'}
                   </span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  Gabungkan PDF
+                  {lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF'}
                 </h3>
                 <p className="text-sm text-secondary dark:text-slate-300 mt-1.5">
-                  Satukan beragam laporan, halaman terpisah, dan scan dalam susunan berurutan.
+                  {lang === 'id'
+                    ? 'Satukan beragam laporan, halaman terpisah, dan scan dalam susunan berurutan.'
+                    : 'Combine multiple reports, separate pages, and scans in sequential order.'}
                 </p>
 
                 {/* Stacked Preview Visual */}
                 <div className="mt-6 flex items-center justify-center gap-2 py-2">
                   <div className="w-16 h-20 rounded-lg bg-surface-subtle dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col items-center justify-center text-[10px] font-bold text-slate-500 -rotate-6 transform group-hover:-rotate-12 transition-transform">
                     <span className="material-symbols-outlined text-rose-500 text-[18px]">description</span>
-                    <span>Bab 1</span>
+                    <span>{lang === 'id' ? 'Bab 1' : 'Part 1'}</span>
                   </div>
                   <div className="w-16 h-20 rounded-lg bg-white dark:bg-[#202431] border-2 border-primary shadow-md flex flex-col items-center justify-center text-[10px] font-bold text-primary z-10 scale-105">
                     <span className="material-symbols-outlined text-primary text-[20px]">add</span>
-                    <span>Bab 2</span>
+                    <span>{lang === 'id' ? 'Bab 2' : 'Part 2'}</span>
                   </div>
                   <div className="w-16 h-20 rounded-lg bg-surface-subtle dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col items-center justify-center text-[10px] font-bold text-slate-500 rotate-6 transform group-hover:rotate-12 transition-transform">
                     <span className="material-symbols-outlined text-rose-500 text-[18px]">description</span>
-                    <span>Bab 3</span>
+                    <span>{lang === 'id' ? 'Bab 3' : 'Part 3'}</span>
                   </div>
                 </div>
               </div>
 
               <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <span className="text-xs text-text-muted dark:text-slate-400">Drag & drop urutan</span>
+                <span className="text-xs text-text-muted dark:text-slate-400">
+                  {lang === 'id' ? 'Drag & drop urutan' : 'Drag & drop order'}
+                </span>
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary group-hover:translate-x-1 transition-transform">
-                  <span>Gabungkan Berkas</span>
+                  <span>{lang === 'id' ? 'Gabungkan Berkas' : 'Merge Files'}</span>
                   <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </span>
               </div>
@@ -521,14 +549,16 @@ export const HomePage = ({ onSelectTool }) => {
                   <span className="text-[11px] font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded-full">DOCX</span>
                 </div>
                 <h4 className="text-base font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  PDF ke Word
+                  {lang === 'id' ? 'PDF ke Word' : 'PDF to Word'}
                 </h4>
                 <p className="text-xs text-secondary dark:text-slate-300 mt-1 leading-relaxed">
-                  Konversi presisi tinggi dengan layout teks, tabel, dan format tetap utuh.
+                  {lang === 'id'
+                    ? 'Konversi presisi tinggi dengan layout teks, tabel, dan format tetap utuh.'
+                    : 'High-precision conversion preserving text layouts, tables, and formatting.'}
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-primary">
-                <span>Buka Alat</span>
+                <span>{lang === 'id' ? 'Buka Alat' : 'Open Tool'}</span>
                 <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </div>
             </div>
@@ -543,17 +573,21 @@ export const HomePage = ({ onSelectTool }) => {
                   <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform">
                     <span className="material-symbols-outlined text-[22px]">call_split</span>
                   </div>
-                  <span className="text-[11px] font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/40 px-2 py-0.5 rounded-full">Selektif</span>
+                  <span className="text-[11px] font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/40 px-2 py-0.5 rounded-full">
+                    {lang === 'id' ? 'Selektif' : 'Selective'}
+                  </span>
                 </div>
                 <h4 className="text-base font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  Pisahkan PDF
+                  {lang === 'id' ? 'Pisahkan PDF' : 'Split PDF'}
                 </h4>
                 <p className="text-xs text-secondary dark:text-slate-300 mt-1 leading-relaxed">
-                  Ambil halaman tertentu atau pecah setiap lembar menjadi dokumen terpisah.
+                  {lang === 'id'
+                    ? 'Ambil halaman tertentu atau pecah setiap lembar menjadi dokumen terpisah.'
+                    : 'Extract specific pages or split each page into a separate document.'}
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-primary">
-                <span>Buka Alat</span>
+                <span>{lang === 'id' ? 'Buka Alat' : 'Open Tool'}</span>
                 <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </div>
             </div>
@@ -571,14 +605,16 @@ export const HomePage = ({ onSelectTool }) => {
                   <span className="text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full">Legal e-Sign</span>
                 </div>
                 <h4 className="text-base font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  Tanda Tangan PDF
+                  {lang === 'id' ? 'Tanda Tangan PDF' : 'Sign PDF'}
                 </h4>
                 <p className="text-xs text-secondary dark:text-slate-300 mt-1 leading-relaxed">
-                  Bubuhkan paraf atau tanda tangan legal dalam beberapa detik di ponsel atau PC.
+                  {lang === 'id'
+                    ? 'Bubuhkan paraf atau tanda tangan legal dalam beberapa detik di ponsel atau PC.'
+                    : 'Add your legal initials or signature in seconds on mobile or PC.'}
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-primary">
-                <span>Buka Alat</span>
+                <span>{lang === 'id' ? 'Buka Alat' : 'Open Tool'}</span>
                 <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </div>
             </div>
@@ -593,9 +629,11 @@ export const HomePage = ({ onSelectTool }) => {
               </div>
               <div>
                 <h5 className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  Kunci Dokumen
+                  {lang === 'id' ? 'Kunci Dokumen' : 'Protect Document'}
                 </h5>
-                <span className="text-[11px] text-text-muted dark:text-slate-400">Sandi 128-bit</span>
+                <span className="text-[11px] text-text-muted dark:text-slate-400">
+                  {lang === 'id' ? 'Sandi 128-bit' : '128-bit Password'}
+                </span>
               </div>
             </div>
 
@@ -609,9 +647,11 @@ export const HomePage = ({ onSelectTool }) => {
               </div>
               <div>
                 <h5 className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  PDF ke Excel
+                  {lang === 'id' ? 'PDF ke Excel' : 'PDF to Excel'}
                 </h5>
-                <span className="text-[11px] text-text-muted dark:text-slate-400">Ekstrak tabel instan</span>
+                <span className="text-[11px] text-text-muted dark:text-slate-400">
+                  {lang === 'id' ? 'Ekstrak tabel instan' : 'Instant table extract'}
+                </span>
               </div>
             </div>
 
@@ -625,9 +665,11 @@ export const HomePage = ({ onSelectTool }) => {
               </div>
               <div>
                 <h5 className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  Putar Halaman
+                  {lang === 'id' ? 'Putar Halaman' : 'Rotate Pages'}
                 </h5>
-                <span className="text-[11px] text-text-muted dark:text-slate-400">Orientasi bebas</span>
+                <span className="text-[11px] text-text-muted dark:text-slate-400">
+                  {lang === 'id' ? 'Orientasi bebas' : 'Custom orientation'}
+                </span>
               </div>
             </div>
 
@@ -641,9 +683,11 @@ export const HomePage = ({ onSelectTool }) => {
               </div>
               <div>
                 <h5 className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                  Watermark PDF
+                  {lang === 'id' ? 'Watermark PDF' : 'Watermark PDF'}
                 </h5>
-                <span className="text-[11px] text-text-muted dark:text-slate-400">Proteksi hak cipta</span>
+                <span className="text-[11px] text-text-muted dark:text-slate-400">
+                  {lang === 'id' ? 'Proteksi hak cipta' : 'Copyright protection'}
+                </span>
               </div>
             </div>
           </div>
@@ -658,7 +702,7 @@ export const HomePage = ({ onSelectTool }) => {
               }}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-[#18181B] border border-border-subtle dark:border-slate-800 hover:border-primary text-text-primary dark:text-white font-bold text-xs sm:text-sm shadow-xs transition-all hover:shadow-md cursor-pointer"
             >
-              <span>Lihat Semua 24+ Alat KlikPDF</span>
+              <span>{lang === 'id' ? 'Lihat Semua 24+ Alat KlikPDF' : 'View All 24+ KlikPDF Tools'}</span>
               <span className="material-symbols-outlined text-[18px] text-primary">east</span>
             </button>
           </div>
@@ -670,13 +714,15 @@ export const HomePage = ({ onSelectTool }) => {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-primary">
-              Teknologi Kompresi Adaptif
+              {lang === 'id' ? 'Teknologi Kompresi Adaptif' : 'Adaptive Compression Technology'}
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-text-primary dark:text-white tracking-tight mt-1">
-              Kecilkan Ukuran Dokumen, Pertahankan Kualitas Asli
+              {lang === 'id' ? 'Kecilkan Ukuran Dokumen, Pertahankan Kualitas Asli' : 'Shrink Document Size, Keep Original Quality'}
             </h2>
             <p className="text-sm sm:text-base text-secondary dark:text-slate-300 mt-2">
-              Geser slider di bawah untuk menguji perbandingan kualitas teks dan grafis dokumen sebelum vs sesudah dikompresi.
+              {lang === 'id' 
+                ? 'Geser slider di bawah untuk menguji perbandingan kualitas teks dan grafis dokumen sebelum vs sesudah dikompresi.'
+                : 'Drag the slider below to test the visual quality comparison before vs after compression.'}
             </p>
           </div>
 
@@ -685,19 +731,31 @@ export const HomePage = ({ onSelectTool }) => {
             {/* Top Comparison Metadata Bar */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 mb-6 border-b border-border-subtle/80 dark:border-slate-800 text-center">
               <div className="p-3 rounded-2xl bg-surface-subtle dark:bg-[#12151f]">
-                <span className="text-xs text-text-muted dark:text-slate-400 font-medium block">Sebelum Kompresi</span>
+                <span className="text-xs text-text-muted dark:text-slate-400 font-medium block">
+                  {lang === 'id' ? 'Sebelum Kompresi' : 'Before Compression'}
+                </span>
                 <span className="text-xl sm:text-2xl font-extrabold text-text-primary dark:text-white">15.0 MB</span>
-                <span className="text-[11px] text-secondary dark:text-slate-400">Lambat saat dikirim email</span>
+                <span className="text-[11px] text-secondary dark:text-slate-400">
+                  {lang === 'id' ? 'Lambat saat dikirim email' : 'Slow when sending via email'}
+                </span>
               </div>
               <div className="p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/40 flex flex-col justify-center items-center">
-                <span className="text-xs text-primary font-bold block">Penyusutan Efisien</span>
+                <span className="text-xs text-primary font-bold block">
+                  {lang === 'id' ? 'Penyusutan Efisien' : 'Efficient Reduction'}
+                </span>
                 <span className="text-xl sm:text-2xl font-extrabold text-primary">-88%</span>
-                <span className="text-[11px] text-primary font-medium">Kualitas tetap 100% tajam</span>
+                <span className="text-[11px] text-primary font-medium">
+                  {lang === 'id' ? 'Kualitas tetap 100% tajam' : '100% sharp quality preserved'}
+                </span>
               </div>
               <div className="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40">
-                <span className="text-xs text-emerald-700 dark:text-emerald-400 font-medium block">Hasil Sesudah Kompres</span>
+                <span className="text-xs text-emerald-700 dark:text-emerald-400 font-medium block">
+                  {lang === 'id' ? 'Hasil Sesudah Kompres' : 'After Compression Result'}
+                </span>
                 <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">1.8 MB</span>
-                <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">Siap kirim via WhatsApp & Email</span>
+                <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">
+                  {lang === 'id' ? 'Siap kirim via WhatsApp & Email' : 'Ready for WhatsApp & Email'}
+                </span>
               </div>
             </div>
 
@@ -723,20 +781,24 @@ export const HomePage = ({ onSelectTool }) => {
                     <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded w-5/6"></div>
                     <div className="grid grid-cols-2 gap-4 mt-6">
                       <div className="h-20 bg-rose-100/60 dark:bg-rose-950/30 rounded-xl p-3 flex flex-col justify-center">
-                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Grafik Neraca Q4</span>
+                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                          {lang === 'id' ? 'Grafik Neraca Q4' : 'Q4 Balance Sheet'}
+                        </span>
                         <div className="h-2 bg-rose-300 dark:bg-rose-800 rounded mt-2 w-2/3"></div>
                       </div>
                       <div className="h-20 bg-slate-200/60 dark:bg-slate-800 rounded-xl p-3 flex flex-col justify-center">
-                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Matriks Pertumbuhan</span>
+                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                          {lang === 'id' ? 'Matriks Pertumbuhan' : 'Growth Matrix'}
+                        </span>
                         <div className="h-2 bg-slate-400 dark:bg-slate-600 rounded mt-2 w-3/4"></div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800 pt-3">
-                  <span>Halaman 1 dari 48</span>
+                  <span>{lang === 'id' ? 'Halaman 1 dari 48' : 'Page 1 of 48'}</span>
                   <span className="font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 px-2 py-0.5 rounded">
-                    ORIGINAL (15 MB)
+                    {lang === 'id' ? 'ASLI (15 MB)' : 'ORIGINAL (15 MB)'}
                   </span>
                 </div>
               </div>
@@ -764,20 +826,24 @@ export const HomePage = ({ onSelectTool }) => {
                     <div className="h-3 bg-slate-400 dark:bg-slate-500 rounded w-5/6"></div>
                     <div className="grid grid-cols-2 gap-4 mt-6">
                       <div className="h-20 bg-primary/10 dark:bg-primary/20 rounded-xl p-3 flex flex-col justify-center">
-                        <span className="text-xs font-bold text-primary">Grafik Neraca Q4 (Jernih)</span>
+                        <span className="text-xs font-bold text-primary">
+                          {lang === 'id' ? 'Grafik Neraca Q4 (Jernih)' : 'Q4 Balance Sheet (Crisp)'}
+                        </span>
                         <div className="h-2 bg-primary rounded mt-2 w-2/3"></div>
                       </div>
                       <div className="h-20 bg-slate-100 dark:bg-slate-800 rounded-xl p-3 flex flex-col justify-center">
-                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200">Matriks Pertumbuhan</span>
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                          {lang === 'id' ? 'Matriks Pertumbuhan' : 'Growth Matrix'}
+                        </span>
                         <div className="h-2 bg-slate-500 rounded mt-2 w-3/4"></div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-xs text-text-muted dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
-                  <span>Presisi Teks 100% Terjaga</span>
+                  <span>{lang === 'id' ? 'Presisi Teks 100% Terjaga' : '100% Text Precision Preserved'}</span>
                   <span className="font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded">
-                    HASIL KOMPRES (1.8 MB)
+                    {lang === 'id' ? 'HASIL KOMPRES (1.8 MB)' : 'COMPRESSED (1.8 MB)'}
                   </span>
                 </div>
               </div>
@@ -795,7 +861,9 @@ export const HomePage = ({ onSelectTool }) => {
 
             {/* Slider Range Input Control */}
             <div className="mt-5 flex items-center gap-3">
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">Hasil (1.8 MB)</span>
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                {lang === 'id' ? 'Hasil (1.8 MB)' : 'Result (1.8 MB)'}
+              </span>
               <input
                 className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary"
                 max="100"
@@ -804,7 +872,9 @@ export const HomePage = ({ onSelectTool }) => {
                 value={comparisonValue}
                 onChange={(e) => setComparisonValue(Number(e.target.value))}
               />
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">Asli (15 MB)</span>
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                {lang === 'id' ? 'Asli (15 MB)' : 'Original (15 MB)'}
+              </span>
             </div>
           </div>
         </div>
@@ -815,13 +885,15 @@ export const HomePage = ({ onSelectTool }) => {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="text-xs font-bold uppercase tracking-wider text-primary">
-              Cepat & Tanpa Ribet
+              {lang === 'id' ? 'Cepat & Tanpa Ribet' : 'Fast & Seamless'}
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-text-primary dark:text-white tracking-tight mt-1">
-              Selesai dalam 3 Langkah
+              {lang === 'id' ? 'Selesai dalam 3 Langkah' : 'Done in 3 Easy Steps'}
             </h2>
             <p className="text-sm sm:text-base text-secondary dark:text-slate-300 mt-2">
-              Didesain praktis tanpa pendaftaran wajib agar dokumen Anda selesai seketika.
+              {lang === 'id'
+                ? 'Didesain praktis tanpa pendaftaran wajib agar dokumen Anda selesai seketika.'
+                : 'Designed effortlessly without mandatory registration so your documents are processed instantly.'}
             </p>
           </div>
 
@@ -834,10 +906,12 @@ export const HomePage = ({ onSelectTool }) => {
                 <span className="material-symbols-outlined text-[24px]">cloud_upload</span>
               </div>
               <h3 className="text-lg font-bold text-text-primary dark:text-white mb-2">
-                1. Pilih / Tarik File
+                {lang === 'id' ? '1. Pilih / Tarik File' : '1. Select / Drop File'}
               </h3>
               <p className="text-xs sm:text-sm text-secondary dark:text-slate-400 leading-relaxed">
-                Unggah berkas PDF dari komputer, smartphone, Google Drive, atau Dropbox secara instan.
+                {lang === 'id'
+                  ? 'Unggah berkas PDF dari komputer, smartphone, Google Drive, atau Dropbox secara instan.'
+                  : 'Upload PDF files from your computer, smartphone, Google Drive, or Dropbox instantly.'}
               </p>
             </div>
 
@@ -849,10 +923,12 @@ export const HomePage = ({ onSelectTool }) => {
                 <span className="material-symbols-outlined text-[24px]">instant_mix</span>
               </div>
               <h3 className="text-lg font-bold text-text-primary dark:text-white mb-2">
-                2. Proses Otomatis
+                {lang === 'id' ? '2. Proses Otomatis' : '2. Instant Processing'}
               </h3>
               <p className="text-xs sm:text-sm text-secondary dark:text-slate-400 leading-relaxed">
-                Pilih preferensi Anda. Server cloud KlikPDF memproses kompresi atau konversi secepat kilat.
+                {lang === 'id'
+                  ? 'Pilih preferensi Anda. Server cloud KlikPDF memproses kompresi atau konversi secepat kilat.'
+                  : 'Select your options. KlikPDF cloud servers process compression or conversion at lightning speed.'}
               </p>
             </div>
 
@@ -864,10 +940,12 @@ export const HomePage = ({ onSelectTool }) => {
                 <span className="material-symbols-outlined text-[24px]">file_download_done</span>
               </div>
               <h3 className="text-lg font-bold text-text-primary dark:text-white mb-2">
-                3. Unduh Dokumen
+                {lang === 'id' ? '3. Unduh Dokumen' : '3. Download Document'}
               </h3>
               <p className="text-xs sm:text-sm text-secondary dark:text-slate-400 leading-relaxed">
-                Simpan hasil file yang sudah rapi ke perangkat Anda atau salin tautan berbagi langsung.
+                {lang === 'id'
+                  ? 'Simpan hasil file yang sudah rapi ke perangkat Anda atau salin tautan berbagi langsung.'
+                  : 'Save the optimized document directly to your device or copy the download link.'}
               </p>
             </div>
           </div>
@@ -882,13 +960,15 @@ export const HomePage = ({ onSelectTool }) => {
             
             <div className="max-w-xl relative z-10 text-center lg:text-left">
               <span className="px-3 py-1 rounded-full bg-white/10 text-rose-300 text-xs font-semibold inline-block mb-3">
-                Siap Tingkatkan Efisiensi Kerja?
+                {lang === 'id' ? 'Siap Tingkatkan Efisiensi Kerja?' : 'Ready to Boost Productivity?'}
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
-                Olah Dokumen Anda Sekarang dengan KlikPDF
+                {lang === 'id' ? 'Olah Dokumen Anda Sekarang dengan KlikPDF' : 'Process Your Documents Now with KlikPDF'}
               </h2>
               <p className="text-sm sm:text-base text-slate-300 mt-2">
-                Bebas biaya langganan, tanpa batasan rumit, dan terenkripsi aman secara otomatis.
+                {lang === 'id'
+                  ? 'Bebas biaya langganan, tanpa batasan rumit, dan terenkripsi aman secara otomatis.'
+                  : 'No subscription fees, no complicated limits, and automatically encrypted.'}
               </p>
             </div>
 
@@ -902,7 +982,7 @@ export const HomePage = ({ onSelectTool }) => {
                 }}
                 type="button"
               >
-                <span>Mulai Sekarang Gratis</span>
+                <span>{lang === 'id' ? 'Mulai Sekarang Gratis' : 'Start Free Now'}</span>
                 <span className="material-symbols-outlined text-[18px]">rocket_launch</span>
               </button>
             </div>
@@ -916,14 +996,16 @@ export const HomePage = ({ onSelectTool }) => {
           <div className="text-center max-w-4xl mx-auto mb-10">
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-rose-100 dark:bg-rose-950/60 text-primary font-bold text-xs uppercase tracking-wider mb-4 border border-rose-200 dark:border-rose-900/40 shadow-xs">
               <Sparkles size={14} />
-              <span>{t('hero.badge') || 'Semua Alat PDF & Gambar'}</span>
+              <span>{lang === 'id' ? 'Katalog Lengkap Alat' : 'Complete Tools Catalog'}</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-text-primary dark:text-white tracking-tight leading-tight mb-3">
-              Katalog Lengkap Alat KlikPDF
+              {lang === 'id' ? 'Katalog Lengkap Alat KlikPDF' : 'All KlikPDF Tools'}
             </h2>
             <p className="text-sm sm:text-base text-secondary dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-              Pilih dari 24+ alat gratis untuk memproses, mengonversi, memproteksi, dan mengoptimalkan dokumen Anda.
+              {lang === 'id'
+                ? 'Pilih dari 24+ alat gratis untuk memproses, mengonversi, memproteksi, dan mengoptimalkan dokumen Anda.'
+                : 'Choose from 24+ free tools to process, convert, protect, and optimize your documents.'}
             </p>
 
             {/* Category Filter Pills */}
@@ -1007,7 +1089,7 @@ export const HomePage = ({ onSelectTool }) => {
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-black text-text-primary dark:text-white">
-                    Mau Diapakan File Ini?
+                    {lang === 'id' ? 'Mau Diapakan File Ini?' : 'What would you like to do with this file?'}
                   </h3>
                   <div className="flex items-center gap-2 mt-0.5 text-xs text-text-muted dark:text-slate-400">
                     <span className="font-semibold text-primary truncate max-w-[200px] sm:max-w-[320px]">
@@ -1025,7 +1107,7 @@ export const HomePage = ({ onSelectTool }) => {
               <button
                 onClick={() => setShowActionModal(false)}
                 className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-surface-subtle dark:hover:bg-slate-800 text-lg font-bold transition-colors cursor-pointer"
-                title="Tutup"
+                title={lang === 'id' ? 'Tutup' : 'Close'}
               >
                 ✕
               </button>
@@ -1046,10 +1128,12 @@ export const HomePage = ({ onSelectTool }) => {
                     <div className="p-4 rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50">
                       <div className="flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-blue-300 mb-1">
                         <span className="material-symbols-outlined text-[18px]">info</span>
-                        <span>Dokumen Microsoft Word Terdeteksi</span>
+                        <span>{lang === 'id' ? 'Dokumen Microsoft Word Terdeteksi' : 'Microsoft Word Document Detected'}</span>
                       </div>
                       <p className="text-xs text-blue-600/90 dark:text-blue-400/90">
-                        Klik tombol di bawah untuk langsung mengubah dokumen Word Anda menjadi format PDF siap cetak.
+                        {lang === 'id'
+                          ? 'Klik tombol di bawah untuk langsung mengubah dokumen Word Anda menjadi format PDF siap cetak.'
+                          : 'Click below to instantly convert your Word document into print-ready PDF.'}
                       </p>
                     </div>
 
@@ -1062,9 +1146,13 @@ export const HomePage = ({ onSelectTool }) => {
                           <span className="material-symbols-outlined text-[28px] text-white">description</span>
                         </div>
                         <div>
-                          <div className="text-base sm:text-lg font-black">Word ke PDF (Konversi Otomatis)</div>
+                          <div className="text-base sm:text-lg font-black">
+                            {lang === 'id' ? 'Word ke PDF (Konversi Otomatis)' : 'Word to PDF (Auto Conversion)'}
+                          </div>
                           <div className="text-xs text-blue-100 font-normal mt-0.5">
-                            Tata letak, font, tabel, dan gambar terjaga 100% rapi
+                            {lang === 'id' 
+                              ? 'Tata letak, font, tabel, dan gambar terjaga 100% rapi' 
+                              : 'Preserves layout, fonts, tables, and images with 100% fidelity'}
                           </div>
                         </div>
                       </div>
@@ -1081,7 +1169,7 @@ export const HomePage = ({ onSelectTool }) => {
                 return (
                   <div className="my-4 space-y-3">
                     <div className="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">
-                      Pilih Tindakan untuk Gambar/Foto Anda:
+                      {lang === 'id' ? 'Pilih Tindakan untuk Gambar/Foto Anda:' : 'Choose an Action for Your Image/Photo:'}
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <button
@@ -1093,14 +1181,16 @@ export const HomePage = ({ onSelectTool }) => {
                             <span className="material-symbols-outlined text-[22px]">auto_fix_high</span>
                           </div>
                           <h4 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-600 transition-colors">
-                            HD-kan Foto (AI Upscale)
+                            {lang === 'id' ? 'HD-kan Foto (AI Upscale)' : 'Enhance Photo HD (AI)'}
                           </h4>
                           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                            Pertajam dan tingkatkan resolusi foto buram hingga 4x Ultra HD.
+                            {lang === 'id'
+                              ? 'Pertajam dan tingkatkan resolusi foto buram hingga 4x Ultra HD.'
+                              : 'Sharpen and upscale blurry photos up to 4x Ultra HD.'}
                           </p>
                         </div>
                         <span className="mt-4 text-xs font-bold text-purple-600 dark:text-purple-400 flex items-center gap-1">
-                          <span>Tingkatkan Resolusi</span>
+                          <span>{lang === 'id' ? 'Tingkatkan Resolusi' : 'Enhance Resolution'}</span>
                           <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </span>
                       </button>
@@ -1114,14 +1204,16 @@ export const HomePage = ({ onSelectTool }) => {
                             <span className="material-symbols-outlined text-[22px]">image</span>
                           </div>
                           <h4 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-orange-600 transition-colors">
-                            Gambar ke PDF
+                            {lang === 'id' ? 'Gambar ke PDF' : 'Image to PDF'}
                           </h4>
                           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                            Ubah foto JPG/PNG menjadi lembar dokumen PDF siap cetak.
+                            {lang === 'id'
+                              ? 'Ubah foto JPG/PNG menjadi lembar dokumen PDF siap cetak.'
+                              : 'Convert JPG/PNG images into print-ready PDF pages.'}
                           </p>
                         </div>
                         <span className="mt-4 text-xs font-bold text-orange-600 dark:text-orange-400 flex items-center gap-1">
-                          <span>Konversi ke PDF</span>
+                          <span>{lang === 'id' ? 'Konversi ke PDF' : 'Convert to PDF'}</span>
                           <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </span>
                       </button>
@@ -1143,9 +1235,13 @@ export const HomePage = ({ onSelectTool }) => {
                           <span className="material-symbols-outlined text-[28px] text-white">table_chart</span>
                         </div>
                         <div>
-                          <div className="text-base sm:text-lg font-black">Excel ke PDF</div>
+                          <div className="text-base sm:text-lg font-black">
+                            {lang === 'id' ? 'Excel ke PDF' : 'Excel to PDF'}
+                          </div>
                           <div className="text-xs text-emerald-100 font-normal mt-0.5">
-                            Konversi tabel spreadsheet menjadi dokumen PDF rapi
+                            {lang === 'id'
+                              ? 'Konversi tabel spreadsheet menjadi dokumen PDF rapi'
+                              : 'Convert spreadsheet tables into clean PDF documents'}
                           </div>
                         </div>
                       </div>
@@ -1170,9 +1266,13 @@ export const HomePage = ({ onSelectTool }) => {
                           <span className="material-symbols-outlined text-[28px] text-white">slideshow</span>
                         </div>
                         <div>
-                          <div className="text-base sm:text-lg font-black">PowerPoint ke PDF</div>
+                          <div className="text-base sm:text-lg font-black">
+                            {lang === 'id' ? 'PowerPoint ke PDF' : 'PowerPoint to PDF'}
+                          </div>
                           <div className="text-xs text-orange-100 font-normal mt-0.5">
-                            Ubah slide presentasi PowerPoint menjadi file PDF
+                            {lang === 'id'
+                              ? 'Ubah slide presentasi PowerPoint menjadi file PDF'
+                              : 'Convert PowerPoint presentation slides into PDF files'}
                           </div>
                         </div>
                       </div>
@@ -1188,7 +1288,7 @@ export const HomePage = ({ onSelectTool }) => {
               return (
                 <div className="my-3">
                   <div className="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-slate-400 mb-3">
-                    Pilih Tindakan untuk Dokumen PDF Anda:
+                    {lang === 'id' ? 'Pilih Tindakan untuk Dokumen PDF Anda:' : 'Choose an Action for Your PDF Document:'}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1202,11 +1302,13 @@ export const HomePage = ({ onSelectTool }) => {
                       </div>
                       <div>
                         <div className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors flex items-center gap-1.5">
-                          <span>Kompres PDF</span>
-                          <span className="text-[10px] font-bold bg-primary text-white px-1.5 py-0.5 rounded-full">Populer</span>
+                          <span>{lang === 'id' ? 'Kompres PDF' : 'Compress PDF'}</span>
+                          <span className="text-[10px] font-bold bg-primary text-white px-1.5 py-0.5 rounded-full">
+                            {lang === 'id' ? 'Populer' : 'Popular'}
+                          </span>
                         </div>
                         <p className="text-xs text-secondary dark:text-slate-400 mt-0.5 leading-snug">
-                          Kecilkan ukuran file s/d 85% untuk email
+                          {lang === 'id' ? 'Kecilkan ukuran file s/d 85% untuk email' : 'Reduce file size up to 85% for email'}
                         </p>
                       </div>
                     </button>
@@ -1221,10 +1323,10 @@ export const HomePage = ({ onSelectTool }) => {
                       </div>
                       <div>
                         <div className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                          Gabungkan PDF
+                          {lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF'}
                         </div>
                         <p className="text-xs text-secondary dark:text-slate-400 mt-0.5 leading-snug">
-                          Satukan dengan file PDF lainnya
+                          {lang === 'id' ? 'Satukan dengan file PDF lainnya' : 'Combine with other PDF files'}
                         </p>
                       </div>
                     </button>
@@ -1239,10 +1341,10 @@ export const HomePage = ({ onSelectTool }) => {
                       </div>
                       <div>
                         <div className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                          PDF ke Word
+                          {lang === 'id' ? 'PDF ke Word' : 'PDF to Word'}
                         </div>
                         <p className="text-xs text-secondary dark:text-slate-400 mt-0.5 leading-snug">
-                          Ubah ke berkas DOCX yang bisa diedit
+                          {lang === 'id' ? 'Ubah ke berkas DOCX yang bisa diedit' : 'Convert to editable DOCX document'}
                         </p>
                       </div>
                     </button>
@@ -1257,10 +1359,10 @@ export const HomePage = ({ onSelectTool }) => {
                       </div>
                       <div>
                         <div className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                          Pisahkan PDF
+                          {lang === 'id' ? 'Pisahkan PDF' : 'Split PDF'}
                         </div>
                         <p className="text-xs text-secondary dark:text-slate-400 mt-0.5 leading-snug">
-                          Ambil lembar tertentu atau pecah per hal
+                          {lang === 'id' ? 'Ambil lembar tertentu atau pecah per hal' : 'Extract pages or split into single sheets'}
                         </p>
                       </div>
                     </button>
@@ -1275,10 +1377,10 @@ export const HomePage = ({ onSelectTool }) => {
                       </div>
                       <div>
                         <div className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                          Tanda Tangan PDF
+                          {lang === 'id' ? 'Tanda Tangan PDF' : 'Sign PDF'}
                         </div>
                         <p className="text-xs text-secondary dark:text-slate-400 mt-0.5 leading-snug">
-                          Bubuhkan tanda tangan atau paraf digital
+                          {lang === 'id' ? 'Bubuhkan tanda tangan atau paraf digital' : 'Add digital signature or initials'}
                         </p>
                       </div>
                     </button>
@@ -1293,10 +1395,10 @@ export const HomePage = ({ onSelectTool }) => {
                       </div>
                       <div>
                         <div className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                          Kunci Dokumen
+                          {lang === 'id' ? 'Kunci Dokumen' : 'Protect Document'}
                         </div>
                         <p className="text-xs text-secondary dark:text-slate-400 mt-0.5 leading-snug">
-                          Proteksi PDF dengan kata sandi enkripsi
+                          {lang === 'id' ? 'Proteksi PDF dengan kata sandi enkripsi' : 'Protect PDF with password encryption'}
                         </p>
                       </div>
                     </button>
@@ -1311,10 +1413,10 @@ export const HomePage = ({ onSelectTool }) => {
                       </div>
                       <div>
                         <div className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                          PDF ke Excel
+                          {lang === 'id' ? 'PDF ke Excel' : 'PDF to Excel'}
                         </div>
                         <p className="text-xs text-secondary dark:text-slate-400 mt-0.5 leading-snug">
-                          Ekstrak data tabel ke spreadsheet Excel
+                          {lang === 'id' ? 'Ekstrak data tabel ke spreadsheet Excel' : 'Extract table data to Excel spreadsheet'}
                         </p>
                       </div>
                     </button>
@@ -1329,10 +1431,10 @@ export const HomePage = ({ onSelectTool }) => {
                       </div>
                       <div>
                         <div className="text-sm font-bold text-text-primary dark:text-white group-hover:text-primary transition-colors">
-                          Putar Halaman
+                          {lang === 'id' ? 'Putar Halaman' : 'Rotate Pages'}
                         </div>
                         <p className="text-xs text-secondary dark:text-slate-400 mt-0.5 leading-snug">
-                          Ubah orientasi dokumen yang miring
+                          {lang === 'id' ? 'Ubah orientasi dokumen yang miring' : 'Rotate pages or change orientation'}
                         </p>
                       </div>
                     </button>
@@ -1352,7 +1454,7 @@ export const HomePage = ({ onSelectTool }) => {
                 type="button"
               >
                 <span className="material-symbols-outlined text-[16px]">replay</span>
-                <span>Pilih Berkas Lain</span>
+                <span>{lang === 'id' ? 'Pilih Berkas Lain' : 'Choose Another File'}</span>
               </button>
 
               <button
@@ -1360,7 +1462,7 @@ export const HomePage = ({ onSelectTool }) => {
                 className="px-4 py-2 rounded-xl bg-surface-subtle dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold transition-colors cursor-pointer"
                 type="button"
               >
-                Batal
+                {lang === 'id' ? 'Batal' : 'Cancel'}
               </button>
             </div>
           </div>

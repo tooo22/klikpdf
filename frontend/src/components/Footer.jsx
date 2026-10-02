@@ -20,7 +20,9 @@ export const Footer = () => {
             </div>
             
             <p className="text-xs sm:text-sm text-secondary dark:text-slate-400 leading-relaxed max-w-sm">
-              Solusi produktivitas PDF terdepan untuk profesional, pelajar, dan bisnis modern di Indonesia. Cepat, aman, dan tanpa biaya langganan.
+              {lang === 'id'
+                ? 'Solusi produktivitas PDF terdepan untuk profesional, pelajar, dan bisnis modern di Indonesia. Cepat, aman, dan tanpa biaya langganan.'
+                : 'Leading PDF productivity suite for professionals, students, and modern businesses. Fast, secure, and free forever.'}
             </p>
 
             <div className="flex flex-wrap items-center gap-2.5 pt-2">
@@ -30,7 +32,7 @@ export const Footer = () => {
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs text-secondary dark:text-slate-300 bg-white dark:bg-[#18181B] px-3 py-1 rounded-full border border-border-subtle/80 dark:border-slate-700 shadow-xs">
                 <span className="material-symbols-outlined text-[15px] text-emerald-500">auto_delete</span>
-                <span>Otomatis Dihapus (2 Jam)</span>
+                <span>{lang === 'id' ? 'Otomatis Dihapus (2 Jam)' : 'Auto-Deleted (2 Hours)'}</span>
               </span>
             </div>
           </div>
@@ -38,60 +40,60 @@ export const Footer = () => {
           {/* Col 2: Konversi */}
           <div className="flex flex-col gap-2.5">
             <h4 className="text-xs font-bold text-text-primary dark:text-white uppercase tracking-wider">
-              Konversi PDF
+              {lang === 'id' ? 'Konversi PDF' : 'Convert PDF'}
             </h4>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/pdf-to-word">
-              PDF ke Word
+              {lang === 'id' ? 'PDF ke Word' : 'PDF to Word'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/word-to-pdf">
-              Word ke PDF
+              {lang === 'id' ? 'Word ke PDF' : 'Word to PDF'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/pdf-to-excel">
-              PDF ke Excel
+              {lang === 'id' ? 'PDF ke Excel' : 'PDF to Excel'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/pdf-to-jpg">
-              PDF ke JPG
+              {lang === 'id' ? 'PDF ke JPG' : 'PDF to JPG'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/hd-image">
-              HD-kan Foto (AI Upscale)
+              {lang === 'id' ? 'HD-kan Foto (AI Upscale)' : 'Enhance Photo HD (AI)'}
             </a>
           </div>
 
           {/* Col 3: Organisasi */}
           <div className="flex flex-col gap-2.5">
             <h4 className="text-xs font-bold text-text-primary dark:text-white uppercase tracking-wider">
-              Organisasi PDF
+              {lang === 'id' ? 'Organisasi PDF' : 'Organize PDF'}
             </h4>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/merge">
-              Gabungkan PDF
+              {lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/split">
-              Pisahkan PDF
+              {lang === 'id' ? 'Pisahkan PDF' : 'Split PDF'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/compress">
-              Kompres PDF
+              {lang === 'id' ? 'Kompres PDF' : 'Compress PDF'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/rotate">
-              Putar Halaman
+              {lang === 'id' ? 'Putar Halaman' : 'Rotate Pages'}
             </a>
           </div>
 
           {/* Col 4: Keamanan & Info */}
           <div className="flex flex-col gap-2.5">
             <h4 className="text-xs font-bold text-text-primary dark:text-white uppercase tracking-wider">
-              Keamanan & Bantuan
+              {lang === 'id' ? 'Keamanan & Bantuan' : 'Security & Help'}
             </h4>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/protect">
-              Kunci PDF
+              {lang === 'id' ? 'Kunci PDF' : 'Protect PDF'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/unlock">
-              Buka Sandi PDF
+              {lang === 'id' ? 'Buka Sandi PDF' : 'Unlock PDF'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/watermark">
-              Watermark Dokumen
+              {lang === 'id' ? 'Watermark Dokumen' : 'Watermark PDF'}
             </a>
             <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/sign">
-              Tanda Tangan Digital
+              {lang === 'id' ? 'Tanda Tangan Digital' : 'Sign PDF'}
             </a>
             <button
               onClick={() => window.dispatchEvent(new CustomEvent('open-rating-modal'))}
@@ -106,9 +108,9 @@ export const Footer = () => {
         {/* Copyright & Creator Credit */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted dark:text-slate-400">
           <div className="flex items-center gap-1.5">
-            <span>© 2026 KlikPDF. Dibuat dengan</span>
+            <span>© 2026 KlikPDF. {lang === 'id' ? 'Dibuat dengan' : 'Crafted with'}</span>
             <Heart size={13} className="text-primary fill-current" />
-            <span>oleh</span>
+            <span>{lang === 'id' ? 'oleh' : 'by'}</span>
             <a
               href="https://instagram.com/toooowys"
               target="_blank"
@@ -117,21 +119,21 @@ export const Footer = () => {
             >
               @toooowys
             </a>
-            <span className="hidden sm:inline">• Seluruh hak cipta dilindungi.</span>
+            <span className="hidden sm:inline">• {lang === 'id' ? 'Seluruh hak cipta dilindungi.' : 'All rights reserved.'}</span>
           </div>
 
           <div className="flex items-center gap-4 text-secondary dark:text-slate-400">
             <span className="inline-flex items-center gap-1 text-emerald-500 font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Server Normal</span>
+              <span>{lang === 'id' ? 'Server Normal' : 'Server Online'}</span>
             </span>
             <span>•</span>
             <a className="hover:text-primary transition-colors" href="#">
-              Kebijakan Privasi
+              {lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy'}
             </a>
             <span>•</span>
             <a className="hover:text-primary transition-colors" href="#">
-              Syarat & Ketentuan
+              {lang === 'id' ? 'Syarat & Ketentuan' : 'Terms & Conditions'}
             </a>
           </div>
         </div>
