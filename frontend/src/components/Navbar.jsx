@@ -254,12 +254,12 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
 
           {/* Language Switcher */}
           <button
-            onClick={toggleLanguage}
-            title="Ganti Bahasa"
-            className="hidden sm:inline-flex items-center text-xs font-bold text-secondary dark:text-slate-300 hover:text-primary bg-surface-subtle dark:bg-slate-800/80 px-2.5 py-1 rounded-full gap-1 border border-border-subtle/80 dark:border-slate-700/60 transition-colors cursor-pointer"
+            onClick={() => toggleLanguage()}
+            title="Ganti Bahasa / Switch Language"
+            className="inline-flex items-center text-xs font-bold text-secondary dark:text-slate-300 hover:text-primary bg-surface-subtle dark:bg-slate-800/80 px-2.5 py-1 rounded-full gap-1 border border-border-subtle/80 dark:border-slate-700/60 transition-colors cursor-pointer active:scale-95"
           >
             <span className="material-symbols-outlined text-[15px] text-primary">language</span>
-            <span>{lang.toUpperCase()}</span>
+            <span>{String(lang || 'ID').toUpperCase()}</span>
           </button>
 
           {/* Auth Button or User Menu */}
