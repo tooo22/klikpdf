@@ -40,7 +40,7 @@ export const Dropzone = ({ tool, onFilesSelected, onGoHome }) => {
       <div 
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className="bg-white dark:bg-[#1E1E22] border-2 border-dashed border-gray-300 dark:border-[#3F3F46] hover:border-[#E5322D] dark:hover:border-[#E5322D] rounded-3xl p-12 text-center shadow-lg transition-colors cursor-pointer"
+        className="bg-white dark:bg-[#1E1E22] border-2 border-dashed border-gray-300 dark:border-[#3F3F46] hover:border-[#E5322D] dark:hover:border-[#E5322D] rounded-3xl p-6 sm:p-12 text-center shadow-lg transition-colors cursor-pointer"
         onClick={() => fileInputRef.current?.click()}
       >
         <input
@@ -51,18 +51,18 @@ export const Dropzone = ({ tool, onFilesSelected, onGoHome }) => {
           accept={tool.accept}
           className="hidden"
         />
-        <div className="w-20 h-20 bg-red-50 dark:bg-red-950/40 text-[#E5322D] rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-          <Upload size={36} />
+        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-50 dark:bg-red-950/40 text-[#E5322D] rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-inner">
+          <Upload size={32} className="sm:w-9 sm:h-9" />
         </div>
-        <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2">
+        <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-2">
           {lang === 'id' ? tool.name : tool.nameEn}
         </h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-6 sm:mb-8 max-w-md mx-auto">
           {lang === 'id' ? tool.desc : tool.descEn}
         </p>
 
-        <button className="bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white text-lg font-extrabold px-8 py-4 rounded-2xl shadow-xl transition-all inline-flex items-center space-x-3 cursor-pointer">
-          <Plus size={24} />
+        <button className="bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white text-base sm:text-lg font-extrabold px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-xl transition-all inline-flex items-center justify-center space-x-3 w-full sm:w-auto cursor-pointer">
+          <Plus size={22} />
           <span>
             {tool.id === 'word-to-pdf'
               ? (lang === 'id' ? 'Pilih Berkas Word' : 'Select Word Files')

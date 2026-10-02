@@ -6,7 +6,7 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
   const { t, lang } = useLanguage();
 
   return (
-    <div className="w-full md:w-80 bg-white dark:bg-[#1E1E22] border-l border-gray-200 dark:border-[#27272A] p-6 flex flex-col justify-between transition-colors duration-200">
+    <div className="w-full md:w-80 bg-white dark:bg-[#1E1E22] border-t md:border-t-0 md:border-l border-gray-200 dark:border-[#27272A] p-5 sm:p-6 flex flex-col justify-between transition-colors duration-200">
       <div>
         <div className="flex items-center space-x-2 text-gray-900 dark:text-white font-extrabold text-lg border-b border-gray-200 dark:border-[#27272A] pb-4 mb-6">
           <Settings size={20} className="text-[#E5322D]" />
@@ -111,18 +111,21 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
         )}
       </div>
 
-      <button
-        onClick={onProcess}
-        disabled={isProcessing}
-        className="w-full mt-6 bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white font-extrabold py-4 px-6 rounded-2xl shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
-      >
-        <span>
-          {isProcessing 
-            ? (lang === 'id' ? 'Memproses berkas...' : 'Processing file...') 
-            : (lang === 'id' ? 'Proses Sekarang' : 'Process Now')}
-        </span>
-        <ArrowRight size={20} />
-      </button>
+      {/* Sticky Bottom Container on Mobile */}
+      <div className="sticky bottom-0 left-0 right-0 -mx-5 -mb-5 sm:-mx-6 sm:-mb-6 p-4 bg-white/95 dark:bg-[#1E1E22]/95 backdrop-blur-md border-t border-gray-200/80 dark:border-[#27272A] md:static md:mx-0 md:mb-0 md:p-0 md:bg-transparent md:border-0 z-30 mt-6">
+        <button
+          onClick={onProcess}
+          disabled={isProcessing}
+          className="w-full bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white font-extrabold py-3.5 sm:py-4 px-6 rounded-2xl shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
+        >
+          <span>
+            {isProcessing 
+              ? (lang === 'id' ? 'Memproses berkas...' : 'Processing file...') 
+              : (lang === 'id' ? 'Proses Sekarang' : 'Process Now')}
+          </span>
+          <ArrowRight size={20} />
+        </button>
+      </div>
     </div>
   );
 };
