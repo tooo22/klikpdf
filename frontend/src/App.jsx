@@ -60,10 +60,18 @@ function AppContent() {
     };
   }, []);
 
-  // Listen to browser Back / Forward buttons
+  // Disable browser automatic scroll restoration to avoid landing at bottom of shorter pages
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  // Listen to browser Back / Forward buttons & Hash changes
   useEffect(() => {
     const handleHashChange = () => {
       setActiveToolId(getToolFromHash());
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     };
 
     window.addEventListener('hashchange', handleHashChange);
@@ -75,10 +83,16 @@ function AppContent() {
     };
   }, []);
 
+  // Guarantee scroll-to-top whenever the active tool changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [activeToolId]);
+
   const handleSelectTool = (toolId, files = []) => {
     setActiveToolId(toolId);
     setInitialFiles(files || []);
     window.location.hash = `#/${toolId}`;
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
 
   const handleGoHome = () => {
@@ -87,6 +101,7 @@ function AppContent() {
     if (window.location.hash) {
       window.history.pushState(null, '', window.location.pathname);
     }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
 
   // ==============================================================
@@ -217,7 +232,7 @@ function AppContent() {
           )}
         </main>
       </div>
-      <Footer />
+      <Footer onSelectTool={handleSelectTool} onGoHome={handleGoHome} />
       <LoginModal />
       <RecentFilesModal />
       <RatingModal

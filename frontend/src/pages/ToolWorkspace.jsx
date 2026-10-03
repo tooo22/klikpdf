@@ -81,6 +81,7 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
       if (blob) {
         const url = window.URL.createObjectURL(blob);
         setResultUrl(url);
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
         // Record to user's recent file history
         try {
@@ -139,6 +140,7 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
         onReset={() => {
           setSelectedFiles([]);
           setResultUrl(null);
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         }}
       />
     );

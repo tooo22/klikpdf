@@ -2,19 +2,42 @@ import React from 'react';
 import { Heart } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export const Footer = () => {
+export const Footer = ({ onSelectTool, onGoHome }) => {
   const { lang } = useLanguage();
+
+  const handleToolClick = (e, toolId) => {
+    e.preventDefault();
+    if (onSelectTool) {
+      onSelectTool(toolId);
+    } else {
+      window.location.hash = `#/${toolId}`;
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  };
+
+  const handleBrandClick = () => {
+    if (onGoHome) {
+      onGoHome();
+    } else {
+      window.location.hash = '';
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  };
+
   return (
     <footer className="w-full bg-slate-50 dark:bg-[#0c0e14] border-t border-border-subtle/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-border-subtle/80 dark:border-slate-800">
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-2 flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20">
+            <div 
+              onClick={handleBrandClick}
+              className="flex items-center gap-2 cursor-pointer group w-fit"
+            >
+              <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform">
                 <span className="material-symbols-outlined text-[20px]">layers</span>
               </div>
-              <span className="text-xl font-extrabold tracking-tight text-text-primary dark:text-white">
+              <span className="text-xl font-extrabold tracking-tight text-text-primary dark:text-white group-hover:text-primary transition-colors">
                 Klik<span className="text-primary">PDF</span>
               </span>
             </div>
@@ -42,19 +65,39 @@ export const Footer = () => {
             <h4 className="text-xs font-bold text-text-primary dark:text-white uppercase tracking-wider">
               {lang === 'id' ? 'Konversi PDF' : 'Convert PDF'}
             </h4>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/pdf-to-word">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/pdf-to-word"
+              onClick={(e) => handleToolClick(e, 'pdf-to-word')}
+            >
               {lang === 'id' ? 'PDF ke Word' : 'PDF to Word'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/word-to-pdf">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/word-to-pdf"
+              onClick={(e) => handleToolClick(e, 'word-to-pdf')}
+            >
               {lang === 'id' ? 'Word ke PDF' : 'Word to PDF'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/pdf-to-excel">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/pdf-to-excel"
+              onClick={(e) => handleToolClick(e, 'pdf-to-excel')}
+            >
               {lang === 'id' ? 'PDF ke Excel' : 'PDF to Excel'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/pdf-to-jpg">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/pdf-to-jpg"
+              onClick={(e) => handleToolClick(e, 'pdf-to-jpg')}
+            >
               {lang === 'id' ? 'PDF ke JPG' : 'PDF to JPG'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/hd-image">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/hd-image"
+              onClick={(e) => handleToolClick(e, 'hd-image')}
+            >
               {lang === 'id' ? 'HD-kan Foto (AI Upscale)' : 'Enhance Photo HD (AI)'}
             </a>
           </div>
@@ -64,16 +107,32 @@ export const Footer = () => {
             <h4 className="text-xs font-bold text-text-primary dark:text-white uppercase tracking-wider">
               {lang === 'id' ? 'Organisasi PDF' : 'Organize PDF'}
             </h4>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/merge">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/merge"
+              onClick={(e) => handleToolClick(e, 'merge')}
+            >
               {lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/split">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/split"
+              onClick={(e) => handleToolClick(e, 'split')}
+            >
               {lang === 'id' ? 'Pisahkan PDF' : 'Split PDF'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/compress">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/compress"
+              onClick={(e) => handleToolClick(e, 'compress')}
+            >
               {lang === 'id' ? 'Kompres PDF' : 'Compress PDF'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/rotate">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/rotate"
+              onClick={(e) => handleToolClick(e, 'rotate')}
+            >
               {lang === 'id' ? 'Putar Halaman' : 'Rotate Pages'}
             </a>
           </div>
@@ -83,16 +142,32 @@ export const Footer = () => {
             <h4 className="text-xs font-bold text-text-primary dark:text-white uppercase tracking-wider">
               {lang === 'id' ? 'Keamanan & Bantuan' : 'Security & Help'}
             </h4>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/protect">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/protect"
+              onClick={(e) => handleToolClick(e, 'protect')}
+            >
               {lang === 'id' ? 'Kunci PDF' : 'Protect PDF'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/unlock">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/unlock"
+              onClick={(e) => handleToolClick(e, 'unlock')}
+            >
               {lang === 'id' ? 'Buka Sandi PDF' : 'Unlock PDF'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/watermark">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/watermark"
+              onClick={(e) => handleToolClick(e, 'watermark')}
+            >
               {lang === 'id' ? 'Watermark Dokumen' : 'Watermark PDF'}
             </a>
-            <a className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors" href="#/sign">
+            <a 
+              className="text-xs sm:text-sm text-secondary dark:text-slate-400 hover:text-primary transition-colors cursor-pointer" 
+              href="#/sign"
+              onClick={(e) => handleToolClick(e, 'sign')}
+            >
               {lang === 'id' ? 'Tanda Tangan Digital' : 'Sign PDF'}
             </a>
             <button

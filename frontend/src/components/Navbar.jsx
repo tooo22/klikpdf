@@ -56,12 +56,34 @@ export const Navbar = ({ onSelectTool, onGoHome, onOpenAdmin }) => {
     setActiveMenu(null);
     setIsMobileDrawerOpen(false);
     onSelectTool(toolId);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  };
+
+  const handleBrandClick = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveMenu(null);
+    setIsMobileDrawerOpen(false);
+    onGoHome();
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
 
   const handleScrollToTools = () => {
-    const el = document.getElementById('semua-alat') || document.getElementById('bento-grid');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveMenu(null);
+    setIsMobileDrawerOpen(false);
+    if (window.location.hash) {
+      onGoHome();
+      setTimeout(() => {
+        const el = document.getElementById('semua-alat') || document.getElementById('bento-grid');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const el = document.getElementById('semua-alat') || document.getElementById('bento-grid');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -85,7 +107,7 @@ export const Navbar = ({ onSelectTool, onGoHome, onOpenAdmin }) => {
 
           {/* Brand Logo */}
           <div 
-            onClick={onGoHome}
+            onClick={handleBrandClick}
             className="flex items-center gap-2 group cursor-pointer"
           >
             <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform duration-200">
@@ -108,21 +130,21 @@ export const Navbar = ({ onSelectTool, onGoHome, onOpenAdmin }) => {
           </button>
 
           <button
-            onClick={() => onSelectTool('merge')}
+            onClick={() => handleItemClick('merge')}
             className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
             {lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF'}
           </button>
 
           <button
-            onClick={() => onSelectTool('split')}
+            onClick={() => handleItemClick('split')}
             className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
             {lang === 'id' ? 'Pisahkan PDF' : 'Split PDF'}
           </button>
 
           <button
-            onClick={() => onSelectTool('compress')}
+            onClick={() => handleItemClick('compress')}
             className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
             {lang === 'id' ? 'Kompres PDF' : 'Compress PDF'}
@@ -412,10 +434,7 @@ export const Navbar = ({ onSelectTool, onGoHome, onOpenAdmin }) => {
               {/* Drawer Top Header */}
               <div className="p-4 border-b border-border-subtle/80 dark:border-slate-800 flex items-center justify-between">
                 <div 
-                  onClick={() => {
-                    setIsMobileDrawerOpen(false);
-                    onGoHome();
-                  }}
+                  onClick={handleBrandClick}
                   className="flex items-center gap-2 cursor-pointer"
                 >
                   <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-sm">
