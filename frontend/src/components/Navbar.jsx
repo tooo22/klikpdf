@@ -14,8 +14,50 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [mobileSearchQuery, setMobileSearchQuery] = useState('');
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
   const timeoutRef = useRef(null);
   const userMenuRef = useRef(null);
+
+  // PWA Install prompt listener
+  useEffect(() => {
+    const handleBeforeInstall = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    const handleAppInstalled = () => {
+      setIsAppInstalled(true);
+      setDeferredPrompt(null);
+    };
+    window.addEventListener('beforeinstallprompt', handleBeforeInstall);
+    window.addEventListener('appinstalled', handleAppInstalled);
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstallApp = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setIsAppInstalled(true);
+      }
+      setDeferredPrompt(null);
+    } else {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      if (isIOS) {
+        alert(lang === 'id' 
+          ? 'Cara pasang di iPhone/iPad:\n1. Ketuk tombol Bagikan (Share) di Safari bawah\n2. Pilih "Tambah ke Layar Utama" (Add to Home Screen)'
+          : 'To install on iPhone/iPad:\n1. Tap the Share button at the bottom of Safari\n2. Select "Add to Home Screen"');
+      } else {
+        alert(lang === 'id'
+          ? 'Cara pasang di Android:\n1. Ketuk menu titik tiga (⋮) di Chrome\n2. Pilih "Pasang aplikasi" atau "Tambahkan ke Layar Utama"'
+          : 'To install on Android:\n1. Tap the menu button (⋮) in Chrome\n2. Select "Install app" or "Add to Home screen"');
+      }
+    }
+  };
 
   // Prevent background scroll when mobile drawer is open
   useEffect(() => {
@@ -538,8 +580,23 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
               </div>
             </div>
 
-            {/* Drawer Bottom Controls (Language + Theme) */}
-            <div className="p-4 border-t border-border-subtle/80 dark:border-slate-800 bg-surface-subtle/60 dark:bg-[#11131c] pb-[max(1rem,env(safe-area-inset-bottom,1rem))]">
+            {/* Drawer Bottom Controls (Install App + Language + Theme) */}
+            <div className="p-4 border-t border-border-subtle/80 dark:border-slate-800 bg-surface-subtle/60 dark:bg-[#11131c] space-y-3 pb-[max(1rem,env(safe-area-inset-bottom,1rem))]">
+              {/* Install App for Android / iOS Button */}
+              {!isAppInstalled && (
+                <button
+                  type="button"
+                  onClick={handleInstallApp}
+                  className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-rose-600 hover:from-crimson-dark hover:to-primary text-white text-xs font-bold shadow-md shadow-primary/25 cursor-pointer active:scale-95 transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[18px]">install_mobile</span>
+                    <span>{lang === 'id' ? 'Pasang Aplikasi KlikPDF' : 'Install KlikPDF App'}</span>
+                  </div>
+                  <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-md font-mono">Android & iOS</span>
+                </button>
+              )}
+
               {/* Language & Theme Controls Row */}
               <div className="flex items-center justify-between gap-2">
                 {/* Language Switcher */}
