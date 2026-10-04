@@ -465,22 +465,28 @@ export const HomePage = ({ onSelectTool }) => {
   return (
     <div className="max-w-[1440px] mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6">
       
-      {/* 1. COMPACT HERO & CATEGORY BAR */}
-      <section className="bg-gradient-to-r from-navy-banner via-navy-deep to-slate-900 rounded-2xl p-4 sm:p-7 text-white shadow-xl relative overflow-hidden">
-        {/* Glow Decor */}
-        <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute -left-20 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+      {/* 1. MODERN COMPACT HERO & CATEGORY BAR */}
+      <section className="hero-mesh rounded-3xl p-5 sm:p-8 text-white shadow-2xl relative overflow-hidden border border-white/10">
+        {/* Ambient Glow Spotlights */}
+        <div className="absolute -right-16 -bottom-16 w-96 h-96 bg-primary/25 rounded-full blur-[100px] pointer-events-none animate-pulse"></div>
+        <div className="absolute -left-16 -top-16 w-80 h-80 bg-blue-500/20 rounded-full blur-[100px] pointer-events-none"></div>
 
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 rounded-full bg-white/10 text-white text-[11px] sm:text-xs font-medium backdrop-blur-xs border border-white/10">
-              <span className="material-symbols-outlined text-[14px] text-amber-400">offline_bolt</span>
-              <span>{lang === 'id' ? 'Direct Action Matrix — Proses instan di peramban tanpa antrean' : 'Direct Action Matrix — Instant document processing with zero queues'}</span>
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.12] text-white text-[11px] sm:text-xs font-semibold backdrop-blur-md border border-white/15 shadow-inner transition-colors">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span className="font-mono text-emerald-300">v2.6 Live Engine</span>
+              <span className="text-white/40">•</span>
+              <span>{lang === 'id' ? 'Proses Instan di Browser Tanpa Antrean' : 'Instant In-Browser Processing Zero Queues'}</span>
             </div>
-            <h1 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
-              {lang === 'id' ? 'Pusat Pengolahan Dokumen PDF Cepat & Mandiri' : 'Fast & Autonomous PDF Document Processing Center'}
+            
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
+              <span className="bg-gradient-to-r from-white via-slate-100 to-rose-200 bg-clip-text text-transparent">
+                {lang === 'id' ? 'Pusat Pengolahan Dokumen PDF Cepat & Mandiri' : 'Fast & Autonomous PDF Document Processing Center'}
+              </span>
             </h1>
-            <p className="text-xs sm:text-base text-slate-300">
+            
+            <p className="text-xs sm:text-sm text-slate-300/90 leading-relaxed max-w-xl">
               {lang === 'id' 
                 ? 'Pilih tindakan langsung, seret dokumen ke dropzone pintar terpadu, atau gunakan tombol unggah cepat pada setiap kartu modul di bawah.'
                 : 'Select actions directly, drag documents into the smart unified dropzone, or trigger quick upload on any card module below.'}
@@ -488,42 +494,43 @@ export const HomePage = ({ onSelectTool }) => {
           </div>
 
           {/* Metric Badges Widget */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 shrink-0">
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2.5 sm:p-3 border border-white/10 flex flex-col">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3 shrink-0">
+            <div className="bg-white/[0.07] hover:bg-white/[0.12] backdrop-blur-xl rounded-2xl p-3 sm:p-3.5 border border-white/15 hover:border-white/25 flex flex-col justify-between transition-all shadow-md shadow-black/20">
               <span className="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-bold">
                 {lang === 'id' ? 'Kecepatan Rata2' : 'Avg Speed'}
               </span>
-              <span className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">1.4 Detik</span>
-              <span className="text-[10px] text-emerald-400 flex items-center gap-0.5 mt-0.5 font-medium">
-                <span className="material-symbols-outlined text-[12px]">trending_up</span> Multi-core
+              <span className="text-lg sm:text-2xl font-extrabold text-white mt-1">1.4 Detik</span>
+              <span className="text-[10px] text-emerald-400 flex items-center gap-1 mt-1 font-semibold">
+                <span className="material-symbols-outlined text-[14px]">bolt</span> Multi-core Engine
               </span>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2.5 sm:p-3 border border-white/10 flex flex-col">
+            <div className="bg-white/[0.07] hover:bg-white/[0.12] backdrop-blur-xl rounded-2xl p-3 sm:p-3.5 border border-white/15 hover:border-white/25 flex flex-col justify-between transition-all shadow-md shadow-black/20">
               <span className="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-bold">
                 {lang === 'id' ? 'Enkripsi Privat' : 'Private Encryption'}
               </span>
-              <span className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">256-Bit SSL</span>
-              <span className="text-[10px] text-emerald-400 flex items-center gap-0.5 mt-0.5 font-medium">
-                <span className="material-symbols-outlined text-[12px]">lock</span> Zero Data Storage
+              <span className="text-lg sm:text-2xl font-extrabold text-white mt-1">256-Bit SSL</span>
+              <span className="text-[10px] text-emerald-400 flex items-center gap-1 mt-1 font-semibold">
+                <span className="material-symbols-outlined text-[14px]">lock</span> Zero Data Storage
               </span>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2.5 sm:p-3 border border-white/10 col-span-2 sm:col-span-1 flex flex-col">
+            <div className="bg-white/[0.07] hover:bg-white/[0.12] backdrop-blur-xl rounded-2xl p-3 sm:p-3.5 border border-white/15 hover:border-white/25 col-span-2 sm:col-span-1 flex flex-col justify-between transition-all shadow-md shadow-black/20">
               <span className="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-bold">
                 {lang === 'id' ? 'Biaya & Kuota' : 'Cost & Limit'}
               </span>
-              <span className="text-lg sm:text-xl font-extrabold text-amber-300 mt-0.5 sm:mt-1">100% Gratis</span>
-              <span className="text-[10px] text-slate-300 mt-0.5 font-medium">
-                {activeUsers} Online
+              <span className="text-lg sm:text-2xl font-extrabold text-amber-300 mt-1">100% Gratis</span>
+              <span className="text-[10px] text-slate-300 flex items-center gap-1 mt-1 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>{activeUsers} Online</span>
               </span>
             </div>
           </div>
         </div>
 
         {/* Quick Category Segment Control Bar (Swipeable on Mobile) */}
-        <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 -mx-2 px-2 sm:mx-0 sm:px-0 sm:flex-wrap" id="categoryFilterGroup">
+        <div className="mt-6 sm:mt-8 pt-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-2 px-2 sm:mx-0 sm:px-0 sm:flex-wrap" id="categoryFilterGroup">
             {[
               { id: 'all', label: lang === 'id' ? 'Semua Alat' : 'All Tools', icon: 'apps' },
               { id: 'kompresi', label: lang === 'id' ? 'Kompresi' : 'Compress', icon: 'compress' },
@@ -535,10 +542,10 @@ export const HomePage = ({ onSelectTool }) => {
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 type="button"
-                className={`category-pill shrink-0 px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+                className={`category-pill shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                   activeCategory === cat.id
-                    ? 'tool-active-filter'
-                    : 'bg-white/10 hover:bg-white/20 text-white'
+                    ? 'bg-gradient-to-r from-primary to-rose-600 text-white shadow-lg shadow-primary/30 border border-primary/50'
+                    : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10'
                 }`}
               >
                 <span className="material-symbols-outlined text-[16px]">{cat.icon}</span>
@@ -580,20 +587,20 @@ export const HomePage = ({ onSelectTool }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* CENTRAL SMART MULTI-FILE DROPZONE (8 Cols) */}
-        <section className="lg:col-span-8 bg-surface-card dark:bg-[#151928] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sm:p-6 relative transition-colors">
-          <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-crimson-glow text-primary dark:bg-rose-950/60 dark:text-rose-400 flex items-center justify-center font-bold">
+        <section className="lg:col-span-8 bg-white/90 dark:bg-[#131728]/90 backdrop-blur-xl rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 relative transition-all">
+          <div className="flex items-center justify-between mb-4 sm:mb-5">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary/10 to-rose-100 dark:from-rose-950/60 dark:to-primary/20 text-primary dark:text-rose-400 flex items-center justify-center font-bold shadow-xs">
                 <span className="material-symbols-outlined text-[20px]">smart_toy</span>
               </div>
               <div>
-                <h2 className="text-sm sm:text-base font-bold text-navy-deep dark:text-white">Smart Unified Dropzone</h2>
+                <h2 className="text-base sm:text-lg font-extrabold text-navy-deep dark:text-white">Smart Unified Dropzone</h2>
                 <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
                   {lang === 'id' ? 'Deteksi format instan & rekomendasi tindakan otomatis' : 'Instant format detection & automated tool recommendation'}
                 </p>
               </div>
             </div>
-            <span className="text-[10px] sm:text-[11px] font-mono px-2 py-0.5 sm:py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold">
+            <span className="text-[10px] sm:text-[11px] font-mono px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold border border-slate-200/60 dark:border-slate-700">
               Maks. 200 MB
             </span>
           </div>
@@ -611,10 +618,10 @@ export const HomePage = ({ onSelectTool }) => {
               handleFilesQueued(e.dataTransfer.files);
             }}
             onClick={() => masterFileInputRef.current?.click()}
-            className={`relative border-2 border-dashed rounded-xl p-5 sm:p-8 text-center transition-all duration-200 cursor-pointer group flex flex-col items-center justify-center ${
+            className={`relative border-2 border-dashed rounded-2xl p-6 sm:p-10 text-center transition-all duration-300 cursor-pointer group flex flex-col items-center justify-center ${
               isDropzoneDragging
-                ? 'border-primary bg-crimson-glow/30 scale-[1.005]'
-                : 'border-slate-300 dark:border-slate-700 hover:border-primary bg-slate-50/60 dark:bg-slate-900/40 hover:bg-crimson-glow/10 active:scale-[0.99]'
+                ? 'border-primary bg-crimson-glow/30 dark:bg-rose-950/30 scale-[1.008] shadow-lg shadow-primary/10'
+                : 'border-slate-300/90 dark:border-slate-700 hover:border-primary/80 bg-slate-50/70 dark:bg-slate-900/40 hover:bg-rose-50/20 dark:hover:bg-rose-950/10 active:scale-[0.99]'
             }`}
           >
             <input
@@ -626,48 +633,48 @@ export const HomePage = ({ onSelectTool }) => {
               onChange={(e) => handleFilesQueued(e.target.files)}
             />
 
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-800 shadow-md border border-slate-200/80 dark:border-slate-700 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 mb-2.5 sm:mb-3">
-              <span className="material-symbols-outlined text-[28px] sm:text-[34px]">cloud_upload</span>
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-black/50 border border-slate-200/80 dark:border-slate-700 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 mb-3">
+              <span className="material-symbols-outlined text-[30px] sm:text-[34px]">cloud_upload</span>
             </div>
 
-            <h3 className="text-sm sm:text-lg font-bold text-navy-deep dark:text-white group-hover:text-primary transition-colors">
+            <h3 className="text-base sm:text-xl font-extrabold text-navy-deep dark:text-white group-hover:text-primary transition-colors">
               {lang === 'id' ? 'Tarik Dokumen atau Ketuk untuk Memilih' : 'Drag & Drop or Tap to Choose File'}
             </h3>
 
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mt-1 mb-3.5 sm:mb-4">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mt-1 mb-4 sm:mb-5 leading-relaxed">
               {lang === 'id' ? (
                 <>
-                  KlikPDF otomatis mendeteksi apakah file perlu <span className="font-semibold text-primary">dikompres</span>, <span className="font-semibold text-secondary dark:text-indigo-400">dikonversi</span>, atau <span className="font-semibold text-tertiary dark:text-emerald-400">digabungkan</span>.
+                  KlikPDF otomatis mendeteksi apakah file perlu <span className="font-bold text-primary">dikompres</span>, <span className="font-bold text-indigo-600 dark:text-indigo-400">dikonversi</span>, atau <span className="font-bold text-emerald-600 dark:text-emerald-400">digabungkan</span>.
                 </>
               ) : (
                 <>
-                  KlikPDF automatically detects whether your file should be <span className="font-semibold text-primary">compressed</span>, <span className="font-semibold text-secondary dark:text-indigo-400">converted</span>, or <span className="font-semibold text-tertiary dark:text-emerald-400">merged</span>.
+                  KlikPDF automatically detects whether your file should be <span className="font-bold text-primary">compressed</span>, <span className="font-bold text-indigo-600 dark:text-indigo-400">converted</span>, or <span className="font-bold text-emerald-600 dark:text-emerald-400">merged</span>.
                 </>
               )}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   masterFileInputRef.current?.click();
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-2.5 rounded-xl sm:rounded-lg bg-primary hover:bg-crimson-dark text-white text-xs font-bold shadow-md shadow-primary/25 active:scale-95 transition-all cursor-pointer"
+                className="btn-shimmer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-primary via-rose-600 to-crimson-dark hover:from-crimson-dark hover:to-primary text-white text-xs sm:text-sm font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[18px]">add_circle</span>
                 <span>{lang === 'id' ? 'Pilih Berkas dari Perangkat' : 'Choose File From Device'}</span>
               </button>
 
               <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400">
-                <span className="text-slate-400 dark:text-slate-500">{lang === 'id' ? 'atau impor:' : 'or import:'}</span>
+                <span className="text-slate-400 dark:text-slate-500 font-medium">{lang === 'id' ? 'atau impor:' : 'or import:'}</span>
                 <button
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     setCloudNotice('Google Drive');
                   }}
-                  className="px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium text-slate-700 dark:text-slate-200 cursor-pointer active:scale-95"
+                  className="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-all font-semibold text-slate-700 dark:text-slate-200 cursor-pointer active:scale-95 shadow-2xs"
                 >
                   Google Drive
                 </button>
@@ -677,7 +684,7 @@ export const HomePage = ({ onSelectTool }) => {
                     e.stopPropagation();
                     setCloudNotice('Dropbox');
                   }}
-                  className="px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium text-slate-700 dark:text-slate-200 cursor-pointer active:scale-95"
+                  className="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-all font-semibold text-slate-700 dark:text-slate-200 cursor-pointer active:scale-95 shadow-2xs"
                 >
                   Dropbox
                 </button>
@@ -685,17 +692,17 @@ export const HomePage = ({ onSelectTool }) => {
             </div>
 
             {/* Live Detection Notification Banner */}
-            <div className="w-full mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
+            <div className="w-full mt-5 pt-4 border-t border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
-                <span className="font-bold text-slate-700 dark:text-slate-300">{lang === 'id' ? 'Dukungan:' : 'Supported:'}</span>
-                <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px] font-bold text-primary">PDF</span>
-                <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">WORD</span>
-                <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">EXCEL</span>
-                <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">PPT</span>
-                <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">JPG/PNG</span>
+                <span className="font-bold text-slate-700 dark:text-slate-300">{lang === 'id' ? 'Format Didukung:' : 'Supported:'}</span>
+                <span className="px-2 py-0.5 rounded-lg bg-rose-50 dark:bg-rose-950/60 border border-rose-200/60 dark:border-rose-900/60 font-mono text-[10px] font-extrabold text-primary">PDF</span>
+                <span className="px-2 py-0.5 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/60 font-mono text-[10px] font-extrabold text-blue-600 dark:text-blue-400">WORD</span>
+                <span className="px-2 py-0.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-900/60 font-mono text-[10px] font-extrabold text-emerald-600 dark:text-emerald-400">EXCEL</span>
+                <span className="px-2 py-0.5 rounded-lg bg-orange-50 dark:bg-orange-950/60 border border-orange-200/60 dark:border-orange-900/60 font-mono text-[10px] font-extrabold text-orange-600 dark:text-orange-400">PPT</span>
+                <span className="px-2 py-0.5 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-900/60 font-mono text-[10px] font-extrabold text-amber-600 dark:text-amber-400">JPG/PNG</span>
               </div>
-              <div className="flex items-center gap-1 text-tertiary dark:text-emerald-400 font-medium text-[11px] sm:text-xs">
-                <span className="material-symbols-outlined text-[15px]">verified_user</span>
+              <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold text-[11px] sm:text-xs">
+                <span className="material-symbols-outlined text-[16px]">verified_user</span>
                 <span>{lang === 'id' ? 'Pembersihan otomatis < 2 jam' : 'Auto cleanup < 2 hours'}</span>
               </div>
             </div>
@@ -758,14 +765,14 @@ export const HomePage = ({ onSelectTool }) => {
         <aside className="lg:col-span-4 space-y-4">
           
           {/* Widget 1: Penghematan Ruang Hari Ini */}
-          <div className="bg-surface-card dark:bg-[#151928] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-5 relative overflow-hidden transition-colors">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+          <div className="bg-white/90 dark:bg-[#131728]/90 backdrop-blur-xl rounded-3xl border border-emerald-500/20 dark:border-emerald-500/30 shadow-lg p-5 sm:p-6 relative overflow-hidden transition-all hover:border-emerald-500/40">
+            <div className="flex items-center justify-between mb-3.5">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-100 to-teal-50 dark:from-emerald-950/60 dark:to-teal-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs">
                   <span className="material-symbols-outlined text-[20px]">save</span>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-navy-deep dark:text-white">
+                  <h3 className="text-sm font-extrabold text-navy-deep dark:text-white">
                     {lang === 'id' ? 'Penghematan Ruang Hari Ini' : 'Today\'s Storage Saved'}
                   </h3>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400">
@@ -773,49 +780,50 @@ export const HomePage = ({ onSelectTool }) => {
                   </p>
                 </div>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold">
-                LIVE ID
+              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-extrabold border border-emerald-200/60 dark:border-emerald-800/60 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>LIVE ID</span>
               </span>
             </div>
 
-            <div className="bg-slate-50 dark:bg-slate-900/60 rounded-xl p-3 border border-slate-200/70 dark:border-slate-700/80 space-y-2.5">
+            <div className="bg-slate-50/80 dark:bg-slate-900/60 rounded-2xl p-4 border border-slate-200/70 dark:border-slate-800/80 space-y-3">
               <div className="flex items-baseline justify-between">
                 <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">
                   {lang === 'id' ? 'Kapasitas Diselamatkan:' : 'Capacity Saved:'}
                 </span>
-                <span className="text-2xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
+                <span className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent font-mono">
                   {savedStorageGB.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} GB
                 </span>
               </div>
 
               {/* Progress representation */}
-              <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
-                <div className="bg-emerald-500 h-full rounded-full transition-all duration-500" style={{ width: '86.4%' }}></div>
+              <div className="w-full bg-slate-200/80 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-slate-700">
+                <div className="bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-400 h-full rounded-full transition-all duration-500 shadow-sm" style={{ width: '86.4%' }}></div>
               </div>
 
               <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                <span>{lang === 'id' ? 'Efisiensi Rata-rata:' : 'Avg Efficiency:'} <strong>86.4%</strong></span>
+                <span>{lang === 'id' ? 'Efisiensi Rata-rata:' : 'Avg Efficiency:'} <strong className="text-emerald-600 dark:text-emerald-400 font-bold">86.4%</strong></span>
                 <span>{lang === 'id' ? 'Dokumen:' : 'Docs:'} <strong>34,920</strong></span>
               </div>
             </div>
 
-            <div className="mt-3 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-800">
-              <span className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-[15px] text-emerald-600">bolt</span>
+            <div className="mt-3.5 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 pt-2.5 border-t border-slate-100 dark:border-slate-800">
+              <span className="flex items-center gap-1.5 text-[11px] sm:text-xs">
+                <span className="material-symbols-outlined text-[16px] text-emerald-600">bolt</span>
                 {lang === 'id' ? 'Proses instan tanpa beban memori PC' : 'Instant processing with zero PC memory burden'}
               </span>
             </div>
           </div>
 
           {/* Widget 2: Status Server Enkripsi Aktif */}
-          <div className="bg-surface-card dark:bg-[#151928] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-5 transition-colors">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+          <div className="bg-white/90 dark:bg-[#131728]/90 backdrop-blur-xl rounded-3xl border border-indigo-500/20 dark:border-indigo-500/30 shadow-lg p-5 sm:p-6 transition-all hover:border-indigo-500/40">
+            <div className="flex items-center justify-between mb-3.5">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-100 to-blue-50 dark:from-indigo-950/60 dark:to-blue-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs">
                   <span className="material-symbols-outlined text-[20px]">security</span>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-navy-deep dark:text-white">
+                  <h3 className="text-sm font-extrabold text-navy-deep dark:text-white">
                     {lang === 'id' ? 'Status Server Enkripsi' : 'Encryption Server Status'}
                   </h3>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400">
@@ -823,31 +831,31 @@ export const HomePage = ({ onSelectTool }) => {
                   </p>
                 </div>
               </div>
-              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             </div>
 
             <div className="space-y-2 text-xs">
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800">
-                <span className="text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[15px] text-indigo-600 dark:text-indigo-400">lock_open</span>
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800">
+                <span className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[16px] text-indigo-600 dark:text-indigo-400">lock_open</span>
                   {lang === 'id' ? 'Protokol TLS / SSL' : 'TLS / SSL Protocol'}
                 </span>
-                <span className="font-mono font-bold text-slate-800 dark:text-slate-200">TLS 1.3 (256-Bit)</span>
+                <span className="font-mono font-extrabold text-slate-800 dark:text-slate-200">TLS 1.3 (256-Bit)</span>
               </div>
 
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800">
-                <span className="text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[15px] text-indigo-600 dark:text-indigo-400">auto_delete</span>
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800">
+                <span className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[16px] text-indigo-600 dark:text-indigo-400">auto_delete</span>
                   {lang === 'id' ? 'Pembersihan Cache' : 'Cache Cleanup'}
                 </span>
-                <span className="font-mono font-bold text-slate-800 dark:text-slate-200">
+                <span className="font-mono font-extrabold text-slate-800 dark:text-slate-200">
                   {lang === 'id' ? 'Tiap 120 Menit' : 'Every 120 Mins'}
                 </span>
               </div>
 
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800">
-                <span className="text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[15px] text-indigo-600 dark:text-indigo-400">policy</span>
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800">
+                <span className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[16px] text-indigo-600 dark:text-indigo-400">policy</span>
                   {lang === 'id' ? 'Log & Kebijakan' : 'Audit Policy'}
                 </span>
                 <span className="font-bold text-emerald-600 dark:text-emerald-400">100% Zero-Log Audit</span>
@@ -886,43 +894,43 @@ export const HomePage = ({ onSelectTool }) => {
 
         {/* TOOL CARDS GRID */}
         {filteredTools.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4" id="toolCardsContainer">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5 sm:gap-5" id="toolCardsContainer">
             {filteredTools.map((tool) => (
               <div
                 key={tool.id + '-' + tool.name}
                 onClick={() => onSelectTool(tool.id, [])}
-                className="tool-card group bg-surface-card dark:bg-[#151928] rounded-xl border border-slate-200/90 dark:border-slate-800 hover:border-primary dark:hover:border-primary p-3.5 sm:p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between cursor-pointer active:scale-[0.98]"
+                className="tool-card card-lift group bg-white/90 dark:bg-[#131728]/90 backdrop-blur-md rounded-2xl border border-slate-200/90 dark:border-slate-800 hover:border-primary/50 dark:hover:border-primary/50 p-4 sm:p-5 shadow-2xs transition-all duration-300 flex flex-col justify-between cursor-pointer active:scale-[0.98]"
               >
                 <div>
-                  <div className="flex items-start justify-between gap-2 mb-2.5 sm:mb-3">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform ${tool.iconBg}`}>
+                  <div className="flex items-start justify-between gap-2 mb-3">
+                    <div className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-xs ${tool.iconBg}`}>
                       <span className="material-symbols-outlined text-[24px]">{tool.icon}</span>
                     </div>
                     <div className="flex flex-col items-end gap-1">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${tool.badgeColor}`}>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold font-mono tracking-wider shadow-2xs ${tool.badgeColor}`}>
                         {tool.badge}
                       </span>
-                      <span className="text-[10px] text-slate-400 font-mono">{tool.speed}</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono font-medium">{tool.speed}</span>
                     </div>
                   </div>
 
-                  <h3 className="text-sm font-bold text-navy-deep dark:text-white group-hover:text-primary transition-colors flex items-center justify-between">
+                  <h3 className="text-[15px] font-extrabold text-navy-deep dark:text-white group-hover:text-primary transition-colors flex items-center justify-between">
                     <span>{tool.name}</span>
-                    <span className="material-symbols-outlined text-[16px] text-slate-300 dark:text-slate-600 group-hover:text-primary transition-colors">
+                    <span className="material-symbols-outlined text-[18px] text-slate-300 dark:text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all">
                       arrow_forward
                     </span>
                   </h3>
                   
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
                     {tool.desc}
                   </p>
                 </div>
 
                 <div 
-                  className="mt-3.5 sm:mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2"
+                  className="mt-4 pt-3.5 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <label className="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2.5 sm:py-2 px-3 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-primary dark:hover:bg-primary text-slate-700 dark:text-slate-200 hover:text-white text-xs font-bold transition-all active:scale-95 shadow-2xs">
+                  <label className="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-primary dark:hover:bg-primary text-slate-700 dark:text-slate-200 hover:text-white text-xs font-bold transition-all active:scale-95 shadow-2xs">
                     <span className="material-symbols-outlined text-[16px]">upload_file</span>
                     <span>{lang === 'id' ? 'Pilih File' : 'Pick File'}</span>
                     <input
@@ -937,7 +945,7 @@ export const HomePage = ({ onSelectTool }) => {
                   <button
                     type="button"
                     onClick={() => onSelectTool(tool.id, [])}
-                    className="w-9 h-9 sm:w-8 sm:h-8 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors cursor-pointer active:scale-95"
+                    className="w-9 h-9 rounded-xl border border-slate-200/90 dark:border-slate-700 hover:border-primary hover:text-primary dark:hover:text-rose-400 text-slate-400 flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-2xs"
                     title={lang === 'id' ? 'Buka Ruang Kerja Alat' : 'Open Workspace'}
                   >
                     <span className="material-symbols-outlined text-[18px]">tune</span>
@@ -948,7 +956,7 @@ export const HomePage = ({ onSelectTool }) => {
           </div>
         ) : (
           /* No match fallback message */
-          <div className="py-12 text-center bg-surface-card dark:bg-[#151928] rounded-xl border border-slate-200 dark:border-slate-800 mt-4">
+          <div className="py-12 text-center bg-white/90 dark:bg-[#131728]/90 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-slate-800 mt-4 shadow-sm">
             <span className="material-symbols-outlined text-4xl text-slate-400 mb-2">find_in_page</span>
             <h4 className="text-base font-bold text-navy-deep dark:text-white">
               {lang === 'id' ? 'Tidak menemukan alat yang sesuai' : 'No matching tools found'}
@@ -966,7 +974,7 @@ export const HomePage = ({ onSelectTool }) => {
                 const searchEl = document.getElementById('globalToolSearch');
                 if (searchEl) searchEl.value = '';
               }}
-              className="mt-3 px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg hover:bg-crimson-dark transition-colors cursor-pointer"
+              className="mt-3 px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-crimson-dark transition-all shadow-md active:scale-95 cursor-pointer"
             >
               {lang === 'id' ? 'Reset Filter & Tampilkan Semua' : 'Reset Filter & Show All'}
             </button>
@@ -975,17 +983,17 @@ export const HomePage = ({ onSelectTool }) => {
       </section>
 
       {/* 4. WORKFLOW QUICK BENCHMARK STRIP */}
-      <section className="bg-surface-card dark:bg-[#151928] rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xs transition-colors">
+      <section className="bg-white/90 dark:bg-[#131728]/90 backdrop-blur-xl rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-sm transition-all">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100 dark:divide-slate-800">
-          <div className="flex items-start gap-3.5 pt-4 md:pt-0">
-            <div className="w-10 h-10 rounded-xl bg-crimson-glow text-primary dark:bg-rose-950/60 dark:text-rose-400 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[22px]">memory</span>
+          <div className="flex items-start gap-4 pt-4 md:pt-0">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-rose-100 to-primary/10 text-primary dark:bg-rose-950/60 dark:text-rose-400 flex items-center justify-center shrink-0 shadow-xs">
+              <span className="material-symbols-outlined text-[24px]">memory</span>
             </div>
             <div>
-              <h4 className="text-sm font-bold text-navy-deep dark:text-white">
+              <h4 className="text-sm font-extrabold text-navy-deep dark:text-white">
                 {lang === 'id' ? 'WebAssembly Multi-Core' : 'WebAssembly Multi-Core'}
               </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 {lang === 'id'
                   ? 'Eksekusi kompresi dan rotasi dokumen dijalankan langsung via teknologi WebAssembly di CPU peramban tanpa antrean server.'
                   : 'Document operations execute client-side via optimized WebAssembly algorithms directly on your CPU.'}
@@ -993,15 +1001,15 @@ export const HomePage = ({ onSelectTool }) => {
             </div>
           </div>
 
-          <div className="flex items-start gap-3.5 pt-4 md:pt-0 md:pl-6">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[22px]">shield_lock</span>
+          <div className="flex items-start gap-4 pt-4 md:pt-0 md:pl-6">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-100 to-teal-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 flex items-center justify-center shrink-0 shadow-xs">
+              <span className="material-symbols-outlined text-[24px]">shield_lock</span>
             </div>
             <div>
-              <h4 className="text-sm font-bold text-navy-deep dark:text-white">
+              <h4 className="text-sm font-extrabold text-navy-deep dark:text-white">
                 {lang === 'id' ? 'Kerahasiaan Dokumen Terjamin' : 'Confidential Data Sandbox'}
               </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 {lang === 'id'
                   ? 'Seluruh file diproses dalam lingkungan Sandbox memori tertutup. Tidak ada konten teks atau lampiran yang diindeks model AI.'
                   : 'Files are processed inside isolated memory sandboxes. Zero user documents are used for model training.'}
@@ -1009,15 +1017,15 @@ export const HomePage = ({ onSelectTool }) => {
             </div>
           </div>
 
-          <div className="flex items-start gap-3.5 pt-4 md:pt-0 md:pl-6">
-            <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[22px]">devices</span>
+          <div className="flex items-start gap-4 pt-4 md:pt-0 md:pl-6">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-100 to-blue-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400 flex items-center justify-center shrink-0 shadow-xs">
+              <span className="material-symbols-outlined text-[24px]">devices</span>
             </div>
             <div>
-              <h4 className="text-sm font-bold text-navy-deep dark:text-white">
+              <h4 className="text-sm font-extrabold text-navy-deep dark:text-white">
                 {lang === 'id' ? 'Kompatibel di Semua OS' : 'Universal Device Compatibility'}
               </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 {lang === 'id'
                   ? 'Berjalan responsif di Windows, macOS, Linux, ChromeOS, iOS, maupun ponsel Android tanpa wajib instal APK/software.'
                   : 'Seamlessly functions across Windows, macOS, Linux, ChromeOS, iOS, and Android without installation.'}

@@ -115,7 +115,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
   const isAllOpen = activeMenu === 'all';
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-surface-card/95 dark:bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 shadow-xs transition-colors duration-200 select-none">
+    <header className="sticky top-0 w-full z-50 bg-white/90 dark:bg-[#0c101c]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-xs transition-colors duration-200 select-none">
       <div className="max-w-[1440px] mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand & Status Tag */}
         <div className="flex items-center gap-4 shrink-0">
@@ -123,13 +123,13 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             onClick={handleBrandClick}
             className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-primary flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-primary to-rose-600 flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform">
               <span className="material-symbols-outlined text-white text-[19px] sm:text-[22px]">picture_as_pdf</span>
             </div>
             <div className="flex flex-col">
               <span className="text-lg sm:text-xl font-extrabold tracking-tight text-navy-deep dark:text-white leading-none flex items-center gap-1.5">
                 Klik<span className="text-primary">PDF</span>
-                <span className="hidden sm:inline-flex text-[10px] font-bold px-1.5 py-0.5 rounded bg-crimson-glow text-primary uppercase font-mono tracking-wider">PRO TOOLS</span>
+                <span className="hidden sm:inline-flex text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-primary dark:text-rose-400 border border-rose-200/60 dark:border-rose-900/60 uppercase font-mono tracking-wider">PRO TOOLS</span>
               </span>
               <span className="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">Direct Action Matrix</span>
             </div>
@@ -201,7 +201,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-primary hover:bg-crimson-dark text-white text-[11px] sm:text-xs font-bold shadow-md shadow-primary/20 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-rose-600 hover:from-crimson-dark hover:to-primary text-white text-[11px] sm:text-xs font-bold shadow-md shadow-primary/20 active:scale-95 transition-all cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px] sm:text-[17px]">flash_on</span>
             <span className="hidden sm:inline">{lang === 'id' ? 'Alat Kilat' : 'Instant Tools'}</span>
@@ -302,9 +302,9 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             <button
               onClick={() => setIsLoginModalOpen(true)}
               title={lang === 'id' ? 'Masuk dengan Google' : 'Sign in with Google'}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-primary text-xs font-bold border border-slate-200 dark:border-slate-700 hover:border-primary/40 transition-all shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:text-primary dark:hover:text-primary text-xs font-bold border border-slate-200/90 dark:border-slate-700 hover:border-primary/40 transition-all shadow-2xs hover:shadow-md active:scale-95 cursor-pointer"
             >
-              <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
