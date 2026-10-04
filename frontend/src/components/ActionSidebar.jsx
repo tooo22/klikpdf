@@ -57,6 +57,63 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
           </div>
         )}
 
+        {tool.id === 'compress' && (
+          <div className="space-y-4">
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">
+              {lang === 'id' ? 'Tingkat Kompresi' : 'Compression Level'}
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => onOptionsChange({ ...options, level: 'medium' })}
+                className={`p-3 rounded-xl border text-xs font-bold transition-all ${
+                  (options.level || 'medium') === 'medium'
+                    ? 'border-[#38B44A] bg-[#38B44A]/10 text-[#38B44A] ring-2 ring-[#38B44A]/30'
+                    : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-300 hover:border-gray-400'
+                }`}
+              >
+                🌱 {lang === 'id' ? 'Sedang' : 'Medium'}
+                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
+                  {lang === 'id' ? 'Kualitas Bagus' : 'Good Quality'}
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onOptionsChange({ ...options, level: 'high' })}
+                className={`p-3 rounded-xl border text-xs font-bold transition-all ${
+                  options.level === 'high'
+                    ? 'border-[#38B44A] bg-[#38B44A]/10 text-[#38B44A] ring-2 ring-[#38B44A]/30'
+                    : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-300 hover:border-gray-400'
+                }`}
+              >
+                ⚡ {lang === 'id' ? 'Tinggi' : 'Extreme'}
+                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
+                  {lang === 'id' ? 'Ukuran Terkecil' : 'Smallest Size'}
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {tool.id === 'page-numbers' && (
+          <div className="space-y-4">
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">
+              {lang === 'id' ? 'Posisi Nomor Halaman' : 'Page Number Position'}
+            </label>
+            <select
+              value={options.position || 'bottom-right'}
+              onChange={(e) => onOptionsChange({ ...options, position: e.target.value })}
+              className="w-full bg-white dark:bg-[#161619] border border-gray-300 dark:border-[#3F3F46] text-gray-900 dark:text-white rounded-lg p-2.5 text-sm font-medium focus:ring-2 focus:ring-[#E5322D] outline-none cursor-pointer"
+            >
+              <option value="bottom-right">{lang === 'id' ? 'Kanan Bawah' : 'Bottom Right'}</option>
+              <option value="bottom-center">{lang === 'id' ? 'Tengah Bawah' : 'Bottom Center'}</option>
+              <option value="bottom-left">{lang === 'id' ? 'Kiri Bawah' : 'Bottom Left'}</option>
+              <option value="top-right">{lang === 'id' ? 'Kanan Atas' : 'Top Right'}</option>
+              <option value="top-center">{lang === 'id' ? 'Tengah Atas' : 'Top Center'}</option>
+            </select>
+          </div>
+        )}
+
         {tool.id === 'hd-image' && (
           <div className="space-y-4">
             <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">

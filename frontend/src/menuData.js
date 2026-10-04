@@ -74,7 +74,7 @@ export const ALL_TOOLS_COLUMNS = [
     titleId: "EDIT PDF",
     items: [
       { id: "rotate", name: "Rotate PDF", nameId: "Putar PDF", icon: "RotateCw", color: "#9C27B0" },
-      { id: "watermark", name: "Add page numbers", nameId: "Nomor halaman", icon: "Hash", color: "#9C27B0" },
+      { id: "page-numbers", name: "Add page numbers", nameId: "Nomor halaman", icon: "Hash", color: "#9C27B0" },
       { id: "watermark", name: "Add watermark", nameId: "Cap air (Watermark)", icon: "Stamp", color: "#9C27B0" },
       { id: "rotate", name: "Crop PDF", nameId: "Potong PDF", icon: "Crop", color: "#9C27B0" },
       { id: "watermark", name: "Edit PDF", nameId: "Edit teks PDF", icon: "PenTool", color: "#9C27B0" },

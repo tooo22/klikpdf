@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KlikPDF - Direct Action Tool Matrix & Instant Utility PDF Online</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .tool-active-filter {
+      background-color: #b80035 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(184, 0, 53, 0.25);
+    }
+    .custom-dashed-border {
+      background-image: repeating-linear-gradient(0deg, #e11d48, #e11d48 10px, transparent 10px, transparent 20px), repeating-linear-gradient(90deg, #e11d48, #e11d48 10px, transparent 10px, transparent 20px), repeating-linear-gradient(180deg, #e11d48, #e11d48 10px, transparent 10px, transparent 20px), repeating-linear-gradient(270deg, #e11d48, #e11d48 10px, transparent 10px, transparent 20px);
+      background-size: 2px 100%, 100% 2px, 2px 100%, 100% 2px;
+      background-position: 0 0, 0 0, 100% 0, 0 100%;
+      background-repeat: no-repeat;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-card": "#FFFFFF",
+            "crimson-dark": "#BE123C",
+            "tertiary": "#006847",
+            "secondary": "#5b598c",
+            "surface-container-high": "#dce9ff",
+            "outline-variant": "#e5bdbe",
+            "on-secondary-container": "#514f81",
+            "surface-dim": "#cbdbf5",
+            "secondary-fixed": "#e3dfff",
+            "on-primary-fixed": "#40000c",
+            "primary-fixed-dim": "#ffb3b6",
+            "tertiary-fixed-dim": "#4edea3",
+            "surface-bright": "#f8f9ff",
+            "secondary-fixed-dim": "#c4c1fb",
+            "surface-container-low": "#eff4ff",
+            "primary-fixed": "#ffdada",
+            "on-surface-variant": "#5c3f40",
+            "crimson-primary": "#E11D48",
+            "on-error-container": "#93000a",
+            "inverse-primary": "#ffb3b6",
+            "crimson-glow": "#FFE4E6",
+            "surface": "#f8f9ff",
+            "error": "#ba1a1a",
+            "surface-bg": "#F8FAFC",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "inverse-surface": "#213145",
+            "primary-container": "#e11d48",
+            "tertiary-container": "#00845a",
+            "navy-deep": "#0F172A",
+            "on-secondary-fixed-variant": "#444173",
+            "surface-tint": "#be0037",
+            "secondary-container": "#c7c3fe",
+            "on-tertiary-fixed-variant": "#005236",
+            "navy-banner": "#1E1B4B",
+            "on-primary": "#ffffff",
+            "on-tertiary-container": "#eefff3",
+            "on-primary-fixed-variant": "#920028",
+            "coral-accent": "#EF4444",
+            "primary": "#b80035",
+            "on-background": "#0b1c30",
+            "on-surface": "#0b1c30",
+            "surface-container": "#e5eeff",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#002113",
+            "on-primary-container": "#fffaf9",
+            "outline": "#906f70",
+            "surface-container-highest": "#d3e4fe",
+            "background": "#f8f9ff",
+            "tertiary-fixed": "#6ffbbe",
+            "on-secondary-fixed": "#181445",
+            "border-subtle": "rgba(226, 232, 240, 0.8)",
+            "surface-container-lowest": "#ffffff",
+            "surface-variant": "#d3e4fe",
+            "success-emerald": "#10B981",
+            "error-container": "#ffdad6",
+            "on-tertiary": "#ffffff"
+          },
+          fontFamily: {
+            sans: ["Plus Jakarta Sans", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-sans text-on-surface antialiased selection:bg-crimson-glow selection:text-primary">
+<!-- TOP APP BAR / HEADER -->
+<header class="sticky top-0 w-full z-50 bg-surface-card/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+<!-- Brand & Status Tag -->
+<div class="flex items-center gap-4 shrink-0">
+<a class="flex items-center gap-2.5 group" href="/">
+<div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-white text-[22px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-extrabold tracking-tight text-navy-deep leading-none flex items-center gap-1.5">
+              Klik<span class="text-primary">PDF</span>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-crimson-glow text-primary uppercase font-mono tracking-wider">PRO TOOLS</span>
+</span>
+<span class="text-[11px] text-slate-500 font-medium tracking-wide">Direct Action Matrix</span>
+</div>
+</a>
+</div>
+<!-- Quick Search Bar (Direct Filter for 30+ Tools) -->
+<div class="flex-1 max-w-xl hidden md:block">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="w-full pl-10 pr-20 py-2 text-sm bg-surface-container-low/70 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-on-surface placeholder:text-slate-400" id="globalToolSearch" placeholder="Cari alat kilat (contoh: kompres, excel, gabung, tanda tangan)..." type="text"/>
+<div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1 pointer-events-none">
+<kbd class="px-1.5 py-0.5 text-[10px] font-mono font-semibold text-slate-500 bg-white border border-slate-200 rounded shadow-2xs">Ctrl</kbd>
+<kbd class="px-1.5 py-0.5 text-[10px] font-mono font-semibold text-slate-500 bg-white border border-slate-200 rounded shadow-2xs">K</kbd>
+</div>
+</div>
+</div>
+<!-- Actions & Server Ping -->
+<div class="flex items-center gap-3 shrink-0">
+<div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/60 text-emerald-800 text-xs font-semibold">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<span>Cloud Engine Aktif (~12ms)</span>
+</div>
+<div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-700 hover:text-primary transition-colors" href="/">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Riwayat File</span>
+</a>
+<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-crimson-dark text-white text-xs font-bold shadow-md shadow-primary/20 active:scale-95 transition-all" href="#matrixGrid">
+<span class="material-symbols-outlined text-[17px]">flash_on</span>
+<span>Alat Kilat</span>
+</a>
+</div>
+</div>
+</header>
+<!-- MAIN APPLICATION CONTENT -->
+<main class="max-w-[1440px] mx-auto px-4 sm:px-6 py-6 space-y-6">
+<!-- COMPACT HERO & CATEGORY BAR -->
+<section class="bg-gradient-to-r from-navy-banner via-navy-deep to-slate-900 rounded-2xl p-5 sm:p-7 text-white shadow-xl relative overflow-hidden">
+<!-- Glow Decor -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="space-y-2 max-w-2xl">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 text-white text-xs font-medium backdrop-blur-xs border border-white/10">
+<span class="material-symbols-outlined text-[14px] text-amber-400">offline_bolt</span>
+<span>Direct Action Matrix — Proses dokumen langsung di peramban tanpa antrean</span>
+</div>
+<h1 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
+            Pusat Pengolahan Dokumen PDF Cepat &amp; Mandiri
+          </h1>
+<p class="text-sm sm:text-base text-slate-300">
+            Pilih tindakan langsung, seret dokumen ke dropzone pintar terpadu, atau gunakan tombol unggah cepat pada setiap kartu modul di bawah.
+          </p>
+</div>
+<!-- Metric Badges Widget -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0">
+<div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/10 flex flex-col">
+<span class="text-[11px] text-slate-300 uppercase tracking-wider font-bold">Kecepatan Rata2</span>
+<span class="text-xl font-extrabold text-white mt-1">1.4 Detik</span>
+<span class="text-[10px] text-emerald-400 flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> Batch multi-core
+            </span>
+</div>
+<div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/10 flex flex-col">
+<span class="text-[11px] text-slate-300 uppercase tracking-wider font-bold">Enkripsi Privat</span>
+<span class="text-xl font-extrabold text-white mt-1">256-Bit SSL</span>
+<span class="text-[10px] text-emerald-400 flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">lock</span> Zero Data Storage
+            </span>
+</div>
+<div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/10 col-span-2 sm:col-span-1 flex flex-col">
+<span class="text-[11px] text-slate-300 uppercase tracking-wider font-bold">Biaya &amp; Kuota</span>
+<span class="text-xl font-extrabold text-amber-300 mt-1">100% Gratis</span>
+<span class="text-[10px] text-slate-300 mt-0.5">Tanpa Limitasi Harian</span>
+</div>
+</div>
+</div>
+<!-- Quick Category Segment Control Bar -->
+<div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-1.5" id="categoryFilterGroup">
+<button class="category-pill tool-active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5" data-category="all" type="button">
+<span class="material-symbols-outlined text-[16px]">apps</span>
+<span>Semua Alat (24)</span>
+</button>
+<button class="category-pill bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5" data-category="kompresi" type="button">
+<span class="material-symbols-outlined text-[16px]">compress</span>
+<span>Kompresi</span>
+</button>
+<button class="category-pill bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5" data-category="konversi" type="button">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+<span>Konversi</span>
+</button>
+<button class="category-pill bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5" data-category="edit" type="button">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+<span>Edit &amp; Tanda Tangan</span>
+</button>
+<button class="category-pill bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5" data-category="keamanan" type="button">
+<span class="material-symbols-outlined text-[16px]">shield</span>
+<span>Keamanan &amp; Sandi</span>
+</button>
+</div>
+<div class="text-xs text-slate-300 font-mono hidden md:flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>Filter Real-time Aktif</span>
+</div>
+</div>
+</section>
+<!-- CORE WORKSPACE: SMART DROPZONE & LIVE PERFORMANCE WIDGETS -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- CENTRAL SMART MULTI-FILE DROPZONE (8 Cols) -->
+<section class="lg:col-span-8 bg-surface-card rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 relative">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-crimson-glow text-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</div>
+<div>
+<h2 class="text-base font-bold text-navy-deep">Smart Unified Dropzone</h2>
+<p class="text-xs text-slate-500">Deteksi format instan &amp; rekomendasi tindakan otomatis</p>
+</div>
+</div>
+<span class="text-[11px] font-mono px-2 py-1 rounded bg-slate-100 text-slate-600 font-semibold">
+            Maks. 200 MB / batch
+          </span>
+</div>
+<!-- Interactive Drag & Drop Area -->
+<div class="relative border-2 border-dashed border-slate-300 hover:border-primary rounded-xl p-8 text-center bg-slate-50/60 hover:bg-crimson-glow/20 transition-all duration-200 cursor-pointer group flex flex-col items-center justify-center" id="smartDropArea">
+<input accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png" class="hidden" id="masterFileInput" multiple="" type="file"/>
+<div class="w-16 h-16 rounded-2xl bg-white shadow-md border border-slate-200/80 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 mb-3">
+<span class="material-symbols-outlined text-[34px]">cloud_upload</span>
+</div>
+<h3 class="text-base sm:text-lg font-bold text-navy-deep group-hover:text-primary transition-colors">
+            Tarik &amp; Lepas Dokumen Ke Sini
+          </h3>
+<p class="text-xs sm:text-sm text-slate-500 max-w-md mt-1 mb-4">
+            KlikPDF akan otomatis mendeteksi apakah file perlu <span class="font-semibold text-primary">dikompres</span>, <span class="font-semibold text-secondary">dikonversi</span>, atau <span class="font-semibold text-tertiary">digabungkan</span>.
+          </p>
+<div class="flex flex-wrap items-center justify-center gap-3">
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-crimson-dark text-white text-xs font-bold shadow-md shadow-primary/25 active:scale-95 transition-all" onclick="document.getElementById('masterFileInput').click()" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Pilih Dari Perangkat</span>
+</button>
+<div class="flex items-center gap-1.5 text-xs text-slate-600">
+<span class="text-slate-400">atau impor via:</span>
+<button class="px-2 py-1 bg-white border border-slate-200 rounded hover:bg-slate-100 transition-colors font-medium" type="button">Google Drive</button>
+<button class="px-2 py-1 bg-white border border-slate-200 rounded hover:bg-slate-100 transition-colors font-medium" type="button">Dropbox</button>
+</div>
+</div>
+<!-- Live Detection Notification Banner (Dynamic State Mockup) -->
+<div class="w-full mt-5 pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-between text-xs text-slate-500" id="dropzonePrompt">
+<div class="flex items-center gap-2">
+<span class="font-bold text-slate-700">Dukungan:</span>
+<span class="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px] font-bold text-primary">PDF</span>
+<span class="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px]">WORD</span>
+<span class="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px]">EXCEL</span>
+<span class="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px]">POWERPOINT</span>
+<span class="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px]">JPG/PNG</span>
+</div>
+<div class="flex items-center gap-1 text-tertiary font-medium">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span>Pembersihan berkas otomatis &lt; 2 jam</span>
+</div>
+</div>
+</div>
+<!-- Detected File Queue Preview Container (Hidden by default, ready for file drag) -->
+<div class="hidden mt-4 space-y-2" id="fileQueueContainer">
+<div class="flex items-center justify-between text-xs font-bold text-slate-700 pb-1">
+<span>Berkas Terdeteksi (Siap Diproses):</span>
+<button class="text-primary hover:underline text-[11px]" id="clearQueueBtn" type="button">Batal Semua</button>
+</div>
+<div class="space-y-1.5" id="fileQueueList"></div>
+</div>
+</section>
+<!-- LIVE PERFORMANCE & TELEMETRY WIDGETS (4 Cols) -->
+<aside class="lg:col-span-4 space-y-4">
+<!-- Widget 1: Penghematan Ruang Hari Ini -->
+<div class="bg-surface-card rounded-2xl border border-slate-200 shadow-sm p-5 relative overflow-hidden">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">save</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-navy-deep">Penghematan Ruang Hari Ini</h3>
+<p class="text-[11px] text-slate-500">Kalkulasi real-time kompresi KlikPDF</p>
+</div>
+</div>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">LIVE ID</span>
+</div>
+<div class="bg-slate-50 rounded-xl p-3 border border-slate-200/70 space-y-2.5">
+<div class="flex items-baseline justify-between">
+<span class="text-xs text-slate-600 font-medium">Kapasitas Diselamatkan:</span>
+<span class="text-2xl font-black text-emerald-600 font-mono" id="savedStorageCounter">1,482.6 GB</span>
+</div>
+<!-- Progress representation -->
+<div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full rounded-full" style="width: 86%;"></div>
+</div>
+<div class="flex justify-between text-[11px] text-slate-500 font-mono">
+<span>Efisiensi Rata-rata: <strong>86.4%</strong></span>
+<span>Dokumen: <strong>34,920</strong></span>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-100">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-emerald-600">bolt</span>
+              Proses instan tanpa beban memori PC
+            </span>
+</div>
+</div>
+<!-- Widget 2: Status Server Enkripsi Aktif -->
+<div class="bg-surface-card rounded-2xl border border-slate-200 shadow-sm p-5">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">security</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-navy-deep">Status Server Enkripsi</h3>
+<p class="text-[11px] text-slate-500">Kluster Cloud Jakarta &amp; Surabaya</p>
+</div>
+</div>
+<span class="flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+</div>
+<div class="space-y-2 text-xs">
+<div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+<span class="text-slate-600 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-indigo-600">lock_open</span>
+                Protokol TLS / SSL
+              </span>
+<span class="font-mono font-bold text-slate-800">TLS 1.3 (256-Bit)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+<span class="text-slate-600 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-indigo-600">auto_delete</span>
+                Pembersihan Cache
+              </span>
+<span class="font-mono font-bold text-slate-800">Tiap 120 Menit</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+<span class="text-slate-600 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-indigo-600">policy</span>
+                Log &amp; Kebijakan
+              </span>
+<span class="font-bold text-emerald-600">100% Zero-Log Audit</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- FULL INTERACTIVE ACTION TOOL MATRIX (Grid with Direct File Triggers) -->
+<section class="pt-4" id="matrixGrid">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5">
+<div>
+<div class="inline-flex items-center gap-1.5 text-xs font-bold text-primary uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+            Katalog Alat Lengkap &amp; Aksi Langsung
+          </div>
+<h2 class="text-xl sm:text-2xl font-black text-navy-deep mt-0.5">
+            Matriks Perkakas PDF Interaktif
+          </h2>
+<p class="text-xs sm:text-sm text-slate-500">Setiap modul dilengkapi trigger langsung untuk memilih file dan memulai pengolahan seketika.</p>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-500 font-mono">
+<span id="toolCountLabel">Menampilkan 12 Modul Populer</span>
+</div>
+</div>
+<!-- TOOL CARDS GRID -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="toolCardsContainer">
+<!-- Card 1: Kompres PDF -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="kompresi" data-keywords="kompres kecil perkecil compress shrink ukuran mb kb">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-crimson-glow text-primary flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">compress</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-bold font-mono">HEMAT 88%</span>
+<span class="text-[10px] text-slate-400 font-mono">~1.2 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Kompres PDF Kilat
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">bolt</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Kecilkan volume dokumen hingga 88% dengan tetap menjaga ketajaman font &amp; grafik.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="Kompres PDF Kilat" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Shortcut Pengaturan" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Gabungkan PDF -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="edit" data-keywords="gabung susun merge combine gabungkan satukan urutkan">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-indigo-50 text-secondary flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">call_merge</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 text-[10px] font-bold font-mono">MULTI-PAGE</span>
+<span class="text-[10px] text-slate-400 font-mono">~0.8 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Gabungkan PDF
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Satukan lembaran acak atau beberapa berkas PDF terpisah menjadi 1 file rapi siap cetak.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="Gabungkan PDF" multiple="" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Atur Urutan" type="button">
+<span class="material-symbols-outlined text-[18px]">reorder</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Pisahkan / Split PDF -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="edit" data-keywords="pisah split potong ekstrak halam pisahkan halaman">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">call_split</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-bold font-mono">SELEKTIF</span>
+<span class="text-[10px] text-slate-400 font-mono">~1.0 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Pisahkan PDF
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Ambil rentang halaman tertentu (misal: hal 3-8) atau pecah dokumen jadi file terpisah.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="Pisahkan PDF" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Pilih Rentang" type="button">
+<span class="material-symbols-outlined text-[18px]">content_cut</span>
+</button>
+</div>
+</div>
+<!-- Card 4: PDF ke Word (DOCX) -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="konversi" data-keywords="pdf ke word docx doc convert konversi ubah microsoft word">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">description</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[10px] font-bold font-mono">OCR PRECISE</span>
+<span class="text-[10px] text-slate-400 font-mono">~2.2 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              PDF ke Word (DOCX)
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Konversi dokumen ke format Word yang dapat disunting penuh tanpa merusak margin &amp; tata letak.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="PDF ke Word" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Opsi OCR" type="button">
+<span class="material-symbols-outlined text-[18px]">document_scanner</span>
+</button>
+</div>
+</div>
+<!-- Card 5: PDF ke Excel (XLSX) -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="konversi" data-keywords="pdf ke excel xlsx xls tabel angka data spread sheet">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-50 text-tertiary flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">table_view</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-bold font-mono">AUTO-TABLE</span>
+<span class="text-[10px] text-slate-400 font-mono">~1.8 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              PDF ke Excel (XLSX)
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Pindai dan ekstrak tabel neraca, faktur belanja, atau laporan keuangan ke lembar kerja siap olah.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="PDF ke Excel" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Deteksi Kolom" type="button">
+<span class="material-symbols-outlined text-[18px]">view_column</span>
+</button>
+</div>
+</div>
+<!-- Card 6: PDF ke Foto (JPG/PNG) -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="konversi" data-keywords="pdf ke jpg png gambar foto image convert ubah">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">photo_library</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-amber-50 text-amber-700 text-[10px] font-bold font-mono">300 DPI</span>
+<span class="text-[10px] text-slate-400 font-mono">~1.5 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              PDF ke JPG / PNG
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Ekstrak lembar PDF menjadi gambar resolusi tinggi tanpa kompresi visual yang merusak ketajaman.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="PDF ke Gambar" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Pilihan Resolusi" type="button">
+<span class="material-symbols-outlined text-[18px]">high_quality</span>
+</button>
+</div>
+</div>
+<!-- Card 7: Word / Foto ke PDF -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="konversi" data-keywords="word ke pdf docx foto jpg convert jadikan pdf ubah jadi pdf">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">transform</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-teal-50 text-teal-700 text-[10px] font-bold font-mono">UNIVERSAL</span>
+<span class="text-[10px] text-slate-400 font-mono">~1.4 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Word &amp; Foto ke PDF
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Jadikan berkas Word, Excel, PowerPoint, atau galeri gambar menjadi dokumen PDF standar internasional.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.png" class="hidden card-file-trigger" data-tool="Word ke PDF" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Pengaturan Halaman" type="button">
+<span class="material-symbols-outlined text-[18px]">aspect_ratio</span>
+</button>
+</div>
+</div>
+<!-- Card 8: Tanda Tangan PDF (E-Sign) -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="edit" data-keywords="tanda tangan sign e-sign paraf digital draw surat berkas">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-rose-50 text-crimson-primary flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">draw</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-rose-50 text-crimson-primary text-[10px] font-bold font-mono">E-SIGN</span>
+<span class="text-[10px] text-slate-400 font-mono">~1.0 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Tanda Tangan Digital
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Bubuhkan paraf, tanda tangan basah, stempel cap perusahaan, atau inisial langsung di browser.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="Tanda Tangan Digital" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Manajemen TTD" type="button">
+<span class="material-symbols-outlined text-[18px]">gesture</span>
+</button>
+</div>
+</div>
+<!-- Card 9: Kunci PDF (Enkripsi Sandi) -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="keamanan" data-keywords="kunci lock password kata sandi enkripsi proteksi secure">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">lock</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-amber-50 text-amber-800 text-[10px] font-bold font-mono">AES-256</span>
+<span class="text-[10px] text-slate-400 font-mono">~0.7 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Kunci &amp; Proteksi Sandi
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Larang akses tidak berizin dengan enkripsi kata sandi kuat pada dokumen sensitif dan perbankan.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="Kunci PDF" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Set Sandi" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+</button>
+</div>
+</div>
+<!-- Card 10: Buka Sandi PDF -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="keamanan" data-keywords="buka sandi unlock password hilangkan sandi hapus enkripsi">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">lock_open</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-800 text-[10px] font-bold font-mono">UNLOCK</span>
+<span class="text-[10px] text-slate-400 font-mono">~0.6 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Buka Sandi PDF
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Hapus proteksi kata sandi pada dokumen sah agar mudah dicetak dan dibagikan kembali tanpa prompt.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="Buka Sandi PDF" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Instan Unlock" type="button">
+<span class="material-symbols-outlined text-[18px]">vpn_key_off</span>
+</button>
+</div>
+</div>
+<!-- Card 11: Putar & Atur Halaman -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="edit" data-keywords="putar rotasi urutan hapus rearrange delete page reorder">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">rotate_right</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-violet-50 text-violet-700 text-[10px] font-bold font-mono">VISUAL GRID</span>
+<span class="text-[10px] text-slate-400 font-mono">~0.5 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Rotasi &amp; Hapus Halaman
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Perbaiki lembar yang terbalik 90°/180° atau buang lembar kosong yang tidak dibutuhkan.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="Rotasi &amp; Atur Lembar" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Editor Lembar" type="button">
+<span class="material-symbols-outlined text-[18px]">view_module</span>
+</button>
+</div>
+</div>
+<!-- Card 12: Beri Watermark / Cap Sah -->
+<div class="tool-card group bg-surface-card rounded-xl border border-slate-200/90 hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between" data-category="keamanan" data-keywords="watermark cap tanda air stempel rahasia draft confidential">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="w-10 h-10 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">branding_watermark</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded bg-orange-50 text-orange-700 text-[10px] font-bold font-mono">STAMP</span>
+<span class="text-[10px] text-slate-400 font-mono">~1.1 dtk</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-navy-deep group-hover:text-primary transition-colors flex items-center justify-between">
+              Beri Tanda Air (Watermark)
+              <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>
+</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Tambahkan stempel teks kustom atau logo transparan seperti "RAHASIA", "DRAFT", atau hak cipta.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+<label class="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 hover:bg-primary text-slate-700 hover:text-white text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Pilih File</span>
+<input accept=".pdf" class="hidden card-file-trigger" data-tool="Watermark PDF" type="file"/>
+</label>
+<button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors" title="Konfigurasi Cap" type="button">
+<span class="material-symbols-outlined text-[18px]">format_shapes</span>
+</button>
+</div>
+</div>
+</div>
+<!-- No match fallback message -->
+<div class="hidden py-12 text-center bg-surface-card rounded-xl border border-slate-200 mt-4" id="noMatchMessage">
+<span class="material-symbols-outlined text-4xl text-slate-400 mb-2">find_in_page</span>
+<h4 class="text-base font-bold text-navy-deep">Tidak menemukan alat yang sesuai</h4>
+<p class="text-xs text-slate-500 mt-1">Coba gunakan kata kunci umum seperti 'kompres', 'word', 'kunci', atau reset pencarian.</p>
+<button class="mt-3 px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg hover:bg-crimson-dark transition-colors" id="resetSearchBtn" type="button">
+          Reset Filter &amp; Tampilkan Semua
+        </button>
+</div>
+</section>
+<!-- WORKFLOW QUICK BENCHMARK STRIP -->
+<section class="bg-surface-card rounded-2xl border border-slate-200 p-6 shadow-2xs">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+<div class="flex items-start gap-3.5 pt-4 md:pt-0">
+<div class="w-10 h-10 rounded-xl bg-crimson-glow text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">memory</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-navy-deep">WebAssembly Multi-Core</h4>
+<p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Eksekusi kompresi dan rotasi dokumen dijalankan langsung via teknologi WebAssembly di CPU peramban tanpa antrean server.</p>
+</div>
+</div>
+<div class="flex items-start gap-3.5 pt-4 md:pt-0 md:pl-6">
+<div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">shield_lock</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-navy-deep">Kerahasiaan Dokumen Terjamin</h4>
+<p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Seluruh file diproses dalam lingkungan Sandbox memori tertutup. Tidak ada konten teks atau lampiran yang diindeks model AI.</p>
+</div>
+</div>
+<div class="flex items-start gap-3.5 pt-4 md:pt-0 md:pl-6">
+<div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">devices</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-navy-deep">Kompatibel di Semua OS</h4>
+<p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Berjalan responsif di Windows, macOS, Linux, ChromeOS, iOS, maupun ponsel Android tanpa wajib instal APK/software.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- COMPREHENSIVE UTILITY FOOTER -->
+<footer class="w-full bg-slate-900 text-slate-400 mt-12 border-t border-slate-800 text-xs">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 pt-10 pb-8">
+<!-- Top Grid -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 pb-10 border-b border-slate-800">
+<!-- Brand Summary -->
+<div class="col-span-2 space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<span class="text-lg font-extrabold text-white">Klik<span class="text-primary">PDF</span></span>
+<span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 font-mono text-[10px]">v2.6 Enterprise</span>
+</div>
+<p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+            Platform pengolah PDF mandiri berorientasi aksi langsung untuk para profesional kantor, instansi, mahasiswa, dan industri digital di Indonesia.
+          </p>
+<div class="flex items-center gap-3 pt-1">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 text-emerald-400 font-mono text-[11px]">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>Server ID-West: 99.98% Uptime</span>
+</div>
+</div>
+</div>
+<!-- Column 1: Aksi Kompresi & Gabung -->
+<div>
+<h5 class="text-white font-bold text-xs uppercase tracking-wider mb-3 font-mono">Modifikasi</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="#">Kompres PDF Kilat</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Gabungkan Beberapa PDF</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Pisahkan Halaman Dokumen</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Putar / Rotasi Lembar</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Urutkan Halaman Acak</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Hapus Halaman Tertentu</a></li>
+</ul>
+</div>
+<!-- Column 2: Konversi Lengkap -->
+<div>
+<h5 class="text-white font-bold text-xs uppercase tracking-wider mb-3 font-mono">Konversi Format</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="#">PDF ke Word (DOCX)</a></li>
+<li><a class="hover:text-white transition-colors" href="#">PDF ke Excel (XLSX)</a></li>
+<li><a class="hover:text-white transition-colors" href="#">PDF ke Gambar (JPG/PNG)</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Word ke PDF Online</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Excel ke PDF Rapi</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Foto / Scan ke PDF</a></li>
+</ul>
+</div>
+<!-- Column 3: Privasi & Bantuan -->
+<div>
+<h5 class="text-white font-bold text-xs uppercase tracking-wider mb-3 font-mono">Sistem &amp; Bantuan</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="#">Protokol Keamanan Data</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Kebijakan Zero-Retention</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Syarat &amp; Ketentuan Layanan</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Status &amp; API Server</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Pusat Panduan &amp; FAQ</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Laporkan Masalah Berkas</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Utility Bar -->
+<div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
+<div>
+          © 2025 KlikPDF. Dilindungi Hak Cipta. Infrastruktur Cloud Berlokasi di Indonesia.
+        </div>
+<div class="flex items-center gap-4">
+<a class="hover:text-slate-300 transition-colors" href="#">Privasi SSL 256-Bit</a>
+<span>•</span>
+<a class="hover:text-slate-300 transition-colors" href="#">Ketentuan Pemrosesan</a>
+<span>•</span>
+<a class="hover:text-slate-300 transition-colors" href="#">Dukungan Pengguna</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- INTERACTIVE UTILITY LOGIC SCRIPT -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Smart Dropzone Micro-Interactions & File Detection Mockup
+      const smartDropArea = document.getElementById('smartDropArea');
+      const masterFileInput = document.getElementById('masterFileInput');
+      const fileQueueContainer = document.getElementById('fileQueueContainer');
+      const fileQueueList = document.getElementById('fileQueueList');
+      const clearQueueBtn = document.getElementById('clearQueueBtn');
+      const savedStorageCounter = document.getElementById('savedStorageCounter');
+
+      let currentSavedBytes = 1482.6;
+
+      function renderQueuedFiles(files) {
+        if (!files || files.length === 0) return;
+        fileQueueContainer.classList.remove('hidden');
+        fileQueueList.innerHTML = '';
+
+        Array.from(files).forEach((file, index) => {
+          const extension = file.name.split('.').pop().toLowerCase();
+          const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+          
+          let recommendedTool = 'Kompres Dokumen';
+          let badgeColor = 'bg-crimson-glow text-primary';
+          
+          if (extension === 'pdf') {
+            recommendedTool = 'Kompres atau Gabungkan PDF';
+            badgeColor = 'bg-rose-100 text-rose-700';
+          } else if (['doc', 'docx'].includes(extension)) {
+            recommendedTool = 'Konversi ke PDF Instan';
+            badgeColor = 'bg-blue-100 text-blue-700';
+          } else if (['xls', 'xlsx'].includes(extension)) {
+            recommendedTool = 'Konversi Lembar Excel ke PDF';
+            badgeColor = 'bg-emerald-100 text-emerald-700';
+          } else if (['jpg', 'jpeg', 'png'].includes(extension)) {
+            recommendedTool = 'Satukan Gambar Jadi PDF';
+            badgeColor = 'bg-amber-100 text-amber-700';
+          }
+
+          const fileRow = document.createElement('div');
+          fileRow.className = 'flex items-center justify-between p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs animate-fadeIn';
+          fileRow.innerHTML = `
+            <div class="flex items-center gap-2.5 min-w-0 pr-3">
+              <span class="material-symbols-outlined text-slate-500 text-[20px] shrink-0">draft</span>
+              <div class="min-w-0">
+                <p class="font-bold text-navy-deep truncate">${file.name}</p>
+                <p class="text-[11px] text-slate-400 font-mono">${fileSizeMB} MB • ${extension.toUpperCase()}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeColor}">
+                Rekomendasi: ${recommendedTool}
+              </span>
+              <button type="button" class="process-single-file px-3 py-1 bg-primary hover:bg-crimson-dark text-white rounded font-bold text-xs transition-colors">
+                Mulai
+              </button>
+            </div>
+          `;
+          fileQueueList.appendChild(fileRow);
+        });
+
+        // Trigger dynamic storage simulation increment
+        currentSavedBytes += (files.length * 2.8);
+        if (savedStorageCounter) {
+          savedStorageCounter.innerText = currentSavedBytes.toFixed(1) + ' GB';
+        }
+      }
+
+      if (smartDropArea && masterFileInput) {
+        ['dragenter', 'dragover'].forEach(name => {
+          smartDropArea.addEventListener(name, (e) => {
+            e.preventDefault();
+            smartDropArea.classList.add('border-primary', 'bg-crimson-glow/30', 'scale-[1.005]');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(name => {
+          smartDropArea.addEventListener(name, (e) => {
+            e.preventDefault();
+            smartDropArea.classList.remove('border-primary', 'bg-crimson-glow/30', 'scale-[1.005]');
+          });
+        });
+
+        smartDropArea.addEventListener('drop', (e) => {
+          const dt = e.dataTransfer;
+          if (dt && dt.files.length > 0) {
+            renderQueuedFiles(dt.files);
+          }
+        });
+
+        masterFileInput.addEventListener('change', (e) => {
+          if (e.target.files.length > 0) {
+            renderQueuedFiles(e.target.files);
+          }
+        });
+
+        if (clearQueueBtn) {
+          clearQueueBtn.addEventListener('click', () => {
+            fileQueueContainer.classList.add('hidden');
+            fileQueueList.innerHTML = '';
+            masterFileInput.value = '';
+          });
+        }
+      }
+
+      // 2. Direct File Triggers inside individual Tool Cards
+      const cardFileTriggers = document.querySelectorAll('.card-file-trigger');
+      cardFileTriggers.forEach(input => {
+        input.addEventListener('change', (e) => {
+          const toolName = input.getAttribute('data-tool') || 'Alat PDF';
+          if (e.target.files.length > 0) {
+            const fileName = e.target.files[0].name;
+            alert(`[KlikPDF Direct Action]\nMemproses dokumen "${fileName}" langsung dengan alat: ${toolName}.`);
+            // Add to dropzone queue view for unified visibility
+            renderQueuedFiles(e.target.files);
+          }
+        });
+      });
+
+      // 3. Category Filter Navigation (Hero pills)
+      const categoryPills = document.querySelectorAll('.category-pill');
+      const toolCards = document.querySelectorAll('.tool-card');
+      const toolCountLabel = document.getElementById('toolCountLabel');
+      const noMatchMessage = document.getElementById('noMatchMessage');
+      const searchInput = document.getElementById('globalToolSearch');
+
+      function filterTools() {
+        const activePill = document.querySelector('.category-pill.tool-active-filter');
+        const selectedCategory = activePill ? activePill.getAttribute('data-category') : 'all';
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        let visibleCount = 0;
+
+        toolCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category') || '';
+          const cardKeywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+          const cardTitle = (card.querySelector('h3') ? card.querySelector('h3').innerText : '').toLowerCase();
+
+          const matchesCategory = (selectedCategory === 'all') || (cardCategory === selectedCategory);
+          const matchesQuery = (query === '') || cardKeywords.includes(query) || cardTitle.includes(query);
+
+          if (matchesCategory && matchesQuery) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        if (toolCountLabel) {
+          toolCountLabel.innerText = `Menampilkan ${visibleCount} Alat Tersedia`;
+        }
+
+        if (noMatchMessage) {
+          if (visibleCount === 0) {
+            noMatchMessage.classList.remove('hidden');
+          } else {
+            noMatchMessage.classList.add('hidden');
+          }
+        }
+      }
+
+      categoryPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          categoryPills.forEach(p => {
+            p.classList.remove('tool-active-filter');
+            p.classList.add('bg-white/10', 'hover:bg-white/20', 'text-white');
+          });
+          pill.classList.remove('bg-white/10', 'hover:bg-white/20', 'text-white');
+          pill.classList.add('tool-active-filter');
+          filterTools();
+        });
+      });
+
+      // 4. Quick Search Bar Interaction
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          filterTools();
+        });
+
+        // Ctrl+K Shortcut to focus search
+        window.addEventListener('keydown', (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+          }
+        });
+      }
+
+      // Reset search helper
+      const resetSearchBtn = document.getElementById('resetSearchBtn');
+      if (resetSearchBtn) {
+        resetSearchBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          const allPill = document.querySelector('.category-pill[data-category="all"]');
+          if (allPill) allPill.click();
+        });
+      }
+
+    });
+  </script>
+</body></html>

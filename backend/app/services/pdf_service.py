@@ -86,7 +86,7 @@ class PDFService:
         for page in doc:
             rect = page.rect
             point = fitz.Point(rect.width / 4, rect.height / 2)
-            page.insert_text(point, text, fontsize=40, color=(0.8, 0, 0), fill_opacity=opacity, rotate=45)
+            page.insert_text(point, text, fontsize=40, color=(0.8, 0, 0), fill_opacity=opacity, morph=(point, fitz.Matrix(45)))
         doc.save(output_path)
         doc.close()
         return output_path

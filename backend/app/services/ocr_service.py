@@ -45,8 +45,7 @@ class OCRService:
                 ocr_pdf.insert_pdf(temp_ocr_doc)
                 temp_ocr_doc.close()
             except Exception:
-                img_bytes = fitz.open()
-                pdf_b = fitz.open("pdf", page.get_text("pdf") or fitz.open().new_page().get_text("pdf"))
+                # Fallback if tesseract binary is absent on system or fails: retain existing page
                 ocr_pdf.insert_pdf(doc, from_page=page.number, to_page=page.number)
                 
         ocr_pdf.save(output_pdf_path)

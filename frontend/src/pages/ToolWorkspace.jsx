@@ -35,7 +35,17 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
 
   const handleProcess = async () => {
     if (selectedFiles.length === 0) {
-      setErrorMessage("Silakan pilih file terlebih dahulu.");
+      setErrorMessage(lang === 'id' ? "Silakan pilih berkas terlebih dahulu." : "Please select a file first.");
+      return;
+    }
+
+    if (tool.id === 'protect' && (!options.password || !options.password.trim())) {
+      setErrorMessage(lang === 'id' ? "Silakan masukkan kata sandi untuk mengunci berkas PDF." : "Please enter a password to protect the PDF file.");
+      return;
+    }
+
+    if (tool.id === 'unlock' && (!options.password || !options.password.trim())) {
+      setErrorMessage(lang === 'id' ? "Silakan masukkan kata sandi untuk membuka proteksi berkas PDF." : "Please enter the password to unlock the PDF file.");
       return;
     }
 
@@ -74,6 +84,8 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
         if (options.ranges) formData.append('ranges', options.ranges);
         if (options.quality) formData.append('quality', options.quality);
         if (options.scale) formData.append('scale', options.scale.toString());
+        if (options.level) formData.append('level', options.level);
+        if (options.position) formData.append('position', options.position);
 
         blob = await processPdfTool(tool.endpoint, formData);
       }
@@ -98,7 +110,17 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
       }
     } catch (err) {
       console.error("Processing error:", err);
-      setErrorMessage(err.response?.data?.detail || err.message || "Gagal memproses dokumen. Periksa kembali file Anda.");
+      let msg = err.response?.data?.detail;
+      if (!msg) {
+        if (err.code === 'ERR_NETWORK' || err.message?.includes('Network Error') || !err.response) {
+          msg = lang === 'id'
+            ? "Server backend (Port 8000) belum berjalan. Silakan jalankan backend terlebih dahulu (python run.py di folder backend) untuk fitur ini."
+            : "Backend server (Port 8000) is offline. Please start backend first (python run.py in backend folder) to use this feature.";
+        } else {
+          msg = err.message || (lang === 'id' ? "Gagal memproses dokumen. Periksa kembali file Anda." : "Failed to process document. Please check your file.");
+        }
+      }
+      setErrorMessage(msg);
     } finally {
       setIsProcessing(false);
     }
@@ -127,6 +149,8 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
       finalFileName = `${baseName}_rotated.${ext}`;
     } else if (tool.id === 'watermark') {
       finalFileName = `${baseName}_watermark.${ext}`;
+    } else if (tool.id === 'page-numbers') {
+      finalFileName = `${baseName}_numbered.${ext}`;
     } else if (tool.id === 'hd-image') {
       finalFileName = `${baseName}_hd.${ext}`;
     }

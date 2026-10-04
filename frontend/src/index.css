@@ -4,6 +4,24 @@
 
 body {
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overscroll-behavior: none;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+.tool-active-filter {
+  background-color: #b80035 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(184, 0, 53, 0.25);
+}
+
+.custom-dashed-border {
+  background-image: repeating-linear-gradient(0deg, #e11d48, #e11d48 10px, transparent 10px, transparent 20px), repeating-linear-gradient(90deg, #e11d48, #e11d48 10px, transparent 10px, transparent 20px), repeating-linear-gradient(180deg, #e11d48, #e11d48 10px, transparent 10px, transparent 20px), repeating-linear-gradient(270deg, #e11d48, #e11d48 10px, transparent 10px, transparent 20px);
+  background-size: 2px 100%, 100% 2px, 2px 100%, 100% 2px;
+  background-position: 0 0, 0 0, 100% 0, 0 100%;
+  background-repeat: no-repeat;
 }
 
 /* Hide scrollbar for Chrome, Safari, Edge and Firefox */

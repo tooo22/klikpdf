@@ -130,6 +130,19 @@ export const TOOLS = [
     accept: ".pdf"
   },
   {
+    id: "page-numbers",
+    name: "Nomor Halaman",
+    nameEn: "Page Numbers",
+    desc: "Tambahkan penomoran halaman otomatis pada berkas PDF Anda dengan posisi yang rapi.",
+    descEn: "Add page numbers into PDF documents easily with customized positioning.",
+    icon: "Hash",
+    color: "#9C27B0",
+    category: "edit",
+    endpoint: "/api/page-numbers",
+    multipleFiles: false,
+    accept: ".pdf"
+  },
+  {
     id: "protect",
     name: "Kunci PDF",
     nameEn: "Protect PDF",
