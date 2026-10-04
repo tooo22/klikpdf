@@ -73,6 +73,21 @@ export const AuthProvider = ({ children }) => {
     setIsLoginModalOpen(false);
   };
 
+  const loginCustom = (name, email) => {
+    const trimmedName = (name || '').trim() || 'Ardiansyah';
+    const trimmedEmail = (email || '').trim() || 'user@klikpdf.my.id';
+    const customUser = {
+      id: 'user_' + Date.now(),
+      name: trimmedName,
+      email: trimmedEmail,
+      picture: null,
+      isDemo: false
+    };
+    setUser(customUser);
+    setIsLoginModalOpen(false);
+    return true;
+  };
+
   const logout = () => {
     setUser(null);
   };
@@ -96,6 +111,7 @@ export const AuthProvider = ({ children }) => {
   const contextValue = {
     user,
     loginWithGoogle,
+    loginCustom,
     loginDemo,
     logout,
     recentFiles,
