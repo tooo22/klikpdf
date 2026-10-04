@@ -3,7 +3,6 @@ import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { CONVERT_COLUMNS, ALL_TOOLS_COLUMNS } from '../menuData';
-import { TOOLS } from '../toolsConfig';
 import * as Icons from 'lucide-react';
 
 export const Navbar = ({ onSelectTool, onGoHome }) => {
@@ -13,51 +12,8 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
   const [activeMenu, setActiveMenu] = useState(null); // 'convert' | 'all' | null
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
-  const [mobileSearchQuery, setMobileSearchQuery] = useState('');
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [isAppInstalled, setIsAppInstalled] = useState(false);
   const timeoutRef = useRef(null);
   const userMenuRef = useRef(null);
-
-  // PWA Install prompt listener
-  useEffect(() => {
-    const handleBeforeInstall = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
-    const handleAppInstalled = () => {
-      setIsAppInstalled(true);
-      setDeferredPrompt(null);
-    };
-    window.addEventListener('beforeinstallprompt', handleBeforeInstall);
-    window.addEventListener('appinstalled', handleAppInstalled);
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
-      window.removeEventListener('appinstalled', handleAppInstalled);
-    };
-  }, []);
-
-  const handleInstallApp = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        setIsAppInstalled(true);
-      }
-      setDeferredPrompt(null);
-    } else {
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-      if (isIOS) {
-        alert(lang === 'id' 
-          ? 'Cara pasang di iPhone/iPad:\n1. Ketuk tombol Bagikan (Share) di Safari bawah\n2. Pilih "Tambah ke Layar Utama" (Add to Home Screen)'
-          : 'To install on iPhone/iPad:\n1. Tap the Share button at the bottom of Safari\n2. Select "Add to Home Screen"');
-      } else {
-        alert(lang === 'id'
-          ? 'Cara pasang di Android:\n1. Ketuk menu titik tiga (⋮) di Chrome\n2. Pilih "Pasang aplikasi" atau "Tambahkan ke Layar Utama"'
-          : 'To install on Android:\n1. Tap the menu button (⋮) in Chrome\n2. Select "Install app" or "Add to Home screen"');
-      }
-    }
-  };
 
   // Prevent background scroll when mobile drawer is open
   useEffect(() => {
@@ -131,151 +87,224 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
     }
   };
 
-  // Global Ctrl+K shortcut listener for the search bar
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        const searchInput = document.getElementById('globalToolSearch');
-        if (searchInput) {
-          searchInput.focus();
-        }
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  const handleGlobalSearchChange = (val) => {
-    window.dispatchEvent(new CustomEvent('klikpdf-search-tools', { detail: { query: val } }));
-    if (window.location.hash) {
-      handleBrandClick();
-    }
-  };
-
   const isConvertOpen = activeMenu === 'convert';
   const isAllOpen = activeMenu === 'all';
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-white/90 dark:bg-[#0c101c]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-xs transition-colors duration-200 select-none">
-      <div className="max-w-[1440px] mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4">
-        {/* Brand & Status Tag */}
-        <div className="flex items-center gap-4 shrink-0">
+    <header className="sticky top-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0f1117]/95 backdrop-blur-xl border-b border-border-subtle/80 dark:border-slate-800 transition-colors duration-200 select-none pt-[env(safe-area-inset-top,0px)]">
+      <div className="h-16 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        {/* Brand Logo */}
+        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
           <div 
             onClick={handleBrandClick}
-            className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer"
+            className="flex items-center gap-2 group cursor-pointer"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-primary to-rose-600 flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform">
-              <span className="material-symbols-outlined text-white text-[19px] sm:text-[22px]">picture_as_pdf</span>
+            <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform duration-200">
+              <span className="material-symbols-outlined text-[20px]">layers</span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg sm:text-xl font-extrabold tracking-tight text-navy-deep dark:text-white leading-none flex items-center gap-1.5">
-                Klik<span className="text-primary">PDF</span>
-                <span className="hidden sm:inline-flex text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-primary dark:text-rose-400 border border-rose-200/60 dark:border-rose-900/60 uppercase font-mono tracking-wider">PRO TOOLS</span>
-              </span>
-              <span className="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">Direct Action Matrix</span>
+            <div className="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl">
+              <span className="text-text-primary dark:text-white group-hover:text-primary transition-colors">Klik</span>
+              <span className="text-primary ml-0.5">PDF</span>
             </div>
           </div>
         </div>
 
-        {/* Quick Search Bar (Direct Filter for 30+ Tools) */}
-        <div className="flex-1 max-w-xl hidden md:block">
-          <div className="relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
-            <input 
-              id="globalToolSearch"
-              type="text"
-              placeholder={lang === 'id' ? "Cari alat kilat (contoh: kompres, excel, gabung, tanda tangan)..." : "Search instant tools (e.g. compress, excel, merge, sign)..."}
-              onChange={(e) => handleGlobalSearchChange(e.target.value)}
-              className="w-full pl-10 pr-20 py-2 text-sm bg-surface-container-low/70 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-on-surface dark:text-white placeholder:text-slate-400"
-            />
-            <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1 pointer-events-none">
-              <kbd className="px-1.5 py-0.5 text-[10px] font-mono font-semibold text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded shadow-2xs">Ctrl</kbd>
-              <kbd className="px-1.5 py-0.5 text-[10px] font-mono font-semibold text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded shadow-2xs">K</kbd>
-            </div>
-          </div>
-        </div>
-
-        {/* Actions & Server Ping */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-semibold">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span>Cloud Engine Aktif (~12ms)</span>
-          </div>
-
-          <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block"></div>
-
-          {/* Quick Search on Mobile */}
+        {/* Center Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-1">
           <button
-            type="button"
-            onClick={() => setIsMobileDrawerOpen(true)}
-            aria-label="Cari Alat"
-            className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            onClick={handleScrollToTools}
+            className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-text-primary dark:hover:text-white px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
-            <Icons.Search size={18} />
+            {lang === 'id' ? 'Semua Alat' : 'All Tools'}
           </button>
 
-          {/* Riwayat File */}
-          <button 
-            type="button"
-            onClick={() => setIsRecentModalOpen(true)}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer"
+          <button
+            onClick={() => handleItemClick('merge')}
+            className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
-            <span className="material-symbols-outlined text-[18px]">history</span>
-            <span>{lang === 'id' ? 'Riwayat File' : 'File History'}</span>
+            {lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF'}
           </button>
 
-          {/* Alat Kilat Button */}
-          <button 
-            type="button"
-            onClick={() => {
-              if (window.location.hash) {
-                handleBrandClick();
-                setTimeout(() => {
-                  const el = document.getElementById('matrixGrid');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-              } else {
-                const el = document.getElementById('matrixGrid');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            className="inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-rose-600 hover:from-crimson-dark hover:to-primary text-white text-[11px] sm:text-xs font-bold shadow-md shadow-primary/20 active:scale-95 transition-all cursor-pointer"
+          <button
+            onClick={() => handleItemClick('split')}
+            className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
-            <span className="material-symbols-outlined text-[16px] sm:text-[17px]">flash_on</span>
-            <span className="hidden sm:inline">{lang === 'id' ? 'Alat Kilat' : 'Instant Tools'}</span>
-            <span className="sm:hidden">{lang === 'id' ? 'Kilat' : 'Tools'}</span>
+            {lang === 'id' ? 'Pisahkan PDF' : 'Split PDF'}
           </button>
 
-          {/* Theme Toggle */}
+          <button
+            onClick={() => handleItemClick('compress')}
+            className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
+          >
+            {lang === 'id' ? 'Kompres PDF' : 'Compress PDF'}
+          </button>
+
+          {/* Hover Dropdown: Konversi */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter('convert')}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              className={`flex items-center gap-1 text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+                isConvertOpen
+                  ? 'text-primary bg-surface-subtle dark:bg-slate-800'
+                  : 'text-secondary dark:text-slate-300 hover:text-text-primary dark:hover:text-white hover:bg-surface-subtle dark:hover:bg-slate-800'
+              }`}
+            >
+              <span>{lang === 'id' ? 'Konversi' : 'Convert'}</span>
+              <Icons.ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${isConvertOpen ? 'rotate-180 text-primary' : 'text-slate-400'}`}
+              />
+            </button>
+
+            {/* Konversi Mega Dropdown Panel */}
+            <div
+              className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200 ${
+                isConvertOpen
+                  ? 'opacity-100 translate-y-0 pointer-events-auto'
+                  : 'opacity-0 -translate-y-2 pointer-events-none'
+              }`}
+            >
+              <div className="w-[520px] bg-white dark:bg-[#18181B] rounded-2xl shadow-2xl border border-border-subtle dark:border-slate-800 p-5 grid grid-cols-2 gap-6 backdrop-blur-md">
+                {CONVERT_COLUMNS.map((col, colIdx) => (
+                  <div key={colIdx} className="space-y-1.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2 px-2">
+                      {lang === 'id' ? col.titleId : col.title}
+                    </span>
+                    {col.items.map((item, itemIdx) => {
+                      const ItemIcon = Icons[item.icon] || Icons.FileText;
+                      return (
+                        <button
+                          key={itemIdx}
+                          onClick={() => handleItemClick(item.id)}
+                          className="w-full flex items-center space-x-2.5 px-2.5 py-2 rounded-xl hover:bg-rose-50/80 dark:hover:bg-rose-950/30 hover:translate-x-1 text-left text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-all duration-150 group cursor-pointer"
+                        >
+                          <div
+                            className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110"
+                            style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                          >
+                            <ItemIcon size={13} />
+                          </div>
+                          <span className="truncate">
+                            {lang === 'id' ? item.nameId : item.name}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Hover Mega Menu: Semua Alat PDF */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter('all')}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              className={`flex items-center gap-1 text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+                isAllOpen
+                  ? 'text-primary bg-surface-subtle dark:bg-slate-800'
+                  : 'text-secondary dark:text-slate-300 hover:text-text-primary dark:hover:text-white hover:bg-surface-subtle dark:hover:bg-slate-800'
+              }`}
+            >
+              <span>{lang === 'id' ? 'Semua Alat PDF' : 'All PDF Tools'}</span>
+              <Icons.ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${isAllOpen ? 'rotate-180 text-primary' : 'text-slate-400'}`}
+              />
+            </button>
+
+            {/* All Tools Mega Dropdown Panel */}
+            <div
+              className={`absolute top-full -left-40 pt-2 transition-all duration-200 ${
+                isAllOpen
+                  ? 'opacity-100 translate-y-0 pointer-events-auto'
+                  : 'opacity-0 -translate-y-2 pointer-events-none'
+              }`}
+            >
+              <div className="w-[840px] bg-white dark:bg-[#18181B] rounded-2xl shadow-2xl border border-border-subtle dark:border-slate-800 p-6 grid grid-cols-4 gap-6 backdrop-blur-md">
+                {ALL_TOOLS_COLUMNS.map((col, colIdx) => (
+                  <div key={colIdx} className="space-y-1">
+                    <div className="flex items-center space-x-1.5 mb-3 px-2">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                        {lang === 'id' ? col.titleId : col.title}
+                      </span>
+                    </div>
+                    <div className="space-y-0.5">
+                      {col.items.map((item, itemIdx) => {
+                        const ItemIcon = Icons[item.icon] || Icons.FileText;
+                        return (
+                          <button
+                            key={itemIdx}
+                            onClick={() => handleItemClick(item.id)}
+                            className="w-full flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-rose-50/80 dark:hover:bg-rose-950/30 hover:translate-x-0.5 text-left text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-all duration-150 group cursor-pointer"
+                          >
+                            <div
+                              className="w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110"
+                              style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                            >
+                              <ItemIcon size={12} />
+                            </div>
+                            <span className="truncate text-[11px] leading-tight font-medium">
+                              {lang === 'id' ? item.nameId : item.name}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        {/* Right Header Actions */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* Search Trigger */}
+          <button
+            onClick={handleScrollToTools}
+            aria-label="Cari alat"
+            title="Cari semua alat PDF"
+            className="w-9 h-9 rounded-xl flex items-center justify-center text-secondary dark:text-slate-300 hover:text-primary hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[20px]">search</span>
+          </button>
+
+          {/* Dark / Light Theme Toggle */}
           <button
             onClick={toggleTheme}
             title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-600 dark:text-amber-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-xl flex items-center justify-center text-secondary dark:text-amber-400 hover:text-primary hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer active:scale-90"
             type="button"
+            aria-label="Toggle theme"
           >
             {theme === 'dark' ? (
-              <span className="material-symbols-outlined text-[18px]">light_mode</span>
+              <span className="material-symbols-outlined text-[19px] text-amber-400">light_mode</span>
             ) : (
-              <span className="material-symbols-outlined text-[18px]">dark_mode</span>
+              <span className="material-symbols-outlined text-[19px]">dark_mode</span>
             )}
           </button>
 
-          {/* Language Toggle */}
+          {/* Language Switcher (Desktop only, mobile has it inside drawer) */}
           <button
-            onClick={toggleLanguage}
+            onClick={() => toggleLanguage()}
             title="Ganti Bahasa / Switch Language"
-            className="hidden sm:inline-flex items-center text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-primary bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+            className="hidden sm:inline-flex items-center text-xs font-bold text-secondary dark:text-slate-300 hover:text-primary bg-surface-subtle dark:bg-slate-800/80 px-2.5 py-1 rounded-full gap-1 border border-border-subtle/80 dark:border-slate-700/60 transition-colors cursor-pointer active:scale-95"
           >
+            <span className="material-symbols-outlined text-[15px] text-primary">language</span>
             <span>{String(lang || 'ID').toUpperCase()}</span>
           </button>
 
-          {/* Auth Button or User Menu (Google Login) */}
+          {/* Auth Button or User Menu (Desktop only, mobile has it inside drawer) */}
           {user ? (
-            <div className="relative hidden sm:block" ref={userMenuRef}>
+            <div className="hidden sm:inline-block relative" ref={userMenuRef}>
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 className="flex items-center space-x-2 p-1 pl-1.5 pr-2.5 rounded-full border border-border-subtle dark:border-slate-700 hover:border-primary/50 bg-white dark:bg-[#18181B] transition-all duration-150 cursor-pointer shadow-xs active:scale-95"
@@ -291,7 +320,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
                     {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                   </div>
                 )}
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[100px] truncate">
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[100px] truncate hidden sm:inline">
                   {user.name}
                 </span>
                 <Icons.ChevronDown size={13} className="text-slate-400" />
@@ -308,9 +337,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
                       {user.email}
                     </p>
                     <span className="inline-block mt-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400">
-                      {user.isDemo
-                        ? (lang === 'id' ? 'Akun Demo' : 'Demo Account')
-                        : (lang === 'id' ? 'Akun Google Terverifikasi' : 'Verified Google Account')}
+                      {user.isDemo ? 'Akun Demo' : 'Akun Google Terverifikasi'}
                     </span>
                   </div>
 
@@ -341,32 +368,42 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
               )}
             </div>
           ) : (
-            <button
-              onClick={() => setIsLoginModalOpen(true)}
-              title={lang === 'id' ? 'Masuk dengan Google' : 'Sign in with Google'}
-              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:text-primary dark:hover:text-primary text-xs font-bold border border-slate-200/90 dark:border-slate-700 hover:border-primary/40 transition-all shadow-2xs hover:shadow-md active:scale-95 cursor-pointer"
-            >
-              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-              </svg>
-              <span>{lang === 'id' ? 'Masuk' : 'Sign in'}</span>
-            </button>
+            <div className="hidden sm:flex items-center gap-2">
+              <button
+                onClick={() => setIsLoginModalOpen(true)}
+                className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+              >
+                {lang === 'id' ? 'Masuk' : 'Sign in'}
+              </button>
+              <button
+                onClick={() => {
+                  const dropzone = document.getElementById('dropzone-box');
+                  if (dropzone) {
+                    dropzone.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    setIsLoginModalOpen(true);
+                  }
+                }}
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold bg-primary hover:bg-primary-container text-white px-3.5 sm:px-4 py-2 rounded-xl shadow-sm shadow-primary/25 hover:shadow-md transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <span>{lang === 'id' ? 'Mulai Gratis' : 'Start Free'}</span>
+                <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </button>
+            </div>
           )}
 
-          {/* Mobile Drawer Toggle */}
+          {/* Mobile Hamburger Menu Toggle */}
           <button
             onClick={() => setIsMobileDrawerOpen(!isMobileDrawerOpen)}
-            aria-label="Buka Menu"
-            className="lg:hidden w-8 h-8 rounded-lg flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            aria-label="Buka Menu Navigasi"
+            title={lang === 'id' ? 'Menu Navigasi' : 'Navigation Menu'}
+            className="lg:hidden w-9 h-9 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-primary hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer active:scale-90"
             type="button"
           >
             {isMobileDrawerOpen ? (
-              <Icons.X size={20} className="text-primary" />
+              <Icons.X size={22} className="text-primary" />
             ) : (
-              <Icons.Menu size={20} />
+              <Icons.Menu size={22} />
             )}
           </button>
         </div>
@@ -382,7 +419,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
           />
 
           {/* Drawer Sheet */}
-          <div className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-[340px] bg-white dark:bg-[#151722] shadow-2xl flex flex-col justify-between z-10 overflow-hidden border-l border-border-subtle dark:border-slate-800 animate-in slide-in-from-right duration-200">
+          <div className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-[340px] bg-white dark:bg-[#151722] shadow-2xl flex flex-col justify-between z-10 overflow-hidden border-l border-border-subtle dark:border-slate-800 animate-in slide-in-from-right duration-200 pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)]">
             {/* Scrollable Content */}
             <div className="flex flex-col flex-1 overflow-y-auto">
               {/* Drawer Top Header */}
@@ -457,152 +494,80 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
                         setIsMobileDrawerOpen(false);
                         setIsLoginModalOpen(true);
                       }}
-                      className="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-border-subtle dark:border-slate-700 hover:border-primary/40 text-xs font-bold shadow-2xs flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
+                      className="w-full py-2.5 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold shadow-sm shadow-primary/25 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                     >
-                      <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                      </svg>
-                      <span>{lang === 'id' ? 'Masuk dengan Google' : 'Sign in with Google'}</span>
+                      <Icons.LogIn size={15} />
+                      <span>{lang === 'id' ? 'Masuk dengan Google' : 'Sign In with Google'}</span>
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* Drawer Search Input for 24+ Tools */}
-              <div className="p-3 border-b border-border-subtle/80 dark:border-slate-800 bg-surface-subtle/40 dark:bg-slate-900/30">
-                <div className="relative">
-                  <Icons.Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input
-                    type="text"
-                    value={mobileSearchQuery}
-                    onChange={(e) => setMobileSearchQuery(e.target.value)}
-                    placeholder={lang === 'id' ? "Cari dari 24+ alat PDF..." : "Search 24+ PDF tools..."}
-                    className="w-full pl-9 pr-8 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/40 text-slate-900 dark:text-white placeholder:text-slate-400"
-                  />
-                  {mobileSearchQuery && (
-                    <button
-                      onClick={() => setMobileSearchQuery('')}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-0.5 cursor-pointer"
-                    >
-                      <Icons.X size={13} />
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* Navigation Tools List or Search Results */}
+              {/* Quick Navigation Tools */}
               <div className="p-4 space-y-4">
-                {mobileSearchQuery.trim() ? (
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2 px-1">
-                      {lang === 'id' ? `Hasil Pencarian (${TOOLS.filter(t => t.name?.toLowerCase().includes(mobileSearchQuery.toLowerCase()) || t.nameEn?.toLowerCase().includes(mobileSearchQuery.toLowerCase()) || t.desc?.toLowerCase().includes(mobileSearchQuery.toLowerCase())).length})` : `Search Results (${TOOLS.filter(t => t.name?.toLowerCase().includes(mobileSearchQuery.toLowerCase()) || t.nameEn?.toLowerCase().includes(mobileSearchQuery.toLowerCase()) || t.desc?.toLowerCase().includes(mobileSearchQuery.toLowerCase())).length})`}
-                    </span>
-                    <div className="space-y-1 max-h-[50vh] overflow-y-auto pr-1">
-                      {TOOLS.filter(t => 
-                        (t.name && t.name.toLowerCase().includes(mobileSearchQuery.toLowerCase())) ||
-                        (t.nameEn && t.nameEn.toLowerCase().includes(mobileSearchQuery.toLowerCase())) ||
-                        (t.desc && t.desc.toLowerCase().includes(mobileSearchQuery.toLowerCase()))
-                      ).map((item) => {
-                        const ItemIcon = Icons[item.icon] || Icons.FileText;
-                        return (
-                          <button
-                            key={item.id}
-                            onClick={() => {
-                              setMobileSearchQuery('');
-                              handleItemClick(item.id);
-                            }}
-                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-rose-50/80 dark:hover:bg-rose-950/30 hover:text-primary transition-all text-left cursor-pointer active:scale-98"
-                          >
-                            <div
-                              className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                              style={{ backgroundColor: `${item.color || '#E5322D'}18`, color: item.color || '#E5322D' }}
-                            >
-                              <ItemIcon size={14} />
-                            </div>
-                            <div className="min-w-0 flex-1">
-                              <p className="truncate font-bold">{lang === 'id' ? item.name : item.nameEn}</p>
-                              <p className="text-[10px] text-slate-400 truncate">{lang === 'id' ? item.desc : item.descEn}</p>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2 px-1">
+                    {lang === 'id' ? 'Alat Populer' : 'Popular Tools'}
+                  </span>
+                  <div className="space-y-1">
+                    {[
+                      { id: 'merge', name: lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF', icon: Icons.Layers, color: '#E5322D' },
+                      { id: 'split', name: lang === 'id' ? 'Pisahkan PDF' : 'Split PDF', icon: Icons.Scissors, color: '#FF7B00' },
+                      { id: 'compress', name: lang === 'id' ? 'Kompres PDF' : 'Compress PDF', icon: Icons.Minimize2, color: '#38B44A' },
+                      { id: 'word-to-pdf', name: lang === 'id' ? 'Word ke PDF' : 'Word to PDF', icon: Icons.FileCheck, color: '#2072B8' },
+                      { id: 'pdf-to-word', name: lang === 'id' ? 'PDF ke Word' : 'PDF to Word', icon: Icons.FileText, color: '#2072B8' },
+                      { id: 'hd-image', name: lang === 'id' ? 'HD-kan Foto (AI)' : 'Enhance Photo HD', icon: Icons.Sparkles, color: '#8B5CF6' },
+                      { id: 'image-to-pdf', name: lang === 'id' ? 'Gambar ke PDF' : 'Image to PDF', icon: Icons.Image, color: '#F7A600' }
+                    ].map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => handleItemClick(item.id)}
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-rose-50/80 dark:hover:bg-rose-950/30 hover:text-primary transition-all text-left cursor-pointer group"
+                      >
+                        <div
+                          className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
+                          style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                        >
+                          <item.icon size={13} />
+                        </div>
+                        <span className="truncate">{item.name}</span>
+                      </button>
+                    ))}
                   </div>
-                ) : (
-                  <>
-                    <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2 px-1">
-                        {lang === 'id' ? 'Alat Populer' : 'Popular Tools'}
-                      </span>
-                      <div className="space-y-1">
-                        {[
-                          { id: 'merge', name: lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF', icon: Icons.Layers, color: '#E5322D' },
-                          { id: 'split', name: lang === 'id' ? 'Pisahkan PDF' : 'Split PDF', icon: Icons.Scissors, color: '#FF7B00' },
-                          { id: 'compress', name: lang === 'id' ? 'Kompres PDF' : 'Compress PDF', icon: Icons.Minimize2, color: '#38B44A' },
-                          { id: 'word-to-pdf', name: lang === 'id' ? 'Word ke PDF' : 'Word to PDF', icon: Icons.FileCheck, color: '#2072B8' },
-                          { id: 'pdf-to-word', name: lang === 'id' ? 'PDF ke Word' : 'PDF to Word', icon: Icons.FileText, color: '#2072B8' },
-                          { id: 'hd-image', name: lang === 'id' ? 'HD-kan Foto (AI)' : 'Enhance Photo HD', icon: Icons.Sparkles, color: '#8B5CF6' },
-                          { id: 'image-to-pdf', name: lang === 'id' ? 'Gambar ke PDF' : 'Image to PDF', icon: Icons.Image, color: '#F7A600' }
-                        ].map((item) => (
-                          <button
-                            key={item.id}
-                            onClick={() => handleItemClick(item.id)}
-                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-rose-50/80 dark:hover:bg-rose-950/30 hover:text-primary transition-all text-left cursor-pointer group active:scale-98"
-                          >
-                            <div
-                              className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
-                              style={{ backgroundColor: `${item.color}15`, color: item.color }}
-                            >
-                              <item.icon size={14} />
-                            </div>
-                            <span className="truncate">{item.name}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                </div>
 
-                    {/* Browse all tools CTA in drawer */}
-                    <button
-                      onClick={() => {
-                        setIsMobileDrawerOpen(false);
-                        handleScrollToTools();
-                      }}
-                      className="w-full py-2.5 px-3 rounded-xl border border-primary/30 bg-rose-50/50 dark:bg-rose-950/20 text-primary text-xs font-bold flex items-center justify-center gap-2 hover:bg-primary hover:text-white transition-all cursor-pointer active:scale-95"
-                    >
-                      <span>{lang === 'id' ? 'Jelajahi Semua 24+ Alat' : 'Browse All 24+ Tools'}</span>
-                      <Icons.ArrowRight size={14} />
-                    </button>
-                  </>
-                )}
+                {/* Browse all tools CTA in drawer */}
+                <button
+                  onClick={() => {
+                    setIsMobileDrawerOpen(false);
+                    handleScrollToTools();
+                  }}
+                  className="w-full py-2.5 px-3 rounded-xl border border-primary/30 bg-rose-50/50 dark:bg-rose-950/20 text-primary text-xs font-bold flex items-center justify-center gap-2 hover:bg-primary hover:text-white transition-all cursor-pointer"
+                >
+                  <span>{lang === 'id' ? 'Jelajahi Semua 24+ Alat' : 'Browse All 24+ Tools'}</span>
+                  <Icons.ArrowRight size={14} />
+                </button>
+
+                {/* Android APK Download Option in Drawer */}
+                <a
+                  href="https://github.com/tooo22/klikpdf/releases/download/android-app/KlikPDF.apk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-3 rounded-xl bg-slate-900 text-white dark:bg-slate-800 hover:bg-slate-800 text-xs font-bold flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[16px] text-emerald-400">android</span>
+                  <span>{lang === 'id' ? 'Unduh Aplikasi Android (APK)' : 'Download Android App (APK)'}</span>
+                </a>
               </div>
             </div>
 
-            {/* Drawer Bottom Controls (Install App + Language + Theme) */}
-            <div className="p-4 border-t border-border-subtle/80 dark:border-slate-800 bg-surface-subtle/60 dark:bg-[#11131c] space-y-3 pb-[max(1rem,env(safe-area-inset-bottom,1rem))]">
-              {/* Install App for Android / iOS Button */}
-              {!isAppInstalled && (
-                <button
-                  type="button"
-                  onClick={handleInstallApp}
-                  className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-rose-600 hover:from-crimson-dark hover:to-primary text-white text-xs font-bold shadow-md shadow-primary/25 cursor-pointer active:scale-95 transition-all"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[18px]">install_mobile</span>
-                    <span>{lang === 'id' ? 'Pasang Aplikasi KlikPDF' : 'Install KlikPDF App'}</span>
-                  </div>
-                  <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-md font-mono">Android & iOS</span>
-                </button>
-              )}
-
-              {/* Language & Theme Controls Row */}
+            {/* Drawer Bottom Controls (Language + Theme) */}
+            <div className="p-4 border-t border-border-subtle/80 dark:border-slate-800 bg-surface-subtle/60 dark:bg-[#11131c]">
               <div className="flex items-center justify-between gap-2">
                 {/* Language Switcher */}
                 <button
                   onClick={toggleLanguage}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl bg-white dark:bg-slate-800 border border-border-subtle dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 cursor-pointer active:scale-95"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-white dark:bg-slate-800 border border-border-subtle dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 cursor-pointer active:scale-95"
                 >
                   <span className="material-symbols-outlined text-[15px] text-primary">language</span>
                   <span>Bahasa: <strong>{String(lang || 'ID').toUpperCase()}</strong></span>
