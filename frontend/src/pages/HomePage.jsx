@@ -463,24 +463,24 @@ export const HomePage = ({ onSelectTool }) => {
   ];
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div className="max-w-[1440px] mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6">
       
       {/* 1. COMPACT HERO & CATEGORY BAR */}
-      <section className="bg-gradient-to-r from-navy-banner via-navy-deep to-slate-900 rounded-2xl p-5 sm:p-7 text-white shadow-xl relative overflow-hidden">
+      <section className="bg-gradient-to-r from-navy-banner via-navy-deep to-slate-900 rounded-2xl p-4 sm:p-7 text-white shadow-xl relative overflow-hidden">
         {/* Glow Decor */}
         <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute -left-20 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 text-white text-xs font-medium backdrop-blur-xs border border-white/10">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 rounded-full bg-white/10 text-white text-[11px] sm:text-xs font-medium backdrop-blur-xs border border-white/10">
               <span className="material-symbols-outlined text-[14px] text-amber-400">offline_bolt</span>
-              <span>{lang === 'id' ? 'Direct Action Matrix — Proses dokumen langsung di peramban tanpa antrean' : 'Direct Action Matrix — Instant document processing with zero queues'}</span>
+              <span>{lang === 'id' ? 'Direct Action Matrix — Proses instan di peramban tanpa antrean' : 'Direct Action Matrix — Instant document processing with zero queues'}</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
+            <h1 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
               {lang === 'id' ? 'Pusat Pengolahan Dokumen PDF Cepat & Mandiri' : 'Fast & Autonomous PDF Document Processing Center'}
             </h1>
-            <p className="text-sm sm:text-base text-slate-300">
+            <p className="text-xs sm:text-base text-slate-300">
               {lang === 'id' 
                 ? 'Pilih tindakan langsung, seret dokumen ke dropzone pintar terpadu, atau gunakan tombol unggah cepat pada setiap kartu modul di bawah.'
                 : 'Select actions directly, drag documents into the smart unified dropzone, or trigger quick upload on any card module below.'}
@@ -488,32 +488,32 @@ export const HomePage = ({ onSelectTool }) => {
           </div>
 
           {/* Metric Badges Widget */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0">
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/10 flex flex-col">
-              <span className="text-[11px] text-slate-300 uppercase tracking-wider font-bold">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 shrink-0">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2.5 sm:p-3 border border-white/10 flex flex-col">
+              <span className="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-bold">
                 {lang === 'id' ? 'Kecepatan Rata2' : 'Avg Speed'}
               </span>
-              <span className="text-xl font-extrabold text-white mt-1">1.4 Detik</span>
+              <span className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">1.4 Detik</span>
               <span className="text-[10px] text-emerald-400 flex items-center gap-0.5 mt-0.5 font-medium">
-                <span className="material-symbols-outlined text-[12px]">trending_up</span> Batch multi-core
+                <span className="material-symbols-outlined text-[12px]">trending_up</span> Multi-core
               </span>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/10 flex flex-col">
-              <span className="text-[11px] text-slate-300 uppercase tracking-wider font-bold">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2.5 sm:p-3 border border-white/10 flex flex-col">
+              <span className="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-bold">
                 {lang === 'id' ? 'Enkripsi Privat' : 'Private Encryption'}
               </span>
-              <span className="text-xl font-extrabold text-white mt-1">256-Bit SSL</span>
+              <span className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">256-Bit SSL</span>
               <span className="text-[10px] text-emerald-400 flex items-center gap-0.5 mt-0.5 font-medium">
                 <span className="material-symbols-outlined text-[12px]">lock</span> Zero Data Storage
               </span>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/10 col-span-2 sm:col-span-1 flex flex-col">
-              <span className="text-[11px] text-slate-300 uppercase tracking-wider font-bold">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2.5 sm:p-3 border border-white/10 col-span-2 sm:col-span-1 flex flex-col">
+              <span className="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-bold">
                 {lang === 'id' ? 'Biaya & Kuota' : 'Cost & Limit'}
               </span>
-              <span className="text-xl font-extrabold text-amber-300 mt-1">100% Gratis</span>
+              <span className="text-lg sm:text-xl font-extrabold text-amber-300 mt-0.5 sm:mt-1">100% Gratis</span>
               <span className="text-[10px] text-slate-300 mt-0.5 font-medium">
                 {activeUsers} Online
               </span>
@@ -521,11 +521,11 @@ export const HomePage = ({ onSelectTool }) => {
           </div>
         </div>
 
-        {/* Quick Category Segment Control Bar */}
-        <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-1.5" id="categoryFilterGroup">
+        {/* Quick Category Segment Control Bar (Swipeable on Mobile) */}
+        <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 -mx-2 px-2 sm:mx-0 sm:px-0 sm:flex-wrap" id="categoryFilterGroup">
             {[
-              { id: 'all', label: lang === 'id' ? 'Semua Alat (16)' : 'All Tools (16)', icon: 'apps' },
+              { id: 'all', label: lang === 'id' ? 'Semua Alat' : 'All Tools', icon: 'apps' },
               { id: 'kompresi', label: lang === 'id' ? 'Kompresi' : 'Compress', icon: 'compress' },
               { id: 'konversi', label: lang === 'id' ? 'Konversi' : 'Convert', icon: 'sync_alt' },
               { id: 'edit', label: lang === 'id' ? 'Edit & Tanda Tangan' : 'Edit & Sign', icon: 'edit_note' },
@@ -535,7 +535,7 @@ export const HomePage = ({ onSelectTool }) => {
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 type="button"
-                className={`category-pill px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                className={`category-pill shrink-0 px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                   activeCategory === cat.id
                     ? 'tool-active-filter'
                     : 'bg-white/10 hover:bg-white/20 text-white'
@@ -554,25 +554,47 @@ export const HomePage = ({ onSelectTool }) => {
         </div>
       </section>
 
+      {/* Mobile Instant Tool Search Input */}
+      <div className="md:hidden">
+        <div className="relative">
+          <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+          <input
+            type="text"
+            placeholder={lang === 'id' ? "Cari 24+ alat PDF (kompres, word, tanda tangan)..." : "Search 24+ PDF tools (compress, word, sign)..."}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-9 py-2.5 bg-surface-card dark:bg-[#151928] border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-medium text-navy-deep dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary shadow-xs"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-0.5 cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[17px]">close</span>
+            </button>
+          )}
+        </div>
+      </div>
+
       {/* 2. CORE WORKSPACE: SMART DROPZONE & LIVE TELEMETRY WIDGETS */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* CENTRAL SMART MULTI-FILE DROPZONE (8 Cols) */}
-        <section className="lg:col-span-8 bg-surface-card dark:bg-[#151928] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-5 sm:p-6 relative transition-colors">
-          <div className="flex items-center justify-between mb-4">
+        <section className="lg:col-span-8 bg-surface-card dark:bg-[#151928] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sm:p-6 relative transition-colors">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-crimson-glow text-primary dark:bg-rose-950/60 dark:text-rose-400 flex items-center justify-center font-bold">
                 <span className="material-symbols-outlined text-[20px]">smart_toy</span>
               </div>
               <div>
-                <h2 className="text-base font-bold text-navy-deep dark:text-white">Smart Unified Dropzone</h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <h2 className="text-sm sm:text-base font-bold text-navy-deep dark:text-white">Smart Unified Dropzone</h2>
+                <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
                   {lang === 'id' ? 'Deteksi format instan & rekomendasi tindakan otomatis' : 'Instant format detection & automated tool recommendation'}
                 </p>
               </div>
             </div>
-            <span className="text-[11px] font-mono px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold">
-              Maks. 200 MB / batch
+            <span className="text-[10px] sm:text-[11px] font-mono px-2 py-0.5 sm:py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold">
+              Maks. 200 MB
             </span>
           </div>
 
@@ -589,10 +611,10 @@ export const HomePage = ({ onSelectTool }) => {
               handleFilesQueued(e.dataTransfer.files);
             }}
             onClick={() => masterFileInputRef.current?.click()}
-            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 cursor-pointer group flex flex-col items-center justify-center ${
+            className={`relative border-2 border-dashed rounded-xl p-5 sm:p-8 text-center transition-all duration-200 cursor-pointer group flex flex-col items-center justify-center ${
               isDropzoneDragging
                 ? 'border-primary bg-crimson-glow/30 scale-[1.005]'
-                : 'border-slate-300 dark:border-slate-700 hover:border-primary bg-slate-50/60 dark:bg-slate-900/40 hover:bg-crimson-glow/10'
+                : 'border-slate-300 dark:border-slate-700 hover:border-primary bg-slate-50/60 dark:bg-slate-900/40 hover:bg-crimson-glow/10 active:scale-[0.99]'
             }`}
           >
             <input
@@ -604,18 +626,18 @@ export const HomePage = ({ onSelectTool }) => {
               onChange={(e) => handleFilesQueued(e.target.files)}
             />
 
-            <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 shadow-md border border-slate-200/80 dark:border-slate-700 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 mb-3">
-              <span className="material-symbols-outlined text-[34px]">cloud_upload</span>
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-800 shadow-md border border-slate-200/80 dark:border-slate-700 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 mb-2.5 sm:mb-3">
+              <span className="material-symbols-outlined text-[28px] sm:text-[34px]">cloud_upload</span>
             </div>
 
-            <h3 className="text-base sm:text-lg font-bold text-navy-deep dark:text-white group-hover:text-primary transition-colors">
-              {lang === 'id' ? 'Tarik & Lepas Dokumen Ke Sini' : 'Drag & Drop Documents Here'}
+            <h3 className="text-sm sm:text-lg font-bold text-navy-deep dark:text-white group-hover:text-primary transition-colors">
+              {lang === 'id' ? 'Tarik Dokumen atau Ketuk untuk Memilih' : 'Drag & Drop or Tap to Choose File'}
             </h3>
 
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mt-1 mb-4">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mt-1 mb-3.5 sm:mb-4">
               {lang === 'id' ? (
                 <>
-                  KlikPDF akan otomatis mendeteksi apakah file perlu <span className="font-semibold text-primary">dikompres</span>, <span className="font-semibold text-secondary dark:text-indigo-400">dikonversi</span>, atau <span className="font-semibold text-tertiary dark:text-emerald-400">digabungkan</span>.
+                  KlikPDF otomatis mendeteksi apakah file perlu <span className="font-semibold text-primary">dikompres</span>, <span className="font-semibold text-secondary dark:text-indigo-400">dikonversi</span>, atau <span className="font-semibold text-tertiary dark:text-emerald-400">digabungkan</span>.
                 </>
               ) : (
                 <>
@@ -624,28 +646,28 @@ export const HomePage = ({ onSelectTool }) => {
               )}
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   masterFileInputRef.current?.click();
                 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-crimson-dark text-white text-xs font-bold shadow-md shadow-primary/25 active:scale-95 transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-2.5 rounded-xl sm:rounded-lg bg-primary hover:bg-crimson-dark text-white text-xs font-bold shadow-md shadow-primary/25 active:scale-95 transition-all cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[18px]">add_circle</span>
-                <span>{lang === 'id' ? 'Pilih Dari Perangkat' : 'Choose From Device'}</span>
+                <span>{lang === 'id' ? 'Pilih Berkas dari Perangkat' : 'Choose File From Device'}</span>
               </button>
 
               <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400">
-                <span className="text-slate-400 dark:text-slate-500">{lang === 'id' ? 'atau impor via:' : 'or import via:'}</span>
+                <span className="text-slate-400 dark:text-slate-500">{lang === 'id' ? 'atau impor:' : 'or import:'}</span>
                 <button
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     setCloudNotice('Google Drive');
                   }}
-                  className="px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium text-slate-700 dark:text-slate-200 cursor-pointer"
+                  className="px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium text-slate-700 dark:text-slate-200 cursor-pointer active:scale-95"
                 >
                   Google Drive
                 </button>
@@ -655,7 +677,7 @@ export const HomePage = ({ onSelectTool }) => {
                     e.stopPropagation();
                     setCloudNotice('Dropbox');
                   }}
-                  className="px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium text-slate-700 dark:text-slate-200 cursor-pointer"
+                  className="px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium text-slate-700 dark:text-slate-200 cursor-pointer active:scale-95"
                 >
                   Dropbox
                 </button>
@@ -663,18 +685,18 @@ export const HomePage = ({ onSelectTool }) => {
             </div>
 
             {/* Live Detection Notification Banner */}
-            <div className="w-full mt-5 pt-4 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-              <div className="flex items-center gap-2">
+            <div className="w-full mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
                 <span className="font-bold text-slate-700 dark:text-slate-300">{lang === 'id' ? 'Dukungan:' : 'Supported:'}</span>
                 <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px] font-bold text-primary">PDF</span>
                 <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">WORD</span>
                 <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">EXCEL</span>
-                <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">POWERPOINT</span>
+                <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">PPT</span>
                 <span className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">JPG/PNG</span>
               </div>
-              <div className="flex items-center gap-1 text-tertiary dark:text-emerald-400 font-medium">
+              <div className="flex items-center gap-1 text-tertiary dark:text-emerald-400 font-medium text-[11px] sm:text-xs">
                 <span className="material-symbols-outlined text-[15px]">verified_user</span>
-                <span>{lang === 'id' ? 'Pembersihan berkas otomatis < 2 jam' : 'Auto cleanup < 2 hours'}</span>
+                <span>{lang === 'id' ? 'Pembersihan otomatis < 2 jam' : 'Auto cleanup < 2 hours'}</span>
               </div>
             </div>
           </div>
@@ -864,15 +886,15 @@ export const HomePage = ({ onSelectTool }) => {
 
         {/* TOOL CARDS GRID */}
         {filteredTools.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="toolCardsContainer">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4" id="toolCardsContainer">
             {filteredTools.map((tool) => (
               <div
                 key={tool.id + '-' + tool.name}
                 onClick={() => onSelectTool(tool.id, [])}
-                className="tool-card group bg-surface-card dark:bg-[#151928] rounded-xl border border-slate-200/90 dark:border-slate-800 hover:border-primary dark:hover:border-primary p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between cursor-pointer"
+                className="tool-card group bg-surface-card dark:bg-[#151928] rounded-xl border border-slate-200/90 dark:border-slate-800 hover:border-primary dark:hover:border-primary p-3.5 sm:p-4 shadow-2xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between cursor-pointer active:scale-[0.98]"
               >
                 <div>
-                  <div className="flex items-start justify-between gap-2 mb-3">
+                  <div className="flex items-start justify-between gap-2 mb-2.5 sm:mb-3">
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform ${tool.iconBg}`}>
                       <span className="material-symbols-outlined text-[24px]">{tool.icon}</span>
                     </div>
@@ -897,10 +919,10 @@ export const HomePage = ({ onSelectTool }) => {
                 </div>
 
                 <div 
-                  className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2"
+                  className="mt-3.5 sm:mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <label className="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-primary dark:hover:bg-primary text-slate-700 dark:text-slate-200 hover:text-white text-xs font-bold transition-all active:scale-95 shadow-2xs">
+                  <label className="flex-1 cursor-pointer inline-flex items-center justify-center gap-1.5 py-2.5 sm:py-2 px-3 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-primary dark:hover:bg-primary text-slate-700 dark:text-slate-200 hover:text-white text-xs font-bold transition-all active:scale-95 shadow-2xs">
                     <span className="material-symbols-outlined text-[16px]">upload_file</span>
                     <span>{lang === 'id' ? 'Pilih File' : 'Pick File'}</span>
                     <input
@@ -915,7 +937,7 @@ export const HomePage = ({ onSelectTool }) => {
                   <button
                     type="button"
                     onClick={() => onSelectTool(tool.id, [])}
-                    className="w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors cursor-pointer"
+                    className="w-9 h-9 sm:w-8 sm:h-8 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors cursor-pointer active:scale-95"
                     title={lang === 'id' ? 'Buka Ruang Kerja Alat' : 'Open Workspace'}
                   >
                     <span className="material-symbols-outlined text-[18px]">tune</span>

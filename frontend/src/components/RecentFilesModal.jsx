@@ -25,22 +25,22 @@ export const RecentFilesModal = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
       <div 
-        className="relative w-full max-w-lg bg-white dark:bg-[#1E1E22] rounded-3xl shadow-2xl border border-gray-100 dark:border-[#2E2E33] overflow-hidden flex flex-col max-h-[85vh]"
+        className="relative w-full max-w-lg bg-white dark:bg-[#1E1E22] rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-100 dark:border-[#2E2E33] overflow-hidden flex flex-col max-h-[88vh] sm:max-h-[85vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-5 border-b border-gray-100 dark:border-[#2E2E33] flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/40 text-[#E5322D] flex items-center justify-center">
-              <History size={20} />
+        <div className="px-4 py-3.5 sm:px-6 sm:py-5 border-b border-gray-100 dark:border-[#2E2E33] flex items-center justify-between">
+          <div className="flex items-center space-x-2.5 sm:space-x-3">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-red-50 dark:bg-red-950/40 text-[#E5322D] flex items-center justify-center shrink-0">
+              <History size={18} />
             </div>
-            <div>
-              <h2 className="text-lg font-black text-gray-900 dark:text-white">
+            <div className="min-w-0">
+              <h2 className="text-base sm:text-lg font-black text-gray-900 dark:text-white truncate">
                 {lang === 'id' ? 'Riwayat File Saya' : 'My Recent Files'}
               </h2>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 truncate">
                 {user ? user.name : (lang === 'id' ? 'Pengguna' : 'User')} • {recentFiles.length} {lang === 'id' ? 'dokumen' : 'files'}
               </p>
             </div>
@@ -48,7 +48,7 @@ export const RecentFilesModal = () => {
 
           <button
             onClick={() => setIsRecentModalOpen(false)}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#27272A] text-gray-500 dark:text-gray-400 transition-colors cursor-pointer"
+            className="p-1.5 sm:p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-[#27272A] text-gray-500 dark:text-gray-400 transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X size={18} />
@@ -56,7 +56,7 @@ export const RecentFilesModal = () => {
         </div>
 
         {/* File List Body */}
-        <div className="p-6 overflow-y-auto flex-1 space-y-3">
+        <div className="p-3.5 sm:p-6 overflow-y-auto flex-1 space-y-2.5 sm:space-y-3">
           {recentFiles.length === 0 ? (
             <div className="text-center py-12 space-y-3">
               <div className="w-14 h-14 bg-gray-100 dark:bg-[#27272A] rounded-2xl flex items-center justify-center mx-auto text-gray-400">

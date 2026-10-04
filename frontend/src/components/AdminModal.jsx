@@ -250,33 +250,33 @@ export const AdminModal = ({ isOpen, onClose }) => {
           /* ============================================================== */
           <>
             {/* Modal Header */}
-            <div className="px-6 py-4.5 bg-gradient-to-r from-slate-900 via-[#181c2e] to-slate-900 text-white flex items-center justify-between border-b border-slate-800">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-2xl bg-primary/20 text-rose-400 flex items-center justify-center border border-primary/30 shadow-inner">
-                  <ShieldCheck size={22} />
+            <div className="px-4 py-3 sm:px-6 sm:py-4.5 bg-gradient-to-r from-slate-900 via-[#181c2e] to-slate-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-slate-800">
+              <div className="flex items-center space-x-2.5 sm:space-x-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-primary/20 text-rose-400 flex items-center justify-center border border-primary/30 shadow-inner shrink-0">
+                  <ShieldCheck size={18} />
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-base sm:text-lg font-black tracking-tight leading-none">
-                      {lang === 'id' ? 'Panel Kontrol Admin KlikPDF' : 'KlikPDF Admin Dashboard'}
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <h2 className="text-sm sm:text-lg font-black tracking-tight leading-none truncate">
+                      {lang === 'id' ? 'Panel Kontrol Admin' : 'Admin Dashboard'}
                     </h2>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                    <span className="px-1.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1 shrink-0">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                       <span>Verified</span>
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
+                  <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 truncate hidden sm:block">
                     {lang === 'id' ? 'Pemantauan sistem, ulasan pengguna, dan kelola dokumen' : 'System monitoring, user reviews & document management'}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between sm:justify-end gap-2 border-t border-slate-800/80 pt-2 sm:border-0 sm:pt-0">
                 {/* Master System On/Off Toggle Button */}
                 <button
                   onClick={toggleSystemStatus}
                   title={systemStatus === 'online' ? 'Matikan sistem (Set OFF)' : 'Nyalakan sistem (Set ON)'}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 border transition-all cursor-pointer shadow-xs active:scale-95 ${
+                  className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-black flex items-center gap-1.5 border transition-all cursor-pointer shadow-xs active:scale-95 ${
                     systemStatus === 'online'
                       ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/25'
                       : 'bg-rose-500/20 text-rose-300 border-rose-500/40 hover:bg-rose-500/30 animate-pulse'
@@ -286,35 +286,37 @@ export const AdminModal = ({ isOpen, onClose }) => {
                   <span>{systemStatus === 'online' ? 'SISTEM: ON' : 'SISTEM: OFF'}</span>
                 </button>
 
-                <button
-                  onClick={handleLogout}
-                  title={lang === 'id' ? 'Keluar Admin' : 'Admin Logout'}
-                  className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 border border-slate-700 transition-colors cursor-pointer"
-                >
-                  <LogOut size={13} />
-                  <span className="hidden sm:inline">{lang === 'id' ? 'Keluar Admin' : 'Logout'}</span>
-                </button>
-                <button
-                  onClick={onClose}
-                  className="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm font-bold transition-colors cursor-pointer"
-                >
-                  ✕
-                </button>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleLogout}
+                    title={lang === 'id' ? 'Keluar Admin' : 'Admin Logout'}
+                    className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[11px] sm:text-xs font-semibold flex items-center gap-1.5 border border-slate-700 transition-colors cursor-pointer"
+                  >
+                    <LogOut size={13} />
+                    <span className="hidden sm:inline">{lang === 'id' ? 'Keluar' : 'Logout'}</span>
+                  </button>
+                  <button
+                    onClick={onClose}
+                    className="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm font-bold transition-colors cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="px-6 py-2.5 bg-slate-50 dark:bg-[#12141e] border-b border-slate-200 dark:border-slate-800/80 flex items-center gap-2 overflow-x-auto no-scrollbar">
+            <div className="px-4 sm:px-6 py-2 bg-slate-50 dark:bg-[#12141e] border-b border-slate-200 dark:border-slate-800/80 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar">
               {[
                 { id: 'overview', label: lang === 'id' ? '📊 Ringkasan' : '📊 Overview', icon: Activity },
-                { id: 'reviews', label: `${lang === 'id' ? '⭐ Ulasan Pengguna' : '⭐ User Reviews'} (${reviews.length})`, icon: Star },
-                { id: 'files', label: `${lang === 'id' ? '📄 Riwayat Berkas' : '📄 File History'} (${recentFiles.length})`, icon: FileText },
-                { id: 'settings', label: lang === 'id' ? '⚙️ Pengaturan' : '⚙️ System Controls', icon: Sliders },
+                { id: 'reviews', label: `${lang === 'id' ? '⭐ Ulasan' : '⭐ Reviews'} (${reviews.length})`, icon: Star },
+                { id: 'files', label: `${lang === 'id' ? '📄 Riwayat' : '📄 Files'} (${recentFiles.length})`, icon: FileText },
+                { id: 'settings', label: lang === 'id' ? '⚙️ Pengaturan' : '⚙️ Settings', icon: Sliders },
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer shrink-0 active:scale-95 ${
                     activeTab === tab.id
                       ? 'bg-primary text-white shadow-xs shadow-primary/25'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800'
@@ -326,7 +328,7 @@ export const AdminModal = ({ isOpen, onClose }) => {
             </div>
 
             {/* Modal Body Content */}
-            <div className="p-6 overflow-y-auto flex-1 bg-surface-canvas dark:bg-[#151722] space-y-6">
+            <div className="p-4 sm:p-6 overflow-y-auto flex-1 bg-surface-canvas dark:bg-[#151722] space-y-4 sm:space-y-6">
               {/* TAB 1: OVERVIEW */}
               {activeTab === 'overview' && (
                 <div className="space-y-6">

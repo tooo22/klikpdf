@@ -11,25 +11,25 @@ export const LoginModal = () => {
   if (!isLoginModalOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
       <div 
-        className="relative w-full max-w-md bg-white dark:bg-[#1E1E22] rounded-3xl shadow-2xl border border-gray-100 dark:border-[#2E2E33] overflow-hidden transform transition-all"
+        className="relative w-full max-w-md bg-white dark:bg-[#1E1E22] rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-100 dark:border-[#2E2E33] overflow-hidden transform transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header decoration */}
-        <div className="bg-gradient-to-r from-[#E5322D] to-[#FF5E57] p-6 text-white text-center relative">
+        <div className="bg-gradient-to-r from-[#E5322D] to-[#FF5E57] p-5 sm:p-6 text-white text-center relative">
           <button
             onClick={() => setIsLoginModalOpen(false)}
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors cursor-pointer"
+            className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 p-1.5 sm:p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X size={18} />
           </button>
           
-          <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-inner backdrop-blur-md">
-            <ShieldCheck size={32} className="text-white" />
+          <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-2.5 sm:mb-3 shadow-inner backdrop-blur-md">
+            <ShieldCheck size={28} className="text-white sm:w-8 sm:h-8" />
           </div>
-          <h2 className="text-2xl font-black tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black tracking-tight">
             {lang === 'id' ? 'Masuk ke KlikPDF' : 'Sign in to KlikPDF'}
           </h2>
           <p className="text-xs text-white/90 font-medium mt-1">
@@ -40,7 +40,7 @@ export const LoginModal = () => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 sm:p-8 space-y-6">
+        <div className="p-4 sm:p-8 space-y-4 sm:space-y-6">
           {/* Features highlight */}
           <div className="space-y-3 bg-gray-50 dark:bg-[#27272A]/50 p-4 rounded-2xl border border-gray-100 dark:border-[#2E2E33]">
             <div className="flex items-center space-x-3 text-xs text-gray-700 dark:text-gray-300">

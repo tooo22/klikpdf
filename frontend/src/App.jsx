@@ -218,7 +218,6 @@ function AppContent() {
         <Navbar
           onSelectTool={handleSelectTool}
           onGoHome={handleGoHome}
-          onOpenAdmin={() => setIsAdminModalOpen(true)}
         />
         <main>
           {activeToolId ? (
@@ -247,24 +246,8 @@ function AppContent() {
           setIsAdminAuth(sessionStorage.getItem('klikpdf_admin_auth') === 'true');
         }}
       />
-      
-      {/* Quick Access Admin Badge on Bottom Left */}
-      <button
-        onClick={() => setIsAdminModalOpen(true)}
-        title="Menu Admin (Password: 2899)"
-        aria-label="Menu Admin"
-        className="hidden sm:flex fixed bottom-6 left-6 z-40 px-3 py-2 rounded-2xl bg-white/95 dark:bg-[#18181B]/95 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-rose-400 text-xs font-bold shadow-lg shadow-black/10 dark:shadow-black/40 border border-slate-200/80 dark:border-slate-800 backdrop-blur-md items-center gap-2 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer group"
-      >
-        <div className="w-5 h-5 rounded-lg bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
-          <ShieldCheck size={13} />
-        </div>
-        <span>Admin</span>
-        {systemStatus === 'offline' && (
-          <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-        )}
-      </button>
 
-      <ChatbotWidget onSelectTool={handleSelectTool} />
+      <ChatbotWidget onSelectTool={handleSelectTool} isWorkspace={Boolean(activeToolId)} />
     </div>
   );
 }

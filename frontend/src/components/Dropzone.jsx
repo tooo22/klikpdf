@@ -24,12 +24,12 @@ export const Dropzone = ({ tool, onFilesSelected, onGoHome }) => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-8 px-4">
+    <div className="max-w-3xl mx-auto my-4 sm:my-8 px-3 sm:px-4">
       {/* Back button to Home */}
       {onGoHome && (
         <button
           onClick={onGoHome}
-          className="mb-4 inline-flex items-center space-x-2 text-xs font-bold text-gray-500 dark:text-gray-300 hover:text-[#E5322D] dark:hover:text-[#E5322D] bg-white/70 dark:bg-[#1E1E22]/90 hover:bg-white dark:hover:bg-[#1E1E22] px-3.5 py-2 rounded-xl border border-gray-200 dark:border-[#27272A] shadow-sm transition-all cursor-pointer group"
+          className="mb-3 sm:mb-4 inline-flex items-center space-x-2 text-xs font-bold text-gray-500 dark:text-gray-300 hover:text-[#E5322D] dark:hover:text-[#E5322D] bg-white/70 dark:bg-[#1E1E22]/90 hover:bg-white dark:hover:bg-[#1E1E22] px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-gray-200 dark:border-[#27272A] shadow-sm transition-all cursor-pointer group active:scale-95"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           <span>{lang === 'id' ? '← Kembali ke Semua Alat' : '← Back to All Tools'}</span>
@@ -40,7 +40,7 @@ export const Dropzone = ({ tool, onFilesSelected, onGoHome }) => {
       <div 
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className="bg-white dark:bg-[#1E1E22] border-2 border-dashed border-gray-300 dark:border-[#3F3F46] hover:border-[#E5322D] dark:hover:border-[#E5322D] rounded-3xl p-6 sm:p-12 text-center shadow-lg transition-colors cursor-pointer"
+        className="bg-white dark:bg-[#1E1E22] border-2 border-dashed border-gray-300 dark:border-[#3F3F46] hover:border-[#E5322D] dark:hover:border-[#E5322D] rounded-2xl sm:rounded-3xl p-5 sm:p-12 text-center shadow-lg transition-colors cursor-pointer active:scale-[0.99]"
         onClick={() => fileInputRef.current?.click()}
       >
         <input
@@ -51,18 +51,18 @@ export const Dropzone = ({ tool, onFilesSelected, onGoHome }) => {
           accept={tool.accept}
           className="hidden"
         />
-        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-50 dark:bg-red-950/40 text-[#E5322D] rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-inner">
-          <Upload size={32} className="sm:w-9 sm:h-9" />
+        <div className="w-14 h-14 sm:w-20 sm:h-20 bg-red-50 dark:bg-red-950/40 text-[#E5322D] rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-6 shadow-inner">
+          <Upload size={28} className="sm:w-9 sm:h-9" />
         </div>
-        <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-2">
+        <h2 className="text-lg sm:text-2xl font-black text-gray-900 dark:text-white mb-1.5 sm:mb-2">
           {lang === 'id' ? tool.name : tool.nameEn}
         </h2>
-        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-6 sm:mb-8 max-w-md mx-auto">
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-5 sm:mb-8 max-w-md mx-auto leading-relaxed">
           {lang === 'id' ? tool.desc : tool.descEn}
         </p>
 
-        <button className="bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white text-base sm:text-lg font-extrabold px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-xl transition-all inline-flex items-center justify-center space-x-3 w-full sm:w-auto cursor-pointer">
-          <Plus size={22} />
+        <button className="bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white text-sm sm:text-lg font-extrabold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl shadow-xl transition-all inline-flex items-center justify-center space-x-2.5 sm:space-x-3 w-full sm:w-auto cursor-pointer">
+          <Plus size={20} className="sm:w-5 sm:h-5" />
           <span>
             {tool.id === 'word-to-pdf'
               ? (lang === 'id' ? 'Pilih Berkas Word' : 'Select Word Files')
@@ -72,11 +72,11 @@ export const Dropzone = ({ tool, onFilesSelected, onGoHome }) => {
           </span>
         </button>
         
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 font-medium">
+        <p className="text-[11px] sm:text-xs text-gray-400 dark:text-gray-500 mt-3 sm:mt-4 font-medium">
           {tool.id === 'word-to-pdf'
-            ? (lang === 'id' ? 'atau jatuhkan berkas Word (.docx, .doc) di sini' : 'or drop Word documents here')
+            ? (lang === 'id' ? 'atau ketuk / jatuhkan berkas Word (.docx, .doc) di sini' : 'or tap / drop Word documents here')
             : tool.id === 'image-to-pdf' || tool.id === 'hd-image'
-            ? (lang === 'id' ? 'atau jatuhkan gambar di sini' : 'or drop images here')
+            ? (lang === 'id' ? 'atau ketuk / jatuhkan gambar di sini' : 'or tap / drop images here')
             : t('dropzone.drop_here')}
         </p>
       </div>

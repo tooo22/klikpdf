@@ -24,10 +24,10 @@ export const Footer = ({ onSelectTool, onGoHome }) => {
   };
 
   return (
-    <footer className="w-full bg-slate-900 text-slate-400 mt-12 border-t border-slate-800 text-xs">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 pt-10 pb-8">
+    <footer className="w-full bg-slate-900 text-slate-400 mt-8 sm:mt-12 border-t border-slate-800 text-xs">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 pt-8 sm:pt-10 pb-6 sm:pb-8">
         {/* Top Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 pb-10 border-b border-slate-800">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-8 pb-8 sm:pb-10 border-b border-slate-800">
           {/* Brand Summary */}
           <div className="col-span-2 space-y-3">
             <div 
@@ -251,11 +251,11 @@ export const Footer = ({ onSelectTool, onGoHome }) => {
         </div>
 
         {/* Bottom Utility Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500 text-center sm:text-left">
           <div>
             © {new Date().getFullYear()} KlikPDF. {lang === 'id' ? 'Dilindungi Hak Cipta. Infrastruktur Cloud Berlokasi di Indonesia.' : 'All Rights Reserved. High-Performance Indonesian Cloud.'}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2.5 sm:gap-4">
             <span className="hover:text-slate-300 transition-colors">Privasi SSL 256-Bit</span>
             <span>•</span>
             <span className="hover:text-slate-300 transition-colors">Zero Data Storage</span>

@@ -49,12 +49,12 @@ export const RatingModal = ({ isOpen, onClose, toolName = null }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4 animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-[#18181B] rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-border-subtle dark:border-slate-800 relative transition-all">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-3 sm:p-4 animate-in fade-in duration-200">
+      <div className="bg-white dark:bg-[#18181B] rounded-2xl sm:rounded-3xl p-5 sm:p-8 max-w-md w-full shadow-2xl border border-border-subtle dark:border-slate-800 relative transition-all">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-surface-subtle dark:hover:bg-slate-800 text-lg font-bold transition-colors cursor-pointer"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-surface-subtle dark:hover:bg-slate-800 text-base font-bold transition-colors cursor-pointer"
         >
           ✕
         </button>

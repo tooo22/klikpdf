@@ -169,11 +169,11 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
       </div>
 
       {/* Sticky Bottom Container on Mobile */}
-      <div className="sticky bottom-0 left-0 right-0 -mx-5 -mb-5 sm:-mx-6 sm:-mb-6 p-4 bg-white/95 dark:bg-[#1E1E22]/95 backdrop-blur-md border-t border-gray-200/80 dark:border-[#27272A] md:static md:mx-0 md:mb-0 md:p-0 md:bg-transparent md:border-0 z-30 mt-6">
+      <div className="sticky bottom-0 left-0 right-0 -mx-4 -mb-4 sm:-mx-6 sm:-mb-6 p-3.5 sm:p-4 bg-white/95 dark:bg-[#1E1E22]/95 backdrop-blur-md border-t border-gray-200/80 dark:border-[#27272A] md:static md:mx-0 md:mb-0 md:p-0 md:bg-transparent md:border-0 z-30 mt-6 pb-[max(1rem,env(safe-area-inset-bottom,1rem))]">
         <button
           onClick={onProcess}
           disabled={isProcessing}
-          className="w-full bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white font-extrabold py-3.5 sm:py-4 px-6 rounded-2xl shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
+          className="w-full bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white font-extrabold py-3.5 sm:py-4 px-6 rounded-xl sm:rounded-2xl shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
         >
           <span>
             {isProcessing 

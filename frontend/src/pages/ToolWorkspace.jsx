@@ -183,15 +183,16 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
     <div className="flex flex-col md:flex-row min-h-[calc(100vh-4rem)]">
       <div className="flex-1 bg-[#F4F5F7] dark:bg-[#121214] flex flex-col transition-colors duration-200">
         {/* Top bar with back button */}
-        <div className="p-4 bg-white/60 dark:bg-[#1E1E22]/80 border-b border-gray-200/80 dark:border-[#27272A] flex items-center justify-between">
+        <div className="p-3 sm:p-4 bg-white/60 dark:bg-[#1E1E22]/80 border-b border-gray-200/80 dark:border-[#27272A] flex items-center justify-between">
           <button
             onClick={onGoHome}
-            className="inline-flex items-center space-x-2 text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-[#E5322D] dark:hover:text-[#E5322D] bg-white dark:bg-[#1E1E22] px-3 py-1.5 rounded-lg border border-gray-200 dark:border-[#27272A] shadow-sm transition-all cursor-pointer group"
+            className="inline-flex items-center space-x-1.5 sm:space-x-2 text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-[#E5322D] dark:hover:text-[#E5322D] bg-white dark:bg-[#1E1E22] px-2.5 sm:px-3 py-1.5 rounded-lg border border-gray-200 dark:border-[#27272A] shadow-sm transition-all cursor-pointer group active:scale-95"
           >
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            <span>{lang === 'id' ? 'Kembali ke Semua Alat' : 'Back to All Tools'}</span>
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform shrink-0" />
+            <span className="hidden sm:inline">{lang === 'id' ? 'Kembali ke Semua Alat' : 'Back to All Tools'}</span>
+            <span className="sm:hidden">{lang === 'id' ? 'Kembali' : 'Back'}</span>
           </button>
-          <span className="text-xs font-bold text-gray-500 dark:text-gray-400">
+          <span className="text-[11px] sm:text-xs font-bold text-gray-500 dark:text-gray-400">
             {selectedFiles.length} {lang === 'id' ? 'berkas dipilih' : 'files selected'}
           </span>
         </div>
