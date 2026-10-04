@@ -6,9 +6,7 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('klikpdf_theme') || localStorage.getItem('sukapdf_theme');
     if (saved) return saved;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    return 'dark'; // Aura default: obsidian cinematic dark theme
   });
 
   useEffect(() => {
