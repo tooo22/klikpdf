@@ -179,151 +179,85 @@ export const HomePage = ({ onSelectTool }) => {
 
   return (
     <div className="w-full overflow-x-hidden">
-      {/* SECTION 1: SPLIT HERO & COMPACT DROPZONE */}
-      <section className="relative w-full overflow-hidden bg-gradient-to-b from-white via-surface-canvas to-surface-low/30 dark:from-[#0f1117] dark:via-[#12151f] dark:to-[#0f1117] pt-8 pb-16 lg:py-16 transition-colors duration-200">
-        {/* Glow ambient background */}
-        <div className="absolute -top-24 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute top-1/2 -right-20 w-[420px] h-[420px] bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      {/* SECTION 1: AURA-INSPIRED CINEMATIC HERO & ACTION DOCK */}
+      <section className="relative w-full overflow-hidden aura-bg aura-ambient-glow pt-10 pb-20 lg:pt-16 lg:pb-28 transition-colors duration-200">
+        {/* Soft atmospheric ambient glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-gradient-to-b from-rose-500/15 via-rose-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            
-            {/* LEFT COLUMN: Headline & Copy & Social Proof */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left">
-              {/* Trust Badge with Live Active Users */}
-              <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white dark:bg-[#18181B] border border-border-subtle/80 dark:border-slate-800 shadow-xs mb-5 sm:mb-6 text-[11px] sm:text-xs max-w-full">
-                <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary shrink-0">
-                  <span className="material-symbols-outlined text-[14px]">bolt</span>
-                </span>
-                <span className="font-bold text-text-primary dark:text-white">
-                  {lang === 'id' ? '100% Gratis & Tanpa Batas' : '100% Free & Unlimited'}
-                </span>
-                <span className="w-1 h-1 rounded-full bg-border-strong dark:bg-slate-700"></span>
-                <span className="font-semibold text-success flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[13px]">verified</span> 
-                  <span>{lang === 'id' ? 'Bebas Watermark' : 'No Watermark'}</span>
-                </span>
-                <span className="w-1 h-1 rounded-full bg-border-strong dark:bg-slate-700 hidden sm:inline"></span>
-                {/* Live Online Indicator */}
-                <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-300 font-semibold">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                  </span>
-                  <span>{activeUsers} Online</span>
-                </span>
-              </div>
-
-              {/* Main Title */}
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[52px] font-black text-text-primary dark:text-white tracking-tight leading-[1.2] sm:leading-[1.12] mb-4 sm:mb-5">
-                {lang === 'id' ? (
-                  <>
-                    Olah Dokumen PDF <br className="hidden sm:inline" />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-500 to-red-600">
-                      Lebih Cepat & Praktis
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    Process PDF Documents <br className="hidden sm:inline" />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-500 to-red-600">
-                      Faster & Effortless
-                    </span>
-                  </>
-                )}
-              </h1>
-
-              {/* Subtitle */}
-              <p className="text-sm sm:text-lg text-secondary dark:text-slate-300 leading-relaxed mb-6 sm:mb-8 max-w-xl">
-                {lang === 'id'
-                  ? 'Gabungkan berkas, kompres hingga 85%, atau ubah format PDF ke Word dalam hitungan detik. Cukup seret file Anda langsung ke kotak di samping.'
-                  : 'Merge files, compress up to 85%, or convert PDF to Word in seconds. Simply drag and drop your file into the box on the right.'}
-              </p>
-
-              {/* Quick CTA buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-8 sm:mb-10">
-                <button
-                  onClick={() => {
-                    const el = document.getElementById('dropzone-box');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5 cursor-pointer active:scale-95"
-                >
-                  <span className="material-symbols-outlined text-[20px]">upload_file</span>
-                  <span>{lang === 'id' ? 'Unggah Dokumen Sekarang' : 'Upload Document Now'}</span>
-                </button>
-                <button
-                  onClick={() => {
-                    const el = document.getElementById('bento-grid');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white dark:bg-[#18181B] hover:bg-surface-subtle dark:hover:bg-slate-800 text-text-primary dark:text-white border border-border-subtle dark:border-slate-800 font-bold text-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
-                >
-                  <span>{lang === 'id' ? 'Jelajahi 24+ Alat' : 'Explore 24+ Tools'}</span>
-                  <span className="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
-                </button>
-              </div>
-
-              {/* Social proof & rating */}
-              <div className="pt-5 sm:pt-6 border-t border-border-subtle/80 dark:border-slate-800 flex flex-wrap items-center gap-4 sm:gap-6 w-full">
-                <div className="flex items-center -space-x-2">
-                  <div className="w-9 h-9 rounded-full ring-2 ring-white dark:ring-[#18181B] bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-xs text-slate-700 dark:text-slate-200">
-                    AK
-                  </div>
-                  <div className="w-9 h-9 rounded-full ring-2 ring-white dark:ring-[#18181B] bg-rose-200 dark:bg-rose-950 flex items-center justify-center font-bold text-xs text-rose-800 dark:text-rose-200">
-                    DR
-                  </div>
-                  <div className="w-9 h-9 rounded-full ring-2 ring-white dark:ring-[#18181B] bg-amber-200 dark:bg-amber-950 flex items-center justify-center font-bold text-xs text-amber-800 dark:text-amber-200">
-                    RP
-                  </div>
-                  <div className="w-9 h-9 rounded-full ring-2 ring-white dark:ring-[#18181B] bg-rose-100 dark:bg-rose-900/60 flex items-center justify-center text-xs font-black text-primary">
-                    +{totalVisits > 1000 ? `${Math.floor(totalVisits / 1000)}k` : totalVisits}
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-2">
-                    <div className="flex text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-                          star
-                        </span>
-                      ))}
-                    </div>
-                    <span className="text-sm font-bold text-text-primary dark:text-white">4.9 / 5.0</span>
-                    <button
-                      onClick={() => window.dispatchEvent(new CustomEvent('open-rating-modal'))}
-                      className="ml-1 text-[11px] font-bold text-primary hover:text-primary-container dark:text-rose-400 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900/60 px-2.5 py-1 rounded-full border border-primary/20 transition-all cursor-pointer flex items-center gap-1 active:scale-95 shadow-xs"
-                      title={lang === 'id' ? 'Beri Penilaian & Ulasan untuk KlikPDF' : 'Rate KlikPDF'}
-                    >
-                      <span className="material-symbols-outlined text-[13px]">rate_review</span>
-                      <span>{lang === 'id' ? 'Beri Ulasan' : 'Review'}</span>
-                    </button>
-                  </div>
-                  <span className="text-xs text-secondary dark:text-slate-400 mt-0.5">
-                    {lang === 'id' 
-                      ? `Dipercaya oleh ${totalVisits.toLocaleString('id-ID')}+ kunjungan pengguna di Indonesia` 
-                      : `Trusted by ${totalVisits.toLocaleString('en-US')}+ user visits worldwide`}
-                  </span>
-                </div>
-              </div>
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+            {/* Top Announcement Pill */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold border border-slate-200/90 dark:border-white/10 bg-white/70 dark:bg-white/[0.05] backdrop-blur-md shadow-xs mb-6">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-slate-900 dark:text-white font-bold">KlikPDF 2.0</span>
+              <span className="text-slate-300 dark:text-slate-600">•</span>
+              <span className="text-slate-600 dark:text-slate-300">
+                {lang === 'id' ? 'Pemrosesan Dokumen 100% Client-Side Tanpa Server' : '100% Client-Side PDF Engine'}
+              </span>
+              <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700 hidden sm:inline" />
+              <span className="hidden sm:inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
+                <span className="material-symbols-outlined text-[14px]">shield</span>
+                <span>{lang === 'id' ? 'Bebas Watermark' : 'Zero Watermark'}</span>
+              </span>
             </div>
 
-            {/* RIGHT COLUMN: Compact Interactive Tool Box & Action Selector */}
-            <div className="lg:col-span-6 w-full" id="dropzone-box">
-              <div className="relative bg-white dark:bg-[#18181B] rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-black/40 border border-border-subtle/90 dark:border-slate-800 p-4 sm:p-7 transition-all duration-300">
-                {/* Dropzone Header */}
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border-subtle/80 dark:border-slate-800">
-                  <span className="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-slate-400 flex items-center gap-1.5">
-                    <span className="material-symbols-outlined text-[16px] text-primary">upload_file</span>
-                    <span>{lang === 'id' ? 'Upload & Pengolahan Dokumen' : 'Upload & Document Processing'}</span>
+            {/* Display Title */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[64px] font-black text-slate-900 dark:text-white tracking-tight leading-[1.12] mb-5">
+              {lang === 'id' ? (
+                <>
+                  Olah Dokumen PDF Lebih <br className="hidden sm:inline" />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-crimson-primary to-amber-500">
+                    Cepat, Modern & Privat
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-0.5 rounded-full">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>{lang === 'id' ? 'Server Siap' : 'Server Ready'}</span>
+                </>
+              ) : (
+                <>
+                  Process PDF Documents <br className="hidden sm:inline" />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-crimson-primary to-amber-500">
+                    Faster, Modern & Private
                   </span>
+                </>
+              )}
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-sm sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-10 max-w-2xl mx-auto">
+              {lang === 'id'
+                ? 'Gabungkan berkas, kompres hingga 85%, tanda tangani, atau ubah format PDF langsung di peramban Anda dalam hitungan detik. Tanpa batas kuota, tanpa antrean, dan data Anda aman 100% di memori lokal.'
+                : 'Merge files, compress up to 85%, sign, or convert PDF directly in your browser. Unlimited, zero watermark, and zero server storage.'}
+            </p>
+
+            {/* THE AURA FLOATING ACTION DOCK */}
+            <div className="w-full max-w-4xl mx-auto text-left" id="dropzone-box">
+              <div className="aura-dock rounded-[28px] p-4 sm:p-7 transition-all duration-300 relative shadow-2xl">
+                {/* Dock Header: Quick Action Pills Bar */}
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-3 mb-4 border-b border-slate-200/80 dark:border-white/[0.08]">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 shrink-0 px-2 flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-primary">bolt</span>
+                    <span>{lang === 'id' ? 'Aksi Cepat:' : 'Quick Actions:'}</span>
+                  </span>
+                  {[
+                    { id: 'merge', label: lang === 'id' ? 'Gabung PDF' : 'Merge PDF', icon: 'call_merge', color: 'text-rose-500' },
+                    { id: 'split', label: lang === 'id' ? 'Pisahkan' : 'Split', icon: 'call_split', color: 'text-amber-500' },
+                    { id: 'compress', label: lang === 'id' ? 'Kompres' : 'Compress', icon: 'compress', color: 'text-emerald-500' },
+                    { id: 'pdf-to-word', label: 'PDF ke Word', icon: 'description', color: 'text-blue-500' },
+                    { id: 'sign', label: lang === 'id' ? 'Tanda Tangan' : 'Sign', icon: 'draw', color: 'text-indigo-500' },
+                    { id: 'protect', label: lang === 'id' ? 'Kunci' : 'Protect', icon: 'lock', color: 'text-slate-400' },
+                    { id: 'pdf-to-excel', label: 'Ke Excel', icon: 'table_chart', color: 'text-emerald-500' },
+                    { id: 'rotate', label: lang === 'id' ? 'Putar' : 'Rotate', icon: 'rotate_right', color: 'text-amber-500' },
+                  ].map((tool) => (
+                    <button
+                      key={tool.id}
+                      onClick={() => onSelectTool(tool.id)}
+                      className="aura-pill px-3 py-1.5 rounded-full text-xs font-bold text-slate-700 dark:text-slate-200 bg-slate-100/90 hover:bg-white dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-slate-200/80 dark:border-white/10 flex items-center gap-1.5 shrink-0 transition-all cursor-pointer shadow-2xs hover:border-primary/40 active:scale-95"
+                    >
+                      <span className={`material-symbols-outlined text-[15px] ${tool.color}`}>{tool.icon}</span>
+                      <span>{tool.label}</span>
+                    </button>
+                  ))}
                 </div>
 
-                {/* Compact Dropzone Area */}
+                {/* Dropzone Area */}
                 <input
                   accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.webp"
                   className="hidden"
@@ -346,63 +280,139 @@ export const HomePage = ({ onSelectTool }) => {
                     handleHeroFiles(e.dataTransfer.files);
                   }}
                   onClick={() => heroFileInputRef.current?.click()}
-                  className={`w-full rounded-2xl border-2 border-dashed p-5 sm:p-9 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 group ${
+                  className={`w-full rounded-2xl border-2 border-dashed p-6 sm:p-12 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 group ${
                     isHeroDragging
                       ? 'border-primary bg-rose-50/70 dark:bg-rose-950/40 ring-4 ring-rose-500/20 scale-[1.01]'
-                      : 'border-rose-200 dark:border-rose-900/50 bg-rose-50/30 dark:bg-rose-950/15 hover:bg-rose-50/60 dark:hover:bg-rose-950/30 hover:border-primary'
+                      : 'border-rose-200 dark:border-rose-900/40 bg-gradient-to-b from-rose-50/20 to-transparent dark:from-rose-950/10 dark:to-transparent hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20'
                   }`}
                 >
-                  {/* Central Icon Badge */}
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white dark:bg-[#232733] shadow-md text-primary flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                    <span className="material-symbols-outlined text-[28px] sm:text-[32px]">
+                  {/* Central Gradient Icon */}
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-crimson-dark via-primary to-rose-500 text-white shadow-xl shadow-rose-500/25 flex items-center justify-center mb-4 sm:mb-5 group-hover:scale-110 group-hover:shadow-rose-500/40 transition-all duration-300">
+                    <span className="material-symbols-outlined text-[32px] sm:text-[38px]">
                       cloud_upload
                     </span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-text-primary dark:text-white mb-1">
-                    {lang === 'id' ? 'Tarik & Lepaskan File Anda Di Sini' : 'Drag & Drop Your Files Here'}
+                  <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mb-2">
+                    {lang === 'id' ? 'Tarik & Jatuhkan Dokumen Anda Di Sini' : 'Drag & Drop Your Documents Here'}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-text-muted dark:text-slate-400 mb-4 sm:mb-5 max-w-sm">
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-6 max-w-md leading-relaxed">
                     {lang === 'id'
-                      ? 'Mendukung file PDF, Word (.docx), Excel, PowerPoint, atau Foto (JPG/PNG). Pilih file untuk opsi pengolahan instan.'
-                      : 'Supports PDF, Word (.docx), Excel, PowerPoint, or Photos (JPG/PNG). Choose file for instant processing options.'}
+                      ? 'Mendukung format PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx), atau Gambar (JPG, PNG) hingga 100 MB.'
+                      : 'Supports PDF, Word (.docx), Excel, PowerPoint, or Photos (JPG/PNG) up to 100 MB.'}
                   </p>
 
-                  <button
-                    className="h-11 sm:h-12 w-full sm:w-auto px-6 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-sm shadow-primary/20 transition-transform active:scale-95 cursor-pointer"
-                    type="button"
-                  >
-                    <span className="material-symbols-outlined text-[18px]">add_circle</span>
-                    <span>{lang === 'id' ? 'Pilih Berkas Dokumen' : 'Choose Document File'}</span>
-                  </button>
-                </div>
-
-                {/* Cloud Import and Security Badges */}
-                <div className="mt-4 pt-3 flex flex-wrap items-center justify-between gap-3 text-xs text-text-muted dark:text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span>{lang === 'id' ? 'Impor:' : 'Import:'}</span>
+                  <div className="flex flex-col sm:flex-row items-center gap-3">
                     <button
-                      onClick={() => heroFileInputRef.current?.click()}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-subtle dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-text-primary dark:text-slate-200 transition-colors cursor-pointer"
+                      className="btn-shimmer h-12 px-7 rounded-full bg-gradient-to-r from-crimson-primary via-primary to-rose-600 hover:from-primary hover:to-crimson-dark text-white font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-lg shadow-rose-500/25 hover:shadow-rose-500/35 transition-all active:scale-95 cursor-pointer"
                       type="button"
                     >
-                      <span className="material-symbols-outlined text-[15px] text-[#4285F4]">cloud</span>
-                      <span>Drive</span>
+                      <span className="material-symbols-outlined text-[20px]">add_circle</span>
+                      <span>{lang === 'id' ? 'Pilih Berkas Dokumen (Gratis)' : 'Choose Document File (Free)'}</span>
+                    </button>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectTool('scan');
+                      }}
+                      className="h-12 px-5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 border border-slate-200 dark:border-white/10 transition-all active:scale-95 cursor-pointer"
+                      type="button"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">photo_camera</span>
+                      <span>{lang === 'id' ? 'Pindai Dokumen' : 'Scan Document'}</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Bottom Dock Trust & Cloud Bar */}
+                <div className="mt-4 pt-3.5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-white/[0.06]">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] font-semibold">{lang === 'id' ? 'Impor Cepat:' : 'Quick Import:'}</span>
+                    <button
+                      onClick={() => heroFileInputRef.current?.click()}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-white/[0.04] hover:bg-slate-200 dark:hover:bg-white/[0.08] font-semibold text-slate-700 dark:text-slate-200 transition-colors cursor-pointer border border-slate-200/60 dark:border-white/[0.06]"
+                      type="button"
+                    >
+                      <span className="material-symbols-outlined text-[14px] text-[#4285F4]">cloud</span>
+                      <span>Google Drive</span>
                     </button>
                     <button
                       onClick={() => heroFileInputRef.current?.click()}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-subtle dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-text-primary dark:text-slate-200 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-white/[0.04] hover:bg-slate-200 dark:hover:bg-white/[0.08] font-semibold text-slate-700 dark:text-slate-200 transition-colors cursor-pointer border border-slate-200/60 dark:border-white/[0.06]"
                       type="button"
                     >
-                      <span className="material-symbols-outlined text-[15px] text-[#0061FE]">folder_shared</span>
+                      <span className="material-symbols-outlined text-[14px] text-[#0061FE]">folder_shared</span>
                       <span>Dropbox</span>
                     </button>
                   </div>
-                  <div className="inline-flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">
-                    <span className="material-symbols-outlined text-[14px]">lock</span>
-                    <span>{lang === 'id' ? 'Enkripsi SSL 256-bit' : '256-bit SSL Encryption'}</span>
+
+                  <div className="flex items-center gap-4 text-[11px]">
+                    <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold">
+                      <span className="material-symbols-outlined text-[14px]">lock</span>
+                      <span>256-Bit SSL</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-slate-500 dark:text-slate-400">
+                      <span className="material-symbols-outlined text-[14px] text-primary">memory</span>
+                      <span>{lang === 'id' ? 'Zero-Upload Sandbox' : 'Zero Server Upload'}</span>
+                    </span>
                   </div>
+                </div>
+              </div>
+
+              {/* Social Proof & Metrics Underneath Dock */}
+              <div className="mt-8 flex flex-wrap items-center justify-between gap-4 px-2">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center -space-x-2">
+                    <div className="w-8 h-8 rounded-full ring-2 ring-white dark:ring-[#090D16] bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-[11px] text-slate-700 dark:text-slate-200">
+                      AK
+                    </div>
+                    <div className="w-8 h-8 rounded-full ring-2 ring-white dark:ring-[#090D16] bg-rose-200 dark:bg-rose-950 flex items-center justify-center font-bold text-[11px] text-rose-800 dark:text-rose-200">
+                      DR
+                    </div>
+                    <div className="w-8 h-8 rounded-full ring-2 ring-white dark:ring-[#090D16] bg-amber-200 dark:bg-amber-950 flex items-center justify-center font-bold text-[11px] text-amber-800 dark:text-amber-200">
+                      RP
+                    </div>
+                    <div className="w-8 h-8 rounded-full ring-2 ring-white dark:ring-[#090D16] bg-rose-100 dark:bg-rose-900/60 flex items-center justify-center text-[10px] font-black text-primary">
+                      +{totalVisits > 1000 ? `${Math.floor(totalVisits / 1000)}k` : totalVisits}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-1.5">
+                      <div className="flex text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                            star
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-xs font-bold text-slate-800 dark:text-white">4.9 / 5.0</span>
+                      <button
+                        onClick={() => window.dispatchEvent(new CustomEvent('open-rating-modal'))}
+                        className="ml-1 text-[10px] font-bold text-primary hover:text-primary-container dark:text-rose-400 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900/60 px-2 py-0.5 rounded-full border border-primary/20 transition-all cursor-pointer flex items-center gap-1 active:scale-95 shadow-2xs"
+                        title={lang === 'id' ? 'Beri Penilaian & Ulasan untuk KlikPDF' : 'Rate KlikPDF'}
+                      >
+                        <span className="material-symbols-outlined text-[12px]">rate_review</span>
+                        <span>{lang === 'id' ? 'Ulas' : 'Review'}</span>
+                      </button>
+                    </div>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                      {lang === 'id'
+                        ? `${totalVisits.toLocaleString('id-ID')}+ pengguna terbantu di Indonesia`
+                        : `${totalVisits.toLocaleString('en-US')}+ happy users worldwide`}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Real-time Online Indicator */}
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/70 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 text-xs font-semibold text-slate-600 dark:text-slate-300 shadow-2xs">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span>{activeUsers} {lang === 'id' ? 'Pengguna Sedang Aktif' : 'Active Users Online'}</span>
                 </div>
               </div>
             </div>
@@ -411,12 +421,13 @@ export const HomePage = ({ onSelectTool }) => {
       </section>
 
       {/* SECTION 2: BENTO PRODUCTIVITY GRID */}
-      <section className="w-full py-16 lg:py-20 bg-surface dark:bg-[#0c0e14] transition-colors duration-200" id="bento-grid">
+      <section className="w-full py-16 lg:py-24 bg-slate-50/60 dark:bg-[#090D16] border-t border-slate-200/60 dark:border-white/[0.06] transition-colors duration-200" id="bento-grid">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
             <div className="max-w-xl">
-              <span className="text-xs font-bold uppercase tracking-wider text-primary">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/40 text-primary border border-rose-200 dark:border-rose-900/40 text-xs font-bold uppercase tracking-wider mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
                 Bento Productivity Suite
               </span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-text-primary dark:text-white tracking-tight mt-1">
@@ -430,7 +441,7 @@ export const HomePage = ({ onSelectTool }) => {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-semibold text-text-muted dark:text-slate-400">Status:</span>
-              <span className="text-xs font-bold text-text-primary dark:text-white bg-white dark:bg-[#18181B] px-3 py-1 rounded-full border border-border-subtle dark:border-slate-800 shadow-xs">
+              <span className="aura-pill text-xs font-bold text-text-primary dark:text-white bg-white/80 dark:bg-[#0E1320]/80 px-3.5 py-1 rounded-full border border-slate-200/80 dark:border-white/10 shadow-2xs">
                 {lang === 'id' ? '24 Alat Berjalan Normal' : '24 Tools Running Normally'}
               </span>
             </div>
@@ -441,12 +452,12 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO HERO CARD 1: KOMPRES PDF (Span 7 col) */}
             <div 
               onClick={() => onSelectTool('compress')}
-              className="lg:col-span-7 bg-white dark:bg-[#18181B] rounded-3xl border border-border-subtle/90 dark:border-slate-800 p-5 sm:p-8 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
+              className="aura-card lg:col-span-7 bg-white/85 dark:bg-[#0E1320]/80 rounded-3xl border border-slate-200/80 dark:border-white/[0.08] p-5 sm:p-8 backdrop-blur-xl shadow-xs hover:shadow-2xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
             >
-              <div className="absolute -right-16 -top-16 w-52 h-52 bg-rose-50 dark:bg-rose-950/30 rounded-full blur-2xl group-hover:bg-rose-100 dark:group-hover:bg-rose-900/40 transition-all"></div>
+              <div className="absolute -right-16 -top-16 w-52 h-52 bg-rose-500/10 dark:bg-rose-500/15 rounded-full blur-3xl group-hover:scale-125 transition-all duration-500 pointer-events-none"></div>
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-rose-100 dark:bg-rose-950/60 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-500/20 to-primary/10 dark:from-rose-500/30 dark:to-primary/20 text-primary border border-rose-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <span className="material-symbols-outlined text-[28px]">compress</span>
                   </div>
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-primary text-white shadow-xs shadow-primary/20">
@@ -463,7 +474,7 @@ export const HomePage = ({ onSelectTool }) => {
                 </p>
 
                 {/* Interactive mini graphic visualization */}
-                <div className="mt-6 p-4 rounded-2xl bg-surface-canvas dark:bg-[#12151f] border border-border-subtle/80 dark:border-slate-800">
+                <div className="mt-6 p-4 rounded-2xl bg-slate-50/80 dark:bg-[#090D16]/70 border border-slate-200/70 dark:border-white/[0.06]">
                   <div className="flex items-center justify-between text-xs font-semibold text-text-primary dark:text-white mb-2">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-500"></span> 
@@ -472,8 +483,8 @@ export const HomePage = ({ onSelectTool }) => {
                     <span className="text-primary font-bold">{lang === 'id' ? 'Hemat 82%' : 'Saved 82%'}</span>
                   </div>
                   {/* Progress bar comparison */}
-                  <div className="w-full bg-slate-200 dark:bg-slate-700 h-3 rounded-full overflow-hidden flex">
-                    <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '18%' }}></div>
+                  <div className="w-full bg-slate-200 dark:bg-slate-800 h-3 rounded-full overflow-hidden flex">
+                    <div className="bg-gradient-to-r from-crimson-primary to-primary h-full rounded-full transition-all duration-500" style={{ width: '18%' }}></div>
                   </div>
                   <div className="flex justify-between items-center text-[11px] text-text-muted dark:text-slate-400 mt-2">
                     <span>{lang === 'id' ? 'Ukuran Awal:' : 'Original Size:'} <strong className="text-slate-700 dark:text-slate-200">15.0 MB</strong></span>
@@ -482,7 +493,7 @@ export const HomePage = ({ onSelectTool }) => {
                 </div>
               </div>
 
-              <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between">
                 <span className="text-xs text-text-muted dark:text-slate-400 flex items-center gap-1">
                   <span className="material-symbols-outlined text-[16px] text-emerald-500">speed</span> 
                   <span>{lang === 'id' ? 'Proses < 3 detik' : 'Processed in < 3s'}</span>
@@ -497,11 +508,11 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO HERO CARD 2: GABUNGKAN PDF (Span 5 col) */}
             <div 
               onClick={() => onSelectTool('merge')}
-              className="lg:col-span-5 bg-white dark:bg-[#18181B] rounded-3xl border border-border-subtle/90 dark:border-slate-800 p-5 sm:p-8 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
+              className="aura-card lg:col-span-5 bg-white/85 dark:bg-[#0E1320]/80 rounded-3xl border border-slate-200/80 dark:border-white/[0.08] p-5 sm:p-8 backdrop-blur-xl shadow-xs hover:shadow-2xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
             >
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-100/80 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 border border-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <span className="material-symbols-outlined text-[28px]">call_merge</span>
                   </div>
                   <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800">
@@ -519,22 +530,22 @@ export const HomePage = ({ onSelectTool }) => {
 
                 {/* Stacked Preview Visual */}
                 <div className="mt-6 flex items-center justify-center gap-2 py-2">
-                  <div className="w-16 h-20 rounded-lg bg-surface-subtle dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col items-center justify-center text-[10px] font-bold text-slate-500 -rotate-6 transform group-hover:-rotate-12 transition-transform">
+                  <div className="w-16 h-20 rounded-lg bg-surface-subtle dark:bg-[#141A29] border border-slate-200 dark:border-white/[0.08] shadow-xs flex flex-col items-center justify-center text-[10px] font-bold text-slate-500 -rotate-6 transform group-hover:-rotate-12 transition-transform">
                     <span className="material-symbols-outlined text-rose-500 text-[18px]">description</span>
                     <span>{lang === 'id' ? 'Bab 1' : 'Part 1'}</span>
                   </div>
-                  <div className="w-16 h-20 rounded-lg bg-white dark:bg-[#202431] border-2 border-primary shadow-md flex flex-col items-center justify-center text-[10px] font-bold text-primary z-10 scale-105">
+                  <div className="w-16 h-20 rounded-lg bg-white dark:bg-[#182033] border-2 border-primary shadow-md flex flex-col items-center justify-center text-[10px] font-bold text-primary z-10 scale-105">
                     <span className="material-symbols-outlined text-primary text-[20px]">add</span>
                     <span>{lang === 'id' ? 'Bab 2' : 'Part 2'}</span>
                   </div>
-                  <div className="w-16 h-20 rounded-lg bg-surface-subtle dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col items-center justify-center text-[10px] font-bold text-slate-500 rotate-6 transform group-hover:rotate-12 transition-transform">
+                  <div className="w-16 h-20 rounded-lg bg-surface-subtle dark:bg-[#141A29] border border-slate-200 dark:border-white/[0.08] shadow-xs flex flex-col items-center justify-center text-[10px] font-bold text-slate-500 rotate-6 transform group-hover:rotate-12 transition-transform">
                     <span className="material-symbols-outlined text-rose-500 text-[18px]">description</span>
                     <span>{lang === 'id' ? 'Bab 3' : 'Part 3'}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between">
                 <span className="text-xs text-text-muted dark:text-slate-400">
                   {lang === 'id' ? 'Drag & drop urutan' : 'Drag & drop order'}
                 </span>
@@ -548,11 +559,11 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO MICRO-CARD 3: PDF ke Word (Span 4 col) */}
             <div 
               onClick={() => onSelectTool('pdf-to-word')}
-              className="lg:col-span-4 bg-white dark:bg-[#18181B] rounded-2xl border border-border-subtle/90 dark:border-slate-800 p-5 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer"
+              className="aura-card lg:col-span-4 bg-white/85 dark:bg-[#0E1320]/80 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] p-5 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-500/20 flex items-center justify-center group-hover:scale-105 transition-transform">
                     <span className="material-symbols-outlined text-[22px]">description</span>
                   </div>
                   <span className="text-[11px] font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded-full">DOCX</span>
@@ -566,7 +577,7 @@ export const HomePage = ({ onSelectTool }) => {
                     : 'High-precision conversion preserving text layouts, tables, and formatting.'}
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-primary">
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between text-xs font-bold text-primary">
                 <span>{lang === 'id' ? 'Buka Alat' : 'Open Tool'}</span>
                 <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </div>
@@ -575,11 +586,11 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO MICRO-CARD 4: Pisahkan PDF (Span 4 col) */}
             <div 
               onClick={() => onSelectTool('split')}
-              className="lg:col-span-4 bg-white dark:bg-[#18181B] rounded-2xl border border-border-subtle/90 dark:border-slate-800 p-5 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer"
+              className="aura-card lg:col-span-4 bg-white/85 dark:bg-[#0E1320]/80 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] p-5 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 border border-purple-500/20 flex items-center justify-center group-hover:scale-105 transition-transform">
                     <span className="material-symbols-outlined text-[22px]">call_split</span>
                   </div>
                   <span className="text-[11px] font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/40 px-2 py-0.5 rounded-full">
@@ -595,7 +606,7 @@ export const HomePage = ({ onSelectTool }) => {
                     : 'Extract specific pages or split each page into a separate document.'}
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-primary">
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between text-xs font-bold text-primary">
                 <span>{lang === 'id' ? 'Buka Alat' : 'Open Tool'}</span>
                 <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </div>
@@ -604,11 +615,11 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO MICRO-CARD 5: Tanda Tangan Digital (Span 4 col) */}
             <div 
               onClick={() => onSelectTool('sign')}
-              className="lg:col-span-4 bg-white dark:bg-[#18181B] rounded-2xl border border-border-subtle/90 dark:border-slate-800 p-5 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer"
+              className="aura-card lg:col-span-4 bg-white/85 dark:bg-[#0E1320]/80 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] p-5 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center justify-center group-hover:scale-105 transition-transform">
                     <span className="material-symbols-outlined text-[22px]">draw</span>
                   </div>
                   <span className="text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full">Legal e-Sign</span>
@@ -622,7 +633,7 @@ export const HomePage = ({ onSelectTool }) => {
                     : 'Add your legal initials or signature in seconds on mobile or PC.'}
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-primary">
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between text-xs font-bold text-primary">
                 <span>{lang === 'id' ? 'Buka Alat' : 'Open Tool'}</span>
                 <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </div>
@@ -631,9 +642,9 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO MICRO-CARD 6: Kunci & Enkripsi (Span 3 col) */}
             <div 
               onClick={() => onSelectTool('protect')}
-              className="lg:col-span-3 bg-white dark:bg-[#18181B] rounded-2xl border border-border-subtle/90 dark:border-slate-800 p-4 sm:p-5 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-200 flex items-center gap-3 group cursor-pointer"
+              className="aura-card lg:col-span-3 bg-white/85 dark:bg-[#0E1320]/80 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] p-4 sm:p-5 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-200 flex items-center gap-3 group cursor-pointer"
             >
-              <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-[#141A29] text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
                 <span className="material-symbols-outlined text-[20px]">lock</span>
               </div>
               <div>
@@ -649,7 +660,7 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO MICRO-CARD 7: PDF ke Excel (Span 3 col) */}
             <div 
               onClick={() => onSelectTool('pdf-to-excel')}
-              className="lg:col-span-3 bg-white dark:bg-[#18181B] rounded-2xl border border-border-subtle/90 dark:border-slate-800 p-4 sm:p-5 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-200 flex items-center gap-3 group cursor-pointer"
+              className="aura-card lg:col-span-3 bg-white/85 dark:bg-[#0E1320]/80 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] p-4 sm:p-5 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-200 flex items-center gap-3 group cursor-pointer"
             >
               <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
                 <span className="material-symbols-outlined text-[20px]">table_chart</span>
@@ -667,7 +678,7 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO MICRO-CARD 8: Putar & Atur Hal (Span 3 col) */}
             <div 
               onClick={() => onSelectTool('rotate')}
-              className="lg:col-span-3 bg-white dark:bg-[#18181B] rounded-2xl border border-border-subtle/90 dark:border-slate-800 p-4 sm:p-5 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-200 flex items-center gap-3 group cursor-pointer"
+              className="aura-card lg:col-span-3 bg-white/85 dark:bg-[#0E1320]/80 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] p-4 sm:p-5 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-200 flex items-center gap-3 group cursor-pointer"
             >
               <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
                 <span className="material-symbols-outlined text-[20px]">rotate_right</span>
@@ -685,7 +696,7 @@ export const HomePage = ({ onSelectTool }) => {
             {/* BENTO MICRO-CARD 9: Watermark PDF (Span 3 col) */}
             <div 
               onClick={() => onSelectTool('watermark')}
-              className="lg:col-span-3 bg-white dark:bg-[#18181B] rounded-2xl border border-border-subtle/90 dark:border-slate-800 p-4 sm:p-5 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-200 flex items-center gap-3 group cursor-pointer"
+              className="aura-card lg:col-span-3 bg-white/85 dark:bg-[#0E1320]/80 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] p-4 sm:p-5 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-200 flex items-center gap-3 group cursor-pointer"
             >
               <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
                 <span className="material-symbols-outlined text-[20px]">branding_watermark</span>
@@ -702,14 +713,14 @@ export const HomePage = ({ onSelectTool }) => {
           </div>
 
           {/* View all button */}
-          <div className="mt-10 flex justify-center">
+          <div className="mt-12 flex justify-center">
             <button
               onClick={() => {
                 setShowAllTools(true);
                 const el = document.getElementById('semua-alat');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-[#18181B] border border-border-subtle dark:border-slate-800 hover:border-primary text-text-primary dark:text-white font-bold text-xs sm:text-sm shadow-xs transition-all hover:shadow-md cursor-pointer"
+              className="aura-pill inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white dark:bg-[#0E1320] border border-slate-200/80 dark:border-white/10 hover:border-primary text-text-primary dark:text-white font-bold text-xs sm:text-sm shadow-2xs hover:shadow-md transition-all cursor-pointer"
             >
               <span>{lang === 'id' ? 'Lihat Semua 24+ Alat KlikPDF' : 'View All 24+ KlikPDF Tools'}</span>
               <span className="material-symbols-outlined text-[18px] text-primary">east</span>
@@ -719,10 +730,11 @@ export const HomePage = ({ onSelectTool }) => {
       </section>
 
       {/* SECTION 3: LIVE PREVIEW PERBANDINGAN SEBELUM VS SESUDAH KOMPRESI */}
-      <section className="w-full py-16 lg:py-20 bg-surface-canvas dark:bg-[#0f1117] border-y border-border-subtle/80 dark:border-slate-800 transition-colors duration-200">
+      <section className="w-full py-16 lg:py-24 bg-slate-50/70 dark:bg-[#0B0F1A] border-y border-slate-200/60 dark:border-white/[0.06] transition-colors duration-200">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-primary">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/40 text-primary border border-rose-200 dark:border-rose-900/40 text-xs font-bold uppercase tracking-wider mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
               {lang === 'id' ? 'Teknologi Kompresi Adaptif' : 'Adaptive Compression Technology'}
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-text-primary dark:text-white tracking-tight mt-1">
@@ -736,10 +748,10 @@ export const HomePage = ({ onSelectTool }) => {
           </div>
 
           {/* Interactive Comparison Container */}
-          <div className="max-w-4xl mx-auto bg-white dark:bg-[#18181B] rounded-3xl p-6 sm:p-8 shadow-xl border border-border-subtle dark:border-slate-800">
+          <div className="aura-card max-w-4xl mx-auto bg-white/85 dark:bg-[#0E1320]/80 rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200/80 dark:border-white/[0.08] backdrop-blur-xl">
             {/* Top Comparison Metadata Bar */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 mb-6 border-b border-border-subtle/80 dark:border-slate-800 text-center">
-              <div className="p-3 rounded-2xl bg-surface-subtle dark:bg-[#12151f]">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 mb-6 border-b border-slate-200/70 dark:border-white/[0.06] text-center">
+              <div className="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-[#141A29]/70 border border-slate-200/60 dark:border-white/[0.06]">
                 <span className="text-xs text-text-muted dark:text-slate-400 font-medium block">
                   {lang === 'id' ? 'Sebelum Kompresi' : 'Before Compression'}
                 </span>
@@ -748,7 +760,7 @@ export const HomePage = ({ onSelectTool }) => {
                   {lang === 'id' ? 'Lambat saat dikirim email' : 'Slow when sending via email'}
                 </span>
               </div>
-              <div className="p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/40 flex flex-col justify-center items-center">
+              <div className="p-3.5 rounded-2xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200/60 dark:border-rose-900/40 flex flex-col justify-center items-center">
                 <span className="text-xs text-primary font-bold block">
                   {lang === 'id' ? 'Penyusutan Efisien' : 'Efficient Reduction'}
                 </span>
@@ -757,7 +769,7 @@ export const HomePage = ({ onSelectTool }) => {
                   {lang === 'id' ? 'Kualitas tetap 100% tajam' : '100% sharp quality preserved'}
                 </span>
               </div>
-              <div className="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40">
+              <div className="p-3.5 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-900/40">
                 <span className="text-xs text-emerald-700 dark:text-emerald-400 font-medium block">
                   {lang === 'id' ? 'Hasil Sesudah Kompres' : 'After Compression Result'}
                 </span>
@@ -772,26 +784,26 @@ export const HomePage = ({ onSelectTool }) => {
             <div 
               onTouchMove={handleComparisonTouch}
               onTouchStart={handleComparisonTouch}
-              className="relative w-full h-[280px] sm:h-[340px] bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden border border-border-subtle dark:border-slate-800 select-none touch-none"
+              className="relative w-full h-[280px] sm:h-[340px] bg-slate-100 dark:bg-[#090D16] rounded-2xl overflow-hidden border border-slate-200 dark:border-white/[0.08] select-none touch-none"
             >
               {/* BEFORE BACKGROUND (Full view) */}
-              <div className="absolute inset-0 bg-[#F8FAFC] dark:bg-[#131622] p-6 sm:p-8 flex flex-col justify-between">
+              <div className="absolute inset-0 bg-[#F8FAFC] dark:bg-[#090D16] p-6 sm:p-8 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/[0.08]">
                     <div className="flex items-center gap-2">
                       <span className="material-symbols-outlined text-rose-500 text-[24px]">picture_as_pdf</span>
                       <span className="font-bold text-sm text-slate-800 dark:text-slate-200">
                         Laporan_Tahunan_Keuangan_2025.pdf
                       </span>
                     </div>
-                    <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-slate-200 dark:bg-white/[0.08] text-slate-700 dark:text-slate-300">
                       15.0 MB
                     </span>
                   </div>
                   <div className="mt-5 space-y-3">
-                    <div className="h-4 bg-slate-300/80 dark:bg-slate-700 rounded w-3/4"></div>
-                    <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded w-full"></div>
-                    <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded w-5/6"></div>
+                    <div className="h-4 bg-slate-300/80 dark:bg-white/10 rounded w-3/4"></div>
+                    <div className="h-3 bg-slate-200 dark:bg-white/[0.06] rounded w-full"></div>
+                    <div className="h-3 bg-slate-200 dark:bg-white/[0.06] rounded w-5/6"></div>
                     <div className="grid grid-cols-2 gap-4 mt-6">
                       <div className="h-20 bg-rose-100/60 dark:bg-rose-950/30 rounded-xl p-3 flex flex-col justify-center">
                         <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
@@ -799,7 +811,7 @@ export const HomePage = ({ onSelectTool }) => {
                         </span>
                         <div className="h-2 bg-rose-300 dark:bg-rose-800 rounded mt-2 w-2/3"></div>
                       </div>
-                      <div className="h-20 bg-slate-200/60 dark:bg-slate-800 rounded-xl p-3 flex flex-col justify-center">
+                      <div className="h-20 bg-slate-200/60 dark:bg-[#141A29] rounded-xl p-3 flex flex-col justify-center">
                         <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                           {lang === 'id' ? 'Matriks Pertumbuhan' : 'Growth Matrix'}
                         </span>
@@ -808,7 +820,7 @@ export const HomePage = ({ onSelectTool }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800 pt-3">
+                <div className="flex items-center justify-between text-xs text-slate-400 border-t border-slate-200 dark:border-white/[0.08] pt-3">
                   <span>{lang === 'id' ? 'Halaman 1 dari 48' : 'Page 1 of 48'}</span>
                   <span className="font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 px-2 py-0.5 rounded">
                     {lang === 'id' ? 'ASLI (15 MB)' : 'ORIGINAL (15 MB)'}
@@ -818,25 +830,25 @@ export const HomePage = ({ onSelectTool }) => {
 
               {/* AFTER LAYER (Clipped overlay) */}
               <div 
-                className="absolute inset-0 bg-white dark:bg-[#1a1e2b] p-6 sm:p-8 flex flex-col justify-between border-r-2 border-primary overflow-hidden"
+                className="absolute inset-0 bg-white dark:bg-[#101626] p-6 sm:p-8 flex flex-col justify-between border-r-2 border-primary overflow-hidden"
                 style={{ width: `${comparisonValue}%` }}
               >
                 <div>
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/[0.08]">
                     <div className="flex items-center gap-2">
                       <span className="material-symbols-outlined text-primary text-[24px]">verified</span>
                       <span className="font-bold text-sm text-text-primary dark:text-white truncate">
                         Laporan_Tahunan_Keuangan_2025_Kompres.pdf
                       </span>
                     </div>
-                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300">
                       1.8 MB
                     </span>
                   </div>
                   <div className="mt-5 space-y-3">
                     <div className="h-4 bg-slate-800 dark:bg-slate-200 rounded w-3/4"></div>
-                    <div className="h-3 bg-slate-400 dark:bg-slate-500 rounded w-full"></div>
-                    <div className="h-3 bg-slate-400 dark:bg-slate-500 rounded w-5/6"></div>
+                    <div className="h-3 bg-slate-400 dark:bg-slate-400 rounded w-full"></div>
+                    <div className="h-3 bg-slate-400 dark:bg-slate-400 rounded w-5/6"></div>
                     <div className="grid grid-cols-2 gap-4 mt-6">
                       <div className="h-20 bg-primary/10 dark:bg-primary/20 rounded-xl p-3 flex flex-col justify-center">
                         <span className="text-xs font-bold text-primary">
@@ -844,7 +856,7 @@ export const HomePage = ({ onSelectTool }) => {
                         </span>
                         <div className="h-2 bg-primary rounded mt-2 w-2/3"></div>
                       </div>
-                      <div className="h-20 bg-slate-100 dark:bg-slate-800 rounded-xl p-3 flex flex-col justify-center">
+                      <div className="h-20 bg-slate-100 dark:bg-[#141A29] rounded-xl p-3 flex flex-col justify-center">
                         <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
                           {lang === 'id' ? 'Matriks Pertumbuhan' : 'Growth Matrix'}
                         </span>
@@ -853,7 +865,7 @@ export const HomePage = ({ onSelectTool }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-xs text-text-muted dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+                <div className="flex items-center justify-between text-xs text-text-muted dark:text-slate-400 border-t border-slate-200 dark:border-white/[0.08] pt-3">
                   <span>{lang === 'id' ? 'Presisi Teks 100% Terjaga' : '100% Text Precision Preserved'}</span>
                   <span className="font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded">
                     {lang === 'id' ? 'HASIL KOMPRES (1.8 MB)' : 'COMPRESSED (1.8 MB)'}
@@ -866,7 +878,7 @@ export const HomePage = ({ onSelectTool }) => {
                 className="absolute top-0 bottom-0 pointer-events-none flex flex-col items-center justify-center"
                 style={{ left: `calc(${comparisonValue}% - 16px)` }}
               >
-                <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shadow-lg ring-4 ring-white/80 dark:ring-slate-900 cursor-ew-resize">
+                <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shadow-lg ring-4 ring-white/80 dark:ring-[#090D16] cursor-ew-resize">
                   <span className="material-symbols-outlined text-[18px]">drag_indicator</span>
                 </div>
               </div>
@@ -878,7 +890,7 @@ export const HomePage = ({ onSelectTool }) => {
                 {lang === 'id' ? 'Hasil (1.8 MB)' : 'Result (1.8 MB)'}
               </span>
               <input
-                className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary"
                 max="100"
                 min="0"
                 type="range"
@@ -894,10 +906,11 @@ export const HomePage = ({ onSelectTool }) => {
       </section>
 
       {/* SECTION 4: 3-STEP FLOW */}
-      <section className="w-full py-16 lg:py-20 bg-surface dark:bg-[#0c0e14] transition-colors duration-200">
+      <section className="w-full py-16 lg:py-24 bg-white dark:bg-[#090D16] transition-colors duration-200">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs font-bold uppercase tracking-wider text-primary">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/40 text-primary border border-rose-200 dark:border-rose-900/40 text-xs font-bold uppercase tracking-wider mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
               {lang === 'id' ? 'Cepat & Tanpa Ribet' : 'Fast & Seamless'}
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-text-primary dark:text-white tracking-tight mt-1">
@@ -911,11 +924,11 @@ export const HomePage = ({ onSelectTool }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#18181B] border border-border-subtle/90 dark:border-slate-800 shadow-xs relative overflow-hidden group hover:shadow-md transition-all">
-              <span className="text-4xl font-black text-slate-100 dark:text-slate-800 group-hover:text-rose-100 dark:group-hover:text-rose-950 transition-colors absolute top-4 right-5 select-none">
+            <div className="aura-card p-6 sm:p-8 rounded-3xl bg-white/85 dark:bg-[#0E1320]/80 border border-slate-200/80 dark:border-white/[0.08] backdrop-blur-xl shadow-xs relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+              <span className="text-5xl font-black text-slate-100 dark:text-white/[0.04] group-hover:text-rose-500/10 transition-colors absolute top-4 right-5 select-none">
                 01
               </span>
-              <div className="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-primary flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-500/20 to-primary/10 dark:from-rose-500/30 dark:to-primary/20 text-primary border border-rose-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                 <span className="material-symbols-outlined text-[24px]">cloud_upload</span>
               </div>
               <h3 className="text-lg font-bold text-text-primary dark:text-white mb-2">
@@ -928,11 +941,11 @@ export const HomePage = ({ onSelectTool }) => {
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#18181B] border border-border-subtle/90 dark:border-slate-800 shadow-xs relative overflow-hidden group hover:shadow-md transition-all">
-              <span className="text-4xl font-black text-slate-100 dark:text-slate-800 group-hover:text-rose-100 dark:group-hover:text-rose-950 transition-colors absolute top-4 right-5 select-none">
+            <div className="aura-card p-6 sm:p-8 rounded-3xl bg-white/85 dark:bg-[#0E1320]/80 border border-slate-200/80 dark:border-white/[0.08] backdrop-blur-xl shadow-xs relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+              <span className="text-5xl font-black text-slate-100 dark:text-white/[0.04] group-hover:text-rose-500/10 transition-colors absolute top-4 right-5 select-none">
                 02
               </span>
-              <div className="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-primary flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-500/20 to-primary/10 dark:from-rose-500/30 dark:to-primary/20 text-primary border border-rose-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                 <span className="material-symbols-outlined text-[24px]">instant_mix</span>
               </div>
               <h3 className="text-lg font-bold text-text-primary dark:text-white mb-2">
@@ -940,16 +953,16 @@ export const HomePage = ({ onSelectTool }) => {
               </h3>
               <p className="text-xs sm:text-sm text-secondary dark:text-slate-400 leading-relaxed">
                 {lang === 'id'
-                  ? 'Pilih preferensi Anda. Server cloud KlikPDF memproses kompresi atau konversi secepat kilat.'
-                  : 'Select your options. KlikPDF cloud servers process compression or conversion at lightning speed.'}
+                  ? 'Pilih preferensi Anda. Mesin client-side & server KlikPDF memproses kompresi atau konversi secepat kilat.'
+                  : 'Select your options. KlikPDF client engine processes compression or conversion at lightning speed.'}
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#18181B] border border-border-subtle/90 dark:border-slate-800 shadow-xs relative overflow-hidden group hover:shadow-md transition-all">
-              <span className="text-4xl font-black text-slate-100 dark:text-slate-800 group-hover:text-rose-100 dark:group-hover:text-rose-950 transition-colors absolute top-4 right-5 select-none">
+            <div className="aura-card p-6 sm:p-8 rounded-3xl bg-white/85 dark:bg-[#0E1320]/80 border border-slate-200/80 dark:border-white/[0.08] backdrop-blur-xl shadow-xs relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+              <span className="text-5xl font-black text-slate-100 dark:text-white/[0.04] group-hover:text-emerald-500/10 transition-colors absolute top-4 right-5 select-none">
                 03
               </span>
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                 <span className="material-symbols-outlined text-[24px]">file_download_done</span>
               </div>
               <h3 className="text-lg font-bold text-text-primary dark:text-white mb-2">
@@ -966,13 +979,13 @@ export const HomePage = ({ onSelectTool }) => {
       </section>
 
       {/* SECTION 5: BOTTOM HIGH-CONVERSION CTA BANNER */}
-      <section className="w-full py-12 lg:py-16 bg-surface dark:bg-[#0c0e14] transition-colors duration-200">
+      <section className="w-full py-12 lg:py-16 bg-slate-50/60 dark:bg-[#090D16] transition-colors duration-200">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-slate-900 dark:bg-[#141724] text-white p-8 sm:p-12 relative overflow-hidden shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-slate-800">
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/30 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="rounded-3xl bg-gradient-to-br from-[#121829] via-[#0E1320] to-[#090D16] text-white p-8 sm:p-14 relative overflow-hidden shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-white/[0.1]">
+            <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-rose-500/20 rounded-full blur-3xl pointer-events-none"></div>
             
             <div className="max-w-xl relative z-10 text-center lg:text-left">
-              <span className="px-3 py-1 rounded-full bg-white/10 text-rose-300 text-xs font-semibold inline-block mb-3">
+              <span className="px-3 py-1 rounded-full bg-white/10 text-rose-300 text-xs font-semibold inline-block mb-3 border border-white/10">
                 {lang === 'id' ? 'Siap Tingkatkan Efisiensi Kerja?' : 'Ready to Boost Productivity?'}
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
@@ -987,7 +1000,7 @@ export const HomePage = ({ onSelectTool }) => {
 
             <div className="relative z-10 shrink-0 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
               <button
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/30 transition-all transform hover:-translate-y-0.5 cursor-pointer active:scale-95"
+                className="btn-shimmer w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-crimson-primary via-primary to-rose-600 hover:from-primary hover:to-crimson-dark text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-rose-500/30 transition-all transform hover:-translate-y-0.5 cursor-pointer active:scale-95"
                 onClick={() => {
                   const el = document.getElementById('dropzone-box');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -1004,7 +1017,7 @@ export const HomePage = ({ onSelectTool }) => {
       </section>
 
       {/* SECTION 6: COMPLETE 24+ TOOLS CATALOG WITH FILTER TABS */}
-      <section className="w-full py-16 bg-surface-canvas dark:bg-[#0f1117] border-t border-border-subtle/80 dark:border-slate-800 transition-colors duration-200" id="semua-alat">
+      <section className="w-full py-16 lg:py-24 bg-slate-50/70 dark:bg-[#0B0F1A] border-t border-slate-200/60 dark:border-white/[0.06] transition-colors duration-200" id="semua-alat">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto mb-10">
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-rose-100 dark:bg-rose-950/60 text-primary font-bold text-xs uppercase tracking-wider mb-4 border border-rose-200 dark:border-rose-900/40 shadow-xs">
@@ -1033,10 +1046,10 @@ export const HomePage = ({ onSelectTool }) => {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                  className={`aura-pill px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                     activeCategory === cat.id
-                      ? 'bg-primary text-white shadow-md shadow-primary/20 scale-105'
-                      : 'bg-white dark:bg-[#18181B] text-secondary dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-border-subtle dark:border-slate-800'
+                      ? 'bg-primary text-white shadow-md shadow-rose-500/25 scale-105'
+                      : 'bg-white/80 dark:bg-[#0E1320]/80 text-secondary dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06] border border-slate-200/80 dark:border-white/10'
                   }`}
                 >
                   {cat.label}
@@ -1067,7 +1080,7 @@ export const HomePage = ({ onSelectTool }) => {
               {faqs.map((faq, idx) => (
                 <div 
                   key={idx} 
-                  className="bg-white dark:bg-[#18181B] rounded-2xl border border-border-subtle dark:border-slate-800 overflow-hidden shadow-xs transition-colors"
+                  className="aura-card bg-white/85 dark:bg-[#0E1320]/80 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] overflow-hidden shadow-2xs transition-colors backdrop-blur-md"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
@@ -1079,7 +1092,7 @@ export const HomePage = ({ onSelectTool }) => {
                     </span>
                   </button>
                   {openFaq === idx && (
-                    <div className="px-5 pb-5 text-xs sm:text-sm text-secondary dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 pt-3 leading-relaxed">
+                    <div className="px-5 pb-5 text-xs sm:text-sm text-secondary dark:text-slate-300 border-t border-slate-100 dark:border-white/[0.06] pt-3 leading-relaxed">
                       {faq.a}
                     </div>
                   )}
@@ -1092,12 +1105,12 @@ export const HomePage = ({ onSelectTool }) => {
 
       {/* Smart Contextual Action Modal when user drops or selects any file */}
       {showActionModal && droppedFiles.length > 0 && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4 animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-[#18181B] rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl border border-border-subtle dark:border-slate-800 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-in fade-in duration-200">
+          <div className="aura-dock bg-white/95 dark:bg-[#0E1320]/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl border border-slate-200/80 dark:border-white/[0.1] max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="flex items-start justify-between mb-5 pb-4 border-b border-border-subtle/80 dark:border-slate-800">
+            <div className="flex items-start justify-between mb-5 pb-4 border-b border-slate-100 dark:border-white/[0.08]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-rose-50 dark:bg-rose-950/60 text-primary flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-500/20 to-primary/10 dark:from-rose-500/30 dark:to-primary/20 text-primary border border-rose-500/20 flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined text-[24px]">task_alt</span>
                 </div>
                 <div>
@@ -1109,7 +1122,7 @@ export const HomePage = ({ onSelectTool }) => {
                       {droppedFiles[0]?.name}
                     </span>
                     {droppedFiles[0]?.size && (
-                      <span className="text-[11px] px-2 py-0.5 rounded bg-surface-subtle dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono">
+                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.08] text-slate-600 dark:text-slate-300 font-mono">
                         {(droppedFiles[0].size / (1024 * 1024)).toFixed(2)} MB
                       </span>
                     )}
@@ -1119,7 +1132,7 @@ export const HomePage = ({ onSelectTool }) => {
 
               <button
                 onClick={() => setShowActionModal(false)}
-                className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-surface-subtle dark:hover:bg-slate-800 text-lg font-bold transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.08] text-lg font-bold transition-colors cursor-pointer"
                 title={lang === 'id' ? 'Tutup' : 'Close'}
               >
                 ✕
@@ -1138,7 +1151,7 @@ export const HomePage = ({ onSelectTool }) => {
               if (isWord) {
                 return (
                   <div className="my-4 space-y-4">
-                    <div className="p-4 rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50">
+                    <div className="p-4 rounded-2xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50">
                       <div className="flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-blue-300 mb-1">
                         <span className="material-symbols-outlined text-[18px]">info</span>
                         <span>{lang === 'id' ? 'Dokumen Microsoft Word Terdeteksi' : 'Microsoft Word Document Detected'}</span>
@@ -1152,7 +1165,7 @@ export const HomePage = ({ onSelectTool }) => {
 
                     <button
                       onClick={() => handleQuickModalAction('word-to-pdf')}
-                      className="w-full p-5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-left transition-all duration-200 flex items-center justify-between shadow-lg shadow-blue-500/25 group cursor-pointer"
+                      className="btn-shimmer w-full p-5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold text-left transition-all duration-200 flex items-center justify-between shadow-lg shadow-blue-500/25 group cursor-pointer"
                     >
                       <div className="flex items-center gap-3.5">
                         <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
@@ -1187,7 +1200,7 @@ export const HomePage = ({ onSelectTool }) => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <button
                         onClick={() => handleQuickModalAction('hd-image')}
-                        className="p-5 text-left rounded-2xl border-2 border-purple-500/60 bg-purple-50/50 dark:bg-purple-950/20 hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer shadow-xs"
+                        className="aura-card p-5 text-left rounded-2xl border-2 border-purple-500/40 bg-purple-50/50 dark:bg-purple-950/20 hover:bg-purple-100/70 dark:hover:bg-purple-900/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer shadow-xs"
                       >
                         <div>
                           <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-300 flex items-center justify-center mb-3">
@@ -1210,7 +1223,7 @@ export const HomePage = ({ onSelectTool }) => {
 
                       <button
                         onClick={() => handleQuickModalAction('image-to-pdf')}
-                        className="p-5 text-left rounded-2xl border-2 border-orange-500/60 bg-orange-50/50 dark:bg-orange-950/20 hover:bg-orange-100 dark:hover:bg-orange-900/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer shadow-xs"
+                        className="aura-card p-5 text-left rounded-2xl border-2 border-orange-500/40 bg-orange-50/50 dark:bg-orange-950/20 hover:bg-orange-100/70 dark:hover:bg-orange-900/40 transition-all duration-200 flex flex-col justify-between group cursor-pointer shadow-xs"
                       >
                         <div>
                           <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-300 flex items-center justify-center mb-3">
@@ -1241,7 +1254,7 @@ export const HomePage = ({ onSelectTool }) => {
                   <div className="my-4 space-y-3">
                     <button
                       onClick={() => handleQuickModalAction('excel-to-pdf')}
-                      className="w-full p-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-left transition-all duration-200 flex items-center justify-between shadow-lg shadow-emerald-500/25 group cursor-pointer"
+                      className="btn-shimmer w-full p-5 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold text-left transition-all duration-200 flex items-center justify-between shadow-lg shadow-emerald-500/25 group cursor-pointer"
                     >
                       <div className="flex items-center gap-3.5">
                         <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
@@ -1272,7 +1285,7 @@ export const HomePage = ({ onSelectTool }) => {
                   <div className="my-4 space-y-3">
                     <button
                       onClick={() => handleQuickModalAction('powerpoint-to-pdf')}
-                      className="w-full p-5 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-left transition-all duration-200 flex items-center justify-between shadow-lg shadow-orange-500/25 group cursor-pointer"
+                      className="btn-shimmer w-full p-5 rounded-2xl bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 hover:from-orange-700 hover:to-amber-800 text-white font-bold text-left transition-all duration-200 flex items-center justify-between shadow-lg shadow-orange-500/25 group cursor-pointer"
                     >
                       <div className="flex items-center gap-3.5">
                         <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
@@ -1308,9 +1321,9 @@ export const HomePage = ({ onSelectTool }) => {
                     {/* Action 1: Kompres PDF */}
                     <button
                       onClick={() => handleQuickModalAction('compress')}
-                      className="p-4 rounded-2xl border border-border-subtle dark:border-slate-800 hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
+                      className="aura-card p-4 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-950/60 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500/20 to-primary/10 dark:from-rose-500/30 dark:to-primary/20 text-primary border border-rose-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined text-[22px]">compress</span>
                       </div>
                       <div>
@@ -1329,9 +1342,9 @@ export const HomePage = ({ onSelectTool }) => {
                     {/* Action 2: Gabungkan PDF */}
                     <button
                       onClick={() => handleQuickModalAction('merge')}
-                      className="p-4 rounded-2xl border border-border-subtle dark:border-slate-800 hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
+                      className="aura-card p-4 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-950/60 text-orange-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-orange-100/80 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined text-[22px]">call_merge</span>
                       </div>
                       <div>
@@ -1347,9 +1360,9 @@ export const HomePage = ({ onSelectTool }) => {
                     {/* Action 3: PDF ke Word */}
                     <button
                       onClick={() => handleQuickModalAction('pdf-to-word')}
-                      className="p-4 rounded-2xl border border-border-subtle dark:border-slate-800 hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
+                      className="aura-card p-4 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined text-[22px]">description</span>
                       </div>
                       <div>
@@ -1365,9 +1378,9 @@ export const HomePage = ({ onSelectTool }) => {
                     {/* Action 4: Pisahkan PDF */}
                     <button
                       onClick={() => handleQuickModalAction('split')}
-                      className="p-4 rounded-2xl border border-border-subtle dark:border-slate-800 hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
+                      className="aura-card p-4 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950/60 text-purple-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined text-[22px]">call_split</span>
                       </div>
                       <div>
@@ -1383,9 +1396,9 @@ export const HomePage = ({ onSelectTool }) => {
                     {/* Action 5: Tanda Tangan PDF */}
                     <button
                       onClick={() => handleQuickModalAction('sign')}
-                      className="p-4 rounded-2xl border border-border-subtle dark:border-slate-800 hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
+                      className="aura-card p-4 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined text-[22px]">draw</span>
                       </div>
                       <div>
@@ -1401,9 +1414,9 @@ export const HomePage = ({ onSelectTool }) => {
                     {/* Action 6: Kunci Dokumen */}
                     <button
                       onClick={() => handleQuickModalAction('protect')}
-                      className="p-4 rounded-2xl border border-border-subtle dark:border-slate-800 hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
+                      className="aura-card p-4 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-[#141A29] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/[0.06] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined text-[22px]">lock</span>
                       </div>
                       <div>
@@ -1419,9 +1432,9 @@ export const HomePage = ({ onSelectTool }) => {
                     {/* Action 7: PDF ke Excel */}
                     <button
                       onClick={() => handleQuickModalAction('pdf-to-excel')}
-                      className="p-4 rounded-2xl border border-border-subtle dark:border-slate-800 hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
+                      className="aura-card p-4 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined text-[22px]">table_chart</span>
                       </div>
                       <div>
@@ -1437,9 +1450,9 @@ export const HomePage = ({ onSelectTool }) => {
                     {/* Action 8: Putar Halaman */}
                     <button
                       onClick={() => handleQuickModalAction('rotate')}
-                      className="p-4 rounded-2xl border border-border-subtle dark:border-slate-800 hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
+                      className="aura-card p-4 rounded-2xl border border-slate-200/80 dark:border-white/[0.08] hover:border-primary hover:bg-rose-50/40 dark:hover:bg-rose-950/20 text-left transition-all group cursor-pointer shadow-xs flex items-start gap-3"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border border-amber-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined text-[22px]">rotate_right</span>
                       </div>
                       <div>
@@ -1457,7 +1470,7 @@ export const HomePage = ({ onSelectTool }) => {
             })()}
 
             {/* Modal Footer */}
-            <div className="mt-6 pt-4 border-t border-border-subtle/80 dark:border-slate-800 flex items-center justify-between text-xs">
+            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-white/[0.08] flex items-center justify-between text-xs">
               <button
                 onClick={() => {
                   setShowActionModal(false);
@@ -1472,7 +1485,7 @@ export const HomePage = ({ onSelectTool }) => {
 
               <button
                 onClick={() => setShowActionModal(false)}
-                className="px-4 py-2 rounded-xl bg-surface-subtle dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold transition-colors cursor-pointer"
+                className="aura-pill px-4 py-2 rounded-full bg-slate-100 dark:bg-white/[0.08] hover:bg-slate-200 dark:hover:bg-white/[0.12] text-slate-700 dark:text-slate-200 font-bold transition-colors cursor-pointer"
                 type="button"
               >
                 {lang === 'id' ? 'Batal' : 'Cancel'}

@@ -65,21 +65,21 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
   const activeLevel = hoverRating || rating;
 
   return (
-    <div className="max-w-2xl mx-auto my-4 sm:my-12 bg-white dark:bg-[#18181B] border border-border-subtle/90 dark:border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-12 text-center shadow-xl transition-colors duration-200">
-      <div className="w-14 h-14 sm:w-20 sm:h-20 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-6 shadow-xs">
-        <CheckCircle2 size={32} className="sm:w-11 sm:h-11" />
+    <div className="aura-dock max-w-2xl mx-auto my-6 sm:my-12 bg-white/90 dark:bg-[#0E1320]/90 border border-slate-200/80 dark:border-white/[0.08] rounded-3xl p-6 sm:p-12 text-center backdrop-blur-2xl shadow-2xl transition-colors duration-200">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-xs">
+        <CheckCircle2 size={36} className="sm:w-11 sm:h-11" />
       </div>
 
-      <h2 className="text-lg sm:text-3xl font-black text-text-primary dark:text-white mb-1.5 sm:mb-2">
+      <h2 className="text-xl sm:text-3xl font-black text-text-primary dark:text-white mb-2">
         {t('success.title') || 'Dokumen Selesai Diproses!'}
       </h2>
-      <p className="text-xs sm:text-sm text-secondary dark:text-slate-400 mb-4">
+      <p className="text-xs sm:text-sm text-secondary dark:text-slate-400 mb-5">
         {t('success.subtitle') || 'Berkas Anda siap diunduh ke perangkat Anda.'}
       </p>
 
       {fileName && (
-        <div className="mb-5 sm:mb-6">
-          <span className="inline-flex items-center gap-1.5 bg-surface-subtle dark:bg-[#121520] text-slate-700 dark:text-slate-200 px-3.5 py-1.5 rounded-full text-xs font-semibold max-w-full truncate border border-border-subtle dark:border-slate-800">
+        <div className="mb-6">
+          <span className="aura-pill inline-flex items-center gap-1.5 bg-slate-100/80 dark:bg-[#141A29] text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-xs font-semibold max-w-full truncate border border-slate-200/80 dark:border-white/10">
             <span>📄</span>
             <span className="font-bold text-primary truncate max-w-[220px] sm:max-w-xs">{fileName}</span>
           </span>
@@ -90,14 +90,14 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
       <a
         href={downloadUrl}
         download={fileName || 'klikpdf_output.pdf'}
-        className="w-full sm:w-auto bg-primary hover:bg-primary-container active:scale-95 text-white text-base sm:text-xl font-black px-6 sm:px-10 py-3.5 sm:py-4.5 rounded-xl sm:rounded-2xl shadow-xl shadow-primary/25 hover:shadow-2xl transition-all inline-flex items-center justify-center space-x-2.5 sm:space-x-3 mb-6 sm:mb-8 cursor-pointer"
+        className="btn-shimmer w-full sm:w-auto bg-gradient-to-r from-crimson-primary via-primary to-rose-600 hover:from-primary hover:to-crimson-dark active:scale-95 text-white text-base sm:text-lg font-black px-8 sm:px-12 py-4 rounded-full shadow-xl shadow-rose-500/25 hover:shadow-2xl transition-all inline-flex items-center justify-center space-x-2.5 mb-6 sm:mb-8 cursor-pointer"
       >
-        <Download size={20} className="sm:w-6 sm:h-6" />
+        <Download size={22} className="sm:w-6 sm:h-6" />
         <span>{lang === 'id' ? 'Unduh Berkas Sekarang' : 'Download File Now'}</span>
       </a>
 
       {/* Interactive In-Page Rating Prompt */}
-      <div className="mb-6 sm:mb-8 p-4 sm:p-5 rounded-2xl bg-surface-canvas dark:bg-[#121520] border border-border-subtle/80 dark:border-slate-800 text-center transition-all">
+      <div className="aura-card mb-6 sm:mb-8 p-5 sm:p-6 rounded-2xl bg-slate-50/80 dark:bg-[#090D16]/60 border border-slate-200/80 dark:border-white/[0.06] text-center transition-all">
         <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200 mb-2">
           <Heart size={14} className="text-primary fill-current" />
           <span>
@@ -140,7 +140,7 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
 
         {/* Thank you feedback and optional comment */}
         {hasRated && (
-          <div className="mt-3 pt-3 border-t border-border-subtle/60 dark:border-slate-800/80 animate-in fade-in">
+          <div className="mt-3 pt-3 border-t border-slate-200/60 dark:border-white/[0.06] animate-in fade-in">
             <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
               <Check size={14} />
               <span>{lang === 'id' ? 'Terima kasih atas ulasan bintang Anda!' : 'Thank you for your rating!'}</span>
@@ -153,11 +153,11 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
                   value={userComment}
                   onChange={(e) => setUserComment(e.target.value)}
                   placeholder={lang === 'id' ? 'Tulis masukan singkat... (opsional)' : 'Optional feedback comment...'}
-                  className="flex-1 bg-white dark:bg-[#18181B] border border-border-subtle dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="flex-1 bg-white dark:bg-[#090D16] border border-slate-200 dark:border-white/10 rounded-full px-3.5 py-1.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-primary"
                 />
                 <button
                   type="submit"
-                  className="px-3 py-1.5 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-container transition-all cursor-pointer"
+                  className="px-4 py-1.5 rounded-full bg-primary text-white text-xs font-bold hover:bg-primary-container transition-all cursor-pointer shadow-xs"
                 >
                   {lang === 'id' ? 'Kirim' : 'Submit'}
                 </button>
@@ -168,17 +168,17 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 pt-4 border-t border-border-subtle/80 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 pt-4 border-t border-slate-100 dark:border-white/[0.06]">
         <button
           onClick={onReset}
-          className="w-full sm:w-auto flex items-center justify-center space-x-2 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer px-4 py-2.5 rounded-xl hover:bg-surface-subtle dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700 sm:border-0"
+          className="aura-pill w-full sm:w-auto flex items-center justify-center space-x-2 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors cursor-pointer px-5 py-2.5 rounded-full bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 shadow-2xs"
         >
           <RefreshCw size={15} />
           <span>{lang === 'id' ? 'Proses Berkas Lain' : 'Process Another File'}</span>
         </button>
         <button
           onClick={onGoHome}
-          className="w-full sm:w-auto flex items-center justify-center space-x-2 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer px-4 py-2.5 rounded-xl hover:bg-surface-subtle dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700 sm:border-0"
+          className="aura-pill w-full sm:w-auto flex items-center justify-center space-x-2 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors cursor-pointer px-5 py-2.5 rounded-full bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 shadow-2xs"
         >
           <ArrowLeft size={15} />
           <span>{lang === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}</span>

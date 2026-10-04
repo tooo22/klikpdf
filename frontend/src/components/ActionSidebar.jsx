@@ -6,10 +6,10 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
   const { t, lang } = useLanguage();
 
   return (
-    <div className="w-full md:w-80 bg-white dark:bg-[#1E1E22] border-t md:border-t-0 md:border-l border-gray-200 dark:border-[#27272A] p-5 sm:p-6 flex flex-col justify-between transition-colors duration-200">
+    <div className="w-full md:w-80 bg-white/85 dark:bg-[#0E1320]/90 backdrop-blur-2xl border-t md:border-t-0 md:border-l border-slate-200/80 dark:border-white/[0.08] p-5 sm:p-6 flex flex-col justify-between transition-colors duration-200">
       <div>
-        <div className="flex items-center space-x-2 text-gray-900 dark:text-white font-extrabold text-lg border-b border-gray-200 dark:border-[#27272A] pb-4 mb-6">
-          <Settings size={20} className="text-[#E5322D]" />
+        <div className="flex items-center space-x-2 text-slate-900 dark:text-white font-extrabold text-lg border-b border-slate-100 dark:border-white/[0.08] pb-4 mb-6">
+          <Settings size={20} className="text-primary" />
           <span>{lang === 'id' ? `Pengaturan ${tool.name}` : `${tool.nameEn} Settings`}</span>
         </div>
 
@@ -169,11 +169,11 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
       </div>
 
       {/* Sticky Bottom Container on Mobile */}
-      <div className="sticky bottom-0 left-0 right-0 -mx-4 -mb-4 sm:-mx-6 sm:-mb-6 p-3.5 sm:p-4 bg-white/95 dark:bg-[#1E1E22]/95 backdrop-blur-md border-t border-gray-200/80 dark:border-[#27272A] md:static md:mx-0 md:mb-0 md:p-0 md:bg-transparent md:border-0 z-30 mt-6 pb-[max(1rem,env(safe-area-inset-bottom,1rem))]">
+      <div className="sticky bottom-0 left-0 right-0 -mx-4 -mb-4 sm:-mx-6 sm:-mb-6 p-3.5 sm:p-4 bg-white/95 dark:bg-[#0E1320]/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-white/[0.08] md:static md:mx-0 md:mb-0 md:p-0 md:bg-transparent md:border-0 z-30 mt-6 pb-[max(1rem,env(safe-area-inset-bottom,1rem))]">
         <button
           onClick={onProcess}
           disabled={isProcessing}
-          className="w-full bg-[#E5322D] hover:bg-[#C62828] active:scale-95 text-white font-extrabold py-3.5 sm:py-4 px-6 rounded-xl sm:rounded-2xl shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
+          className="btn-shimmer w-full bg-gradient-to-r from-crimson-primary via-primary to-rose-600 hover:from-primary hover:to-crimson-dark active:scale-95 text-white font-extrabold py-3.5 sm:py-4 px-6 rounded-full shadow-xl shadow-rose-500/25 transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
         >
           <span>
             {isProcessing 

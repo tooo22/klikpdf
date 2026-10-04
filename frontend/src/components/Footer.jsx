@@ -25,37 +25,40 @@ export const Footer = ({ onSelectTool, onGoHome }) => {
   };
 
   return (
-    <footer className="w-full bg-slate-50 dark:bg-[#0c0e14] border-t border-border-subtle/80 dark:border-slate-800/80 transition-colors duration-200 pb-[env(safe-area-inset-bottom,0px)]">
+    <footer className="w-full bg-slate-50/80 dark:bg-[#070A12] border-t border-slate-200/80 dark:border-white/[0.08] transition-colors duration-200 pb-[env(safe-area-inset-bottom,0px)]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-border-subtle/80 dark:border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-slate-200/80 dark:border-white/[0.06]">
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-2 flex flex-col gap-3">
             <div 
               onClick={handleBrandClick}
               className="flex items-center gap-2 cursor-pointer group w-fit"
             >
-              <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-crimson-dark via-primary to-rose-500 text-white flex items-center justify-center shadow-md shadow-rose-500/20 group-hover:scale-105 transition-transform duration-200">
                 <span className="material-symbols-outlined text-[20px]">layers</span>
               </div>
-              <span className="text-xl font-extrabold tracking-tight text-text-primary dark:text-white group-hover:text-primary transition-colors">
+              <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors">
                 Klik<span className="text-primary">PDF</span>
+              </span>
+              <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                v2.0
               </span>
             </div>
             
-            <p className="text-xs sm:text-sm text-secondary dark:text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
               {lang === 'id'
                 ? 'Solusi produktivitas PDF terdepan untuk profesional, pelajar, dan bisnis modern di Indonesia. Cepat, aman, dan tanpa biaya langganan.'
                 : 'Leading PDF productivity suite for professionals, students, and modern businesses. Fast, secure, and free forever.'}
             </p>
 
-            <div className="flex flex-wrap items-center gap-2.5 pt-2">
-              <span className="inline-flex items-center gap-1.5 text-xs text-secondary dark:text-slate-300 bg-white dark:bg-[#18181B] px-3 py-1 rounded-full border border-border-subtle/80 dark:border-slate-700 shadow-xs">
-                <span className="material-symbols-outlined text-[15px] text-emerald-500">verified_user</span>
+            <div className="flex flex-wrap items-center gap-2 pt-2">
+              <span className="inline-flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 bg-white dark:bg-white/[0.04] px-3 py-1 rounded-full border border-slate-200 dark:border-white/10 shadow-2xs">
+                <span className="material-symbols-outlined text-[14px] text-emerald-500">verified_user</span>
                 <span>256-bit SSL</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs text-secondary dark:text-slate-300 bg-white dark:bg-[#18181B] px-3 py-1 rounded-full border border-border-subtle/80 dark:border-slate-700 shadow-xs">
-                <span className="material-symbols-outlined text-[15px] text-emerald-500">auto_delete</span>
-                <span>{lang === 'id' ? 'Otomatis Dihapus (2 Jam)' : 'Auto-Deleted (2 Hours)'}</span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 bg-white dark:bg-white/[0.04] px-3 py-1 rounded-full border border-slate-200 dark:border-white/10 shadow-2xs">
+                <span className="material-symbols-outlined text-[14px] text-emerald-500">memory</span>
+                <span>{lang === 'id' ? 'Pemrosesan Klien Lokal' : 'Client-Side Sandbox'}</span>
               </span>
             </div>
           </div>

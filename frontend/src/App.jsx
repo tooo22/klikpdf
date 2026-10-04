@@ -109,7 +109,7 @@ function AppContent() {
   // ==============================================================
   if (systemStatus === 'offline' && !isAdminAuth) {
     return (
-      <div className="min-h-screen bg-[#0f1117] text-white flex flex-col justify-between p-6 sm:p-12 relative overflow-hidden select-none">
+      <div className="min-h-screen bg-[#090D16] text-white flex flex-col justify-between p-6 sm:p-12 relative overflow-hidden select-none">
         {/* Glow ambient background */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/15 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -191,7 +191,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-surface dark:bg-[#0f1117] text-text-primary dark:text-[#E4E4E7] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col justify-between aura-bg dark:bg-[#090D16] text-text-primary dark:text-[#E4E4E7] transition-colors duration-200">
       <div>
         {/* Sticky Admin Warning Banner when System is OFF */}
         {systemStatus === 'offline' && (

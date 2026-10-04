@@ -91,7 +91,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
   const isAllOpen = activeMenu === 'all';
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0f1117]/95 backdrop-blur-xl border-b border-border-subtle/80 dark:border-slate-800 transition-colors duration-200 select-none pt-[env(safe-area-inset-top,0px)]">
+    <header className="sticky top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#090D16]/80 backdrop-blur-2xl border-b border-slate-200/80 dark:border-white/[0.08] transition-colors duration-200 select-none pt-[env(safe-area-inset-top,0px)]">
       <div className="h-16 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         {/* Brand Logo */}
         <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
@@ -99,42 +99,45 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             onClick={handleBrandClick}
             className="flex items-center gap-2 group cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform duration-200">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-crimson-dark via-primary to-rose-500 text-white flex items-center justify-center shadow-md shadow-rose-500/20 group-hover:scale-105 transition-transform duration-200">
               <span className="material-symbols-outlined text-[20px]">layers</span>
             </div>
             <div className="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl">
               <span className="text-text-primary dark:text-white group-hover:text-primary transition-colors">Klik</span>
               <span className="text-primary ml-0.5">PDF</span>
             </div>
+            <span className="hidden sm:inline-flex text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 tracking-wider">
+              v2.0
+            </span>
           </div>
         </div>
 
         {/* Center Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1.5 p-1 rounded-full bg-slate-100/70 dark:bg-white/[0.04] border border-slate-200/70 dark:border-white/[0.06]">
           <button
             onClick={handleScrollToTools}
-            className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-text-primary dark:hover:text-white px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-white dark:hover:bg-white/[0.08] transition-all cursor-pointer"
           >
             {lang === 'id' ? 'Semua Alat' : 'All Tools'}
           </button>
 
           <button
             onClick={() => handleItemClick('merge')}
-            className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-rose-400 px-3.5 py-1.5 rounded-full hover:bg-white dark:hover:bg-white/[0.08] transition-all cursor-pointer"
           >
             {lang === 'id' ? 'Gabungkan PDF' : 'Merge PDF'}
           </button>
 
           <button
             onClick={() => handleItemClick('split')}
-            className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-rose-400 px-3.5 py-1.5 rounded-full hover:bg-white dark:hover:bg-white/[0.08] transition-all cursor-pointer"
           >
             {lang === 'id' ? 'Pisahkan PDF' : 'Split PDF'}
           </button>
 
           <button
             onClick={() => handleItemClick('compress')}
-            className="text-sm font-semibold text-secondary dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-1.5 rounded-lg hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-rose-400 px-3.5 py-1.5 rounded-full hover:bg-white dark:hover:bg-white/[0.08] transition-all cursor-pointer"
           >
             {lang === 'id' ? 'Kompres PDF' : 'Compress PDF'}
           </button>
@@ -146,31 +149,31 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             onMouseLeave={handleMouseLeave}
           >
             <button
-              className={`flex items-center gap-1 text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+              className={`flex items-center gap-1 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
                 isConvertOpen
-                  ? 'text-primary bg-surface-subtle dark:bg-slate-800'
-                  : 'text-secondary dark:text-slate-300 hover:text-text-primary dark:hover:text-white hover:bg-surface-subtle dark:hover:bg-slate-800'
+                  ? 'text-primary dark:text-rose-400 bg-white dark:bg-white/[0.1] shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/[0.08]'
               }`}
             >
               <span>{lang === 'id' ? 'Konversi' : 'Convert'}</span>
               <Icons.ChevronDown
-                size={14}
-                className={`transition-transform duration-200 ${isConvertOpen ? 'rotate-180 text-primary' : 'text-slate-400'}`}
+                size={13}
+                className={`transition-transform duration-200 ${isConvertOpen ? 'rotate-180 text-primary dark:text-rose-400' : 'text-slate-400'}`}
               />
             </button>
 
             {/* Konversi Mega Dropdown Panel */}
             <div
-              className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200 ${
+              className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 ${
                 isConvertOpen
                   ? 'opacity-100 translate-y-0 pointer-events-auto'
                   : 'opacity-0 -translate-y-2 pointer-events-none'
               }`}
             >
-              <div className="w-[520px] bg-white dark:bg-[#18181B] rounded-2xl shadow-2xl border border-border-subtle dark:border-slate-800 p-5 grid grid-cols-2 gap-6 backdrop-blur-md">
+              <div className="w-[520px] bg-white/95 dark:bg-[#0E1320]/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-200/80 dark:border-white/10 p-5 grid grid-cols-2 gap-6">
                 {CONVERT_COLUMNS.map((col, colIdx) => (
                   <div key={colIdx} className="space-y-1.5">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2 px-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2 px-2">
                       {lang === 'id' ? col.titleId : col.title}
                     </span>
                     {col.items.map((item, itemIdx) => {
@@ -179,7 +182,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
                         <button
                           key={itemIdx}
                           onClick={() => handleItemClick(item.id)}
-                          className="w-full flex items-center space-x-2.5 px-2.5 py-2 rounded-xl hover:bg-rose-50/80 dark:hover:bg-rose-950/30 hover:translate-x-1 text-left text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-all duration-150 group cursor-pointer"
+                          className="w-full flex items-center space-x-2.5 px-2.5 py-2 rounded-xl hover:bg-rose-50/80 dark:hover:bg-white/[0.06] hover:translate-x-1 text-left text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-rose-400 transition-all duration-150 group cursor-pointer"
                         >
                           <div
                             className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110"
@@ -206,28 +209,28 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             onMouseLeave={handleMouseLeave}
           >
             <button
-              className={`flex items-center gap-1 text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+              className={`flex items-center gap-1 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
                 isAllOpen
-                  ? 'text-primary bg-surface-subtle dark:bg-slate-800'
-                  : 'text-secondary dark:text-slate-300 hover:text-text-primary dark:hover:text-white hover:bg-surface-subtle dark:hover:bg-slate-800'
+                  ? 'text-primary dark:text-rose-400 bg-white dark:bg-white/[0.1] shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/[0.08]'
               }`}
             >
               <span>{lang === 'id' ? 'Semua Alat PDF' : 'All PDF Tools'}</span>
               <Icons.ChevronDown
-                size={14}
-                className={`transition-transform duration-200 ${isAllOpen ? 'rotate-180 text-primary' : 'text-slate-400'}`}
+                size={13}
+                className={`transition-transform duration-200 ${isAllOpen ? 'rotate-180 text-primary dark:text-rose-400' : 'text-slate-400'}`}
               />
             </button>
 
             {/* All Tools Mega Dropdown Panel */}
             <div
-              className={`absolute top-full -left-40 pt-2 transition-all duration-200 ${
+              className={`absolute top-full -left-40 pt-3 transition-all duration-200 ${
                 isAllOpen
                   ? 'opacity-100 translate-y-0 pointer-events-auto'
                   : 'opacity-0 -translate-y-2 pointer-events-none'
               }`}
             >
-              <div className="w-[840px] bg-white dark:bg-[#18181B] rounded-2xl shadow-2xl border border-border-subtle dark:border-slate-800 p-6 grid grid-cols-4 gap-6 backdrop-blur-md">
+              <div className="w-[840px] bg-white/95 dark:bg-[#0E1320]/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-200/80 dark:border-white/10 p-6 grid grid-cols-4 gap-6">
                 {ALL_TOOLS_COLUMNS.map((col, colIdx) => (
                   <div key={colIdx} className="space-y-1">
                     <div className="flex items-center space-x-1.5 mb-3 px-2">
@@ -265,30 +268,42 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
         </nav>
 
         {/* Right Header Actions */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          {/* Quick APK Download Badge */}
+          <a
+            href="https://github.com/tooo22/klikpdf/releases/download/android-app/KlikPDF.apk"
+            target="_blank"
+            rel="noopener noreferrer"
+            title={lang === 'id' ? 'Unduh Aplikasi Android Resmi (APK)' : 'Download Android App (APK)'}
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs"
+          >
+            <span className="material-symbols-outlined text-[15px] text-emerald-500">android</span>
+            <span>APK</span>
+          </a>
+
           {/* Search Trigger */}
           <button
             onClick={handleScrollToTools}
             aria-label="Cari alat"
             title="Cari semua alat PDF"
-            className="w-9 h-9 rounded-xl flex items-center justify-center text-secondary dark:text-slate-300 hover:text-primary hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-colors cursor-pointer"
             type="button"
           >
-            <span className="material-symbols-outlined text-[20px]">search</span>
+            <span className="material-symbols-outlined text-[18px]">search</span>
           </button>
 
           {/* Dark / Light Theme Toggle */}
           <button
             onClick={toggleTheme}
             title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
-            className="w-9 h-9 rounded-xl flex items-center justify-center text-secondary dark:text-amber-400 hover:text-primary hover:bg-surface-subtle dark:hover:bg-slate-800 transition-colors cursor-pointer active:scale-90"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 dark:text-amber-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-colors cursor-pointer active:scale-90"
             type="button"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? (
-              <span className="material-symbols-outlined text-[19px] text-amber-400">light_mode</span>
+              <span className="material-symbols-outlined text-[18px] text-amber-400">light_mode</span>
             ) : (
-              <span className="material-symbols-outlined text-[19px]">dark_mode</span>
+              <span className="material-symbols-outlined text-[18px]">dark_mode</span>
             )}
           </button>
 
@@ -296,9 +311,9 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
           <button
             onClick={() => toggleLanguage()}
             title="Ganti Bahasa / Switch Language"
-            className="hidden sm:inline-flex items-center text-xs font-bold text-secondary dark:text-slate-300 hover:text-primary bg-surface-subtle dark:bg-slate-800/80 px-2.5 py-1 rounded-full gap-1 border border-border-subtle/80 dark:border-slate-700/60 transition-colors cursor-pointer active:scale-95"
+            className="hidden sm:inline-flex items-center text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-white/[0.06] px-2.5 py-1 rounded-full gap-1 border border-slate-200 dark:border-white/10 transition-colors cursor-pointer active:scale-95"
           >
-            <span className="material-symbols-outlined text-[15px] text-primary">language</span>
+            <span className="material-symbols-outlined text-[14px] text-primary">language</span>
             <span>{String(lang || 'ID').toUpperCase()}</span>
           </button>
 
@@ -328,15 +343,15 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
 
               {/* User Dropdown Menu */}
               {isUserMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-[#18181B] rounded-2xl shadow-xl border border-border-subtle dark:border-slate-800 py-2 z-50 animate-fade-in">
-                  <div className="px-4 py-3 border-b border-border-subtle dark:border-slate-800">
+                <div className="absolute right-0 top-full mt-2 w-64 bg-white/95 dark:bg-[#0E1320]/95 backdrop-blur-2xl rounded-2xl shadow-xl border border-slate-200/80 dark:border-white/10 py-2 z-50 animate-fade-in">
+                  <div className="px-4 py-3 border-b border-slate-100 dark:border-white/[0.06]">
                     <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
                       {user.name}
                     </p>
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
                       {user.email}
                     </p>
-                    <span className="inline-block mt-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400">
+                    <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                       {user.isDemo ? 'Akun Demo' : 'Akun Google Terverifikasi'}
                     </span>
                   </div>
@@ -347,9 +362,9 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
                         setIsUserMenuOpen(false);
                         setIsRecentModalOpen(true);
                       }}
-                      className="w-full flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-surface-subtle dark:hover:bg-slate-800 hover:text-primary transition-colors text-left cursor-pointer"
+                      className="w-full flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/[0.06] hover:text-primary transition-colors text-left cursor-pointer"
                     >
-                      <Icons.History size={15} className="text-slate-400" />
+                      <Icons.History size={15} className="text-primary" />
                       <span>{lang === 'id' ? 'Riwayat File Saya' : 'My Recent Files'}</span>
                     </button>
 
@@ -371,7 +386,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             <div className="hidden sm:flex items-center gap-2">
               <button
                 onClick={() => setIsLoginModalOpen(true)}
-                className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                className="text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-primary px-3 py-1.5 rounded-full transition-colors cursor-pointer"
               >
                 {lang === 'id' ? 'Masuk' : 'Sign in'}
               </button>
@@ -384,10 +399,10 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
                     setIsLoginModalOpen(true);
                   }
                 }}
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold bg-primary hover:bg-primary-container text-white px-3.5 sm:px-4 py-2 rounded-xl shadow-sm shadow-primary/25 hover:shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                className="btn-shimmer inline-flex items-center gap-1.5 text-xs font-bold bg-gradient-to-r from-crimson-primary to-primary hover:from-primary hover:to-crimson-dark text-white px-4 py-2 rounded-full shadow-md shadow-rose-500/20 hover:shadow-rose-500/30 transition-all active:scale-[0.98] cursor-pointer"
               >
                 <span>{lang === 'id' ? 'Mulai Gratis' : 'Start Free'}</span>
-                <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
               </button>
             </div>
           )}
