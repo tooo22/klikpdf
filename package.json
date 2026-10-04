@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "cd frontend && npm install && npm run build",
+    "build": "cd frontend && npm ci --prefer-offline --no-audit --no-fund && npm run build",
     "dev": "cd frontend && npm run dev",
     "cap:sync": "npx cap sync",
     "cap:open:android": "npx cap open android",

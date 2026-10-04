@@ -14,3 +14,9 @@
 - **Pertanyaan Santai / Diskusi Biasa:** Jawab langsung to-the-point dengan konsumsi token minimal tanpa penalaran berlebih (zero overhead).
 - **Tugas Coding / Planning / Eksekusi:** Aktifkan kapasitas penalaran penuh (high reasoning effort) untuk analisis arsitektur mendalam, penulisan script, dan eksekusi kode sampai tuntas.
 
+## 4. Auto-Deploy on Change (Zero Delay)
+- **Otomatis Deploy ke Vercel & CI:** Setiap kali selesai mengedit atau menambahkan kode, styling, aset, maupun fitur:
+  1. Jalankan verifikasi build (`npm run build` / build test).
+  2. Lakukan `git add -A` dan buat commit dengan pesan deskriptif.
+  3. Lakukan `git push origin main` secara otomatis SEGERA tanpa menunggu pengguna meminta atau mengetik "deploy".
+  4. Vercel dan GitHub Actions akan otomatis langsung men-deploy versi terbaru secara instan.
