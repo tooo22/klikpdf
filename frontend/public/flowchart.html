@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KlikPDF • Interactive Architecture & User Journey Flowchart</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#e5322d',
+              600: '#dc2626',
+              700: '#b91c1c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+    
+    * {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Grid Background */
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+    .light .bg-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    }
+
+    /* Animated connector pulses */
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -40;
+      }
+    }
+    .flow-line {
+      stroke-dasharray: 6, 6;
+      animation: dash 1.5s linear infinite;
+    }
+    .flow-line-reverse {
+      stroke-dasharray: 6, 6;
+      animation: dash 1.5s linear infinite reverse;
+    }
+
+    /* Node Hover & Glow */
+    .flow-node {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .flow-node:hover {
+      transform: translateY(-4px);
+      filter: drop-shadow(0 12px 24px rgba(229, 50, 45, 0.25));
+    }
+    .node-active {
+      ring: 3px solid #e5322d !important;
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen overflow-hidden select-none flex flex-col">
+
+  <!-- TOP APP BAR -->
+  <header class="h-16 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-6 flex items-center justify-between z-30 shrink-0">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-rose-400 flex items-center justify-center shadow-lg shadow-brand-500/20 text-white font-bold">
+          <i data-lucide="layers" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-extrabold text-base tracking-tight text-white">KlikPDF System Flowchart</h1>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-brand-500/10 text-brand-500 border border-brand-500/20">Digital Interactive</span>
+          </div>
+          <p class="text-xs text-slate-400">Peta Alur Kerja Arsitektur & Perjalanan Pengguna Web</p>
+        </div>
+      </div>
+
+      <!-- Quick Switch Filter -->
+      <div class="hidden md:flex items-center bg-slate-800/80 rounded-lg p-1 border border-slate-700/60 text-xs">
+        <button id="filterAll" class="px-3 py-1 rounded-md font-semibold text-white bg-brand-600 transition">Semua Alur</button>
+        <button id="filterClient" class="px-3 py-1 rounded-md text-slate-400 hover:text-white transition">Client-Side Engine</button>
+        <button id="filterSecurity" class="px-3 py-1 rounded-md text-slate-400 hover:text-white transition">Edge & Keamanan</button>
+        <button id="filterUser" class="px-3 py-1 rounded-md text-slate-400 hover:text-white transition">User Journey</button>
+      </div>
+    </div>
+
+    <!-- Actions & Controls -->
+    <div class="flex items-center gap-3">
+      <!-- Search -->
+      <div class="relative hidden sm:block">
+        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Cari modul / fitur..." 
+          class="bg-slate-800/80 border border-slate-700 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 w-48 transition"
+        />
+      </div>
+
+      <!-- Tour Mode -->
+      <button id="btnTour" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-semibold hover:bg-emerald-500/20 transition">
+        <i data-lucide="play-circle" class="w-4 h-4"></i>
+        <span>Mulai Tour Interaktif</span>
+      </button>
+
+      <!-- Back to Main App -->
+      <a href="/" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-medium transition">
+        <i data-lucide="external-link" class="w-4 h-4"></i>
+        <span>Buka Web KlikPDF</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN CANVAS CONTAINER -->
+  <main class="flex-1 relative overflow-hidden bg-slate-950 bg-grid-pattern flex" id="viewport">
+    
+    <!-- ZOOM & PAN CONTROLS (Floating) -->
+    <div class="absolute bottom-6 left-6 z-20 flex flex-col bg-slate-900/90 backdrop-blur-md rounded-xl border border-slate-800 p-1.5 shadow-2xl gap-1 text-slate-300">
+      <button id="zoomInBtn" title="Zoom In (+)" class="p-2 hover:bg-slate-800 rounded-lg transition hover:text-white">
+        <i data-lucide="zoom-in" class="w-4 h-4"></i>
+      </button>
+      <button id="zoomOutBtn" title="Zoom Out (-)" class="p-2 hover:bg-slate-800 rounded-lg transition hover:text-white">
+        <i data-lucide="zoom-out" class="w-4 h-4"></i>
+      </button>
+      <button id="zoomResetBtn" title="Reset View" class="p-2 hover:bg-slate-800 rounded-lg transition hover:text-white">
+        <i data-lucide="maximize" class="w-4 h-4"></i>
+      </button>
+      <div class="h-px bg-slate-800 my-0.5"></div>
+      <button id="toggleAnimBtn" title="Toggle Animasi Aliran" class="p-2 hover:bg-slate-800 rounded-lg transition text-amber-400 hover:text-amber-300">
+        <i data-lucide="zap" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- LEGEND / STATUS BAR (Floating) -->
+    <div class="absolute top-6 left-6 z-20 hidden lg:flex items-center gap-4 bg-slate-900/90 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-800 shadow-xl text-xs">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-brand-500 shadow-[0_0_8px_#e5322d]"></span>
+        <span class="text-slate-300 font-medium">User Entry / Action</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span>
+        <span class="text-slate-300 font-medium">Client-Side Engine (Offline)</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-amber-500 shadow-[0_0_8px_#f59e0b]"></span>
+        <span class="text-slate-300 font-medium">Edge / WAF / Security</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-purple-500 shadow-[0_0_8px_#a855f7]"></span>
+        <span class="text-slate-300 font-medium">Backend Server (FastAPI)</span>
+      </div>
+    </div>
+
+    <!-- FLOW SVG & NODES CANVAS -->
+    <div id="canvas" class="w-full h-full cursor-grab active:cursor-grabbing relative flex items-center justify-center" style="transform-origin: center center; transform: scale(0.95);">
+      
+      <!-- Interactive SVG Connections -->
+      <svg id="svgConnectors" class="absolute inset-0 w-[1400px] h-[900px] pointer-events-none" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
+        <defs>
+          <linearGradient id="grad-red" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ef4444" />
+            <stop offset="100%" stop-color="#dc2626" />
+          </linearGradient>
+          <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8" />
+            <stop offset="100%" stop-color="#2563eb" />
+          </linearGradient>
+          <linearGradient id="grad-amber" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24" />
+            <stop offset="100%" stop-color="#d97706" />
+          </linearGradient>
+          <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#ef4444" />
+          </marker>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+          </marker>
+          <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#10b981" />
+          </marker>
+        </defs>
+
+        <!-- Connector Lines -->
+        <!-- User -> DNS -->
+        <path d="M 170 300 L 260 300" stroke="#ef4444" stroke-width="2.5" fill="none" class="flow-line" marker-end="url(#arrow-red)" />
+        <!-- DNS -> SPA -->
+        <path d="M 440 300 L 520 300" stroke="#fbbf24" stroke-width="2.5" fill="none" class="flow-line" marker-end="url(#arrow-red)" />
+        <!-- SPA -> Global Nav -->
+        <path d="M 610 240 L 610 140" stroke="#64748b" stroke-width="1.8" stroke-dasharray="4,4" fill="none" />
+        <!-- SPA -> Browse -->
+        <path d="M 700 300 L 770 300" stroke="#38bdf8" stroke-width="2.5" fill="none" class="flow-line" marker-end="url(#arrow-blue)" />
+        <!-- Browse -> Tool Workspace -->
+        <path d="M 860 360 L 860 440 L 520 440 L 520 520" stroke="#38bdf8" stroke-width="2.5" fill="none" class="flow-line" marker-end="url(#arrow-blue)" />
+        
+        <!-- Workspace -> Dropzone & Sidebar -->
+        <path d="M 610 570 L 670 570" stroke="#38bdf8" stroke-width="2" fill="none" class="flow-line" marker-end="url(#arrow-blue)" />
+        
+        <!-- Dropzone -> Client Engine (Branch 1) -->
+        <path d="M 850 540 C 920 540, 920 470, 990 470" stroke="#38bdf8" stroke-width="3" fill="none" class="flow-line" marker-end="url(#arrow-blue)" />
+        <!-- Dropzone -> Backend Server (Branch 2) -->
+        <path d="M 850 600 C 920 600, 920 670, 990 670" stroke="#a855f7" stroke-width="2.5" fill="none" class="flow-line" />
+        
+        <!-- Client Engine -> Result -->
+        <path d="M 1170 470 C 1230 470, 1230 540, 1270 540" stroke="#10b981" stroke-width="3" fill="none" class="flow-line" marker-end="url(#arrow-green)" />
+        <!-- Backend -> Result -->
+        <path d="M 1170 670 C 1230 670, 1230 600, 1270 600" stroke="#10b981" stroke-width="2.5" fill="none" class="flow-line" marker-end="url(#arrow-green)" />
+      </svg>
+
+      <!-- INTERACTIVE NODES CANVAS (Absolute layout) -->
+      <div id="nodesLayer" class="relative w-[1400px] h-[900px] pointer-events-auto">
+
+        <!-- 1. USER ENTRY -->
+        <div id="node-user" onclick="inspectNode('user')" class="flow-node absolute left-10 top-[245px] w-36 bg-slate-900 border-2 border-brand-500/80 rounded-2xl p-4 shadow-xl shadow-brand-500/10 cursor-pointer group">
+          <div class="w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400 mb-3 group-hover:scale-110 transition">
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-sm text-white leading-tight">Pengunjung Web / Mobile</h3>
+          <p class="text-[11px] text-slate-400 mt-1">Akses Browser & Capacitor App</p>
+        </div>
+
+        <!-- 2. DNS & CLOUDFLARE WAF -->
+        <div id="node-edge" onclick="inspectNode('edge')" class="flow-node absolute left-[260px] top-[230px] w-44 bg-slate-900 border border-amber-500/60 rounded-2xl p-4 shadow-xl shadow-amber-500/10 cursor-pointer group">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:scale-110 transition">
+              <i data-lucide="shield-alert" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Edge WAF</span>
+          </div>
+          <h3 class="font-bold text-sm text-white">Vercel & Cloudflare Edge</h3>
+          <p class="text-[11px] text-slate-400 mt-1">DDoS Mitigation, SSL/TLS, & Static CDN Cache</p>
+        </div>
+
+        <!-- 3. HOMEPAGE SPA -->
+        <div id="node-home" onclick="inspectNode('home')" class="flow-node absolute left-[520px] top-[240px] w-44 bg-slate-900 border border-blue-500/60 rounded-2xl p-4 shadow-xl shadow-blue-500/10 cursor-pointer group">
+          <div class="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 mb-2 group-hover:scale-110 transition">
+            <i data-lucide="layout" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-sm text-white">HomePage (SPA)</h3>
+          <p class="text-[11px] text-slate-400 mt-1">Hero, Kategori Alat, FAQ & Hero Upload</p>
+        </div>
+
+        <!-- 3.1 GLOBAL NAV (Auxiliary top) -->
+        <div id="node-nav" onclick="inspectNode('nav')" class="flow-node absolute left-[500px] top-[40px] w-56 bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3 shadow-lg cursor-pointer group">
+          <div class="flex items-center gap-2 mb-2">
+            <i data-lucide="sliders" class="w-4 h-4 text-slate-400"></i>
+            <span class="text-xs font-bold text-slate-200">Fitur & Context Global</span>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5 text-[10px] text-slate-300">
+            <div class="bg-slate-800/80 px-2 py-1 rounded">🌐 ID / EN Multi-lang</div>
+            <div class="bg-slate-800/80 px-2 py-1 rounded">🌙 Dark/Light Theme</div>
+            <div class="bg-slate-800/80 px-2 py-1 rounded">🤖 AI Chatbot Widget</div>
+            <div class="bg-slate-800/80 px-2 py-1 rounded">🔐 Admin & Auth Modal</div>
+          </div>
+        </div>
+
+        <!-- 4. TOOL CATALOG -->
+        <div id="node-tools" onclick="inspectNode('tools')" class="flow-node absolute left-[770px] top-[230px] w-48 bg-slate-900 border border-blue-500/60 rounded-2xl p-4 shadow-xl shadow-blue-500/10 cursor-pointer group">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 group-hover:scale-110 transition">
+              <i data-lucide="grid" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400">12+ Fitur</span>
+          </div>
+          <h3 class="font-bold text-sm text-white">Katalog Alat PDF</h3>
+          <p class="text-[11px] text-slate-400 mt-1">Merge, Split, Word-to-PDF, Watermark, HD Image</p>
+        </div>
+
+        <!-- 5. TOOL WORKSPACE -->
+        <div id="node-workspace" onclick="inspectNode('workspace')" class="flow-node absolute left-[420px] top-[520px] w-52 bg-slate-900 border-2 border-brand-500/80 rounded-2xl p-4 shadow-xl shadow-brand-500/15 cursor-pointer group">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-9 h-9 rounded-xl bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400 group-hover:scale-110 transition">
+              <i data-lucide="wrench" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[10px] font-mono text-slate-400">#/:toolId</span>
+          </div>
+          <h3 class="font-bold text-sm text-white">ToolWorkspace.jsx</h3>
+          <p class="text-[11px] text-slate-400 mt-1">Ruang kerja terpadu untuk upload, edit & eksekusi file</p>
+        </div>
+
+        <!-- 5.1 DROPZONE & PREVIEW -->
+        <div id="node-dropzone" onclick="inspectNode('dropzone')" class="flow-node absolute left-[670px] top-[510px] w-44 bg-slate-900 border border-slate-700 rounded-2xl p-4 shadow-lg cursor-pointer group">
+          <div class="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 mb-2 group-hover:scale-110 transition">
+            <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-sm text-white">Dropzone & Sidebar</h3>
+          <p class="text-[11px] text-slate-400 mt-1">Drag & Drop, Thumbnail Grid, Password & Options</p>
+        </div>
+
+        <!-- 6. ENGINE 1: CLIENT-SIDE (HIGHLIGHT) -->
+        <div id="node-clientengine" onclick="inspectNode('clientengine')" class="flow-node absolute left-[990px] top-[400px] w-48 bg-gradient-to-br from-slate-900 to-slate-950 border-2 border-emerald-500/80 rounded-2xl p-4 shadow-2xl shadow-emerald-500/20 cursor-pointer group">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition">
+              <i data-lucide="zap" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">0 ms Latency</span>
+          </div>
+          <h3 class="font-bold text-sm text-emerald-300">Client-Side Engine</h3>
+          <p class="text-[11px] text-slate-300 mt-1">pdf-lib, jsPDF, Mammoth.js & Canvas. 100% Offline di browser.</p>
+        </div>
+
+        <!-- 7. ENGINE 2: SERVER BACKEND -->
+        <div id="node-backend" onclick="inspectNode('backend')" class="flow-node absolute left-[990px] top-[610px] w-48 bg-slate-900 border border-purple-500/60 rounded-2xl p-4 shadow-xl shadow-purple-500/10 cursor-pointer group">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 group-hover:scale-110 transition">
+              <i data-lucide="server" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/10 text-purple-400">FastAPI</span>
+          </div>
+          <h3 class="font-bold text-sm text-white">Backend Python Server</h3>
+          <p class="text-[11px] text-slate-400 mt-1">PyMuPDF & pdf2docx untuk konversi dokumen tingkat lanjut</p>
+        </div>
+
+        <!-- 8. RESULT & DOWNLOAD -->
+        <div id="node-result" onclick="inspectNode('result')" class="flow-node absolute left-[1250px] top-[500px] w-40 bg-slate-900 border-2 border-emerald-500 rounded-2xl p-4 shadow-2xl shadow-emerald-500/20 cursor-pointer group">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-2 group-hover:scale-110 transition">
+            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-sm text-white">ResultDownload</h3>
+          <p class="text-[11px] text-slate-400 mt-1">Unduh Instan, Rating Modal, & Riwayat File</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DETAIL SLIDEOUT DRAWER (Right Side) -->
+    <div id="detailDrawer" class="absolute top-0 right-0 h-full w-96 bg-slate-900/95 backdrop-blur-xl border-l border-slate-800 p-6 z-40 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <div id="drawerIcon" class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center">
+            <i data-lucide="info" class="w-4 h-4"></i>
+          </div>
+          <h2 id="drawerTitle" class="font-bold text-base text-white">Detail Modul</h2>
+        </div>
+        <button onclick="closeDrawer()" class="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="mt-5 space-y-5 text-xs text-slate-300 flex-1">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Deskripsi</span>
+          <p id="drawerDesc" class="mt-1 text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">File Sumber / Source Code</span>
+          <div id="drawerFiles" class="mt-1.5 space-y-1"></div>
+        </div>
+
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Fitur & Mekanisme Kerja</span>
+          <ul id="drawerFeatures" class="mt-1.5 space-y-1.5 list-disc list-inside text-slate-400"></ul>
+        </div>
+
+        <div id="drawerSecurityBox" class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80">
+          <div class="flex items-center gap-2 font-semibold text-emerald-400 mb-1">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Keamanan & Privasi</span>
+          </div>
+          <p id="drawerSecurity" class="text-[11px] text-slate-400 leading-normal"></p>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-slate-800 mt-auto">
+        <a id="drawerActionBtn" href="/" target="_blank" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs transition shadow-lg shadow-brand-600/20">
+          <span>Buka Modul di Web</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Node Metadata Catalog
+    const nodeDetails = {
+      user: {
+        title: "Pengunjung Web & Aplikasi",
+        icon: "users",
+        desc: "Pengguna mengakses KlikPDF melalui Web Browser (Desktop / Mobile) atau melalui aplikasi mobile yang dibungkus dengan Capacitor (Android / iOS).",
+        files: ["frontend/src/App.jsx", "frontend/src/main.jsx", "capacitor.config.json"],
+        features: ["Responsif di seluruh layar", "Dukungan mode PWA & Offline", "Dukungan Aplikasi Mobile Android/iOS via Capacitor"],
+        security: "Tidak ada data pengguna yang disimpan tanpa izin. Akses file diproses langsung di memori perangkat.",
+        link: "/"
+      },
+      edge: {
+        title: "Vercel & Cloudflare Edge WAF",
+        icon: "shield-alert",
+        desc: "Lapisan proteksi pertama yang menyaring lalu lintas data, mencegah serangan DDoS (*Distributed Denial of Service*), serta melayani file statis melalui CDN global berkecepatan tinggi.",
+        files: ["vercel.json", "frontend/vite.config.js"],
+        features: ["Mitigasi serangan bot & DDoS otomatis", "Rate Limiting HTTP 429", "Kompresi Gzip/Brotli untuk aset cepat", "Enkripsi SSL/TLS End-to-End"],
+        security: "Menghalau upaya brute force dan lonjakan trafik ilegal sebelum sampai ke aplikasi.",
+        link: "/"
+      },
+      home: {
+        title: "Halaman Utama (HomePage.jsx)",
+        icon: "layout",
+        desc: "Antarmuka selamat datang tempat pengguna dapat langsung memilih alat PDF yang diinginkan atau langsung menjatuhkan file ke area Quick Dropzone.",
+        files: ["frontend/src/pages/HomePage.jsx", "frontend/src/components/ToolCard.jsx"],
+        features: ["Hero Section interaktif", "Filter kategori alat (Konversi, Edit, Optimasi, Keamanan)", "Bagian Testimoni & FAQ", "Quick Drop File"],
+        security: "Menghindari penyimpanan formulir tidak aman. Semua aksi dilakukan secara reaktif via React State.",
+        link: "/"
+      },
+      nav: {
+        title: "Navigasi & Context Global",
+        icon: "sliders",
+        desc: "State manager tingkat atas yang mengatur bahasa (Indonesia / English), mode tampilan (Gelap / Terang), sesi login Google, asisten chatbot, dan panel admin.",
+        files: ["frontend/src/context/LanguageContext.jsx", "frontend/src/context/ThemeContext.jsx", "frontend/src/context/AuthContext.jsx", "frontend/src/components/ChatbotWidget.jsx"],
+        features: ["Multi-bahasa ID & EN instan tanpa refresh", "Persistensi tema di LocalStorage", "Login Google OAuth 2.0", "Chatbot asisten pintar PDF"],
+        security: "Autentikasi menggunakan JWT Token yang aman dan sesi terisolasi.",
+        link: "/"
+      },
+      tools: {
+        title: "Katalog 12+ Alat PDF",
+        icon: "grid",
+        desc: "Kumpulan konfigurasi lengkap semua alat PDF yang tersedia di aplikasi.",
+        files: ["frontend/src/toolsConfig.js", "frontend/src/menuData.js"],
+        features: ["Gabung & Pisah PDF", "Word ke PDF & PDF ke Word", "Kompresi PDF & Watermark", "HD Image Upscaler & Gambar ke PDF"],
+        security: "Setiap alat memiliki validasi tipe MIME file yang ketat untuk mencegah upload berbahaya.",
+        link: "/"
+      },
+      workspace: {
+        title: "Ruang Kerja (ToolWorkspace.jsx)",
+        icon: "wrench",
+        desc: "Komponen workspace reaktif yang memuat alur kerja spesifik dari alat yang dipilih pengguna melalui hash routing (#/:toolId).",
+        files: ["frontend/src/pages/ToolWorkspace.jsx", "frontend/src/components/ActionSidebar.jsx"],
+        features: ["Hash routing dinamis (#/merge, #/split, dll.)", "Scroll restoration otomatis", "Handling error terintegrasi dengan Toast notification"],
+        security: "Objek URL dan blob otomatis dimusnahkan dari memori setelah proses selesai.",
+        link: "/#/merge"
+      },
+      dropzone: {
+        title: "Dropzone & Action Sidebar",
+        icon: "upload-cloud",
+        desc: "Area input file drag-and-drop dengan pratinjau thumbnail halaman PDF dan panel kustomisasi parameter.",
+        files: ["frontend/src/components/Dropzone.jsx", "frontend/src/components/PageGridPreview.jsx"],
+        features: ["Pratinjau visual thumbnail per halaman", "Input teks watermark & password", "Pengaturan kualitas kompresi & rasio scaling"],
+        security: "File hanya dibaca ke dalam ArrayBuffer RAM browser pengguna.",
+        link: "/#/watermark"
+      },
+      clientengine: {
+        title: "Client-Side Processing Engine",
+        icon: "zap",
+        desc: "Engine pemrosesan PDF instan yang berjalan 100% di browser pengguna tanpa membutuhkan server backend (Zero Latency & 100% Privacy).",
+        files: ["frontend/src/services/clientPdfProcessor.js"],
+        features: ["Merge & Split PDF via pdf-lib", "Word to PDF via Mammoth & jsPDF", "Rotate & Watermark PDF instan", "Image to PDF & HD Image scaling via Canvas"],
+        security: "100% Privasi Terjamin: Dokumen tidak pernah meninggalkan komputer/ponsel pengguna!",
+        link: "/#/word-to-pdf"
+      },
+      backend: {
+        title: "FastAPI Backend Server",
+        icon: "server",
+        desc: "Server Python cadangan untuk fitur komputasi berat seperti OCR dan konversi dokumen format biner murni.",
+        files: ["backend/main.py", "backend/services/pdf_service.py"],
+        features: ["PyMuPDF untuk manipulasi dokumen kompleks", "pdf2docx untuk ekstraksi layout presisi", "Auto-cleanup folder temporary"],
+        security: "File sementara langsung dihapus otomatis dari server setelah dikirim kembali ke pengguna.",
+        link: "/"
+      },
+      result: {
+        title: "Result & Instant Download",
+        icon: "check-circle-2",
+        desc: "Tahap akhir di mana berkas yang selesai diproses langsung siap diunduh dengan penamaan otomatis dan pencatatan ke riwayat berkas.",
+        files: ["frontend/src/components/ResultDownload.jsx", "frontend/src/components/RatingModal.jsx"],
+        features: ["Tombol unduh satu klik", "Pencatatan riwayat berkas terakhir", "Modal feedback & rating bintang", "Opsi proses berkas baru"],
+        security: "Link download menggunakan Blob URL lokal yang aman dari penyadapan.",
+        link: "/"
+      }
+    };
+
+    // Zoom & Pan State
+    let scale = 0.95;
+    let isPanning = false;
+    let startX = 0, startY = 0;
+    let translateX = 0, translateY = 0;
+
+    const canvas = document.getElementById('canvas');
+    const viewport = document.getElementById('viewport');
+
+    function updateTransform() {
+      canvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    document.getElementById('zoomInBtn').addEventListener('click', () => {
+      scale = Math.min(scale + 0.15, 2.0);
+      updateTransform();
+    });
+
+    document.getElementById('zoomOutBtn').addEventListener('click', () => {
+      scale = Math.max(scale - 0.15, 0.4);
+      updateTransform();
+    });
+
+    document.getElementById('zoomResetBtn').addEventListener('click', () => {
+      scale = 0.95;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    });
+
+    // Pan Handlers
+    viewport.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.flow-node') || e.target.closest('#detailDrawer') || e.target.closest('button')) return;
+      isPanning = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isPanning) return;
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isPanning = false;
+    });
+
+    // Toggle Animation
+    let isAnimActive = true;
+    document.getElementById('toggleAnimBtn').addEventListener('click', () => {
+      isAnimActive = !isAnimActive;
+      document.querySelectorAll('.flow-line').forEach(line => {
+        line.style.animationPlayState = isAnimActive ? 'running' : 'paused';
+      });
+      document.getElementById('toggleAnimBtn').classList.toggle('text-slate-500', !isAnimActive);
+      document.getElementById('toggleAnimBtn').classList.toggle('text-amber-400', isAnimActive);
+    });
+
+    // Drawer Inspector
+    function inspectNode(key) {
+      const data = nodeDetails[key];
+      if (!data) return;
+
+      // Highlight active node
+      document.querySelectorAll('.flow-node').forEach(n => n.classList.remove('node-active'));
+      const activeEl = document.getElementById(`node-${key}`);
+      if (activeEl) activeEl.classList.add('node-active');
+
+      // Populate Drawer
+      document.getElementById('drawerTitle').innerText = data.title;
+      document.getElementById('drawerDesc').innerText = data.desc;
+      document.getElementById('drawerSecurity').innerText = data.security;
+      document.getElementById('drawerActionBtn').setAttribute('href', data.link);
+
+      const filesContainer = document.getElementById('drawerFiles');
+      filesContainer.innerHTML = data.files.map(f => `
+        <div class="px-2.5 py-1.5 rounded-lg bg-slate-800/90 text-slate-300 font-mono text-[10px] flex items-center gap-2 border border-slate-700/60">
+          <i data-lucide="file-code" class="w-3.5 h-3.5 text-brand-400 shrink-0"></i>
+          <span class="truncate">${f}</span>
+        </div>
+      `).join('');
+
+      const featuresContainer = document.getElementById('drawerFeatures');
+      featuresContainer.innerHTML = data.features.map(feat => `<li>${feat}</li>`).join('');
+
+      document.getElementById('detailDrawer').classList.remove('translate-x-full');
+      lucide.createIcons();
+    }
+
+    function closeDrawer() {
+      document.getElementById('detailDrawer').classList.add('translate-x-full');
+      document.querySelectorAll('.flow-node').forEach(n => n.classList.remove('node-active'));
+    }
+
+    // Search filter
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.flow-node').forEach(node => {
+        const text = node.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          node.style.opacity = '1';
+          node.style.filter = 'none';
+        } else {
+          node.style.opacity = '0.25';
+          node.style.filter = 'grayscale(100%)';
+        }
+      });
+    });
+
+    // Tour Mode
+    const tourSteps = ['user', 'edge', 'home', 'workspace', 'clientengine', 'result'];
+    let tourIndex = 0;
+    document.getElementById('btnTour').addEventListener('click', () => {
+      tourIndex = 0;
+      startTourStep();
+    });
+
+    function startTourStep() {
+      if (tourIndex >= tourSteps.length) {
+        tourIndex = 0;
+        return;
+      }
+      const nodeKey = tourSteps[tourIndex];
+      inspectNode(nodeKey);
+      tourIndex++;
+    }
+  </script>
+</body>
+</html>
