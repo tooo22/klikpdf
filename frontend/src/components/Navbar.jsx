@@ -41,7 +41,6 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
   const [activeMenu, setActiveMenu] = useState(null); // 'convert' | 'all' | null
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
-  const [showDesignMdModal, setShowDesignMdModal] = useState(false);
   const timeoutRef = useRef(null);
   const userMenuRef = useRef(null);
 
@@ -276,34 +275,6 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             )}
           </div>
 
-          {/* SKILLS */}
-          <a
-            href="/skills-flowchart.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer py-1"
-          >
-            SKILLS
-          </a>
-
-          {/* DESIGN.MD */}
-          <button
-            onClick={() => setShowDesignMdModal(true)}
-            className="text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer py-1"
-          >
-            DESIGN.MD
-          </button>
-
-          {/* LEARN */}
-          <a
-            href="/flowchart.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer py-1"
-          >
-            LEARN
-          </a>
-
           {/* PRICING */}
           <button
             onClick={() => {
@@ -496,31 +467,6 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
                 >
                   ASSETS (KONVERSI)
                 </button>
-                <a
-                  href="/skills-flowchart.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-left px-3 py-2.5 rounded-lg text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900 font-bold"
-                >
-                  SKILLS
-                </a>
-                <button
-                  onClick={() => {
-                    setIsMobileDrawerOpen(false);
-                    setShowDesignMdModal(true);
-                  }}
-                  className="text-left px-3 py-2.5 rounded-lg text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900 font-bold"
-                >
-                  DESIGN.MD
-                </button>
-                <a
-                  href="/flowchart.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-left px-3 py-2.5 rounded-lg text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900 font-bold"
-                >
-                  LEARN (FLOWCHART)
-                </a>
                 <button
                   onClick={handleScrollToTools}
                   className="text-left px-3 py-2.5 rounded-lg text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900 font-bold"
@@ -554,46 +500,6 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
         </div>
       )}
 
-      {/* DESIGN.MD Information Modal */}
-      {showDesignMdModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-950 rounded-2xl p-6 sm:p-8 max-w-lg w-full border border-zinc-200 dark:border-zinc-800 shadow-2xl">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800 mb-4">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-zinc-900 dark:text-white">description</span>
-                <h3 className="font-mono font-bold text-sm tracking-wider uppercase text-zinc-900 dark:text-white">
-                  GOOGLE STITCH DESIGN.MD
-                </h3>
-              </div>
-              <button
-                onClick={() => setShowDesignMdModal(false)}
-                className="w-7 h-7 rounded-lg flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="text-xs text-zinc-600 dark:text-zinc-300 font-mono space-y-3 leading-relaxed">
-              <p>
-                Konsep antarmuka ini mengadopsi standar <strong>Google Stitch DESIGN.md</strong> dengan sistem desain minimalis monokrom bergaris presisi (*hairline borders*, kanvas grid, dan palet hitam obsidian).
-              </p>
-              <div className="p-3 bg-zinc-100 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 text-[11px] text-zinc-700 dark:text-zinc-300">
-                <code>• Background: #000000 (Pure Black)</code><br />
-                <code>• Typography: Plain White (#FFFFFF)</code><br />
-                <code>• Grid Guide: 32px Canvas Blueprint</code><br />
-                <code>• Theme Capsule: 3-State (Sun/Sys/Moon)</code>
-              </div>
-            </div>
-            <div className="mt-5 pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-end">
-              <button
-                onClick={() => setShowDesignMdModal(false)}
-                className="px-4 py-1.5 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-black font-mono text-xs font-bold"
-              >
-                TUTUP
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
