@@ -119,23 +119,24 @@ export const ChatbotWidget = ({ onSelectTool, isWorkspace = false }) => {
       {!isOpen && showTooltip && (
         <div 
           onClick={() => { setIsOpen(true); setShowTooltip(false); }}
-          className="absolute bottom-16 right-0 mb-2 w-60 sm:w-64 max-w-[calc(100vw-2.5rem)] bg-white dark:bg-[#18181B] p-3.5 rounded-2xl shadow-2xl border border-border-subtle dark:border-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200 cursor-pointer animate-bounce hover:animate-none flex items-center space-x-3 transition-all"
+          className="absolute bottom-16 right-0 mb-2 w-64 max-w-[calc(100vw-2.5rem)] bg-white/95 dark:bg-[#121216]/95 backdrop-blur-xl p-3.5 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-800 text-xs font-semibold text-zinc-800 dark:text-zinc-200 cursor-pointer animate-bounce hover:animate-none flex items-center space-x-3 transition-all"
         >
-          <div className="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-primary flex items-center justify-center shrink-0 shadow-xs">
-            <Sparkles size={17} />
+          <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shrink-0 shadow-xs">
+            <Sparkles size={16} className="text-zinc-700 dark:text-zinc-300" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
+            <p className="font-bold text-zinc-900 dark:text-white flex items-center gap-1.5 font-mono text-[11px] tracking-wide uppercase">
               <span>KlikPDF AI</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             </p>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
-              {lang === 'id' ? 'Tanya seputar fitur PDF di sini!' : 'Ask about PDF tools here!'}
+            <p className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5 font-normal">
+              {lang === 'id' ? 'Tanya seputar alat PDF di sini' : 'Ask about PDF tools here'}
             </p>
           </div>
           <button 
             onClick={(e) => { e.stopPropagation(); setShowTooltip(false); }}
-            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1 cursor-pointer"
+            className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 p-1 cursor-pointer transition-colors"
+            aria-label="Tutup tooltip"
           >
             <X size={13} />
           </button>
@@ -147,34 +148,34 @@ export const ChatbotWidget = ({ onSelectTool, isWorkspace = false }) => {
         <button
           onClick={() => { setIsOpen(true); setShowTooltip(false); }}
           aria-label="Buka Asisten AI"
-          className="relative group w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-primary via-rose-600 to-red-500 text-white shadow-[0_8px_25px_rgba(225,29,72,0.45)] hover:shadow-[0_12px_35px_rgba(225,29,72,0.65)] flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+          className="relative group w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-zinc-950 dark:bg-black text-white hover:bg-zinc-900 dark:hover:bg-zinc-950 border border-zinc-800 dark:border-zinc-700/80 shadow-[0_10px_30px_rgba(0,0,0,0.35)] dark:shadow-[0_12px_35px_rgba(0,0,0,0.8)] flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
         >
-          <Bot size={22} className="sm:w-7 sm:h-7 group-hover:rotate-12 transition-transform duration-200" />
+          <Bot size={22} className="sm:w-6 sm:h-6 text-zinc-100 group-hover:rotate-12 transition-transform duration-200" />
           
           {/* Online green indicator */}
           <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 sm:h-4 sm:w-4">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 bg-emerald-500 border-2 border-white dark:border-[#141724]"></span>
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 bg-emerald-500 border-2 border-white dark:border-[#0c0d12]"></span>
           </span>
         </button>
       ) : (
         /* Chat Window Dialog (Centered & adaptive on mobile) */
-        <div className="fixed inset-x-3 bottom-3 top-auto sm:static sm:inset-auto w-auto sm:w-[410px] h-[520px] max-h-[calc(100dvh-4.5rem)] bg-white dark:bg-[#141724] rounded-2xl sm:rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.35)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.7)] border border-border-subtle/80 dark:border-slate-800 flex flex-col overflow-hidden animate-fade-in transition-colors duration-200 z-50">
+        <div className="fixed inset-x-3 bottom-3 top-auto sm:static sm:inset-auto w-auto sm:w-[410px] h-[520px] max-h-[calc(100dvh-4.5rem)] bg-white dark:bg-[#0c0d12] rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.35)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.9)] border border-zinc-200 dark:border-zinc-800 flex flex-col overflow-hidden animate-fade-in transition-colors duration-200 z-50">
           
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary via-rose-600 to-red-600 px-4 sm:px-5 py-3.5 sm:py-4 text-white flex items-center justify-between shadow-md shrink-0">
+          <div className="bg-zinc-950 dark:bg-[#121318] px-4 sm:px-5 py-3.5 sm:py-4 text-white flex items-center justify-between border-b border-zinc-800 shrink-0">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-inner">
-                <Bot size={22} className="text-white" />
+              <div className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-inner">
+                <Bot size={20} className="text-zinc-200" />
               </div>
               <div>
-                <h3 className="text-sm font-black tracking-tight leading-none flex items-center space-x-1.5">
+                <h3 className="text-xs font-mono font-bold tracking-wider uppercase leading-none flex items-center space-x-1.5 text-white">
                   <span>KlikPDF AI</span>
-                  <Sparkles size={13} className="text-amber-300" />
+                  <Sparkles size={12} className="text-zinc-400" />
                 </h3>
-                <div className="flex items-center space-x-1.5 text-[11px] text-white/90 mt-1 font-medium">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
-                  <span>{lang === 'id' ? 'Aktif Sekarang • Asisten Cerdas' : 'Online • Smart Assistant'}</span>
+                <div className="flex items-center space-x-1.5 text-[11px] text-zinc-400 mt-1 font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                  <span>{lang === 'id' ? 'Aktif • Asisten Cerdas' : 'Online • Assistant'}</span>
                 </div>
               </div>
             </div>
@@ -183,32 +184,32 @@ export const ChatbotWidget = ({ onSelectTool, isWorkspace = false }) => {
               <button
                 onClick={handleClearChat}
                 title={lang === 'id' ? 'Bersihkan Obrolan' : 'Clear Chat'}
-                className="p-2 rounded-xl hover:bg-white/20 text-white transition-colors cursor-pointer"
+                className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800/80 transition-colors cursor-pointer"
               >
-                <Trash2 size={16} />
+                <Trash2 size={15} />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 title={lang === 'id' ? 'Tutup' : 'Close'}
-                className="p-2 rounded-xl hover:bg-white/20 text-white transition-colors cursor-pointer"
+                className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800/80 transition-colors cursor-pointer"
               >
-                <Minus size={18} />
+                <Minus size={17} />
               </button>
             </div>
           </div>
 
           {/* Messages Body */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-surface-canvas dark:bg-[#0f111a] no-scrollbar">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-zinc-50/70 dark:bg-[#08090c] no-scrollbar">
             {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs font-medium leading-relaxed shadow-xs ${
+                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs leading-relaxed shadow-xs ${
                     msg.sender === 'user'
-                      ? 'bg-gradient-to-r from-primary to-rose-600 text-white rounded-br-xs shadow-md shadow-primary/20'
-                      : 'bg-white dark:bg-[#1a1e2e] text-slate-800 dark:text-slate-100 border border-slate-200/80 dark:border-slate-800/80 rounded-bl-xs'
+                      ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-medium rounded-tr-xs shadow-sm border border-zinc-800 dark:border-zinc-200'
+                      : 'bg-white dark:bg-[#14151c] text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-zinc-800/80 rounded-tl-xs'
                   }`}
                 >
                   <p className="whitespace-pre-line">{msg.text}</p>
@@ -217,36 +218,36 @@ export const ChatbotWidget = ({ onSelectTool, isWorkspace = false }) => {
                   {msg.toolId && (
                     <button
                       onClick={() => handleToolClick(msg.toolId)}
-                      className="mt-3 w-full py-2.5 px-3 rounded-xl bg-primary/10 dark:bg-primary/20 hover:bg-primary text-primary hover:text-white dark:text-rose-400 dark:hover:text-white font-bold text-xs flex items-center justify-between border border-primary/25 hover:border-primary transition-all cursor-pointer active:scale-95 group shadow-xs"
+                      className="mt-3 w-full py-2.5 px-3.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-950 text-zinc-900 dark:text-white font-bold text-xs flex items-center justify-between border border-zinc-300/80 dark:border-zinc-700/80 transition-all cursor-pointer active:scale-95 group shadow-xs"
                     >
-                      <span>Buka Alat: {msg.toolName}</span>
-                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      <span className="font-mono text-[11px] uppercase tracking-wide">Buka Alat: {msg.toolName}</span>
+                      <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                   )}
                 </div>
-                <span className="text-[10px] text-slate-400 mt-1 px-1 font-mono">{msg.timestamp}</span>
+                <span className="text-[10px] text-zinc-400 dark:text-zinc-500 mt-1 px-1 font-mono">{msg.timestamp}</span>
               </div>
             ))}
 
             {/* Typing indicator */}
             {isTyping && (
-              <div className="flex items-center space-x-1.5 p-3 rounded-2xl bg-white dark:bg-[#1a1e2e] border border-slate-200/80 dark:border-slate-800 w-20 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-primary animate-bounce"></span>
-                <span className="w-2 h-2 rounded-full bg-primary animate-bounce [animation-delay:0.2s]"></span>
-                <span className="w-2 h-2 rounded-full bg-primary animate-bounce [animation-delay:0.4s]"></span>
+              <div className="flex items-center space-x-1.5 p-3 rounded-2xl bg-white dark:bg-[#14151c] border border-zinc-200 dark:border-zinc-800 w-20 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-zinc-500 dark:bg-zinc-400 animate-bounce"></span>
+                <span className="w-2 h-2 rounded-full bg-zinc-500 dark:bg-zinc-400 animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-2 h-2 rounded-full bg-zinc-500 dark:bg-zinc-400 animate-bounce [animation-delay:0.4s]"></span>
               </div>
             )}
 
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Suggestion Chips (Without ugly scrollbars) */}
-          <div className="px-3.5 py-2.5 bg-white dark:bg-[#141724] border-t border-slate-100 dark:border-slate-800/80 overflow-x-auto no-scrollbar flex items-center gap-2">
+          {/* Suggestion Chips */}
+          <div className="px-3.5 py-2.5 bg-white dark:bg-[#0c0d12] border-t border-zinc-100 dark:border-zinc-800/80 overflow-x-auto no-scrollbar flex items-center gap-2">
             {suggestions.map((chip, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSendMessage(chip)}
-                className="shrink-0 text-[11px] font-semibold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-[#1f2436] hover:bg-rose-50 dark:hover:bg-rose-950/40 text-slate-700 dark:text-slate-200 hover:text-primary transition-all cursor-pointer border border-slate-200/70 dark:border-slate-700/60 hover:border-primary/40 active:scale-95"
+                className="shrink-0 text-[11px] font-mono px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-[#15161f] hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-all cursor-pointer border border-zinc-200 dark:border-zinc-800 active:scale-95"
               >
                 {chip}
               </button>
@@ -259,19 +260,19 @@ export const ChatbotWidget = ({ onSelectTool, isWorkspace = false }) => {
               e.preventDefault();
               handleSendMessage();
             }}
-            className="p-3 bg-white dark:bg-[#141724] border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2 pb-[max(0.75rem,env(safe-area-inset-bottom,0.75rem))]"
+            className="p-3 bg-white dark:bg-[#0c0d12] border-t border-zinc-100 dark:border-zinc-800/80 flex items-center gap-2 pb-[max(0.75rem,env(safe-area-inset-bottom,0.75rem))]"
           >
             <input
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder={lang === 'id' ? 'Tanyakan seputar alat PDF...' : 'Ask anything about PDF tools...'}
-              className="flex-1 bg-slate-100 dark:bg-[#1a1e2e] text-slate-900 dark:text-white px-3.5 sm:px-4 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-primary/40 border border-transparent dark:border-slate-700/80 transition-all placeholder:text-slate-400"
+              className="flex-1 bg-zinc-100 dark:bg-[#15161f] text-zinc-900 dark:text-white px-3.5 sm:px-4 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:focus:ring-zinc-600 border border-transparent dark:border-zinc-800 transition-all placeholder:text-zinc-400"
             />
             <button
               type="submit"
               disabled={!inputMessage.trim()}
-              className="w-10 h-10 rounded-xl bg-primary hover:bg-primary-container disabled:opacity-40 disabled:hover:bg-primary text-white flex items-center justify-center transition-all cursor-pointer shrink-0 active:scale-90 shadow-md shadow-primary/25"
+              className="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white hover:bg-black dark:hover:bg-zinc-200 disabled:opacity-30 text-white dark:text-black flex items-center justify-center transition-all cursor-pointer shrink-0 active:scale-90 shadow-sm"
               aria-label="Kirim pesan"
             >
               <Send size={15} />
