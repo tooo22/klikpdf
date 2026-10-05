@@ -442,13 +442,13 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
 
       {/* MOBILE SLIDE-OVER DRAWER (Matches Dark Blueprint Theme) */}
       {isMobileDrawerOpen && (
-        <div className="fixed inset-0 z-50 xl:hidden">
+        <div className="fixed inset-0 z-[100] xl:hidden">
           <div
             onClick={() => setIsMobileDrawerOpen(false)}
-            className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity animate-fade-in"
+            className="fixed inset-0 bg-black/80 backdrop-blur-xs transition-opacity animate-fade-in z-10"
           />
 
-          <div className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-[320px] bg-white dark:bg-black shadow-2xl flex flex-col justify-between z-10 overflow-hidden border-l border-zinc-200 dark:border-zinc-800 animate-in slide-in-from-right duration-200 pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)]">
+          <div className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-[320px] bg-white dark:bg-zinc-950 shadow-2xl flex flex-col justify-between z-20 overflow-hidden border-l border-zinc-200 dark:border-zinc-800 animate-in slide-in-from-right duration-200 pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)]">
             <div className="flex flex-col flex-1 overflow-y-auto p-5">
               {/* Drawer Header */}
               <div className="flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800 mb-4">
