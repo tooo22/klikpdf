@@ -91,16 +91,27 @@ export const AdminModal = ({ isOpen, onClose }) => {
     }
   };
 
-  const handlePasswordSubmit = (e) => {
+  const handlePasswordSubmit = async (e) => {
     e.preventDefault();
-    if (password.trim() === '2899') {
-      setIsAuthenticated(true);
-      sessionStorage.setItem('klikpdf_admin_auth', 'true');
-      setErrorMsg('');
-      setPassword('');
-      loadStorageData();
-    } else {
-      setErrorMsg(lang === 'id' ? 'Password salah! Silakan coba lagi.' : 'Incorrect password! Please try again.');
+    try {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password.trim());
+      const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+
+      // Cryptographic SHA-256 check prevents cleartext PIN exposure in client code
+      if (hashHex === 'cbcd59dc5044f5dab3ea5ebab2243ce0c1919976dcc707d84ddfacdd719f510b') {
+        setIsAuthenticated(true);
+        sessionStorage.setItem('klikpdf_admin_auth', 'true');
+        setErrorMsg('');
+        setPassword('');
+        loadStorageData();
+      } else {
+        setErrorMsg(lang === 'id' ? 'Password salah! Silakan coba lagi.' : 'Incorrect password! Please try again.');
+      }
+    } catch {
+      setErrorMsg(lang === 'id' ? 'Gagal memverifikasi sandi.' : 'Failed to verify password.');
     }
   };
 

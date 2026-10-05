@@ -2,36 +2,61 @@ import zipfile
 from pathlib import Path
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse
+from starlette.background import BackgroundTask
 from app.core.storage import storage_manager
 from app.services.ocr_service import ocr_service
 
 router = APIRouter()
 
+ALLOWED_IMG_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".bmp"}
+
 @router.post("/pdf-to-image")
 async def pdf_to_image_endpoint(file: UploadFile = File(...), format: str = Form("png")):
     session_id, session_dir = storage_manager.create_session_dir()
-    in_path = session_dir / "input.pdf"
-    in_path.write_bytes(await file.read())
-    
-    img_files = ocr_service.pdf_to_images(in_path, session_dir, image_format=format)
-    zip_path = session_dir / "images_klikpdf.zip"
-    with zipfile.ZipFile(zip_path, "w") as z:
-        for f in img_files:
-            z.write(f, arcname=f.name)
-    return FileResponse(zip_path, filename="images_klikpdf.zip", media_type="application/zip")
+    try:
+        in_path = session_dir / "input.pdf"
+        await storage_manager.save_upload_file(file, in_path)
+        
+        safe_format = "png" if format.lower() == "png" else "jpeg"
+        img_files = ocr_service.pdf_to_images(in_path, session_dir, image_format=safe_format)
+        zip_path = session_dir / "images_klikpdf.zip"
+        with zipfile.ZipFile(zip_path, "w") as z:
+            for f in img_files:
+                z.write(f, arcname=f.name)
+        return FileResponse(
+            zip_path,
+            filename="images_klikpdf.zip",
+            media_type="application/zip",
+            background=BackgroundTask(storage_manager.cleanup_session_dir, session_id)
+        )
+    except Exception:
+        storage_manager.cleanup_session_dir(session_id)
+        raise
 
 @router.post("/image-to-pdf")
 async def image_to_pdf_endpoint(files: list[UploadFile] = File(...)):
     session_id, session_dir = storage_manager.create_session_dir()
-    saved_images = []
-    for idx, f in enumerate(files):
-        img_path = session_dir / f"img_{idx}_{f.filename}"
-        img_path.write_bytes(await f.read())
-        saved_images.append(img_path)
-        
-    out_pdf = session_dir / "converted_images_klikpdf.pdf"
-    ocr_service.images_to_pdf(saved_images, out_pdf)
-    return FileResponse(out_pdf, filename="converted_images_klikpdf.pdf", media_type="application/pdf")
+    try:
+        saved_images = []
+        for idx, f in enumerate(files):
+            raw_ext = Path(f.filename or "").suffix.lower()
+            safe_ext = raw_ext if raw_ext in ALLOWED_IMG_EXTS else ".png"
+            # Safe server-controlled filename prevents any directory traversal
+            img_path = session_dir / f"img_{idx}{safe_ext}"
+            await storage_manager.save_upload_file(f, img_path)
+            saved_images.append(img_path)
+            
+        out_pdf = session_dir / "converted_images_klikpdf.pdf"
+        ocr_service.images_to_pdf(saved_images, out_pdf)
+        return FileResponse(
+            out_pdf,
+            filename="converted_images_klikpdf.pdf",
+            media_type="application/pdf",
+            background=BackgroundTask(storage_manager.cleanup_session_dir, session_id)
+        )
+    except Exception:
+        storage_manager.cleanup_session_dir(session_id)
+        raise
 
 @router.post("/enhance-image")
 async def enhance_image_endpoint(
@@ -40,16 +65,26 @@ async def enhance_image_endpoint(
     quality: str = Form("hd")
 ):
     session_id, session_dir = storage_manager.create_session_dir()
-    ext = Path(file.filename or "image.png").suffix or ".png"
-    in_path = session_dir / f"input{ext}"
-    in_path.write_bytes(await file.read())
-    
-    sharpness = 1.8 if quality == "ultra" else 1.4
-    contrast = 1.15 if quality == "ultra" else 1.08
-    scale_factor = 4 if quality == "ultra" else (scale or 2)
-    
-    out_path = session_dir / f"enhanced_hd_klikpdf{ext}"
-    ocr_service.enhance_image(in_path, out_path, scale=scale_factor, sharpness=sharpness, contrast=contrast)
-    
-    media_type = "image/png" if ext.lower() == ".png" else "image/jpeg"
-    return FileResponse(out_path, filename=f"enhanced_hd_klikpdf{ext}", media_type=media_type)
+    try:
+        raw_ext = Path(file.filename or "").suffix.lower()
+        safe_ext = raw_ext if raw_ext in ALLOWED_IMG_EXTS else ".png"
+        in_path = session_dir / f"input{safe_ext}"
+        await storage_manager.save_upload_file(file, in_path)
+        
+        sharpness = 1.8 if quality == "ultra" else 1.4
+        contrast = 1.15 if quality == "ultra" else 1.08
+        scale_factor = 4 if quality == "ultra" else min(max(scale or 2, 1), 4)
+        
+        out_path = session_dir / f"enhanced_hd_klikpdf{safe_ext}"
+        ocr_service.enhance_image(in_path, out_path, scale=scale_factor, sharpness=sharpness, contrast=contrast)
+        
+        media_type = "image/png" if safe_ext == ".png" else "image/jpeg"
+        return FileResponse(
+            out_path,
+            filename=f"enhanced_hd_klikpdf{safe_ext}",
+            media_type=media_type,
+            background=BackgroundTask(storage_manager.cleanup_session_dir, session_id)
+        )
+    except Exception:
+        storage_manager.cleanup_session_dir(session_id)
+        raise
