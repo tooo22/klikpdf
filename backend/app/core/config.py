@@ -11,7 +11,10 @@ class Settings:
     API_PREFIX: str = "/api"
     TEMP_DIR: Path = TEMP_STORAGE_DIR
     MAX_UPLOAD_SIZE_MB: int = 50
+    MAX_PDF_PAGES: int = 200
     CLEANUP_INTERVAL_MINUTES: int = 30
+    DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "production").lower()
     CORS_ORIGINS: list[str] = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",

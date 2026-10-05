@@ -27,11 +27,13 @@ async def lifespan(app: FastAPI):
     yield
     cleanup_task.cancel()
 
+is_docs_enabled = settings.DEBUG or settings.ENVIRONMENT in ("dev", "development", "local")
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    docs_url="/docs",
-    redoc_url="/redoc",
+    docs_url="/docs" if is_docs_enabled else None,
+    redoc_url="/redoc" if is_docs_enabled else None,
+    openapi_url="/openapi.json" if is_docs_enabled else None,
     lifespan=lifespan
 )
 

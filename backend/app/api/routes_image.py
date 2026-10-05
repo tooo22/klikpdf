@@ -5,6 +5,7 @@ from fastapi.responses import FileResponse
 from starlette.background import BackgroundTask
 from app.core.storage import storage_manager
 from app.services.ocr_service import ocr_service
+from app.services.pdf_service import pdf_service
 
 router = APIRouter()
 
@@ -16,6 +17,8 @@ async def pdf_to_image_endpoint(file: UploadFile = File(...), format: str = Form
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         
         safe_format = "png" if format.lower() == "png" else "jpeg"
         img_files = ocr_service.pdf_to_images(in_path, session_dir, image_format=safe_format)

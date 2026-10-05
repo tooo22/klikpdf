@@ -14,10 +14,8 @@ async def pdf_to_word_endpoint(file: UploadFile = File(...)):
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
-        if not pdf_service.validate_pdf(in_path):
-            raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
-            
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         out_path = session_dir / "converted_klikpdf.docx"
         convert_service.pdf_to_word(in_path, out_path)
         return FileResponse(
@@ -36,7 +34,8 @@ async def pdf_to_excel_endpoint(file: UploadFile = File(...)):
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         out_path = session_dir / "converted_klikpdf.xlsx"
         convert_service.pdf_to_excel(in_path, out_path)
         return FileResponse(
@@ -53,10 +52,11 @@ async def pdf_to_excel_endpoint(file: UploadFile = File(...)):
 async def word_to_pdf_endpoint(file: UploadFile = File(...)):
     session_id, session_dir = storage_manager.create_session_dir()
     try:
+        if not (file.filename or "").lower().endswith((".docx", ".doc")):
+            raise HTTPException(status_code=400, detail="Berkas harus berupa dokumen Word (.docx atau .doc).")
         # Use fixed, safe server-controlled filename to eliminate path traversal
         in_path = session_dir / "input.docx"
         await storage_manager.save_upload_file(file, in_path)
-        
         out_path = session_dir / "converted_klikpdf.pdf"
         convert_service.word_to_pdf(in_path, out_path)
         return FileResponse(

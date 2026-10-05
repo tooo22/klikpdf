@@ -15,10 +15,9 @@ async def ocr_endpoint(file: UploadFile = File(...), lang: str = Form("ind+eng")
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         
-        if not pdf_service.validate_pdf(in_path):
-            raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
-            
         # Strictly sanitize lang parameter: only alphanumeric and '+' allowed
         safe_lang = re.sub(r'[^a-zA-Z0-9\+]', '', lang).strip() or "ind+eng"
         

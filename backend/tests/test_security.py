@@ -30,3 +30,55 @@ def test_save_upload_file_enforces_size_limit(tmp_path):
         assert not dest.exists()
 
     asyncio.run(run_test())
+
+def test_inspect_pdf_page_limit(tmp_path):
+    import fitz
+    from app.services.pdf_service import pdf_service
+    pdf_path = tmp_path / "test_pages.pdf"
+    doc = fitz.open()
+    doc.new_page()
+    doc.new_page()
+    doc.save(pdf_path)
+    doc.close()
+
+    # Passing max_pages=1 should trigger limit exceeded
+    valid, reason = pdf_service.inspect_pdf(pdf_path, max_pages=1)
+    assert not valid
+    assert reason.startswith("PAGE_LIMIT_EXCEEDED")
+
+    # Passing max_pages=5 should pass
+    valid, reason = pdf_service.inspect_pdf(pdf_path, max_pages=5)
+    assert valid
+    assert reason == "OK"
+
+def test_inspect_pdf_detects_encrypted(tmp_path):
+    import fitz
+    from app.services.pdf_service import pdf_service
+    from pypdf import PdfReader, PdfWriter
+    
+    plain_path = tmp_path / "plain.pdf"
+    enc_path = tmp_path / "enc.pdf"
+    doc = fitz.open()
+    doc.new_page()
+    doc.save(plain_path)
+    doc.close()
+
+    writer = PdfWriter()
+    reader = PdfReader(plain_path)
+    for page in reader.pages:
+        writer.add_page(page)
+    writer.encrypt("secret123")
+    with open(enc_path, "wb") as f:
+        writer.write(f)
+
+    valid, reason = pdf_service.inspect_pdf(enc_path)
+    assert not valid
+    assert reason == "ENCRYPTED"
+
+def test_docs_disabled_in_production():
+    from app.main import app
+    from app.core.config import settings
+    if settings.ENVIRONMENT == "production" and not settings.DEBUG:
+        assert app.docs_url is None
+        assert app.redoc_url is None
+        assert app.openapi_url is None

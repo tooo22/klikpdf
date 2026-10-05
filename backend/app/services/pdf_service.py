@@ -1,16 +1,77 @@
 import fitz  # PyMuPDF
 from pathlib import Path
 from pypdf import PdfReader, PdfWriter
+from app.core.config import settings
 
 class PDFService:
     @staticmethod
-    def validate_pdf(file_path: Path) -> bool:
+    def inspect_pdf(file_path: Path, max_pages: int = settings.MAX_PDF_PAGES) -> tuple[bool, str]:
+        """
+        Inspects PDF file for security & validity:
+        - Magic header '%PDF-'
+        - Detects password encryption
+        - Enforces max page limit against PDF decompression bombs
+        - Verifies structural integrity with PyMuPDF
+        """
         try:
             with open(file_path, "rb") as f:
                 header = f.read(5)
-                return header == b"%PDF-"
+                if header != b"%PDF-":
+                    return False, "INVALID_MAGIC_HEADER"
         except Exception:
-            return False
+            return False, "FILE_READ_ERROR"
+
+        try:
+            doc = fitz.open(file_path)
+            if doc.is_encrypted:
+                doc.close()
+                return False, "ENCRYPTED"
+            page_count = len(doc)
+            if page_count == 0:
+                doc.close()
+                return False, "EMPTY_PDF"
+            if page_count > max_pages:
+                doc.close()
+                return False, f"PAGE_LIMIT_EXCEEDED:{page_count}"
+            doc.close()
+            return True, "OK"
+        except Exception as e:
+            return False, f"CORRUPT_OR_MALFORMED:{str(e)}"
+
+    @staticmethod
+    def validate_pdf(file_path: Path) -> bool:
+        valid, _ = PDFService.inspect_pdf(file_path)
+        return valid
+
+    @staticmethod
+    def verify_safe(file_path: Path, filename: str = "Dokumen", max_pages: int = settings.MAX_PDF_PAGES) -> None:
+        """
+        Validates PDF and raises appropriate HTTPException if invalid, encrypted, or oversized.
+        """
+        from fastapi import HTTPException
+        valid, reason = PDFService.inspect_pdf(file_path, max_pages=max_pages)
+        if not valid:
+            if reason == "ENCRYPTED":
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Berkas '{filename}' terkunci kata sandi. Silakan gunakan fitur Buka Kunci PDF terlebih dahulu."
+                )
+            elif reason.startswith("PAGE_LIMIT_EXCEEDED"):
+                count = reason.split(":")[-1]
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Berkas '{filename}' memiliki {count} halaman, melebihi batas maksimum {max_pages} halaman."
+                )
+            elif reason == "EMPTY_PDF":
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Berkas '{filename}' kosong (0 halaman)."
+                )
+            else:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Berkas '{filename}' bukan PDF yang valid atau berkas rusak."
+                )
 
     @staticmethod
     def merge_pdfs(pdf_paths: list[Path], output_path: Path) -> Path:
@@ -128,7 +189,9 @@ class PDFService:
     def unlock_pdf(pdf_path: Path, output_path: Path, password: str) -> Path:
         reader = PdfReader(pdf_path)
         if reader.is_encrypted:
-            reader.decrypt(password)
+            status = reader.decrypt(password)
+            if status == 0:
+                raise ValueError("Kata sandi salah.")
         writer = PdfWriter()
         for page in reader.pages:
             writer.add_page(page)

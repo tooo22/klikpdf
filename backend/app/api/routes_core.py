@@ -19,9 +19,8 @@ async def merge_pdfs_endpoint(files: list[UploadFile] = File(...)):
         for idx, file in enumerate(files):
             in_path = session_dir / f"input_{idx}.pdf"
             await storage_manager.save_upload_file(file, in_path)
-            if not pdf_service.validate_pdf(in_path):
-                clean_name = storage_manager.sanitize_filename(file.filename)
-                raise HTTPException(status_code=400, detail=f"File {clean_name} bukan berkas PDF yang valid.")
+            clean_name = storage_manager.sanitize_filename(file.filename)
+            pdf_service.verify_safe(in_path, clean_name)
             input_paths.append(in_path)
             
         out_path = session_dir / "merged_klikpdf.pdf"
@@ -42,10 +41,8 @@ async def split_pdf_endpoint(file: UploadFile = File(...), ranges: str | None = 
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
-        if not pdf_service.validate_pdf(in_path):
-            raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
-            
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         out_files = pdf_service.split_pdf(in_path, session_dir, ranges)
         if len(out_files) == 1:
             return FileResponse(
@@ -75,10 +72,8 @@ async def compress_pdf_endpoint(file: UploadFile = File(...), level: str = Form(
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
-        if not pdf_service.validate_pdf(in_path):
-            raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
-            
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         out_path = session_dir / "compressed_klikpdf.pdf"
         pdf_service.compress_pdf(in_path, out_path, level)
         return FileResponse(
@@ -97,10 +92,8 @@ async def rotate_pdf_endpoint(file: UploadFile = File(...), degrees: int = Form(
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
-        if not pdf_service.validate_pdf(in_path):
-            raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
-            
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         out_path = session_dir / "rotated_klikpdf.pdf"
         pdf_service.rotate_pdf(in_path, out_path, degrees)
         return FileResponse(
@@ -119,10 +112,8 @@ async def watermark_pdf_endpoint(file: UploadFile = File(...), text: str = Form(
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
-        if not pdf_service.validate_pdf(in_path):
-            raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
-            
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         out_path = session_dir / "watermarked_klikpdf.pdf"
         pdf_service.add_watermark(in_path, out_path, text)
         return FileResponse(
@@ -141,10 +132,8 @@ async def page_numbers_endpoint(file: UploadFile = File(...), position: str = Fo
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
-        if not pdf_service.validate_pdf(in_path):
-            raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
-            
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         out_path = session_dir / "numbered_klikpdf.pdf"
         pdf_service.add_page_numbers(in_path, out_path, position)
         return FileResponse(
@@ -163,10 +152,8 @@ async def protect_pdf_endpoint(file: UploadFile = File(...), password: str = For
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
-        if not pdf_service.validate_pdf(in_path):
-            raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
-            
+        clean_name = storage_manager.sanitize_filename(file.filename)
+        pdf_service.verify_safe(in_path, clean_name)
         out_path = session_dir / "protected_klikpdf.pdf"
         pdf_service.protect_pdf(in_path, out_path, password)
         return FileResponse(
@@ -185,7 +172,9 @@ async def unlock_pdf_endpoint(file: UploadFile = File(...), password: str = Form
     try:
         in_path = session_dir / "input.pdf"
         await storage_manager.save_upload_file(file, in_path)
-        
+        with open(in_path, "rb") as f_check:
+            if f_check.read(5) != b"%PDF-":
+                raise HTTPException(status_code=400, detail="Berkas bukan PDF yang valid.")
         out_path = session_dir / "unlocked_klikpdf.pdf"
         try:
             pdf_service.unlock_pdf(in_path, out_path, password)
