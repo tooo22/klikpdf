@@ -20,3 +20,8 @@
   2. Lakukan `git add -A` dan buat commit dengan pesan deskriptif.
   3. Lakukan `git push origin main` secara otomatis SEGERA tanpa menunggu pengguna meminta atau mengetik "deploy".
   4. Vercel dan GitHub Actions akan otomatis langsung men-deploy versi terbaru secara instan.
+
+## 5. Pintasan Antigravity (agy-1 & agy-2)
+- **`agy-1`**: Mengaktifkan asisten kustomisasi Antigravity (pembuatan Skills, Rules, Plugins, Hooks, dan MCP Servers).
+- **`agy-2`**: Mengaktifkan panduan referensi lengkap Google Antigravity (CLI commands, flags, IDE/2.0 app, SDK, dan live docs).
+
