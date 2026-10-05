@@ -119,7 +119,8 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
   const isAllOpen = activeMenu === 'all';
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200 select-none pt-[env(safe-area-inset-top,0px)]">
+    <>
+      <header className="sticky top-0 left-0 right-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200 select-none pt-[env(safe-area-inset-top,0px)]">
       <div className="h-14 sm:h-16 max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
         {/* Left Section: Blueprint Vertical Line + Hatched Logo + Brand */}
         <div className="flex items-center gap-3 sm:gap-4 shrink-0">
@@ -439,8 +440,8 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
           </button>
         </div>
       </div>
+    </header>
 
-      {/* MOBILE SLIDE-OVER DRAWER (Matches Dark Blueprint Theme) */}
       {isMobileDrawerOpen && (
         <div className="fixed inset-0 z-[100] xl:hidden">
           <div
@@ -590,6 +591,6 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 };
