@@ -35,18 +35,13 @@ const HatchedLogo = () => (
 );
 
 export const LoginModal = () => {
-  const { isLoginModalOpen, setIsLoginModalOpen, loginWithGoogle, loginCustom, googleClientId } = useAuth();
+  const { isLoginModalOpen, setIsLoginModalOpen, loginWithGoogle, googleClientId } = useAuth();
   const { lang } = useLanguage();
   const [hasGoogleError, setHasGoogleError] = useState(false);
 
   if (!isLoginModalOpen) return null;
 
   const isNative = Capacitor.isNativePlatform();
-
-  const handleQuickLogin = () => {
-    loginCustom('Ardiansyah', '3t.ardiansyah@gmail.com');
-    setIsLoginModalOpen(false);
-  };
 
   return (
     <div
@@ -108,31 +103,12 @@ export const LoginModal = () => {
               </div>
             </div>
           ) : null}
-
-          {/* Divider: ── OR ── */}
-          <div className="relative my-4 flex items-center justify-center">
-            <div className="w-full border-t border-zinc-800"></div>
-            <span className="absolute bg-[#121214] px-3 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
-              {lang === 'id' ? 'ATAU' : 'OR'}
-            </span>
-          </div>
-
-          {/* Quick Sign-In (Akun Ardiansyah - 1-Click Instant Login) */}
-          <button
-            type="button"
-            onClick={handleQuickLogin}
-            className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-98"
-          >
-            <Icons.UserCheck size={16} />
-            <span>{lang === 'id' ? 'Masuk Cepat (Akun Ardiansyah)' : 'Instant Sign-in (Ardiansyah)'}</span>
-          </button>
-
-          {/* Info for mobile / APK users if WebView restricts Google popups */}
+          {/* Info if WebView restricts Google popups */}
           {(isNative || hasGoogleError) && (
             <p className="text-[11px] text-zinc-500 text-center leading-relaxed">
               {lang === 'id'
-                ? 'Mode aplikasi mendeteksi pembatasan pop-up. Gunakan tombol "Masuk Cepat" untuk terhubung langsung.'
-                : 'WebView restricts OAuth pop-ups. Use "Instant Sign-in" to access your account.'}
+                ? 'Browser atau aplikasi mendeteksi pembatasan pop-up Google OAuth. Pastikan izin pop-up aktif.'
+                : 'Popup restricted. Please allow pop-ups for Google Sign-In.'}
             </p>
           )}
         </div>
