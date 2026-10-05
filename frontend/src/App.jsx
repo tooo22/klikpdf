@@ -191,7 +191,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-between aura-bg dark:bg-[#090D16] text-text-primary dark:text-[#E4E4E7] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col justify-between stitch-grid dark:bg-black bg-white text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
       <div>
         {/* Sticky Admin Warning Banner when System is OFF */}
         {systemStatus === 'offline' && (

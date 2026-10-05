@@ -25,7 +25,7 @@ export const Footer = ({ onSelectTool, onGoHome }) => {
   };
 
   return (
-    <footer className="w-full bg-slate-50/80 dark:bg-[#070A12] border-t border-slate-200/80 dark:border-white/[0.08] transition-colors duration-200 pb-[env(safe-area-inset-bottom,0px)]">
+    <footer className="w-full bg-slate-50/80 dark:bg-black border-t border-zinc-200/80 dark:border-zinc-800/80 transition-colors duration-200 pb-[env(safe-area-inset-bottom,0px)]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-slate-200/80 dark:border-white/[0.06]">
           {/* Col 1: Brand Info */}

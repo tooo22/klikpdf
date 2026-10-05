@@ -91,7 +91,7 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
   const isAllOpen = activeMenu === 'all';
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#090D16]/80 backdrop-blur-2xl border-b border-slate-200/80 dark:border-white/[0.08] transition-colors duration-200 select-none pt-[env(safe-area-inset-top,0px)]">
+    <header className="sticky top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/85 backdrop-blur-2xl border-b border-zinc-200/80 dark:border-zinc-800/80 transition-colors duration-200 select-none pt-[env(safe-area-inset-top,0px)]">
       <div className="h-16 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         {/* Brand Logo */}
         <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
