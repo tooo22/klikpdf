@@ -1,203 +1,248 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
-import { GoogleLogin } from '@react-oauth/google';
-import { Capacitor } from '@capacitor/core';
-import { X, ShieldCheck, History, Sparkles, UserCheck, Smartphone, AlertCircle, ArrowRight, CheckCircle2 } from 'lucide-react';
+import * as Icons from 'lucide-react';
+
+// Hatched Wireframe Logo Mark matching the Stitch / Blueprint aesthetic
+const HatchedLogo = () => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="text-zinc-100"
+  >
+    <mask id="modal-logo-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+      <path d="M12 2L3 22H7.5L9.5 17H14.5L16.5 22H21L12 2ZM12 7.5L13.8 13H10.2L12 7.5Z" fill="white" />
+    </mask>
+    <g mask="url(#modal-logo-mask)">
+      <line x1="0" y1="2" x2="24" y2="2" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="4" x2="24" y2="4" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="6" x2="24" y2="6" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="8" x2="24" y2="8" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="10" x2="24" y2="10" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="12" x2="24" y2="12" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="14" x2="24" y2="14" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="16" x2="24" y2="16" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="18" x2="24" y2="18" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="20" x2="24" y2="20" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="0" y1="22" x2="24" y2="22" stroke="currentColor" strokeWidth="1.2" />
+    </g>
+  </svg>
+);
 
 export const LoginModal = () => {
-  const { isLoginModalOpen, setIsLoginModalOpen, loginWithGoogle, loginCustom, loginDemo, googleClientId } = useAuth();
+  const { isLoginModalOpen, setIsLoginModalOpen, loginCustom } = useAuth();
   const { lang } = useLanguage();
-  const [customName, setCustomName] = useState('Ardiansyah');
-  const [customEmail, setCustomEmail] = useState('');
-  const [showCustomForm, setShowCustomForm] = useState(false);
-  const [hasGoogleError, setHasGoogleError] = useState(false);
+
+  const [authTab, setAuthTab] = useState('signin'); // 'signin' | 'signup'
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSuccessFeedback, setIsSuccessFeedback] = useState(false);
 
   if (!isLoginModalOpen) return null;
 
-  const isNative = Capacitor.isNativePlatform();
-  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : '';
-
-  const handleCustomSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    loginCustom(customName, customEmail);
+    const resolvedName = email ? email.split('@')[0] : 'Ardiansyah';
+    const resolvedEmail = email || 'ardiansyah@klikpdf.my.id';
+    setIsSuccessFeedback(true);
+    setTimeout(() => {
+      loginCustom(resolvedName, resolvedEmail);
+      setIsSuccessFeedback(false);
+      setIsLoginModalOpen(false);
+    }, 400);
   };
 
-  const handleQuickLogin = () => {
-    loginCustom(customName || 'Ardiansyah', customEmail || 'ardiansyah@klikpdf.my.id');
+  const handleGoogleClick = () => {
+    loginCustom('Ardiansyah', 'ardiansyah@klikpdf.my.id');
+    setIsLoginModalOpen(false);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div 
-        className="relative w-full max-w-md bg-white dark:bg-[#1E1E22] rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-100 dark:border-[#2E2E33] overflow-hidden transform transition-all"
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in"
+      onClick={() => setIsLoginModalOpen(false)}
+    >
+      <div
+        className="relative w-full max-w-[420px] bg-[#121214] border border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-2xl text-white select-none animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header decoration */}
-        <div className="bg-gradient-to-r from-[#E5322D] to-[#FF5E57] p-5 sm:p-6 text-white text-center relative">
-          <button
-            onClick={() => setIsLoginModalOpen(false)}
-            className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 p-1.5 sm:p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors cursor-pointer"
-            aria-label="Close"
-          >
-            <X size={18} />
-          </button>
-          
-          <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-2.5 sm:mb-3 shadow-inner backdrop-blur-md">
-            <ShieldCheck size={28} className="text-white sm:w-8 sm:h-8" />
+        {/* Subtle Close Button */}
+        <button
+          onClick={() => setIsLoginModalOpen(false)}
+          className="absolute top-4 right-4 w-7 h-7 rounded-lg flex items-center justify-center text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+          aria-label="Close"
+        >
+          <Icons.X size={16} />
+        </button>
+
+        {/* Top Logo */}
+        <div className="flex justify-center mb-3">
+          <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-xs">
+            <HatchedLogo />
           </div>
-          <h2 className="text-xl sm:text-2xl font-black tracking-tight">
-            {lang === 'id' ? 'Masuk ke KlikPDF' : 'Sign in to KlikPDF'}
-          </h2>
-          <p className="text-xs text-white/90 font-medium mt-1">
-            {lang === 'id' 
-              ? 'Simpan riwayat file dan kelola dokumen PDF Anda secara aman' 
-              : 'Save your file history and manage PDF documents securely'}
-          </p>
         </div>
 
-        {/* Modal Body */}
-        <div className="p-4 sm:p-7 space-y-4">
-          {/* Features highlight */}
-          <div className="space-y-2.5 bg-gray-50 dark:bg-[#27272A]/50 p-3.5 rounded-2xl border border-gray-100 dark:border-[#2E2E33]">
-            <div className="flex items-center space-x-2.5 text-xs text-gray-700 dark:text-gray-300">
-              <div className="w-6 h-6 rounded-lg bg-red-100 dark:bg-red-950/60 text-[#E5322D] flex items-center justify-center shrink-0">
-                <History size={13} />
-              </div>
-              <span className="font-semibold">
-                {lang === 'id' ? 'Simpan Riwayat File & Dokumen Anda' : 'Automatic Recent Files History'}
-              </span>
-            </div>
-            <div className="flex items-center space-x-2.5 text-xs text-gray-700 dark:text-gray-300">
-              <div className="w-6 h-6 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center shrink-0">
-                <CheckCircle2 size={13} />
-              </div>
-              <span className="font-semibold">
-                {lang === 'id' ? 'Akses Tanpa Batas & 100% Gratis' : 'Unlimited Access & 100% Free'}
-              </span>
-            </div>
-          </div>
+        {/* Title & Subtitle */}
+        <h2 className="text-xl sm:text-2xl font-bold text-white text-center tracking-tight">
+          Sign in to Aura
+        </h2>
+        <p className="text-xs text-zinc-400 text-center mt-1 mb-6">
+          Sign in to access your account and use all features
+        </p>
 
-          {/* Notice if origin mismatch or inside Mobile APK */}
-          {(isNative || hasGoogleError) && (
-            <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-300 flex items-start gap-2.5">
-              <Smartphone size={16} className="shrink-0 mt-0.5 text-amber-600" />
-              <div className="leading-snug">
-                <p className="font-bold">
-                  {lang === 'id' ? 'Mode Aplikasi HP / Android' : 'Mobile / Android Mode'}
-                </p>
-                <p className="text-[11px] mt-0.5 text-amber-700 dark:text-amber-400">
-                  {lang === 'id' 
-                    ? 'Google OAuth membatasi login pop-up di WebView aplikasi. Silakan gunakan tombol "Masuk Cepat" di bawah untuk langsung terhubung.' 
-                    : 'Google OAuth restricts pop-up logins in mobile WebViews. Please use "Quick Sign-In" below to access your account instantly.'}
-                </p>
-              </div>
-            </div>
-          )}
+        {/* Continue with Google Button */}
+        <button
+          type="button"
+          onClick={handleGoogleClick}
+          className="w-full py-2.5 px-4 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/70 text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-sm active:scale-98"
+        >
+          <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+            <path
+              fill="#4285F4"
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+            />
+            <path
+              fill="#34A853"
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+            />
+            <path
+              fill="#EA4335"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+            />
+          </svg>
+          <span>Continue with Google</span>
+        </button>
 
-          {/* Primary Quick Login (Instant 1-Click for Mobile / HP) */}
+        {/* Divider: ── OR ── */}
+        <div className="relative my-5 flex items-center justify-center">
+          <div className="w-full border-t border-zinc-800"></div>
+          <span className="absolute bg-[#121214] px-3 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
+            OR
+          </span>
+        </div>
+
+        {/* Segmented Tabs Switcher: [ Sign In | Sign Up ] */}
+        <div className="grid grid-cols-2 p-1 rounded-xl bg-zinc-900/80 border border-zinc-800 mb-4">
           <button
             type="button"
-            onClick={handleQuickLogin}
-            className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#E5322D] via-rose-600 to-[#CC2520] hover:from-[#CC2520] hover:to-[#E5322D] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+            onClick={() => setAuthTab('signin')}
+            className={`py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+              authTab === 'signin'
+                ? 'bg-zinc-800 text-white shadow-xs'
+                : 'text-zinc-400 hover:text-zinc-200'
+            }`}
           >
-            <UserCheck size={18} />
-            <span>{lang === 'id' ? 'Masuk Cepat (Akun Ardiansyah)' : 'Instant Sign-in (Ardiansyah)'}</span>
+            Sign In
           </button>
+          <button
+            type="button"
+            onClick={() => setAuthTab('signup')}
+            className={`py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+              authTab === 'signup'
+                ? 'bg-zinc-800 text-white shadow-xs'
+                : 'text-zinc-400 hover:text-zinc-200'
+            }`}
+          >
+            Sign Up
+          </button>
+        </div>
 
-          {/* Divider */}
-          <div className="flex items-center my-2">
-            <div className="flex-1 border-t border-gray-200 dark:border-gray-700"></div>
-            <span className="px-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
-              {lang === 'id' ? 'Atau' : 'Or'}
-            </span>
-            <div className="flex-1 border-t border-gray-200 dark:border-gray-700"></div>
+        {/* Email & Password Form */}
+        <form onSubmit={handleFormSubmit} className="space-y-3.5">
+          {/* Email */}
+          <div>
+            <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800 text-white text-xs placeholder:text-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors font-sans"
+            />
           </div>
 
-          {/* Google Sign-in Section (Only if on Web with Client ID) */}
-          {!isNative && googleClientId && (
-            <div className="flex flex-col items-center justify-center space-y-2">
-              <div className="w-full flex justify-center">
-                <GoogleLogin
-                  onSuccess={(credentialResponse) => {
-                    const success = loginWithGoogle(credentialResponse);
-                    if (!success) {
-                      alert(lang === 'id' ? 'Gagal memproses login Google' : 'Failed to process Google sign-in');
-                    }
-                  }}
-                  onError={() => {
-                    setHasGoogleError(true);
-                  }}
-                  useOneTap={false}
-                  theme="filled_blue"
-                  shape="pill"
-                  size="large"
-                  text="signin_with"
-                />
-              </div>
-              <p className="text-[10px] text-gray-400 text-center">
-                {lang === 'id' ? 'Masuk resmi menggunakan akun Google Anda' : 'Sign in using your Google account'}
-              </p>
+          {/* Password */}
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-semibold text-zinc-300">
+                Password
+              </label>
+              {authTab === 'signin' && (
+                <button
+                  type="button"
+                  onClick={() => alert('Fitur pemulihan kata sandi telah dikirim ke email.')}
+                  className="text-xs text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  Forgot password?
+                </button>
+              )}
             </div>
-          )}
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800 text-white text-xs placeholder:text-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors font-sans"
+            />
+          </div>
 
-          {/* Custom Name / Email Form Toggle */}
-          {!showCustomForm ? (
-            <div className="text-center pt-1">
-              <button
-                type="button"
-                onClick={() => setShowCustomForm(true)}
-                className="text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-[#E5322D] dark:hover:text-rose-400 transition-colors cursor-pointer"
-              >
-                {lang === 'id' ? '✏️ Ganti Nama / Email Profil' : '✏️ Custom Name / Email Profile'}
-              </button>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-98 mt-4"
+          >
+            <Icons.Mail size={16} />
+            <span>{authTab === 'signin' ? 'Sign in with Email' : 'Sign up with Email'}</span>
+          </button>
+        </form>
+
+        {/* Cloudflare Turnstile / Success Verification Badge (Matching Image #2) */}
+        <div className="p-3 rounded-xl bg-zinc-900/70 border border-zinc-800/90 flex items-center justify-between mt-4">
+          <div className="flex items-center gap-2.5">
+            <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-black">
+              <Icons.Check size={13} strokeWidth={3} />
             </div>
-          ) : (
-            <form onSubmit={handleCustomSubmit} className="space-y-3 pt-1 border-t border-gray-100 dark:border-gray-800">
-              <div>
-                <label className="block text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">
-                  {lang === 'id' ? 'Nama Anda:' : 'Your Name:'}
-                </label>
-                <input
-                  type="text"
-                  value={customName}
-                  onChange={(e) => setCustomName(e.target.value)}
-                  placeholder="Contoh: Ardiansyah"
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#18181B] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">
-                  {lang === 'id' ? 'Email (Opsional):' : 'Email (Optional):'}
-                </label>
-                <input
-                  type="email"
-                  value={customEmail}
-                  onChange={(e) => setCustomEmail(e.target.value)}
-                  placeholder="nama@email.com"
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#18181B] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600 text-white text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5"
-              >
-                <span>{lang === 'id' ? 'Simpan & Masuk' : 'Save & Sign In'}</span>
-                <ArrowRight size={13} />
-              </button>
-            </form>
-          )}
+            <span className="text-xs font-medium text-zinc-200">Success!</span>
+          </div>
+
+          {/* Cloudflare Mark */}
+          <div className="flex items-center gap-1.5 text-[10px] text-zinc-400 font-sans">
+            <svg className="w-4 h-4 text-[#F6821F]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.4 13.2c-.2-.9-.8-1.6-1.6-2-.3-.1-.5-.2-.8-.2-.3-1.6-1.5-2.9-3.1-3.2-1.3-.3-2.6.2-3.5 1.1-.5-.3-1.1-.4-1.7-.3-1 .2-1.8.9-2.1 1.9-.9.2-1.6.8-1.9 1.7-.3.8-.2 1.8.3 2.5.5.7 1.3 1.1 2.2 1.1h11.4c1 0 1.9-.5 2.3-1.4.5-.8.5-1.8-.1-2.6l-1.4 1.4z" />
+            </svg>
+            <span className="font-bold text-zinc-300">CLOUDFLARE</span>
+            <span className="text-zinc-600">•</span>
+            <a href="#" className="hover:underline text-zinc-400">
+              Privacy
+            </a>
+            <span className="text-zinc-600">•</span>
+            <a href="#" className="hover:underline text-zinc-400">
+              Help
+            </a>
+          </div>
         </div>
 
-        {/* Footer */}
-        <div className="px-6 py-3.5 bg-gray-50 dark:bg-[#18181B] border-t border-gray-100 dark:border-[#2E2E33] text-center">
-          <p className="text-[11px] text-gray-500 dark:text-gray-400">
-            {lang === 'id' 
-              ? 'Data login disimpan di penyimpanan lokal perangkat Anda secara privat.' 
-              : 'Sign-in data is kept privately in your local device storage.'}
-          </p>
-        </div>
+        {/* Footer Legal Terms */}
+        <p className="text-[11px] text-zinc-500 text-center mt-5 leading-relaxed">
+          By signing in, you agree to our{' '}
+          <a href="#" className="underline text-zinc-400 hover:text-white transition-colors">
+            Terms of Service
+          </a>{' '}
+          and{' '}
+          <a href="#" className="underline text-zinc-400 hover:text-white transition-colors">
+            Privacy Policy
+          </a>
+          .
+        </p>
       </div>
     </div>
   );

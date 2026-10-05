@@ -360,24 +360,19 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
             </button>
           </div>
 
-          {/* Teal Circular User Avatar matching screenshot */}
-          <div className="relative" ref={userMenuRef}>
-            <button
-              onClick={() => {
-                if (user) {
-                  setIsUserMenuOpen(!isUserMenuOpen);
-                } else {
-                  setIsLoginModalOpen(true);
-                }
-              }}
-              title={user ? user.name : 'Profil / Masuk'}
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#008080] hover:bg-[#009688] text-white flex items-center justify-center font-bold font-mono text-xs ring-1 ring-white/20 transition-all cursor-pointer shadow-xs active:scale-95"
-            >
-              {user?.name ? user.name.charAt(0).toLowerCase() : 'y'}
-            </button>
+          {/* Teal Circular User Avatar if logged in, OR "SIGN IN" button matching Image #1 */}
+          {user ? (
+            <div className="relative" ref={userMenuRef}>
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                title={user.name}
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#008080] hover:bg-[#009688] text-white flex items-center justify-center font-bold font-mono text-xs ring-1 ring-white/20 transition-all cursor-pointer shadow-xs active:scale-95"
+              >
+                {user.name ? user.name.charAt(0).toLowerCase() : 'y'}
+              </button>
 
-            {/* User Dropdown Menu */}
-            {isUserMenuOpen && user && (
+              {/* User Dropdown Menu */}
+              {isUserMenuOpen && (
               <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-zinc-950 backdrop-blur-2xl rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-800 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
                 <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
                   <p className="text-xs font-bold text-zinc-900 dark:text-white truncate">
@@ -428,6 +423,14 @@ export const Navbar = ({ onSelectTool, onGoHome }) => {
               </div>
             )}
           </div>
+          ) : (
+            <button
+              onClick={() => setIsLoginModalOpen(true)}
+              className="text-xs font-mono font-bold tracking-wider text-zinc-300 hover:text-white transition-colors cursor-pointer px-2 sm:px-3 py-1 select-none"
+            >
+              SIGN IN
+            </button>
+          )}
 
           {/* Mobile Drawer Toggle Button */}
           <button
