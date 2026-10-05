@@ -1,13 +1,17 @@
-# Pintasan Perintah Antigravity (agy-1 & agy-2)
+# Profil Akun Antigravity CLI (agy-1 & agy-2)
 
-Ketika pengguna (Ardiansyah) menyebut kata kunci `agy-1` atau `agy-2`:
+Perintah terminal PowerShell untuk multi-akun Google Antigravity:
 
-1. **`agy-1` (Antigravity Customization Specialist):**
-   - Segera aktifkan kapabilitas `agy-customizations` / skill `agy-1`.
-   - Bantu Ardiansyah membuat, mengelola, atau memperbaiki **Skills**, **Rules** (`GEMINI.md`, `AGENTS.md`), **Plugins**, **Hooks**, atau integrasi **MCP Servers**.
-   - Berikan solusi nyata langsung dibuatkan filenya tanpa bertele-tele.
+1. **`agy-1`**:
+   - Menjalankan Antigravity CLI (`agy`) otomatis beralih ke **Akun Pro 1** (`3t.ardiansyah@gmail.com`).
+   - Menyimpan kredensial mandiri di `~/.gemini/profiles/pro1/`.
 
-2. **`agy-2` (Antigravity Guide & Reference):**
-   - Segera aktifkan kapabilitas `antigravity-guide` / skill `agy-2`.
-   - Berikan referensi cepat perintah CLI (`agy`), slash commands (`/goal`, `/plan`, `/schedule`, `/browser`, `/boost`), konfigurasi IDE/App 2.0, maupun referensi Python SDK.
-   - Sediakan sintaks dan tautan dokumentasi resmi secara ringkas dan tepat sasaran.
+2. **`agy-2`**:
+   - Menjalankan Antigravity CLI (`agy`) otomatis beralih ke **Akun Pro 2**.
+   - Menyimpan kredensial mandiri di `~/.gemini/profiles/pro2/`.
+
+3. **Perintah Pendukung**:
+   - `agy-status`: Melihat profil dan email akun Google yang sedang aktif.
+   - `agy-save 1` / `agy-save 2`: Menyimpan akun yang sedang login ke slot profil 1 atau 2.
+   - `agy-switch 1` / `agy-switch 2`: Beralih profil tanpa langsung meluncurkan CLI.
+   - `agy-logout`: Menghapus sesi aktif sementara untuk login ke akun baru.

@@ -21,7 +21,8 @@
   3. Lakukan `git push origin main` secara otomatis SEGERA tanpa menunggu pengguna meminta atau mengetik "deploy".
   4. Vercel dan GitHub Actions akan otomatis langsung men-deploy versi terbaru secara instan.
 
-## 5. Pintasan Antigravity (agy-1 & agy-2)
-- **`agy-1`**: Mengaktifkan asisten kustomisasi Antigravity (pembuatan Skills, Rules, Plugins, Hooks, dan MCP Servers).
-- **`agy-2`**: Mengaktifkan panduan referensi lengkap Google Antigravity (CLI commands, flags, IDE/2.0 app, SDK, dan live docs).
+## 5. Profil Akun Antigravity (agy-1 & agy-2)
+- **`agy-1`**: Menjalankan Antigravity CLI dengan Profil Akun Pro 1 (`3t.ardiansyah@gmail.com`).
+- **`agy-2`**: Menjalankan Antigravity CLI dengan Profil Akun Pro 2.
+- **Utilitas**: `agy-status` (cek akun aktif), `agy-save 1/2` (simpan sesi), `agy-logout` (ganti akun).
 
