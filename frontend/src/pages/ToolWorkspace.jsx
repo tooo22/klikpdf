@@ -84,6 +84,7 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
         if (options.ranges) formData.append('ranges', options.ranges);
         if (options.quality) formData.append('quality', options.quality);
         if (options.scale) formData.append('scale', options.scale.toString());
+        if (options.mode) formData.append('mode', options.mode);
         if (options.level) formData.append('level', options.level);
         if (options.position) formData.append('position', options.position);
 
@@ -99,14 +100,14 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
         try {
           addRecentFile({
             name: selectedFiles[0]?.name || 'Dokumen.pdf',
-            toolName: lang === 'id' ? (tool.nameId || tool.name) : tool.name,
+            toolName: lang === 'id' ? (tool.nameId || tool.name) : (tool.nameEn || tool.name),
             size: selectedFiles[0]?.size ? (selectedFiles[0].size / 1024 / 1024).toFixed(2) + ' MB' : '-'
           });
         } catch (e) {
           console.warn("Could not save to recent files:", e);
         }
       } else {
-        throw new Error("Gagal menghasilkan berkas PDF.");
+        throw new Error("Gagal menghasilkan berkas.");
       }
     } catch (err) {
       console.error("Processing error:", err);
@@ -132,8 +133,10 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
     const baseName = lastDotIdx > 0 ? firstFileName.substring(0, lastDotIdx) : (firstFileName || 'dokumen');
 
     let ext = 'pdf';
-    if (tool.id === 'hd-image') ext = 'png';
-    else if (tool.id === 'pdf-to-word') ext = 'docx';
+    if (tool.id === 'hd-image') {
+      const origExt = lastDotIdx > 0 ? firstFileName.substring(lastDotIdx + 1).toLowerCase() : 'png';
+      ext = ['jpg', 'jpeg', 'png', 'webp', 'bmp'].includes(origExt) ? origExt : 'png';
+    } else if (tool.id === 'pdf-to-word') ext = 'docx';
     else if (tool.id === 'pdf-to-excel') ext = 'xlsx';
     else if (tool.id === 'pdf-to-image') ext = 'zip';
     else ext = 'pdf';
@@ -159,7 +162,8 @@ export const ToolWorkspace = ({ toolId, onGoHome, initialFiles = [] }) => {
       <ResultDownload
         downloadUrl={resultUrl}
         fileName={finalFileName}
-        toolName={tool.title}
+        tool={tool}
+        toolName={lang === 'id' ? tool.name : (tool.nameEn || tool.name)}
         onGoHome={onGoHome}
         onReset={() => {
           setSelectedFiles([]);

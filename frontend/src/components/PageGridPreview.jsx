@@ -1,17 +1,43 @@
 import React from 'react';
 import { RotateCw, Trash2, File } from 'lucide-react';
 
+const ImageThumbnail = ({ file }) => {
+  const [src, setSrc] = React.useState(null);
+
+  React.useEffect(() => {
+    const url = URL.createObjectURL(file);
+    setSrc(url);
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+
+  if (!src) return <File size={36} className="text-gray-400 dark:text-gray-500 sm:w-12 sm:h-12" />;
+
+  return (
+    <img
+      src={src}
+      alt={file.name}
+      className="w-full h-full object-contain p-1"
+    />
+  );
+};
+
 export const PageGridPreview = ({ files, onRotate, onDelete }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 p-3 sm:p-6">
-      {files.map((fileObj, idx) => (
-        <div key={idx} className="bg-white dark:bg-[#1E1E22] rounded-xl border border-gray-200 dark:border-[#27272A] shadow-md p-2.5 sm:p-4 relative group flex flex-col items-center transition-colors">
-          <div className="w-full h-28 sm:h-40 bg-gray-100 dark:bg-[#161619] rounded-lg flex items-center justify-center mb-2.5 sm:mb-3 relative overflow-hidden border border-gray-200 dark:border-[#2E2E33]">
-            <File size={36} className="text-gray-400 dark:text-gray-500 sm:w-12 sm:h-12" />
-            <span className="absolute bottom-1.5 right-1.5 sm:bottom-2 sm:right-2 bg-gray-900/90 text-white text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded shadow">
-              #{idx + 1}
-            </span>
-          </div>
+      {files.map((fileObj, idx) => {
+        const isImage = fileObj.type?.startsWith('image/') || /\.(jpe?g|png|webp|bmp)$/i.test(fileObj.name || '');
+        return (
+          <div key={idx} className="bg-white dark:bg-[#1E1E22] rounded-xl border border-gray-200 dark:border-[#27272A] shadow-md p-2.5 sm:p-4 relative group flex flex-col items-center transition-colors">
+            <div className="w-full h-28 sm:h-40 bg-gray-100 dark:bg-[#161619] rounded-lg flex items-center justify-center mb-2.5 sm:mb-3 relative overflow-hidden border border-gray-200 dark:border-[#2E2E33]">
+              {isImage ? (
+                <ImageThumbnail file={fileObj} />
+              ) : (
+                <File size={36} className="text-gray-400 dark:text-gray-500 sm:w-12 sm:h-12" />
+              )}
+              <span className="absolute bottom-1.5 right-1.5 sm:bottom-2 sm:right-2 bg-gray-900/90 text-white text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded shadow">
+                #{idx + 1}
+              </span>
+            </div>
           <p className="text-[11px] sm:text-xs font-semibold text-gray-800 dark:text-gray-200 truncate w-full text-center px-1">
             {fileObj.name || `File ${idx + 1}`}
           </p>
@@ -38,7 +64,8 @@ export const PageGridPreview = ({ files, onRotate, onDelete }) => {
             )}
           </div>
         </div>
-      ))}
+      );
+    })}
     </div>
   );
 };

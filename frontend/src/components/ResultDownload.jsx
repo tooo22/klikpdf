@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, Download, ArrowLeft, RefreshCw, Star, Heart, Check } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onReset }) => {
+export const ResultDownload = ({ downloadUrl, fileName, tool, toolName, onGoHome, onReset }) => {
   const { t, lang } = useLanguage();
   const [rating, setRating] = useState(() => {
     try {
@@ -16,6 +16,8 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
   const [hasRated, setHasRated] = useState(false);
   const [userComment, setUserComment] = useState('');
   const [showCommentBox, setShowCommentBox] = useState(false);
+
+  const isImageResult = tool?.id === 'hd-image' || /\.(jpe?g|png|webp|bmp)$/i.test(fileName || '');
 
   const ratingLabels = {
     1: { id: 'Perlu Ditingkatkan 😞', en: 'Needs Improvement 😞' },
@@ -77,10 +79,26 @@ export const ResultDownload = ({ downloadUrl, fileName, toolName, onGoHome, onRe
         {t('success.subtitle') || 'Berkas Anda siap diunduh ke perangkat Anda.'}
       </p>
 
+      {/* Image Preview Card for HD Upscaled Images */}
+      {isImageResult && downloadUrl && (
+        <div className="mb-6 max-w-md mx-auto rounded-2xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-slate-50 dark:bg-[#161619] shadow-inner p-2.5 relative group">
+          <div className="relative max-h-72 flex items-center justify-center overflow-hidden rounded-xl bg-black/5 dark:bg-black/30">
+            <img
+              src={downloadUrl}
+              alt={fileName}
+              className="max-h-72 w-auto object-contain rounded-lg transition-transform duration-300 group-hover:scale-105"
+            />
+            <span className="absolute top-2.5 right-2.5 bg-purple-600/90 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-md backdrop-blur-xs flex items-center gap-1">
+              ✨ Real-ESRGAN HD
+            </span>
+          </div>
+        </div>
+      )}
+
       {fileName && (
         <div className="mb-6">
           <span className="aura-pill inline-flex items-center gap-1.5 bg-slate-100/80 dark:bg-[#141A29] text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-xs font-semibold max-w-full truncate border border-slate-200/80 dark:border-white/10">
-            <span>📄</span>
+            <span>{isImageResult ? '🖼️' : '📄'}</span>
             <span className="font-bold text-primary truncate max-w-[220px] sm:max-w-xs">{fileName}</span>
           </span>
         </div>

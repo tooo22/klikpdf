@@ -115,39 +115,79 @@ export const ActionSidebar = ({ tool, options, onOptionsChange, onProcess, isPro
         )}
 
         {tool.id === 'hd-image' && (
-          <div className="space-y-4">
-            <label className="block text-xs font-bold text-gray-700 dark:text-gray-300">
-              {lang === 'id' ? 'Tingkat Ketajaman & Resolusi' : 'Sharpness & Resolution'}
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => onOptionsChange({ ...options, quality: 'hd', scale: 2 })}
-                className={`p-3 rounded-xl border text-xs font-bold transition-all ${
-                  (options.quality || 'hd') === 'hd'
-                    ? 'border-[#8B5CF6] bg-[#8B5CF6]/10 text-[#8B5CF6] ring-2 ring-[#8B5CF6]/30'
-                    : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-300 hover:border-gray-400'
-                }`}
-              >
-                ✨ 2x HD
-                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
-                  {lang === 'id' ? 'Jernih & Cepat' : 'Clear & Fast'}
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={() => onOptionsChange({ ...options, quality: 'ultra', scale: 4 })}
-                className={`p-3 rounded-xl border text-xs font-bold transition-all ${
-                  options.quality === 'ultra'
-                    ? 'border-[#8B5CF6] bg-[#8B5CF6]/10 text-[#8B5CF6] ring-2 ring-[#8B5CF6]/30'
-                    : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-300 hover:border-gray-400'
-                }`}
-              >
-                💎 4x Ultra HD
-                <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
-                  {lang === 'id' ? 'Maksimal Detail' : 'Maximum Detail'}
-                </span>
-              </button>
+          <div className="space-y-5">
+            <div>
+              <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">
+                {lang === 'id' ? 'Tingkat Resolusi' : 'Resolution Scale'}
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => onOptionsChange({ ...options, quality: 'hd', scale: 2 })}
+                  className={`p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                    (options.quality || 'hd') === 'hd'
+                      ? 'border-[#8B5CF6] bg-[#8B5CF6]/10 text-[#8B5CF6] ring-2 ring-[#8B5CF6]/30'
+                      : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-300 hover:border-gray-400'
+                  }`}
+                >
+                  ✨ 2x HD
+                  <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
+                    {lang === 'id' ? 'Jernih & Natural' : 'Clear & Natural'}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onOptionsChange({ ...options, quality: 'ultra', scale: 4 })}
+                  className={`p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                    options.quality === 'ultra'
+                      ? 'border-[#8B5CF6] bg-[#8B5CF6]/10 text-[#8B5CF6] ring-2 ring-[#8B5CF6]/30'
+                      : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-300 hover:border-gray-400'
+                  }`}
+                >
+                  💎 4x Ultra HD
+                  <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
+                    {lang === 'id' ? 'Maksimal Detail' : 'Maximum Detail'}
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">
+                {lang === 'id' ? 'Tipe Konten' : 'Content Type'}
+              </label>
+              <div className="grid grid-cols-3 gap-1.5">
+                {[
+                  { id: 'photo', label: lang === 'id' ? 'Foto' : 'Photo', desc: 'Wajah & Alam' },
+                  { id: 'art', label: lang === 'id' ? 'Ilustrasi' : 'Art/Anime', desc: 'Grafis & Gambar' },
+                  { id: 'document', label: lang === 'id' ? 'Dokumen' : 'Doc/Text', desc: 'Teks & Scan' }
+                ].map((m) => (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => onOptionsChange({ ...options, mode: m.id })}
+                    className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
+                      (options.mode || 'photo') === m.id
+                        ? 'border-[#8B5CF6] bg-[#8B5CF6]/10 text-[#8B5CF6] font-bold ring-1 ring-[#8B5CF6]/40'
+                        : 'border-gray-200 dark:border-[#3F3F46] text-gray-600 dark:text-gray-400 font-medium hover:border-gray-300'
+                    }`}
+                  >
+                    <span className="block text-xs">{m.label}</span>
+                    <span className="block text-[9px] text-gray-400 dark:text-gray-500 truncate">{m.desc}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-[11px] leading-relaxed">
+              <span className="font-bold flex items-center gap-1 mb-0.5">
+                <span>⚡ Real-ESRGAN AI Engine</span>
+              </span>
+              <span>
+                {lang === 'id'
+                  ? 'Menghilangkan noise kompresi & blur secara cerdas tanpa membuat garis kasar atau artefak putih.'
+                  : 'Removes blur and compression artifacts intelligently with clean, natural textures.'}
+              </span>
             </div>
           </div>
         )}

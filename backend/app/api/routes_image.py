@@ -65,26 +65,44 @@ async def image_to_pdf_endpoint(files: list[UploadFile] = File(...)):
 async def enhance_image_endpoint(
     file: UploadFile = File(...),
     scale: int = Form(2),
-    quality: str = Form("hd")
+    quality: str = Form("hd"),
+    mode: str = Form("photo")
 ):
     session_id, session_dir = storage_manager.create_session_dir()
     try:
-        raw_ext = Path(file.filename or "").suffix.lower()
+        from app.services.image_enhancer import image_enhancer
+        
+        orig_filename = file.filename or "image.png"
+        raw_ext = Path(orig_filename).suffix.lower()
         safe_ext = raw_ext if raw_ext in ALLOWED_IMG_EXTS else ".png"
+        stem = Path(orig_filename).stem or "image"
+        
         in_path = session_dir / f"input{safe_ext}"
         await storage_manager.save_upload_file(file, in_path)
         
-        sharpness = 2.0 if quality == "ultra" else 1.5
-        contrast = 1.2 if quality == "ultra" else 1.1
-        scale_factor = 4 if quality == "ultra" else min(max(scale or 2, 1), 4)
+        out_name = f"{stem}_hd{safe_ext}"
+        out_path = session_dir / out_name
         
-        out_path = session_dir / f"enhanced_hd_klikpdf{safe_ext}"
-        ocr_service.enhance_image(in_path, out_path, scale=scale_factor, sharpness=sharpness, contrast=contrast)
+        image_enhancer.enhance(
+            image_path=in_path,
+            output_path=out_path,
+            scale=scale,
+            quality=quality,
+            mode=mode
+        )
         
-        media_type = "image/png" if safe_ext == ".png" else "image/jpeg"
+        media_types = {
+            ".png": "image/png",
+            ".jpg": "image/jpeg",
+            ".jpeg": "image/jpeg",
+            ".webp": "image/webp",
+            ".bmp": "image/bmp",
+        }
+        media_type = media_types.get(safe_ext, "image/png")
+        
         return FileResponse(
             out_path,
-            filename=f"enhanced_hd_klikpdf{safe_ext}",
+            filename=out_name,
             media_type=media_type,
             background=BackgroundTask(storage_manager.cleanup_session_dir, session_id)
         )

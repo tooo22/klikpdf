@@ -54,36 +54,22 @@ class OCRService:
         return output_pdf_path
 
     @staticmethod
-    def enhance_image(image_path: Path, output_path: Path, scale: int = 2, sharpness: float = 1.6, contrast: float = 1.1) -> Path:
-        img = Image.open(image_path)
-        if img.mode != "RGB":
-            img = img.convert("RGB")
-        
-        # 1. Super-Resolution Upscaling with High-Quality Lanczos Resampling
-        new_width = int(img.width * scale)
-        new_height = int(img.height * scale)
-        upscaled = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
-        
-        # 2. Detail Restoration (sharpen at the kernel level)
-        upscaled = upscaled.filter(ImageFilter.DETAIL)
-        
-        # 3. Unsharp Mask (tuned for punchier sharpness)
-        percent = min(500, int(200 * sharpness))
-        sharpened = upscaled.filter(ImageFilter.UnsharpMask(
-            radius=3, percent=percent, threshold=1
-        ))
-        
-        # 4. Fine-tuning sharpness (adjust contrast and color on the sharpened result)
-        enhancer_sharp = ImageEnhance.Sharpness(sharpened)
-        enhanced = enhancer_sharp.enhance(sharpness)
-        
-        enhancer_contrast = ImageEnhance.Contrast(enhanced)
-        enhanced = enhancer_contrast.enhance(contrast)
-        
-        enhancer_color = ImageEnhance.Color(enhanced)
-        enhanced = enhancer_color.enhance(1.08)
-        
-        enhanced.save(output_path, quality=95, optimize=True)
-        return output_path
+    def enhance_image(
+        image_path: Path,
+        output_path: Path,
+        scale: int = 2,
+        sharpness: float = 1.6,
+        contrast: float = 1.1,
+        quality: str = "hd",
+        mode: str = "photo"
+    ) -> Path:
+        from app.services.image_enhancer import image_enhancer
+        return image_enhancer.enhance(
+            image_path=image_path,
+            output_path=output_path,
+            scale=scale,
+            quality=quality,
+            mode=mode
+        )
 
 ocr_service = OCRService()
