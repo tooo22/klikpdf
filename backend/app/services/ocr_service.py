@@ -64,18 +64,22 @@ class OCRService:
         new_height = int(img.height * scale)
         upscaled = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
         
-        # 2. Detail Restoration and Unsharp Mask
-        sharpened = upscaled.filter(ImageFilter.UnsharpMask(radius=2, percent=int(140 * sharpness), threshold=2))
+        # 2. Detail Restoration (sharpen at the kernel level)
+        upscaled = upscaled.filter(ImageFilter.DETAIL)
         
-        # 3. Fine-tuning sharpness
+        # 3. Unsharp Mask (tuned for punchier sharpness)
+        percent = min(500, int(200 * sharpness))
+        sharpened = upscaled.filter(ImageFilter.UnsharpMask(
+            radius=3, percent=percent, threshold=1
+        ))
+        
+        # 4. Fine-tuning sharpness (adjust contrast and color on the sharpened result)
         enhancer_sharp = ImageEnhance.Sharpness(sharpened)
         enhanced = enhancer_sharp.enhance(sharpness)
         
-        # 4. Dynamic Contrast & Clarity Boost
         enhancer_contrast = ImageEnhance.Contrast(enhanced)
         enhanced = enhancer_contrast.enhance(contrast)
         
-        # 5. Color Vibrancy & Balance
         enhancer_color = ImageEnhance.Color(enhanced)
         enhanced = enhancer_color.enhance(1.08)
         

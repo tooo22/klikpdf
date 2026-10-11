@@ -74,8 +74,8 @@ async def enhance_image_endpoint(
         in_path = session_dir / f"input{safe_ext}"
         await storage_manager.save_upload_file(file, in_path)
         
-        sharpness = 1.8 if quality == "ultra" else 1.4
-        contrast = 1.15 if quality == "ultra" else 1.08
+        sharpness = 2.0 if quality == "ultra" else 1.5
+        contrast = 1.2 if quality == "ultra" else 1.1
         scale_factor = 4 if quality == "ultra" else min(max(scale or 2, 1), 4)
         
         out_path = session_dir / f"enhanced_hd_klikpdf{safe_ext}"

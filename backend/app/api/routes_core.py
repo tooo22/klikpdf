@@ -1,15 +1,19 @@
 import zipfile
 from pathlib import Path
-from fastapi import APIRouter, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 from starlette.background import BackgroundTask
 from app.core.storage import storage_manager
 from app.services.pdf_service import pdf_service
 
 router = APIRouter()
+limiter = Limiter(key_func=get_remote_address)
 
 @router.post("/merge")
-async def merge_pdfs_endpoint(files: list[UploadFile] = File(...)):
+@limiter.limit("10/minute")
+async def merge_pdfs_endpoint(request: Request, files: list[UploadFile] = File(...)):
     if len(files) < 2:
         raise HTTPException(status_code=400, detail="Perlu minimal 2 file PDF untuk digabungkan.")
     
